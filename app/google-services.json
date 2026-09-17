@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "493411333577",
+    "project_id": "kenkosahealthapp",
+    "storage_bucket": "kenkosahealthapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493411333577:android:49c981acdce941019ae418",
+        "android_client_info": {
+          "package_name": "com.example.kenkosahealthapp_prog7314"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493411333577-p305nv2e407esl6gjio6vb3k6h3clsir.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kenkosahealthapp_prog7314",
+            "certificate_hash": "9045b2ce125f89b0cbc27922a6a1cec5516a2050"
+          }
+        },
+        {
+          "client_id": "493411333577-pdhb0e58557kncjlulavlgqt10rpic8f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh3OtRByeBES4UZ-yWOe6oLR4leCkvfA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493411333577-pdhb0e58557kncjlulavlgqt10rpic8f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

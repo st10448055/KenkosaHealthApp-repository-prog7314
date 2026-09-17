@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/kenkosa_green"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp">
+
+    <TextView
+        android:id="@+id/textLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/tagline"
+        android:textColor="@color/text_muted"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/buttonGetStarted"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="@color/kenkosa_green_dark"
+        android:text="@string/get_started"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textGoToLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:padding="8dp"
+        android:text="@string/already_have_account"
+        android:textColor="@color/white" />
+
+</LinearLayout>

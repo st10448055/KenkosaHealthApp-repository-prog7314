@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.kenkosa.app.ui.auth.StartFragment"
+        android:label="Start"
+        tools:layout="@layout/fragment_start">
+        <action
+            android:id="@+id/action_start_to_sso"
+            app:destination="@id/ssoFragment" />
+        <action
+            android:id="@+id/action_start_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ssoFragment"
+        android:name="com.kenkosa.app.ui.auth.SsoFragment"
+        android:label="Sign in with SSO"
+        tools:layout="@layout/fragment_sso">
+        <action
+            android:id="@+id/action_sso_to_login"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_sso_to_sign_up"
+            app:destination="@id/signUpFragment" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.kenkosa.app.ui.auth.SignUpFragment"
+        android:label="Create Account"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_sign_up_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_sign_up_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.kenkosa.app.ui.auth.LoginFragment"
+        android:label="Welcome Back"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_login_to_sign_up"
+            app:destination="@id/signUpFragment" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.kenkosa.app.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.kenkosa.app.ui.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settings_to_start"
+            app:destination="@id/startFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>

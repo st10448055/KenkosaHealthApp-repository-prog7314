@@ -1,3 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">kenkosaHealthApp_PROG7314</string>
+    <string name="app_name">Kenkosa</string>
+
+    <string name="tagline">Your health journey, simplified</string>
+    <string name="get_started">Get Started</string>
+    <string name="already_have_account">Already have an account? Log In</string>
+
+    <string name="sign_in_with_sso">Sign in with SSO</string>
+    <string name="sso_subtitle">Use your email to securely access Kenkosa Health</string>
+    <string name="email_hint">Email address</string>
+    <string name="continue_action">Continue</string>
+    <string name="no_account_sign_up">Don\'t have an account? Sign Up</string>
+
+    <string name="create_account">Create Account</string>
+    <string name="create_account_subtitle">Start your health journey today</string>
+    <string name="full_name_hint">Full Name</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="terms_notice">By signing up, you accept our Terms &amp; Conditions and Privacy Policy</string>
+    <string name="sign_up_action">Sign Up</string>
+    <string name="have_account_sign_in">Already have an account? Sign In</string>
+
+    <string name="welcome_back">Welcome Back</string>
+    <string name="welcome_back_subtitle">Sign in to continue your health journey</string>
+    <string name="sign_in_action">Sign In</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="use_fingerprint">Use Fingerprint to Access</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_units">Units</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_haptics">Haptic feedback</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_subscription">Subscription</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
