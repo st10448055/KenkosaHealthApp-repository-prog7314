@@ -27,6 +27,10 @@
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="use_fingerprint">Use Fingerprint to Access</string>
 
+    <string name="menu">Menu</string>
+    <string name="notifications">Notifications</string>
+    <string name="hi_placeholder">Hi, %1$s</string>
+
     <string name="settings_title">Settings</string>
     <string name="settings_units">Units</string>
     <string name="settings_language">Language</string>

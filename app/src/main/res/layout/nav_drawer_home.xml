@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <!-- Profile header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DCEBD8"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_circle_white"
+            android:padding="8dp"
+            android:src="@android:drawable/ic_menu_myplaces" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textDrawerName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="User"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textDrawerEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="user@email.com"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingTop="8dp">
+
+            <TextView android:id="@+id/navHome" style="@style/DrawerMenuItem" android:text="Home" />
+            <TextView android:id="@+id/navTrackingDiary" style="@style/DrawerMenuItem" android:text="Tracking Diary" />
+            <TextView android:id="@+id/navNutrition" style="@style/DrawerMenuItem" android:text="Nutrition" />
+            <TextView android:id="@+id/navFitness" style="@style/DrawerMenuItem" android:text="Fitness" />
+            <TextView android:id="@+id/navFasting" style="@style/DrawerMenuItem" android:text="Fasting" />
+            <TextView android:id="@+id/navMeditation" style="@style/DrawerMenuItem" android:text="Meditation and Wellness" />
+            <TextView android:id="@+id/navSleep" style="@style/DrawerMenuItem" android:text="Sleep" />
+            <TextView android:id="@+id/navMedication" style="@style/DrawerMenuItem" android:text="Medication" />
+            <TextView android:id="@+id/navGoals" style="@style/DrawerMenuItem" android:text="Goals" />
+            <TextView android:id="@+id/navKnowYourHealth" style="@style/DrawerMenuItem" android:text="Know Your Health" />
+            <TextView android:id="@+id/navStatistics" style="@style/DrawerMenuItem" android:text="Statistics" />
+            <TextView android:id="@+id/navSettings" style="@style/DrawerMenuItem" android:text="Settings" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/buttonDrawerLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:backgroundTint="#4F7A5B"
+        android:text="Logout"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

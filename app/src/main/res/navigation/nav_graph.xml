@@ -77,6 +77,30 @@
         <action
             android:id="@+id/action_home_to_settings"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_home_to_trackingDiary"
+            app:destination="@id/trackingDiaryFragment" />
+        <action
+            android:id="@+id/action_home_to_nutrition"
+            app:destination="@id/nutritionFragment" />
+        <action
+            android:id="@+id/action_home_to_steps"
+            app:destination="@id/stepsFragment" />
+        <action
+            android:id="@+id/action_home_to_workouts"
+            app:destination="@id/workoutsFragment" />
+        <action
+            android:id="@+id/action_home_to_fasting"
+            app:destination="@id/fastingFragment" />
+        <action
+            android:id="@+id/action_home_to_sleep"
+            app:destination="@id/sleepFragment" />
+        <action
+            android:id="@+id/action_home_to_medication"
+            app:destination="@id/medicationFragment" />
+        <action
+            android:id="@+id/action_home_to_goals"
+            app:destination="@id/goalsFragment" />
     </fragment>
 
     <fragment
@@ -89,6 +113,94 @@
             app:destination="@id/startFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/trackingDiaryFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Tracking Diary"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Tracking Diary" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nutritionFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Nutrition"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Nutrition" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/stepsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Steps"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Steps" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/workoutsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Workouts"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Workouts" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fastingFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Fasting"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Fasting" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sleepFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Sleep"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Sleep" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/medicationFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Medication"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Medication" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/goalsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Goals"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Goals" />
     </fragment>
 
 </navigation>
