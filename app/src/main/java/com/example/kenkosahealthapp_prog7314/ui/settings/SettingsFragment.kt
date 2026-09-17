@@ -53,6 +53,10 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        binding.buttonBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         binding.buttonSignOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             findNavController().navigate(R.id.action_settings_to_start)

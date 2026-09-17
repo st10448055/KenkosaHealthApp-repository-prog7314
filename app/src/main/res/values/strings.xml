@@ -30,6 +30,7 @@
     <string name="menu">Menu</string>
     <string name="notifications">Notifications</string>
     <string name="hi_placeholder">Hi, %1$s</string>
+    <string name="back">Back</string>
 
     <string name="settings_title">Settings</string>
     <string name="settings_units">Units</string>

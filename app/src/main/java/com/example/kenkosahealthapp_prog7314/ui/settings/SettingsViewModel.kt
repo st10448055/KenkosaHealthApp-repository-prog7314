@@ -24,13 +24,24 @@ class SettingsViewModel(private val userRepository: UserRepository) : ViewModel(
     private fun load() {
         val uid = userId ?: return
         viewModelScope.launch {
-            userRepository.getSettings(uid)?.let { _settings.value = it }
+            val existing = userRepository.getSettings(uid)
+            if (existing != null) {
+                _settings.value = existing
+            } else {
+                // No settings doc yet for this user — create one with defaults
+                // so userId is always populated correctly.
+                val defaults = UserSettings(userId = uid)
+                userRepository.createDefaultSettings(uid)
+                _settings.value = defaults
+            }
         }
     }
 
     private fun save(updated: UserSettings) {
-        _settings.value = updated
-        viewModelScope.launch { userRepository.updateSettings(updated) }
+        val uid = userId ?: return
+        val withUserId = updated.copy(userId = uid)
+        _settings.value = withUserId
+        viewModelScope.launch { userRepository.updateSettings(withUserId) }
     }
 
     fun setUnitSystem(value: String) = save(_settings.value.copy(unitSystem = value))

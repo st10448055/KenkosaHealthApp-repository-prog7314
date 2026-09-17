@@ -25,6 +25,10 @@ class SsoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.buttonBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
         binding.buttonContinue.setOnClickListener {
             val email = binding.editEmail.text.toString().trim()
             if (email.isEmpty()) {
