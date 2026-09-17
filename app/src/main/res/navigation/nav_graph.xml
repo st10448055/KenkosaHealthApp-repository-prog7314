@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.kenkosa.app.ui.auth.StartFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.auth.StartFragment"
         android:label="Start"
         tools:layout="@layout/fragment_start">
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/ssoFragment"
-        android:name="com.kenkosa.app.ui.auth.SsoFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.auth.SsoFragment"
         android:label="Sign in with SSO"
         tools:layout="@layout/fragment_sso">
         <action
@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.kenkosa.app.ui.auth.SignUpFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.auth.SignUpFragment"
         android:label="Create Account"
         tools:layout="@layout/fragment_sign_up">
         <action
@@ -52,7 +52,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.kenkosa.app.ui.auth.LoginFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.auth.LoginFragment"
         android:label="Welcome Back"
         tools:layout="@layout/fragment_login">
         <action
@@ -71,7 +71,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.kenkosa.app.ui.home.HomeFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.home.HomeFragment"
         android:label="Home"
         tools:layout="@layout/fragment_home">
         <action
@@ -81,7 +81,7 @@
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.kenkosa.app.ui.settings.SettingsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.settings.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings">
         <action
