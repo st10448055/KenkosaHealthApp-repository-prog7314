@@ -172,14 +172,19 @@
 
     <fragment
         android:id="@+id/sleepFragment"
-        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.sleep.SleepFragment"
         android:label="Sleep"
-        tools:layout="@layout/fragment_feature_placeholder">
-        <argument
-            android:name="featureTitle"
-            app:argType="string"
-            android:defaultValue="Sleep" />
+        tools:layout="@layout/fragment_sleep">
+        <action
+            android:id="@+id/action_sleep_to_addSleep"
+            app:destination="@id/addSleepFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/addSleepFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.sleep.AddSleepFragment"
+        android:label="Add Sleep"
+        tools:layout="@layout/fragment_add_sleep" />
 
     <fragment
         android:id="@+id/medicationFragment"

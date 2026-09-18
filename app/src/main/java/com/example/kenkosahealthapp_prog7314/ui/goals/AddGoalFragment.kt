@@ -28,15 +28,41 @@ class AddGoalFragment : Fragment() {
 
         binding.buttonBack.setOnClickListener { findNavController().navigateUp() }
 
-        // Keep the two RadioGroups for category mutually exclusive across both rows.
+        // Keep the two RadioGroups for category mutually exclusive across both rows,
+        // and update the unit field's lock state whenever category changes.
         binding.radioGroupCategory.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId != -1) binding.radioGroupCategory2.clearCheck()
+            applyUnitLockForCategory()
         }
         binding.radioGroupCategory2.setOnCheckedChangeListener { _, checkedId ->
             if (checkedId != -1) binding.radioGroupCategory.clearCheck()
+            applyUnitLockForCategory()
         }
 
+        applyUnitLockForCategory() // set initial state (Steps is checked by default)
+
         binding.buttonCreateGoal.setOnClickListener { attemptCreateGoal() }
+    }
+
+    /**
+     * Locks the unit field to "hours" for Sleep goals, since SleepFragment's
+     * ring target assumes SLEEP-category targetValue is always expressed in
+     * hours. For every other category, the unit stays free-text as before.
+     */
+    private fun applyUnitLockForCategory() {
+        val isSleep = binding.radioSleep.isChecked
+
+        if (isSleep) {
+            binding.editUnit.setText("hours")
+            binding.editUnit.isEnabled = false
+        } else {
+            binding.editUnit.isEnabled = true
+            // Only clear it if it was previously locked to "hours" by us;
+            // don't clobber a unit the user already typed for another category.
+            if (binding.editUnit.text.toString() == "hours") {
+                binding.editUnit.setText("")
+            }
+        }
     }
 
     private fun attemptCreateGoal() {
@@ -68,6 +94,10 @@ class AddGoalFragment : Fragment() {
             showError("Please enter a unit (e.g. steps, ml, hours)")
             return
         }
+        if (category == "SLEEP" && target > 24) {
+            showError("Sleep target can't exceed 24 hours")
+            return
+        }
 
         hideError()
         setLoading(true)
@@ -80,10 +110,7 @@ class AddGoalFragment : Fragment() {
             frequency = frequency,
             remindersEnabled = remindersEnabled,
             onResult = { success, errorMessage ->
-                // Guard: the fragment's view may already be destroyed if the
-                // user navigated away before this callback fired.
                 if (_binding == null) return@createGoal
-
                 setLoading(false)
                 if (success) {
                     findNavController().navigateUp()
@@ -92,14 +119,6 @@ class AddGoalFragment : Fragment() {
                 }
             }
         )
-
-
-        // Since createGoal() doesn't expose a success callback directly here,
-        // navigate back optimistically after a short delay is avoided
-        // instead we navigate back immediately on the assumption the ViewModel
-        // will surface errors via onError above if it fails.
-        setLoading(false)
-        findNavController().navigateUp()
     }
 
     private fun selectedCategory(): String = when {

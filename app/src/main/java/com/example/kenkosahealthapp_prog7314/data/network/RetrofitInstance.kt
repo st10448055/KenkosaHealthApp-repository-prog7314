@@ -28,4 +28,5 @@ object RetrofitInstance {
         .build()
 
     val goalApi: GoalApi by lazy { retrofit.create(GoalApi::class.java) }
+    val sleepApi: SleepApi by lazy { retrofit.create(SleepApi::class.java) }
 }
