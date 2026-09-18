@@ -194,13 +194,18 @@
 
     <fragment
         android:id="@+id/goalsFragment"
-        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.goals.GoalsFragment"
         android:label="Goals"
-        tools:layout="@layout/fragment_feature_placeholder">
-        <argument
-            android:name="featureTitle"
-            app:argType="string"
-            android:defaultValue="Goals" />
+        tools:layout="@layout/fragment_goals">
+        <action
+            android:id="@+id/action_goals_to_addGoal"
+            app:destination="@id/addGoalFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/addGoalFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.goals.AddGoalFragment"
+        android:label="Add Goal"
+        tools:layout="@layout/fragment_add_goal" />
 
 </navigation>
