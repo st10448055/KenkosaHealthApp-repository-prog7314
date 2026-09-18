@@ -9,4 +9,5 @@
     <color name="text_muted">#D7DED4</color>
     <color name="input_bg">#F2F5F0</color>
     <color name="error_red">#D9534F</color>
+    <color name="bg_light_green">#EAF1E9</color>
 </resources>

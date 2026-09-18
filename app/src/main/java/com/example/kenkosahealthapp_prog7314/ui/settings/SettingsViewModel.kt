@@ -28,7 +28,7 @@ class SettingsViewModel(private val userRepository: UserRepository) : ViewModel(
             if (existing != null) {
                 _settings.value = existing
             } else {
-                // No settings doc yet for this user — create one with defaults
+                // No settings doc yet for this user create one with defaults
                 // so userId is always populated correctly.
                 val defaults = UserSettings(userId = uid)
                 userRepository.createDefaultSettings(uid)
