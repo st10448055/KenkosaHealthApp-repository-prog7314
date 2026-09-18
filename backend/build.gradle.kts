@@ -21,6 +21,11 @@ dependencies {
     implementation("io.ktor:ktor-server-call-logging-jvm:2.3.12")
     implementation("io.ktor:ktor-server-status-pages-jvm:2.3.12")
 
+    implementation("io.ktor:ktor-client-core-jvm:2.3.12")
+    implementation("io.ktor:ktor-client-cio-jvm:2.3.12")
+    implementation("io.ktor:ktor-client-content-negotiation-jvm:2.3.12")
+    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:2.3.12")
+
     implementation("com.google.firebase:firebase-admin:9.4.1")
 
 
