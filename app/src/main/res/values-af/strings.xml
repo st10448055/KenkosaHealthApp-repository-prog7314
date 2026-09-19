@@ -81,4 +81,52 @@
     <string name="feature_sleep">Slaap</string>
     <string name="feature_medication">Medikasie</string>
     <string name="feature_goals">Doelwitte</string>
+
+    <!-- Medication -->
+    <string name="cancel">Kanselleer</string>
+    <string name="delete">Skrap</string>
+    <string name="medication_title">Medikasie</string>
+    <string name="add_medication_title">Voeg medikasie by</string>
+    <string name="medication_details_title">Medikasiebesonderhede</string>
+    <string name="edit_medication">Wysig medikasie</string>
+    <string name="medication_hero_title_good">Hou so aan!</string>
+    <string name="medication_hero_msg_good">Jy het nog nie een pil gemis nie.</string>
+    <string name="medication_hero_title_missed">Kom ons kry weer op koers</string>
+    <plurals name="medication_hero_msg_missed">
+        <item quantity="one">Jy het %d dosis in die afgelope 7 dae gemis.</item>
+        <item quantity="other">Jy het %d dosisse in die afgelope 7 dae gemis.</item>
+    </plurals>
+    <string name="medication_hero_title_empty">Welkom!</string>
+    <string name="medication_hero_msg_empty">Voeg jou eerste medikasie by om te begin volg.</string>
+    <string name="medication_pills_today">Pille vir vandag</string>
+    <string name="medication_see_all">Sien alles</string>
+    <string name="medication_show_today">Slegs vandag</string>
+    <string name="medication_vitamins">Bykomende vitamiene</string>
+    <string name="medication_empty_pills">Geen pille vir vandag geskeduleer nie.</string>
+    <string name="medication_empty_vitamins">Geen vitamiene om te wys nie.</string>
+    <string name="medication_dosage">Dosis</string>
+    <string name="medication_time">Tyd</string>
+    <string name="medication_no_reminder">Geen herinnering</string>
+    <string name="medication_mark_taken">Merk as geneem</string>
+    <string name="medication_mark_not_taken">Merk as nie geneem nie</string>
+    <string name="medication_vitamin_subtitle">%1$s · %2$s</string>
+    <string name="medication_delete_title">Skrap medikasie?</string>
+    <string name="medication_delete_message">Dit sal \"%1$s\" permanent verwyder.</string>
+    <string name="medication_name_label">Medikasienaam</string>
+    <string name="medication_name_hint">bv. Panado</string>
+    <string name="medication_dosage_label">Medikasiedosis</string>
+    <string name="medication_dosage_hint">bv. 500mg</string>
+    <string name="medication_type_label">Tipe</string>
+    <string name="medication_type_pill">Medikasie</string>
+    <string name="medication_type_vitamin">Vitamien</string>
+    <string name="medication_frequency_label">Frekwensie</string>
+    <string name="frequency_daily">Daagliks</string>
+    <string name="frequency_weekly">Weekliks</string>
+    <string name="frequency_monthly">Maandeliks</string>
+    <string name="medication_reminders">Herinnerings</string>
+    <string name="medication_error_name_required">Voer asseblief \'n medikasienaam in</string>
+    <string name="medication_error_name_length">Naam mag hoogstens 60 karakters wees</string>
+    <string name="medication_error_dosage_required">Voer asseblief \'n dosis in</string>
+    <string name="medication_error_dosage_length">Dosis mag hoogstens 30 karakters wees</string>
+    <string name="medication_error_generic">Iets het skeefgeloop. Probeer asseblief weer.</string>
 </resources>

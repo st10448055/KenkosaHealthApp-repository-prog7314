@@ -81,4 +81,52 @@
     <string name="feature_sleep">Ukulala</string>
     <string name="feature_medication">Amayeza</string>
     <string name="feature_goals">Iithagethi</string>
+
+    <!-- Medication -->
+    <string name="cancel">Rhoxisa</string>
+    <string name="delete">Cima</string>
+    <string name="medication_title">Amayeza</string>
+    <string name="add_medication_title">Yongeza amayeza</string>
+    <string name="medication_details_title">Iinkcukacha zamayeza</string>
+    <string name="edit_medication">Hlela amayeza</string>
+    <string name="medication_hero_title_good">Qhubeka njalo!</string>
+    <string name="medication_hero_msg_good">Awukhange ulibale ipilisi nayiphi na.</string>
+    <string name="medication_hero_title_missed">Masibuyele emgaqweni</string>
+    <plurals name="medication_hero_msg_missed">
+        <item quantity="one">Iidosi eziphoswe kwiintsuku ezi-7 zidlulileyo: %d</item>
+        <item quantity="other">Iidosi eziphoswe kwiintsuku ezi-7 zidlulileyo: %d</item>
+    </plurals>
+    <string name="medication_hero_title_empty">Wamkelekile!</string>
+    <string name="medication_hero_msg_empty">Yongeza amayeza akho okuqala ukuze uqale ukulandela.</string>
+    <string name="medication_pills_today">Iipilisi zanamhlanje</string>
+    <string name="medication_see_all">Jonga zonke</string>
+    <string name="medication_show_today">Namhlanje kuphela</string>
+    <string name="medication_vitamins">Iivithamini ezongezelelweyo</string>
+    <string name="medication_empty_pills">Akukho pilisi zicwangcisiweyo namhlanje.</string>
+    <string name="medication_empty_vitamins">Akukho vithamini zokubonisa.</string>
+    <string name="medication_dosage">Umthamo</string>
+    <string name="medication_time">Ixesha</string>
+    <string name="medication_no_reminder">Akukho sikhumbuzo</string>
+    <string name="medication_mark_taken">Phawula njengokuthathiweyo</string>
+    <string name="medication_mark_not_taken">Susa uphawu lokuthathwa</string>
+    <string name="medication_vitamin_subtitle">%1$s · %2$s</string>
+    <string name="medication_delete_title">Cima amayeza?</string>
+    <string name="medication_delete_message">Oku kuya kususa \"%1$s\" ngokusisigxina.</string>
+    <string name="medication_name_label">Igama lamayeza</string>
+    <string name="medication_name_hint">umz. Panado</string>
+    <string name="medication_dosage_label">Umthamo wamayeza</string>
+    <string name="medication_dosage_hint">umz. 500mg</string>
+    <string name="medication_type_label">Uhlobo</string>
+    <string name="medication_type_pill">Amayeza</string>
+    <string name="medication_type_vitamin">Ivithamini</string>
+    <string name="medication_frequency_label">Rhoqo</string>
+    <string name="frequency_daily">Yonke imihla</string>
+    <string name="frequency_weekly">Rhoqo evekini</string>
+    <string name="frequency_monthly">Rhoqo ngenyanga</string>
+    <string name="medication_reminders">Izikhumbuzo</string>
+    <string name="medication_error_name_required">Nceda ufake igama lamayeza</string>
+    <string name="medication_error_name_length">Igama mayingabi ngaphezu koonobumba abangama-60</string>
+    <string name="medication_error_dosage_required">Nceda ufake umthamo</string>
+    <string name="medication_error_dosage_length">Umthamo mawungabi ngaphezu koonobumba abangama-30</string>
+    <string name="medication_error_generic">Kukho into engahambanga kakuhle. Nceda uzame kwakhona.</string>
 </resources>

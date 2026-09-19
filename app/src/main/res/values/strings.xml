@@ -83,4 +83,52 @@
     <string name="feature_sleep">Sleep</string>
     <string name="feature_medication">Medication</string>
     <string name="feature_goals">Goals</string>
+
+    <!-- Medication -->
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="medication_title">Medication</string>
+    <string name="add_medication_title">Add Medication</string>
+    <string name="medication_details_title">Medication Details</string>
+    <string name="edit_medication">Edit Medication</string>
+    <string name="medication_hero_title_good">Keep it up!</string>
+    <string name="medication_hero_msg_good">You haven\'t missed a single medication pill.</string>
+    <string name="medication_hero_title_missed">Let\'s get back on track</string>
+    <plurals name="medication_hero_msg_missed">
+        <item quantity="one">You missed %d dose in the past 7 days.</item>
+        <item quantity="other">You missed %d doses in the past 7 days.</item>
+    </plurals>
+    <string name="medication_hero_title_empty">Welcome!</string>
+    <string name="medication_hero_msg_empty">Add your first medication to start tracking.</string>
+    <string name="medication_pills_today">Pills for Today</string>
+    <string name="medication_see_all">See all</string>
+    <string name="medication_show_today">Today only</string>
+    <string name="medication_vitamins">Additional Vitamins</string>
+    <string name="medication_empty_pills">No pills scheduled for today.</string>
+    <string name="medication_empty_vitamins">No vitamins to show.</string>
+    <string name="medication_dosage">Dosage</string>
+    <string name="medication_time">Time</string>
+    <string name="medication_no_reminder">No reminder</string>
+    <string name="medication_mark_taken">Mark as taken</string>
+    <string name="medication_mark_not_taken">Mark as not taken</string>
+    <string name="medication_vitamin_subtitle">%1$s · %2$s</string>
+    <string name="medication_delete_title">Delete medication?</string>
+    <string name="medication_delete_message">This will permanently remove \"%1$s\".</string>
+    <string name="medication_name_label">Medication Name</string>
+    <string name="medication_name_hint">e.g. Panado</string>
+    <string name="medication_dosage_label">Medication Dosage</string>
+    <string name="medication_dosage_hint">e.g. 500mg</string>
+    <string name="medication_type_label">Type</string>
+    <string name="medication_type_pill">Medication</string>
+    <string name="medication_type_vitamin">Vitamin</string>
+    <string name="medication_frequency_label">Frequency</string>
+    <string name="frequency_daily">Daily</string>
+    <string name="frequency_weekly">Weekly</string>
+    <string name="frequency_monthly">Monthly</string>
+    <string name="medication_reminders">Reminders</string>
+    <string name="medication_error_name_required">Please enter a medication name</string>
+    <string name="medication_error_name_length">Name must be 60 characters or fewer</string>
+    <string name="medication_error_dosage_required">Please enter a dosage</string>
+    <string name="medication_error_dosage_length">Dosage must be 30 characters or fewer</string>
+    <string name="medication_error_generic">Something went wrong. Please try again.</string>
 </resources>

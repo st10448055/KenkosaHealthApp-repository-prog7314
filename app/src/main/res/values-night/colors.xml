@@ -13,4 +13,9 @@
     <color name="nav_bar_bg">#2A3D2E</color>
     <color name="nav_icon">#DDE8DB</color>
     <color name="nav_fab_halo">#3A5440</color>
+    <color name="med_card_neutral">#223026</color>
+    <color name="med_hero_start">#3A5440</color>
+    <color name="med_hero_end">#2A3D2E</color>
+    <color name="chip_selected_bg">#8FAF87</color>
+    <color name="chip_selected_text">#101812</color>
 </resources>
