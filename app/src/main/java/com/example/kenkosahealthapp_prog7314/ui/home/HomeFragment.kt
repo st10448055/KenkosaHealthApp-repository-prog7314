@@ -85,16 +85,17 @@ class HomeFragment : Fragment() {
 
         firestore.collection("users").document(uid).get()
             .addOnSuccessListener { doc ->
+                val b = _binding ?: return@addOnSuccessListener   // view already destroyed
                 val name = doc.getString("name").orEmpty()
                 val surname = doc.getString("surname").orEmpty()
                 val fullName = "$name $surname".trim()
                 val display = fullName.ifEmpty { user.email ?: "User" }
 
-                binding.textGreeting.text = "Hi, $display"
-                binding.navDrawerHome.textDrawerName.text = display
+                b.textGreeting.text = getString(R.string.hi_placeholder, display)
+                b.navDrawerHome.textDrawerName.text = display
             }
             .addOnFailureListener {
-                binding.textGreeting.text = "Hi, User"
+                _binding?.textGreeting?.text = getString(R.string.hi_placeholder, "User")
             }
     }
 

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="280dp"
     android:layout_height="match_parent"
     android:background="#83A682"
@@ -30,15 +31,17 @@
             android:id="@+id/imageDrawerAvatar"
             android:layout_width="72dp"
             android:layout_height="72dp"
+            android:importantForAccessibility="no"
             android:src="@android:drawable/ic_menu_myplaces"
             app:tint="@android:color/white" />
 
+        <!-- Name and email are filled in from HomeFragment at runtime -->
         <TextView
             android:id="@+id/textDrawerName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="User"
+            android:text="@string/settings_default_name"
             android:textColor="@android:color/white"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -48,9 +51,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="user@email.com"
             android:textColor="@android:color/white"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:text="user@email.com" />
 
         <!-- Subtle Underline beneath Email -->
         <View
@@ -78,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Home"
+                android:text="@string/nav_home"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -91,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Tracking Diary"
+                android:text="@string/feature_tracking_diary"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -104,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Nutrition"
+                android:text="@string/feature_nutrition"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -117,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Fitness"
+                android:text="@string/nav_fitness"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -130,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Fasting"
+                android:text="@string/feature_fasting"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -143,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Meditation and Wellness"
+                android:text="@string/nav_meditation"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -156,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Sleep"
+                android:text="@string/feature_sleep"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -169,7 +172,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Medication"
+                android:text="@string/feature_medication"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -182,7 +185,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Goals"
+                android:text="@string/nav_goals"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -195,7 +198,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Know Your Health"
+                android:text="@string/nav_know_your_health"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -208,7 +211,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Statistics"
+                android:text="@string/nav_statistics"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -221,7 +224,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
-                android:text="Settings"
+                android:text="@string/nav_settings"
                 android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -234,12 +237,15 @@
     <!-- Bottom Dark Green Pill Logout Button -->
     <Button
         android:id="@+id/buttonDrawerLogout"
-        android:layout_width="120dp"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_gravity="end"
         android:layout_marginTop="16dp"
         android:background="@drawable/bg_pill_dark_green"
-        android:text="Logout"
+        android:minWidth="120dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="@string/sign_out"
         android:textAllCaps="false"
         android:textColor="@android:color/white"
         android:textSize="14sp"

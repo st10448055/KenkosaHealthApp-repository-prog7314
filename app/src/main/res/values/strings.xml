@@ -69,4 +69,18 @@
     <string name="nav_goals">Goals</string>
     <string name="nav_statistics">Statistics</string>
     <string name="nav_settings">Settings</string>
+
+    <string name="nav_fitness">Fitness</string>
+    <string name="nav_meditation">Meditation and Wellness</string>
+    <string name="nav_know_your_health">Know Your Health</string>
+
+    <!-- Home feature grid (new) -->
+    <string name="feature_tracking_diary">Tracking Diary</string>
+    <string name="feature_nutrition">Nutrition</string>
+    <string name="feature_steps">Steps</string>
+    <string name="feature_workouts">Workouts</string>
+    <string name="feature_fasting">Fasting</string>
+    <string name="feature_sleep">Sleep</string>
+    <string name="feature_medication">Medication</string>
+    <string name="feature_goals">Goals</string>
 </resources>

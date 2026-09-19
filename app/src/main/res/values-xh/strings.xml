@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kenkosa</string>
+
+    <string name="tagline">Uhambo lwakho lwempilo, lwenziwe lula</string>
+    <string name="get_started">Qala</string>
+    <string name="already_have_account">Sele unayo iakhawunti? Ngena</string>
+
+    <string name="nav_fitness">Impilo yomzimba</string>
+    <string name="nav_meditation">Ukuzindla nempilo entle</string>
+    <string name="nav_know_your_health">Yazi impilo yakho</string>
+
+    <string name="sign_in_with_sso">Ngena nge-SSO</string>
+    <string name="sso_subtitle">Sebenzisa i-imeyile yakho ukufikelela ngokukhuselekileyo kwi-Kenkosa Health</string>
+    <string name="email_hint">Idilesi ye-imeyile</string>
+    <string name="continue_action">Qhubeka</string>
+    <string name="no_account_sign_up">Awunayo iakhawunti? Bhalisa</string>
+
+    <string name="create_account">Yenza iakhawunti</string>
+    <string name="create_account_subtitle">Qalisa uhambo lwakho lwempilo namhlanje</string>
+    <string name="full_name_hint">Igama elipheleleyo</string>
+    <string name="password_hint">Iphasiwedi</string>
+    <string name="confirm_password_hint">Qinisekisa iphasiwedi</string>
+    <string name="terms_notice">Ngokubhalisa, wamkela Imigaqo &amp; Iimeko zethu kunye noMgaqo-nkqubo weMfihlo</string>
+    <string name="sign_up_action">Bhalisa</string>
+    <string name="have_account_sign_in">Sele unayo iakhawunti? Ngena</string>
+
+    <string name="welcome_back">Wamkelekile kwakhona</string>
+    <string name="welcome_back_subtitle">Ngena ukuze uqhubeke nohambo lwakho lwempilo</string>
+    <string name="sign_in_action">Ngena</string>
+    <string name="sign_in_with_google">Ngena nge-Google</string>
+    <string name="use_fingerprint">Sebenzisa isikhondo somnwe ukungena</string>
+
+    <string name="menu">Imenyu</string>
+    <string name="notifications">Izaziso</string>
+    <string name="hi_placeholder">Molo, %1$s</string>
+    <string name="back">Emva</string>
+    <string name="add">Yongeza</string>
+    <string name="add_sleep">Yongeza ukulala</string>
+
+    <string name="settings_title">Useto</string>
+    <string name="settings_units">Iiyunithi</string>
+    <string name="settings_language">Ulwimi</string>
+    <string name="settings_appearance">Inkangeleko</string>
+    <string name="settings_haptics">Uluvo lokuchukumisa</string>
+    <string name="settings_notifications">Izaziso</string>
+    <string name="settings_subscription">Ukuzibhalisela</string>
+    <string name="sign_out">Phuma</string>
+
+    <string name="settings_section_profile">Iprofayile</string>
+    <string name="settings_section_preferences">Okukhethwayo</string>
+    <string name="settings_section_health_goals">Iithagethi zempilo</string>
+    <string name="settings_push_notifications">Izaziso</string>
+    <string name="settings_dark_mode">Imowudi emnyama</string>
+    <string name="settings_daily_steps">Amanyathelo emihla ngemihla</string>
+    <string name="settings_calorie_target">Ithagethi yekhalori</string>
+    <string name="settings_sleep_target">Ithagethi yokulala</string>
+    <string name="settings_default_name">Umsebenzisi</string>
+    <string name="edit">Hlela</string>
+    <string name="save">Gcina</string>
+    <string name="edit_profile">Hlela iprofayile</string>
+    <string name="first_name_hint">Igama</string>
+    <string name="surname_hint">Ifani</string>
+    <string name="settings_error_name_required">Igama alinakushiywa lingenanto</string>
+    <string name="settings_error_range">Faka ixabiso phakathi kwe-%1$d ne-%2$d</string>
+    <string name="settings_steps_hint">Amanyathelo ngosuku</string>
+    <string name="settings_calories_hint">Iikhalori ngosuku (kcal)</string>
+    <string name="settings_hours_label">iiyure</string>
+    <string name="settings_minutes_label">imizuzu</string>
+    <string name="settings_notifications_blocked">Izaziso zivaliwe. Zivule kuseto lwe-app yefowuni yakho.</string>
+    <string name="nav_home">Ikhaya</string>
+    <string name="nav_goals">Iithagethi</string>
+    <string name="nav_statistics">Amanani</string>
+    <string name="nav_settings">Useto</string>
+
+    <string name="feature_tracking_diary">Idayari yokulandela</string>
+    <string name="feature_nutrition">Ukutya</string>
+    <string name="feature_steps">Amanyathelo</string>
+    <string name="feature_workouts">Ukuzilolonga</string>
+    <string name="feature_fasting">Ukuzila</string>
+    <string name="feature_sleep">Ukulala</string>
+    <string name="feature_medication">Amayeza</string>
+    <string name="feature_goals">Iithagethi</string>
+</resources>

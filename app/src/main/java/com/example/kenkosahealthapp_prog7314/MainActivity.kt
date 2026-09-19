@@ -9,7 +9,6 @@ import com.google.firebase.auth.FirebaseAuth
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Apply the saved Light/Dark/System choice before any UI is inflated.
         ThemeManager.applySaved(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,7 +17,7 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
 
-        if (FirebaseAuth.getInstance().currentUser != null) {
+        if (savedInstanceState == null && FirebaseAuth.getInstance().currentUser != null) {
             navController.navigate(
                 R.id.homeFragment,
                 null,
