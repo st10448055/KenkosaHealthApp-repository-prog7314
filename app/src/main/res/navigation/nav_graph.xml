@@ -101,6 +101,9 @@
         <action
             android:id="@+id/action_home_to_goals"
             app:destination="@id/goalsFragment" />
+        <action
+            android:id="@+id/action_home_to_wellness"
+            app:destination="@id/wellnessFragment" />
     </fragment>
 
     <fragment
@@ -203,7 +206,6 @@
         android:label="Add Sleep"
         tools:layout="@layout/fragment_add_sleep" />
 
-    <!-- Medication -->
     <fragment
         android:id="@+id/medicationFragment"
         android:name="com.example.kenkosahealthapp_prog7314.ui.medication.MedicationFragment"
@@ -228,14 +230,12 @@
         android:name="com.example.kenkosahealthapp_prog7314.ui.medication.AddMedicationFragment"
         android:label="Add Medication"
         tools:layout="@layout/fragment_add_medication">
-
-        <!-- Optional: opens as the details/edit view for a medication -->
+        <!-- Optional: when set, the screen opens as the details / edit view for that medication. -->
         <argument
             android:name="medicationId"
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />
-
         <action
             android:id="@+id/action_addMedication_to_goals"
             app:destination="@id/goalsFragment" />
@@ -244,6 +244,53 @@
             app:destination="@id/statisticsFragment" />
         <action
             android:id="@+id/action_addMedication_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/wellnessFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.wellness.WellnessFragment"
+        android:label="Meditation and Wellness"
+        tools:layout="@layout/fragment_wellness">
+        <action
+            android:id="@+id/action_wellness_to_logMood"
+            app:destination="@id/logMoodFragment" />
+        <action
+            android:id="@+id/action_wellness_to_goals"
+            app:destination="@id/goalsFragment" />
+        <action
+            android:id="@+id/action_wellness_to_statistics"
+            app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_wellness_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/logMoodFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.wellness.LogMoodFragment"
+        android:label="Log Mood"
+        tools:layout="@layout/fragment_log_mood">
+        <!-- Optional: set to open the details / edit view of an existing entry. -->
+        <argument
+            android:name="moodId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <!-- Optional: which face to preselect on a new entry. -->
+        <argument
+            android:name="preselectMood"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_logMood_to_goals"
+            app:destination="@id/goalsFragment" />
+        <action
+            android:id="@+id/action_logMood_to_statistics"
+            app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_logMood_to_settings"
             app:destination="@id/settingsFragment" />
     </fragment>
 
@@ -262,32 +309,5 @@
         android:name="com.example.kenkosahealthapp_prog7314.ui.goals.AddGoalFragment"
         android:label="Add Goal"
         tools:layout="@layout/fragment_add_goal" />
-
-    <fragment
-        android:id="@+id/mealHistoryFragment"
-        android:name="com.example.kenkosahealthapp_prog7314.ui.diary.MealHistoryFragment"
-        android:label="Today's Meals"
-        tools:layout="@layout/fragment_meal_history">
-        <action
-            android:id="@+id/action_mealHistory_to_logFood"
-            app:destination="@id/logFoodFragment" />
-    </fragment>
-
-    <!-- Keep your existing food logging screen -->
-    <fragment
-        android:id="@+id/logFoodFragment"
-        android:name="com.example.kenkosahealthapp_prog7314.ui.diary.LogFoodFragment"
-        android:label="Log Food"
-        tools:layout="@layout/fragment_log_food">
-
-    <argument
-        android:name="mealType"
-        app:argType="string"
-        android:defaultValue="breakfast" />
-        </fragment>
-
-    <action
-        android:id="@+id/action_global_mealHistory"
-        app:destination="@id/mealHistoryFragment" />
 
 </navigation>

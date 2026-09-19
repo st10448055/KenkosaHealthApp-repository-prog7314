@@ -13,7 +13,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentHomeBinding
 import com.example.kenkosahealthapp_prog7314.databinding.ItemHomeFeatureBinding
-import com.example.kenkosahealthapp_prog7314.ui.addmenu.AddMenuBottomSheet
 
 class HomeFragment : Fragment() {
 
@@ -37,7 +36,6 @@ class HomeFragment : Fragment() {
         setupGreeting()
         setupFeatureGrid()
         setupDrawerNavigation()
-        setupAddButton()
         observeOpenDrawerRequest()
 
         // Notification bell is intentionally non-functional for now.
@@ -101,14 +99,6 @@ class HomeFragment : Fragment() {
             }
     }
 
-    private fun setupAddButton() {
-        binding.fabAdd.setOnClickListener {
-            AddMenuBottomSheet().show(childFragmentManager, "AddMenuBottomSheet")
-        }
-    }
-
-
-
     private fun setupFeatureGrid() {
         bindFeature(binding.cardTrackingDiary, R.drawable.ic_diary, "Tracking Diary") {
             findNavController().navigate(R.id.action_home_to_trackingDiary)
@@ -170,11 +160,14 @@ class HomeFragment : Fragment() {
         drawer.navGoals.setOnClickListener {
             closeDrawer(); findNavController().navigate(R.id.action_home_to_goals)
         }
+        drawer.navMeditation.setOnClickListener {
+            closeDrawer(); findNavController().navigate(R.id.action_home_to_wellness)
+        }
         drawer.navSettings.setOnClickListener {
             closeDrawer(); findNavController().navigate(R.id.action_home_to_settings)
         }
 
-        // Fitness / Meditation / Know Your Health / Statistics: no destinations yet,
+        // Fitness / Know Your Health / Statistics: no destinations yet,
         // wire these up once those fragments + nav actions exist.
 
         drawer.buttonDrawerLogout.setOnClickListener {
