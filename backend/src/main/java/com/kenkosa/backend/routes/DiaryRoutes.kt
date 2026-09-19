@@ -12,6 +12,7 @@ import io.ktor.server.auth.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import com.kenkosa.backend.models.CreateMealEntryRequest.UpdateMealEntryRequest
 
 fun Route.diaryRoutes(
     mealRepository: MealDiaryRepository,
@@ -76,6 +77,30 @@ fun Route.diaryRoutes(
 
                 val created = mealRepository.createMealEntry(principal.uid, request)
                 call.respond(HttpStatusCode.Created, created)
+            }
+
+            patch("/{id}") {
+                val mealId = call.parameters["id"] ?: return@patch call.respond(
+                    HttpStatusCode.BadRequest, ErrorResponse(listOf("Missing meal id"))
+                )
+
+                val request = try {
+                    call.receive<UpdateMealEntryRequest>()
+                } catch (e: Exception) {
+                    return@patch call.respond(HttpStatusCode.BadRequest, ErrorResponse(listOf("Malformed request body")))
+                }
+
+                val errors = request.validate()
+                if (errors.isNotEmpty()) {
+                    return@patch call.respond(HttpStatusCode.UnprocessableEntity, ErrorResponse(errors))
+                }
+
+                val updated = mealRepository.updateMealEntryServings(mealId, request.servings)
+                if (updated != null) {
+                    call.respond(HttpStatusCode.OK, updated)
+                } else {
+                    call.respond(HttpStatusCode.NotFound, ErrorResponse(listOf("Meal entry not found")))
+                }
             }
 
             delete("/{id}") {

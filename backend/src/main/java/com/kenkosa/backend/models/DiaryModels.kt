@@ -10,6 +10,10 @@ data class MealEntryResponse(
     val mealType: String,
     val foodName: String,
     val servings: Double,
+    val baseCalories: Double,
+    val baseProteinG: Double,
+    val baseCarbsG: Double,
+    val baseFatG: Double,
     val calories: Double,
     val proteinG: Double,
     val carbsG: Double,
@@ -43,6 +47,17 @@ data class CreateMealEntryRequest(
         if(foodName.isBlank()) errors.add("Food name is required")
         if (servings <= 0) errors.add("Servings must be greater than 0")
         return errors
+    }
+
+    @Serializable
+    data class UpdateMealEntryRequest(
+        val servings: Double
+    ) {
+        fun validate(): List<String> {
+            val errors = mutableListOf<String>()
+            if (servings <= 0) errors.add("Servings must be greater than 0")
+            return errors
+        }
     }
 
 

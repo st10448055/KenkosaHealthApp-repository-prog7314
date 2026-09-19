@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8EFE3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <ImageButton
+            android:id="@+id/buttonBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Today's Meals"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#1B3A1B" />
+
+        <ProgressBar
+            android:id="@+id/progressLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/textError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#B00020"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/sectionBreakfast"
+            layout="@layout/item_meal_section" />
+
+        <include
+            android:id="@+id/sectionLunch"
+            layout="@layout/item_meal_section" />
+
+        <include
+            android:id="@+id/sectionDinner"
+            layout="@layout/item_meal_section" />
+
+        <include
+            android:id="@+id/sectionSnack"
+            layout="@layout/item_meal_section" />
+
+    </LinearLayout>
+</ScrollView>

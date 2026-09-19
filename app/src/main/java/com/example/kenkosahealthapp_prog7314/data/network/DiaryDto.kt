@@ -7,6 +7,10 @@ data class MealEntryDto (
     val mealType: String,
     val foodName: String,
     val servings: Double,
+    val baseCalories: Double,
+    val baseProteinG: Double,
+    val baseCarbsG: Double,
+    val baseFatG: Double,
     val calories: Double,      // already scaled by servings, from backend
     val proteinG: Double,
     val carbsG: Double,
@@ -23,4 +27,8 @@ data class CreateMealEntryRequest(
     val baseProteinG: Double,
     val baseCarbsG: Double,
     val baseFatG: Double
+)
+
+data class UpdateMealEntryRequest(
+    val servings: Double
 )

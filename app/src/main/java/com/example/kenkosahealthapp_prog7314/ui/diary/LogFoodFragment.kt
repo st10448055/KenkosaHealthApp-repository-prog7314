@@ -34,6 +34,9 @@ class LogFoodFragment : Fragment() {
 
         binding.buttonBack.setOnClickListener { findNavController().navigateUp() }
 
+        val incomingMealType = arguments?.getString("mealType")
+        val initialMealType = MealType.entries.find { it.apiValue == incomingMealType } ?: MealType.BREAKFAST
+
         // --- Meal type selector: fixed buttons, no free text, matches your design mockup ---
         mealTypeViews = mapOf(
             MealType.BREAKFAST to binding.mealTypeBreakfast,
@@ -44,7 +47,7 @@ class LogFoodFragment : Fragment() {
         mealTypeViews.forEach { (type, view) ->
             view.setOnClickListener { selectMealType(type) }
         }
-        selectMealType(MealType.BREAKFAST) // default selection on screen open
+        selectMealType(initialMealType)
 
         // --- Search: text search ---
         binding.buttonSearch.setOnClickListener {

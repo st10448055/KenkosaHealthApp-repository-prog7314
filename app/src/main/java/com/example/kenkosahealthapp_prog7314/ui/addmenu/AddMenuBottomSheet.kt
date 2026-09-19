@@ -29,7 +29,7 @@ class AddMenuBottomSheet : BottomSheetDialogFragment() {
         val navController = requireParentFragment().findNavController()
 
         binding.optionLogFood.setOnClickListener {
-            navController.navigate(R.id.action_global_logFood)
+            navController.navigate(R.id.action_global_mealHistory)
             dismiss()
         }
 
@@ -47,6 +47,10 @@ class AddMenuBottomSheet : BottomSheetDialogFragment() {
             dismiss()
         }
         binding.optionExercise.setOnClickListener {
+            dismiss()
+        }
+        binding.optionLogFood.setOnClickListener {
+            navController.navigate(R.id.action_global_mealHistory)
             dismiss()
         }
 

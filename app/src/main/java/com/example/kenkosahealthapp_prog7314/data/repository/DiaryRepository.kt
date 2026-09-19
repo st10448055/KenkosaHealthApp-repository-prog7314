@@ -5,6 +5,7 @@ import com.example.kenkosahealthapp_prog7314.data.network.DiaryApi
 import com.example.kenkosahealthapp_prog7314.data.network.FoodItemDto
 import com.example.kenkosahealthapp_prog7314.data.network.MealEntryDto
 import com.example.kenkosahealthapp_prog7314.data.network.RetrofitInstance
+import com.example.kenkosahealthapp_prog7314.data.network.UpdateMealEntryRequest
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -38,6 +39,11 @@ class DiaryRepository(private val api: DiaryApi = RetrofitInstance.diaryApi) {
                 )
             )
         }
+    }
+
+    suspend fun updateServings(mealId: String, servings: Double): ApiResult<MealEntryDto> {
+        if (servings <= 0) return ApiResult.ValidationError("Servings must be greater than 0")
+        return safeCall { api.updateMeal(mealId, UpdateMealEntryRequest(servings)) }
     }
 
     suspend fun deleteMeal(mealId: String): ApiResult<Unit> =

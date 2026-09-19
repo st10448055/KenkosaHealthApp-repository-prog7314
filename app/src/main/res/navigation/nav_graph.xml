@@ -263,15 +263,31 @@
         android:label="Add Goal"
         tools:layout="@layout/fragment_add_goal" />
 
+    <fragment
+        android:id="@+id/mealHistoryFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.diary.MealHistoryFragment"
+        android:label="Today's Meals"
+        tools:layout="@layout/fragment_meal_history">
+        <action
+            android:id="@+id/action_mealHistory_to_logFood"
+            app:destination="@id/logFoodFragment" />
+    </fragment>
+
     <!-- Keep your existing food logging screen -->
     <fragment
         android:id="@+id/logFoodFragment"
         android:name="com.example.kenkosahealthapp_prog7314.ui.diary.LogFoodFragment"
         android:label="Log Food"
-        tools:layout="@layout/fragment_log_food" />
+        tools:layout="@layout/fragment_log_food">
+
+    <argument
+        android:name="mealType"
+        app:argType="string"
+        android:defaultValue="breakfast" />
+        </fragment>
 
     <action
-        android:id="@+id/action_global_logFood"
-        app:destination="@id/logFoodFragment" />
+        android:id="@+id/action_global_mealHistory"
+        app:destination="@id/mealHistoryFragment" />
 
 </navigation>

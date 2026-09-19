@@ -42,6 +42,10 @@ class MealDiaryRepository {
             "mealType" to request.mealType,
             "foodName" to request.foodName,
             "servings" to request.servings,
+            "baseCalories" to request.baseCalories,
+            "baseProteinG" to request.baseProteinG,
+            "baseCarbsG" to request.baseCarbsG,
+            "baseFatG" to request.baseFatG,
             "calories" to scaledCalories,
             "proteinG" to scaledProtein,
             "carbsG" to scaledCarbs,
@@ -51,6 +55,26 @@ class MealDiaryRepository {
 
         db.collection(MEAL_ENTRIES_COLLECTION).document(mealId).set(data).await()
         return getMealEntry(mealId)!!
+    }
+
+    suspend fun updateMealEntryServings(mealId: String, newServings: Double): MealEntryResponse? {
+        val existing = getMealEntry(mealId) ?: return null
+
+        val scaledCalories = existing.baseCalories * newServings
+        val scaledProtein = existing.baseProteinG * newServings
+        val scaledCarbs = existing.baseCarbsG * newServings
+        val scaledFat = existing.baseFatG * newServings
+
+        val updates = mapOf(
+            "servings" to newServings,
+            "calories" to scaledCalories,
+            "proteinG" to scaledProtein,
+            "carbsG" to scaledCarbs,
+            "fatG" to scaledFat
+        )
+
+        db.collection(MEAL_ENTRIES_COLLECTION).document(mealId).update(updates).await()
+        return getMealEntry(mealId)
     }
 
     suspend fun deleteMealEntry(mealId: String): Boolean {
@@ -68,6 +92,10 @@ class MealDiaryRepository {
             mealType = getString("mealType") ?: return null,
             foodName = getString("foodName") ?: return null,
             servings = getDouble("servings") ?: 1.0,
+            baseCalories = getDouble("baseCalories") ?: 0.0,
+            baseProteinG = getDouble("baseProteinG") ?: 0.0,
+            baseCarbsG = getDouble("baseCarbsG") ?: 0.0,
+            baseFatG = getDouble("baseFatG") ?: 0.0,
             calories = getDouble("calories") ?: 0.0,
             proteinG = getDouble("proteinG") ?: 0.0,
             carbsG = getDouble("carbsG") ?: 0.0,
