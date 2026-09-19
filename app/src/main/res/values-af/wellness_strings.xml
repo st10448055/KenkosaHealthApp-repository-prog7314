@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wellness_title">Meditasie en welstand</string>
+    <string name="wellness_meditations">Begeleide meditasies</string>
+    <string name="wellness_log_mood_today">Teken jou bui vandag aan</string>
+    <string name="wellness_recent_moods">Onlangse buie</string>
+    <string name="wellness_no_moods">Nog geen buie aangeteken nie. Tik op \'n gesig hierbo om aan te teken hoe jy voel.</string>
+    <string name="meditation_minutes">%d Min</string>
+    <string name="meditation_play">Speel %1$s</string>
+    <string name="meditation_open_error">Kon nie die video oopmaak nie. Installeer YouTube of \'n webblaaier.</string>
+    <string name="log_mood_title">Teken bui aan</string>
+    <string name="mood_details_title">Buidetails</string>
+    <string name="edit_mood">Wysig bui</string>
+    <string name="mood_select_label">Kies vandag se bui</string>
+    <string name="mood_feeling_label">Gevoel</string>
+    <string name="mood_very_happy">Baie bly</string>
+    <string name="mood_happy">Bly</string>
+    <string name="mood_neutral">Neutraal</string>
+    <string name="mood_sad">Hartseer</string>
+    <string name="mood_very_sad">Baie hartseer</string>
+    <string name="feeling_calm">Kalm</string>
+    <string name="feeling_content">Tevrede</string>
+    <string name="feeling_excited">Opgewonde</string>
+    <string name="feeling_upset">Ontsteld</string>
+    <string name="feeling_irritated">Geïrriteerd</string>
+    <string name="feeling_happy">Gelukkig</string>
+    <string name="feeling_motivated">Gemotiveerd</string>
+    <string name="feeling_grateful">Dankbaar</string>
+    <string name="feeling_proud">Trots</string>
+    <string name="mood_error_select">Kies asseblief hoe jy voel</string>
+    <string name="mood_error_future">Jy kan nie \'n bui in die toekoms aanteken nie</string>
+    <string name="mood_error_generic">Iets het skeefgeloop. Probeer asseblief weer.</string>
+    <string name="mood_delete_title">Skrap hierdie buiinskrywing?</string>
+    <string name="mood_delete_message">Dit sal hierdie inskrywing permanent verwyder.</string>
+</resources>

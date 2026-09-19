@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.Kenkosa.FeelingChip" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textColor">@color/feeling_text</item>
+        <item name="chipStrokeColor">@color/feeling_stroke</item>
+        <item name="chipStrokeWidth">2dp</item>
+        <item name="chipCornerRadius">20dp</item>
+        <item name="checkedIconVisible">true</item>
+        <item name="checkedIconTint">@color/feeling_text</item>
+        <item name="android:checkable">true</item>
+    </style>
+</resources>
