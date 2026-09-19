@@ -1,6 +1,7 @@
 package com.example.kenkosahealthapp_prog7314.data.repository
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.example.kenkosahealthapp_prog7314.data.model.User
 import com.example.kenkosahealthapp_prog7314.data.model.UserSettings
 import kotlinx.coroutines.tasks.await
@@ -21,6 +22,13 @@ class UserRepository {
         if (userId.isBlank()) return null
         return db.collection(USERS_COLLECTION).document(userId).get().await()
             .toObject(User::class.java)
+    }
+
+    suspend fun updateUserName(userId: String, name: String, surname: String) {
+        require(userId.isNotBlank()) { "User ID cannot be blank" }
+        db.collection(USERS_COLLECTION).document(userId)
+            .set(mapOf("name" to name, "surname" to surname), SetOptions.merge())
+            .await()
     }
 
     suspend fun createDefaultSettings(userId: String) {

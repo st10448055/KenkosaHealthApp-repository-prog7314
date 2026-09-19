@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Shared bottom bar (home / goals / + / statistics / settings).
+    Include it with an explicit android:id and apply the bottom window inset
+    as padding on the include so the bar extends under the gesture area.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/nav_bar_bg"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="5">
+
+        <ImageButton
+            android:id="@+id/navHome"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/nav_home"
+            android:src="@drawable/ic_nav_home"
+            app:tint="@color/nav_icon" />
+
+        <ImageButton
+            android:id="@+id/navGoals"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/nav_goals"
+            android:src="@drawable/ic_nav_target"
+            app:tint="@color/nav_icon" />
+
+        <!-- Space reserved for the centre + button -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/navStats"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/nav_statistics"
+            android:src="@drawable/ic_nav_stats"
+            app:tint="@color/nav_icon" />
+
+        <ImageButton
+            android:id="@+id/navSettings"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/nav_settings"
+            android:src="@drawable/ic_nav_settings"
+            app:tint="@color/nav_icon" />
+    </LinearLayout>
+
+    <!-- Halo + raised + button -->
+    <FrameLayout
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="-34dp"
+        android:background="@drawable/bg_fab_halo"
+        android:clipChildren="false">
+
+        <ImageButton
+            android:id="@+id/fabAdd"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_circle_deep_green"
+            android:contentDescription="@string/add"
+            android:elevation="6dp"
+            android:padding="14dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_add"
+            app:tint="@color/white" />
+    </FrameLayout>
+
+</FrameLayout>

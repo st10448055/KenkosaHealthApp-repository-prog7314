@@ -3,11 +3,14 @@ package com.example.kenkosahealthapp_prog7314
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import com.example.kenkosahealthapp_prog7314.ui.settings.ThemeManager
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Apply the saved Light/Dark/System choice before any UI is inflated.
+        ThemeManager.applySaved(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

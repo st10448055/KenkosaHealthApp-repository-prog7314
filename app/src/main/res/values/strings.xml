@@ -42,4 +42,31 @@
     <string name="settings_notifications">Notifications</string>
     <string name="settings_subscription">Subscription</string>
     <string name="sign_out">Sign Out</string>
+
+    <!-- Settings redesign -->
+    <string name="settings_section_profile">Profile</string>
+    <string name="settings_section_preferences">Preferences</string>
+    <string name="settings_section_health_goals">Health Goals</string>
+    <string name="settings_push_notifications">Push Notifications</string>
+    <string name="settings_dark_mode">Dark Mode</string>
+    <string name="settings_daily_steps">Daily Steps</string>
+    <string name="settings_calorie_target">Calorie Target</string>
+    <string name="settings_sleep_target">Sleep Target</string>
+    <string name="settings_default_name">User</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="first_name_hint">First name</string>
+    <string name="surname_hint">Surname</string>
+    <string name="settings_error_name_required">First name can\'t be empty</string>
+    <string name="settings_error_range">Enter a value between %1$d and %2$d</string>
+    <string name="settings_steps_hint">Steps per day</string>
+    <string name="settings_calories_hint">Calories per day (kcal)</string>
+    <string name="settings_hours_label">h</string>
+    <string name="settings_minutes_label">min</string>
+    <string name="settings_notifications_blocked">Notifications are blocked. Enable them in your phone\'s app settings.</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_goals">Goals</string>
+    <string name="nav_statistics">Statistics</string>
+    <string name="nav_settings">Settings</string>
 </resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="settings_bg">#101812</color>
+    <color name="settings_card">#1B261E</color>
+    <color name="settings_title">#E4EEE2</color>
+    <color name="settings_text">#E4EEE2</color>
+    <color name="settings_text_secondary">#9DB09F</color>
+    <color name="settings_divider">#2A382D</color>
+    <color name="settings_avatar_bg">#2F4F3A</color>
+    <color name="settings_avatar_text">#E4EEE2</color>
+    <color name="settings_switch_on">#8FAF87</color>
+    <color name="settings_switch_off">#3A473C</color>
+    <color name="nav_bar_bg">#2A3D2E</color>
+    <color name="nav_icon">#DDE8DB</color>
+    <color name="nav_fab_halo">#3A5440</color>
+</resources>

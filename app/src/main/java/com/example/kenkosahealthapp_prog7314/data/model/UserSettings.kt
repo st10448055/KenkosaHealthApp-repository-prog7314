@@ -7,7 +7,11 @@ data class UserSettings(
     val appearanceMode: String = "System",
     val hapticsEnabled: Boolean = true,
     val notificationsEnabled: Boolean = true,
-    val subscriptionStatus: String = "Free"
+    val subscriptionStatus: String = "Free",
+    // Health goals shown on the Settings screen
+    val dailyStepGoal: Int = 10_000,
+    val calorieTarget: Int = 2_500,
+    val sleepTargetMinutes: Int = 450 // 7h 30m
 ) {
     constructor() : this(userId = "")
 
@@ -18,6 +22,9 @@ data class UserSettings(
         "appearanceMode" to appearanceMode,
         "hapticsEnabled" to hapticsEnabled,
         "notificationsEnabled" to notificationsEnabled,
-        "subscriptionStatus" to subscriptionStatus
+        "subscriptionStatus" to subscriptionStatus,
+        "dailyStepGoal" to dailyStepGoal,
+        "calorieTarget" to calorieTarget,
+        "sleepTargetMinutes" to sleepTargetMinutes
     )
 }

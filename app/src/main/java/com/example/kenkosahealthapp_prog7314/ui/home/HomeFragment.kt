@@ -36,8 +36,20 @@ class HomeFragment : Fragment() {
         setupGreeting()
         setupFeatureGrid()
         setupDrawerNavigation()
+        observeOpenDrawerRequest()
 
         // Notification bell is intentionally non-functional for now.
+    }
+
+    /** Settings' menu button pops back here and asks for the drawer to be opened. */
+    private fun observeOpenDrawerRequest() {
+        val handle = findNavController().currentBackStackEntry?.savedStateHandle ?: return
+        handle.getLiveData<Boolean>(KEY_OPEN_DRAWER).observe(viewLifecycleOwner) { open ->
+            if (open == true) {
+                binding.drawerLayout.openDrawer(GravityCompat.START)
+                handle.remove<Boolean>(KEY_OPEN_DRAWER)
+            }
+        }
     }
 
     private fun setupDrawer() {
@@ -171,5 +183,9 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        const val KEY_OPEN_DRAWER = "open_drawer"
     }
 }

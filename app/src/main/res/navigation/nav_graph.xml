@@ -113,6 +113,23 @@
             app:destination="@id/startFragment"
             app:popUpTo="@id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_settings_to_goals"
+            app:destination="@id/goalsFragment" />
+        <action
+            android:id="@+id/action_settings_to_statistics"
+            app:destination="@id/statisticsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Statistics"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Statistics" />
     </fragment>
 
     <fragment
