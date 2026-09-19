@@ -22,6 +22,7 @@ import com.example.kenkosahealthapp_prog7314.databinding.FragmentAddMedicationBi
 import com.example.kenkosahealthapp_prog7314.ui.home.HomeFragment
 import kotlinx.coroutines.launch
 import java.time.LocalDate
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 /**
  * Add screen, and (when opened with [ARG_MEDICATION_ID]) the details / edit screen for an existing
@@ -73,6 +74,7 @@ class AddMedicationFragment : Fragment() {
             setLocked(true)
             observeEditState()
             viewModel.loadMedication(medicationId!!)
+            binding.buttonDeleteMedication.isVisible = true
         } else {
             binding.textTitle.setText(R.string.add_medication_title)
             setLocked(false)
@@ -275,6 +277,23 @@ class AddMedicationFragment : Fragment() {
     private fun setLoading(loading: Boolean) {
         binding.progressSaving.isVisible = loading
         binding.buttonSaveMedication.isEnabled = !loading
+    }
+
+    private fun confirmDelete() {
+        val id = medicationId ?: return
+        val name = original?.name ?: binding.editName.text.toString()
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.medication_delete_title)
+            .setMessage(getString(R.string.medication_delete_message, name))
+            .setPositiveButton(R.string.delete) { _, _ ->
+                viewModel.deleteMedication(id) { success, errorMessage ->
+                    if (_binding == null) return@deleteMedication
+                    if (success) findNavController().navigateUp()
+                    else showError(errorMessage ?: getString(R.string.medication_error_generic))
+                }
+            }
+            .setNegativeButton(R.string.cancel, null)
+            .show()
     }
 
     override fun onDestroyView() {

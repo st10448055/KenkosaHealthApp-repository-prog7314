@@ -314,6 +314,21 @@
                 android:textColor="@color/white"
                 app:backgroundTint="@color/med_btn_cancel"
                 app:cornerRadius="24dp" />
+
+            <!-- Edit mode only -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonDeleteMedication"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="220dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="@string/delete"
+                android:textAllCaps="false"
+                android:textColor="@color/error_red"
+                android:visibility="gone"
+                app:cornerRadius="24dp"
+                app:strokeColor="@color/error_red" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

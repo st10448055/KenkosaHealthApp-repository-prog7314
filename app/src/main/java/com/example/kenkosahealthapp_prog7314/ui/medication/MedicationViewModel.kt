@@ -65,9 +65,13 @@ class MedicationViewModel(
         }
     }
 
-    fun deleteMedication(medicationId: String) {
+    fun deleteMedication(
+        medicationId: String,
+        onResult: ((success: Boolean, errorMessage: String?) -> Unit)? = null
+    ) {
         viewModelScope.launch {
-            repository.deleteMedication(medicationId)
+            val result = repository.deleteMedication(medicationId)
+            onResult?.invoke(result is ApiResult.Success, result.errorMessage())
             loadMedications()
         }
     }
