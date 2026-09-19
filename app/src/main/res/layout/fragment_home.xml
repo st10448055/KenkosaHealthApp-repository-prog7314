@@ -14,7 +14,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/bottomNavigationView"
+            android:layout_above="@+id/fabAdd"
             android:clipToPadding="false"
             android:fillViewport="true">
 
@@ -189,70 +189,22 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- Bottom Navigation Bar with Curved Plus Button -->
-        <FrameLayout
-            android:id="@+id/bottomNavigationView"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
+
+        <!-- Standalone Add button-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAdd"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:layout_alignParentBottom="true"
-            android:background="#83A682">
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/add"
+            android:src="@android:drawable/ic_input_add"
+            app:backgroundTint="#0F2812"
+            app:elevation="4dp"
+            app:fabCustomSize="56dp"
+            app:tint="@android:color/white" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:weightSum="5">
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="28dp"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/ic_menu_compass"
-                    app:tint="@android:color/white" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="28dp"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/ic_menu_mylocation"
-                    app:tint="@android:color/white" />
-
-                <!-- Empty space reserved for the central FAB -->
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_weight="1" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="28dp"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/ic_menu_sort_by_size"
-                    app:tint="@android:color/white" />
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="28dp"
-                    android:layout_weight="1"
-                    android:src="@android:drawable/ic_menu_preferences"
-                    app:tint="@android:color/white" />
-            </LinearLayout>
-
-            <!-- Center Plus FAB -->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabAdd"
-                android:layout_width="56dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal|top"
-                android:layout_marginTop="-20dp"
-                android:contentDescription="@string/add"
-                android:src="@android:drawable/ic_input_add"
-                app:backgroundTint="#0F2812"
-                app:elevation="4dp"
-                app:fabCustomSize="56dp"
-                app:tint="@android:color/white" />
-        </FrameLayout>
 
     </RelativeLayout>
 

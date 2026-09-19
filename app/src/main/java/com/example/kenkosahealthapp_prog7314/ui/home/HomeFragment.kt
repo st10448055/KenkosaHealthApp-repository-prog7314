@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentHomeBinding
 import com.example.kenkosahealthapp_prog7314.databinding.ItemHomeFeatureBinding
+import com.example.kenkosahealthapp_prog7314.ui.addmenu.AddMenuBottomSheet
 
 class HomeFragment : Fragment() {
 
@@ -36,6 +37,7 @@ class HomeFragment : Fragment() {
         setupGreeting()
         setupFeatureGrid()
         setupDrawerNavigation()
+        setupAddButton()
         observeOpenDrawerRequest()
 
         // Notification bell is intentionally non-functional for now.
@@ -98,6 +100,14 @@ class HomeFragment : Fragment() {
                 _binding?.textGreeting?.text = getString(R.string.hi_placeholder, "User")
             }
     }
+
+    private fun setupAddButton() {
+        binding.fabAdd.setOnClickListener {
+            AddMenuBottomSheet().show(childFragmentManager, "AddMenuBottomSheet")
+        }
+    }
+
+
 
     private fun setupFeatureGrid() {
         bindFeature(binding.cardTrackingDiary, R.drawable.ic_diary, "Tracking Diary") {

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8EFE3">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top bar: back button -->
+        <ImageButton
+            android:id="@+id/buttonBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:contentDescription="Back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Log Food"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="#1B3A1B" />
+
+        <!-- Meal type pills -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/mealTypeBreakfast"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="Breakfast"
+                android:gravity="center"
+                android:padding="10dp"
+                android:background="@android:drawable/btn_default"
+                android:textColor="#1B3A1B" />
+
+            <TextView
+                android:id="@+id/mealTypeLunch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="Lunch"
+                android:gravity="center"
+                android:padding="10dp"
+                android:background="@android:drawable/btn_default"
+                android:textColor="#1B3A1B" />
+
+            <TextView
+                android:id="@+id/mealTypeDinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:text="Dinner"
+                android:gravity="center"
+                android:padding="10dp"
+                android:background="@android:drawable/btn_default"
+                android:textColor="#1B3A1B" />
+
+            <TextView
+                android:id="@+id/mealTypeSnack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Snack"
+                android:gravity="center"
+                android:padding="10dp"
+                android:background="@android:drawable/btn_default"
+                android:textColor="#1B3A1B" />
+        </LinearLayout>
+
+        <!-- Search bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:background="@android:color/white"
+            android:padding="4dp">
+
+            <EditText
+                android:id="@+id/editSearchQuery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="Search food items..."
+                android:background="@android:color/transparent"
+                android:padding="12dp"
+                android:inputType="text"
+                android:imeOptions="actionSearch" />
+
+            <Button
+                android:id="@+id/buttonSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search" />
+        </LinearLayout>
+
+        <!-- Loading indicator for search -->
+        <ProgressBar
+            android:id="@+id/progressSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_gravity="center"
+            android:visibility="gone" />
+
+        <!-- Search error message -->
+        <TextView
+            android:id="@+id/textSearchError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#B00020"
+            android:visibility="gone" />
+
+        <!-- Found food result group -->
+        <LinearLayout
+            android:id="@+id/groupFoodResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/white"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textFoodName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1B3A1B" />
+
+            <TextView
+                android:id="@+id/textCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textSize="16sp"
+                android:textColor="#1B3A1B" />
+
+            <TextView
+                android:id="@+id/textProtein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="#4A4A4A" />
+
+            <TextView
+                android:id="@+id/textCarbs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="#4A4A4A" />
+
+            <TextView
+                android:id="@+id/textFat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="#4A4A4A" />
+
+            <!-- Servings input -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Servings"
+                android:textColor="#4A4A4A" />
+
+            <EditText
+                android:id="@+id/editServings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:text="1"
+                android:background="@android:drawable/edit_text" />
+        </LinearLayout>
+
+        <!-- Add Entry button -->
+        <Button
+            android:id="@+id/buttonAddEntry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Add Entry"
+            android:backgroundTint="#1B3A1B"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</ScrollView>

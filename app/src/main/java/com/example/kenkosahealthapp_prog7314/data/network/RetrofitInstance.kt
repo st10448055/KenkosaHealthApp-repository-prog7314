@@ -29,4 +29,6 @@ object RetrofitInstance {
 
     val goalApi: GoalApi by lazy { retrofit.create(GoalApi::class.java) }
     val sleepApi: SleepApi by lazy { retrofit.create(SleepApi::class.java) }
+    val foodApi: FoodApi by lazy { retrofit.create(FoodApi::class.java) }
+    val diaryApi: DiaryApi by lazy { retrofit.create(DiaryApi::class.java) }
 }

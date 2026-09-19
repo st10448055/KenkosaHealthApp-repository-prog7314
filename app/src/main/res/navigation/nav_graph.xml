@@ -230,4 +230,14 @@
         android:label="Add Goal"
         tools:layout="@layout/fragment_add_goal" />
 
+    <fragment
+        android:id="@+id/logFoodFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.diary.LogFoodFragment"
+        android:label="Log Food"
+        tools:layout="@layout/fragment_log_food" />
+
+    <action
+        android:id="@+id/action_global_logFood"
+        app:destination="@id/logFoodFragment" />
+
 </navigation>
