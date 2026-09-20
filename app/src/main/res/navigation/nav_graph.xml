@@ -182,13 +182,25 @@
 
     <fragment
         android:id="@+id/fastingFragment"
-        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.fasting.FastingFragment"
         android:label="Fasting"
-        tools:layout="@layout/fragment_feature_placeholder">
-        <argument
-            android:name="featureTitle"
-            app:argType="string"
-            android:defaultValue="Fasting" />
+        tools:layout="@layout/fragment_fasting">
+        <action android:id="@+id/action_fasting_to_addFast" app:destination="@id/addFastFragment" />
+        <action android:id="@+id/action_fasting_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_fasting_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_fasting_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addFastFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.fasting.AddFastFragment"
+        android:label="Add Fast"
+        tools:layout="@layout/fragment_add_fast">
+        <argument android:name="fastId" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="startEditing" android:defaultValue="false" app:argType="boolean" />
+        <action android:id="@+id/action_addFast_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_addFast_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_addFast_to_settings" app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment

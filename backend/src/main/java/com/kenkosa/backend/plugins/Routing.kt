@@ -14,6 +14,8 @@ import com.kenkosa.backend.routes.moodRoutes
 import com.kenkosa.backend.routes.sleepRoutes
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
+import com.kenkosa.backend.repository.FastRepository
+import com.kenkosa.backend.routes.fastRoutes
 
 fun Application.configureRouting() {
     val goalRepository = GoalRepository()
@@ -23,6 +25,7 @@ fun Application.configureRouting() {
     val mealRepository = MealDiaryRepository()
     val openFoodFactsClient = OpenFoodFactsClient()
     val usdaFoodClient = UsdaFoodClient()
+    val fastRepository = FastRepository()
 
     routing {
         goalRoutes(goalRepository)
@@ -30,6 +33,7 @@ fun Application.configureRouting() {
         medicationRoutes(medicationRepository)
         moodRoutes(moodRepository)
         diaryRoutes(mealRepository,openFoodFactsClient,usdaFoodClient)
+        fastRoutes(fastRepository)
 
     }
 }

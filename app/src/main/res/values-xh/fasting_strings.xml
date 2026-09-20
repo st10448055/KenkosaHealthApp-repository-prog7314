@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fasting_title">Ukuzila</string>
+    <string name="fasting_for">Uzila ixesha elingu</string>
+    <string name="fasting_not_fasting">Awuzili</string>
+    <string name="fasting_ready">Ukulungele xa ulungile</string>
+    <string name="fasting_goal_reached">Injongo ifikelelwe</string>
+    <string name="fasting_end">Yekisa ukuzila</string>
+    <string name="fasting_start_now">Qala ukuzila</string>
+    <string name="fasting_start_label">Ukuqala</string>
+    <string name="fasting_end_label">Ukuphela</string>
+    <string name="fasting_none">—</string>
+    <string name="fasting_edit_start_desc">Hlela ixesha lokuqala</string>
+    <string name="fasting_edit_end_desc">Hlela ixesha lokuphela</string>
+    <string name="fasting_tips">Amacebiso</string>
+    <string name="fasting_recent">Ukuzila kwamva nje</string>
+    <string name="fasting_no_history">Akukabikho kuzila okugqityiweyo.</string>
+    <string name="fasting_today_at">Namhlanje ngo-%1$s</string>
+    <string name="fasting_yesterday_at">Izolo ngo-%1$s</string>
+    <string name="fasting_tomorrow_at">Ngomso ngo-%1$s</string>
+    <string name="fasting_date_at">%1$s ngo-%2$s</string>
+    <string name="fasting_add_title">Yongeza ukuzila</string>
+    <string name="fasting_details_title">Iinkcukacha zokuzila</string>
+    <string name="fasting_start_fast">Ukuqala kokuzila</string>
+    <string name="fasting_end_fast">Ukuphela kokuzila</string>
+    <string name="fasting_duration">Ubude: %1$s</string>
+    <string name="fasting_edit">Hlela ukuzila</string>
+    <string name="fasting_save">Gcina</string>
+    <string name="fasting_cancel">Rhoxisa</string>
+    <string name="fasting_delete">Cima</string>
+    <string name="fasting_delete_title">Cima oku kuzila?</string>
+    <string name="fasting_delete_message">Oku kuya kususa oku kuzila ngokusisigxina.</string>
+    <string name="fasting_error_end_before_start">Ukuphela kufuneka kube emva kokuqala</string>
+    <string name="fasting_error_too_long">Ukuzila akunakugqitha kwiintsuku ezi-7</string>
+    <string name="fasting_error_start_future">Ukuqala akunakuba kwixesha elizayo</string>
+    <string name="fasting_error_finished_future">Ukuzila okugqityiweyo akunakuphela kwixesha elizayo</string>
+    <string name="fasting_error_generic">Kukho into engahambanga kakuhle. Nceda uzame kwakhona.</string>
+    <plurals name="fasting_hours">
+        <item quantity="one">%d Iyure</item>
+        <item quantity="other">%d Iiyure</item>
+    </plurals>
+    <plurals name="fasting_minutes">
+        <item quantity="one">%d Umzuzu</item>
+        <item quantity="other">%d Imizuzu</item>
+    </plurals>
+    <string-array name="fasting_tips">
+        <item>Sela amanzi anele kwaye ucwangcise ukutya kwakho kwangaphambili. Khetha ukutya okunesondlo nokuzalisayo xa ukwazi ukutya, uphulaphule umzimba wakho ngalo lonke ixesha lokuzila.</item>
+        <item>Amanzi, ikofu emnyama netiyi ecacileyo zihlala zilungile ngexesha lokuzila. Sela rhoqo ngemini.</item>
+        <item>Yekisa ukuzila ngokucothayo ngokutya okulinganisiweyo kunokutya okukhulu kakhulu okanye okumnandi kakhulu.</item>
+        <item>Uziva unesiyezi okanye ungaphilanga? Yekisa ukuzila utye into. Impilo yakho ibalulekile kuqala.</item>
+        <item>Qala kancinci: qala ngokuzila kwexeshana elifutshane uze wandise ngokuthe ngcembe njengoko umzimba wakho uqhelana.</item>
+    </string-array>
+</resources>
