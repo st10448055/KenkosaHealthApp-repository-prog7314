@@ -11,7 +11,9 @@ data class User(
     val weightKg: Double? = null,
     val profileImageUrl: String? = null,
     val isPremium: Boolean = false,
-    val createdAt: Long = System.currentTimeMillis()
+    val createdAt: Long = System.currentTimeMillis(),
+    // true for a brand-new account until the user has filled in the body metrics form
+    val metricsPending: Boolean = true
 ) {
     constructor() : this(userId = "")
 
@@ -26,6 +28,7 @@ data class User(
         "weightKg" to weightKg,
         "profileImageUrl" to profileImageUrl,
         "isPremium" to isPremium,
-        "createdAt" to createdAt
+        "createdAt" to createdAt,
+        "metricsPending" to metricsPending
     )
 }

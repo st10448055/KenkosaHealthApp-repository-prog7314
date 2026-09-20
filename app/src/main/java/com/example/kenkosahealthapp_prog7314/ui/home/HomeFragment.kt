@@ -101,7 +101,7 @@ class HomeFragment : Fragment() {
                 b.textGreeting.text = getString(R.string.hi_placeholder, display)
                 b.navDrawerHome.textDrawerName.text = display
 
-                // First login: ask for body metrics if they haven't been given yet.
+                // First login of a new account: ask for body metrics.
                 promptForMetricsIfNeeded(uid, doc)
             }
             .addOnFailureListener {
@@ -110,11 +110,11 @@ class HomeFragment : Fragment() {
     }
 
     /**
-     * A user who hasn't given their body metrics yet is sent to the metrics form.
-     * (Existing users without metrics get it once too; "Skip for now" silences it until the app restarts.)
+     * A new account (metricsPending = true) that hasn't filled in the body metrics yet is sent to the form.
+     * Saving the form clears the flag. "Skip for now" only silences it until the app restarts.
      */
     private fun promptForMetricsIfNeeded(uid: String, doc: DocumentSnapshot) {
-        if (UserMetrics.fromSnapshot(doc) != null) return
+        if (!UserMetrics.isPromptPending(doc)) return
         if (MetricsPromptState.skippedForUid == uid) return
 
         val nav = findNavController()

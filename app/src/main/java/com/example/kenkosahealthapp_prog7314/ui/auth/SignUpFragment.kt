@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentSignUpBinding
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 class SignUpFragment : Fragment() {
@@ -45,7 +46,14 @@ class SignUpFragment : Fragment() {
                         is AuthUiState.Loading -> setLoading(true)
                         is AuthUiState.Success -> {
                             setLoading(false)
-                            findNavController().navigate(R.id.action_sign_up_to_home)
+                            // The account is created. Sign out and send them to the Login screen (with their
+                            // email filled in), so their first login is what shows the body metrics questions.
+                            FirebaseAuth.getInstance().signOut()
+                            viewModel.resetState()
+                            findNavController().navigate(
+                                R.id.action_sign_up_to_login,
+                                androidx.core.os.bundleOf("email" to binding.editEmail.text.toString().trim())
+                            )
                         }
                         is AuthUiState.Error -> {
                             setLoading(false)

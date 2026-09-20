@@ -73,13 +73,23 @@ data class UserMetrics(
         "activityLevel" to activityLevel.name,
         "heightUnit" to heightUnit.name,
         "weightUnit" to weightUnit.name,
-        "metricsUpdatedAt" to System.currentTimeMillis()
+        "metricsUpdatedAt" to System.currentTimeMillis(),
+        // Saving the form is what ends the first-login prompt (see isPromptPending below).
+        "metricsPending" to false
     )
 
     companion object {
         /**
+         * True for an account that was just created and hasn't filled the metrics form in yet. User.kt writes
+         * metricsPending = true when the account is created, and saving the form sets it to false. Accounts that
+         * existed before this feature have no such field, so they are not prompted (they can still use Settings).
+         */
+        fun isPromptPending(doc: DocumentSnapshot): Boolean =
+            doc.exists() && (doc.get("metricsPending") as? Boolean) == true
+
+        /**
          * Returns the metrics stored on a users/{uid} document, or null if any required answer is
-         * missing. Null is what triggers the first-login prompt.
+         * missing.
          */
         fun fromSnapshot(doc: DocumentSnapshot): UserMetrics? {
             if (!doc.exists()) return null
