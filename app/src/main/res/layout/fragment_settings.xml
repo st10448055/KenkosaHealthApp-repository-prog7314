@@ -217,6 +217,12 @@
                     android:showDividers="middle">
 
                     <include
+                        android:id="@+id/rowBodyMetrics"
+                        layout="@layout/item_settings_row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <include
                         android:id="@+id/rowDailySteps"
                         layout="@layout/item_settings_row"
                         android:layout_width="match_parent"

@@ -14,6 +14,11 @@ import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentHomeBinding
 import com.example.kenkosahealthapp_prog7314.databinding.ItemHomeFeatureBinding
 import com.example.kenkosahealthapp_prog7314.ui.addmenu.AddMenuBottomSheet
+import androidx.core.os.bundleOf
+import com.google.firebase.firestore.DocumentSnapshot
+import com.example.kenkosahealthapp_prog7314.data.model.UserMetrics
+import com.example.kenkosahealthapp_prog7314.ui.metrics.MetricsFragment
+import com.example.kenkosahealthapp_prog7314.ui.metrics.MetricsPromptState
 
 class HomeFragment : Fragment() {
 
@@ -95,10 +100,26 @@ class HomeFragment : Fragment() {
 
                 b.textGreeting.text = getString(R.string.hi_placeholder, display)
                 b.navDrawerHome.textDrawerName.text = display
+
+                // First login: ask for body metrics if they haven't been given yet.
+                promptForMetricsIfNeeded(uid, doc)
             }
             .addOnFailureListener {
                 _binding?.textGreeting?.text = getString(R.string.hi_placeholder, "User")
             }
+    }
+
+    /**
+     * A user who hasn't given their body metrics yet is sent to the metrics form.
+     * (Existing users without metrics get it once too; "Skip for now" silences it until the app restarts.)
+     */
+    private fun promptForMetricsIfNeeded(uid: String, doc: DocumentSnapshot) {
+        if (UserMetrics.fromSnapshot(doc) != null) return
+        if (MetricsPromptState.skippedForUid == uid) return
+
+        val nav = findNavController()
+        if (nav.currentDestination?.id != R.id.homeFragment) return
+        nav.navigate(R.id.action_global_metrics, bundleOf(MetricsFragment.ARG_ONBOARDING to true))
     }
 
     private fun setupAddButton() {

@@ -115,6 +115,7 @@ class SettingsFragment : Fragment() {
         binding.rowPushNotifications.textLabel.setText(R.string.settings_push_notifications)
         binding.rowDarkMode.textLabel.setText(R.string.settings_dark_mode)
         binding.rowLanguage.textLabel.setText(R.string.settings_language)
+        binding.rowBodyMetrics.textLabel.setText(R.string.metrics_settings_row)
         binding.rowDailySteps.textLabel.setText(R.string.settings_daily_steps)
         binding.rowCalorieTarget.textLabel.setText(R.string.settings_calorie_target)
         binding.rowSleepTarget.textLabel.setText(R.string.settings_sleep_target)
@@ -188,6 +189,11 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setupGoalListeners() {
+        // Body metrics (date of birth, gender, height, weight, activity level)
+        binding.rowBodyMetrics.root.setOnClickListener {
+            findNavController().navigate(R.id.action_global_metrics)
+        }
+
         binding.rowDailySteps.root.setOnClickListener {
             showNumberDialog(
                 title = R.string.settings_daily_steps,

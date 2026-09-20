@@ -426,4 +426,19 @@
     <action
         android:id="@+id/action_global_knowYourHealth"
         app:destination="@id/knowYourHealthFragment" />
+
+    <fragment
+        android:id="@+id/metricsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.metrics.MetricsFragment"
+        android:label="Body Metrics"
+        tools:layout="@layout/fragment_metrics">
+        <argument
+            android:name="onboarding"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_metrics"
+        app:destination="@id/metricsFragment" />
 </navigation>
