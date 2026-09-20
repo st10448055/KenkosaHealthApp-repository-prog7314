@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="kyh_title">Ken jou gesondheid</string>
+    <string name="kyh_search_hint">Soek \'n blog...</string>
+    <string name="kyh_no_results">Geen artikels pas by jou soektog nie.</string>
+    <string name="kyh_min_read">%d min lees</string>
+    <string name="kyh_search_desc">Soek artikels</string>
+    <string name="kyh_back">Terug</string>
+    <string name="kyh_disclaimer">Dit is algemene inligting, nie mediese advies nie. Praat met \'n dokter of ander gesondheidswerker oor jou eie situasie.</string>
+</resources>

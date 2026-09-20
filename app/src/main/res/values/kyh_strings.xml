@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="kyh_title">Know Your Health</string>
+    <string name="kyh_search_hint">Find a Blog...</string>
+    <string name="kyh_no_results">No articles match your search.</string>
+    <string name="kyh_min_read">%d min read</string>
+    <string name="kyh_search_desc">Search articles</string>
+    <string name="kyh_back">Back</string>
+    <string name="kyh_disclaimer">This is general information, not medical advice. Talk to a doctor or another healthcare professional about your own situation.</string>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="kyh_title">Yazi impilo yakho</string>
+    <string name="kyh_search_hint">Khangela i-blog...</string>
+    <string name="kyh_no_results">Akukho zinqaku ziyahambelana nokukhangela kwakho.</string>
+    <string name="kyh_min_read">%d imizuzu yokufunda</string>
+    <string name="kyh_search_desc">Khangela amanqaku</string>
+    <string name="kyh_back">Buya umva</string>
+    <string name="kyh_disclaimer">Eli lulwazi ngokubanzi, hayi icebiso lezonyango. Thetha nogqirha okanye omnye umsebenzi wezempilo malunga nemeko yakho.</string>
+</resources>

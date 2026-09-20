@@ -175,6 +175,9 @@ class HomeFragment : Fragment() {
         drawer.navSettings.setOnClickListener {
             closeDrawer(); findNavController().navigate(R.id.action_home_to_settings)
         }
+        drawer.navKnowYourHealth.setOnClickListener {
+            closeDrawer(); findNavController().navigate(R.id.action_global_knowYourHealth)
+        }
 
         // Fitness / Know Your Health / Statistics: no destinations yet,
         // wire these up once those fragments + nav actions exist.

@@ -375,5 +375,29 @@
     <action
         android:id="@+id/action_global_mealHistory"
         app:destination="@id/mealHistoryFragment" />
+    <fragment
+        android:id="@+id/knowYourHealthFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.knowhealth.KnowYourHealthFragment"
+        android:label="Know Your Health"
+        tools:layout="@layout/fragment_know_your_health">
+        <action android:id="@+id/action_kyh_to_article" app:destination="@id/healthArticleFragment" />
+        <action android:id="@+id/action_kyh_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_kyh_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_kyh_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/healthArticleFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.knowhealth.HealthArticleFragment"
+        android:label="Article"
+        tools:layout="@layout/fragment_health_article">
+        <argument android:name="articleId" android:defaultValue="" app:argType="string" />
+        <action android:id="@+id/action_article_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_article_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_article_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_knowYourHealth"
+        app:destination="@id/knowYourHealthFragment" />
 </navigation>
