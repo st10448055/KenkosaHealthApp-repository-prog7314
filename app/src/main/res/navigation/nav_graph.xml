@@ -79,7 +79,7 @@
             app:destination="@id/settingsFragment" />
         <action
             android:id="@+id/action_home_to_trackingDiary"
-            app:destination="@id/trackingDiaryFragment" />
+            app:destination="@id/diaryFragment" />
         <action
             android:id="@+id/action_home_to_nutrition"
             app:destination="@id/nutritionFragment" />
@@ -403,6 +403,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/diaryFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.diary.DiaryFragment"
+        android:label="Diary"
+        tools:layout="@layout/fragment_diary" />
+
+    <action
+        android:id="@+id/action_global_diary"
+        app:destination="@id/diaryFragment" />
+
+    <fragment
         android:id="@+id/waterFragment"
         android:name="com.example.kenkosahealthapp_prog7314.ui.water.WaterFragment"
         android:label="Water Intake"
@@ -441,4 +451,8 @@
     <action
         android:id="@+id/action_global_metrics"
         app:destination="@id/metricsFragment" />
+
+    <action
+        android:id="@+id/action_global_logFood"
+        app:destination="@id/logFoodFragment" />
 </navigation>
