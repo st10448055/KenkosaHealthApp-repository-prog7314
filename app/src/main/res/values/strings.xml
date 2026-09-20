@@ -131,4 +131,6 @@
     <string name="medication_error_dosage_required">Please enter a dosage</string>
     <string name="medication_error_dosage_length">Dosage must be 30 characters or fewer</string>
     <string name="medication_error_generic">Something went wrong. Please try again.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

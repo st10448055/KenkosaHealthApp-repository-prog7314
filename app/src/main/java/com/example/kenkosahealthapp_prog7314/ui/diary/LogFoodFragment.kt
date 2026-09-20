@@ -12,6 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentLogFoodBinding
 import kotlinx.coroutines.launch
+import com.example.kenkosahealthapp_prog7314.R
 
 class LogFoodFragment : Fragment() {
 
@@ -54,6 +55,18 @@ class LogFoodFragment : Fragment() {
             val query = binding.editSearchQuery.text.toString().trim()
             if (query.isNotEmpty()) viewModel.searchByText(query)
         }
+
+        binding.buttonScanBarcode.setOnClickListener {
+            findNavController().navigate(R.id.action_logFood_to_barcodeScanner)
+        }
+
+// Listen for the barcode result coming back from BarcodeScannerFragment
+        findNavController().currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<String>("scanned_barcode")
+            ?.observe(viewLifecycleOwner) { barcode ->
+                viewModel.searchByBarcode(barcode)
+                findNavController().currentBackStackEntry?.savedStateHandle?.remove<String>("scanned_barcode")
+            }
 
         // --- Servings input ---
         binding.editServings.addTextChangedListener(object : android.text.TextWatcher {

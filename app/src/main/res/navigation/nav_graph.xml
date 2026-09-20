@@ -328,6 +328,12 @@
             app:destination="@id/logFoodFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/barcodeScannerFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.diary.BarcodeScannerFragment"
+        android:label="Scan Barcode"
+        tools:layout="@layout/fragment_barcode_scanner" />
+
     <!-- Keep your existing food logging screen -->
     <fragment
         android:id="@+id/logFoodFragment"
@@ -339,6 +345,9 @@
             android:name="mealType"
             app:argType="string"
             android:defaultValue="breakfast" />
+        <action
+            android:id="@+id/action_logFood_to_barcodeScanner"
+            app:destination="@id/barcodeScannerFragment" />
     </fragment>
 
     <action
