@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A small dot centred in the circle: a day that wasn't met, or hasn't happened yet -->
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetBottom="12dp"
+    android:insetLeft="12dp"
+    android:insetRight="12dp"
+    android:insetTop="12dp">
+    <shape android:shape="oval">
+        <solid android:color="@color/goaltrack_streak_dot" />
+    </shape>
+</inset>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sleeplog_title">Sleep</string>
+    <string name="sleeplog_add_title">Add Sleep</string>
+    <string name="sleeplog_edit_title">Edit Sleep</string>
+    <string name="sleeplog_total_sleep">Total Sleep</string>
+    <string name="sleeplog_quality">Sleep Quality</string>
+    <string name="sleeplog_score">%1$d / 100</string>
+    <string name="sleeplog_score_none">— / 100</string>
+    <string name="sleeplog_quality_excellent">Excellent</string>
+    <string name="sleeplog_quality_good">Good</string>
+    <string name="sleeplog_quality_fair">Fair</string>
+    <string name="sleeplog_quality_poor">Poor</string>
+    <string name="sleeplog_weekly_patterns">Weekly Patterns</string>
+    <string name="sleeplog_recent">Recent Sleep</string>
+    <string name="sleeplog_empty">No sleep logged yet. Tap + to add your first night.</string>
+    <string name="sleeplog_today">Today</string>
+    <string name="sleeplog_duration_short">%1$dh %2$02dm</string>
+    <string name="sleeplog_duration_long">%1$dh %2$02dmin</string>
+    <string name="sleeplog_none">—</string>
+    <string name="sleeplog_wake_date">Wake-up date</string>
+    <string name="sleeplog_bedtime">Bedtime</string>
+    <string name="sleeplog_wake_time">Wake-up time</string>
+    <string name="sleeplog_total_caps">TOTAL SLEEP</string>
+    <string name="sleeplog_q_poor">Poor</string>
+    <string name="sleeplog_q_fair">Fair</string>
+    <string name="sleeplog_q_okay">Okay</string>
+    <string name="sleeplog_q_good">Good</string>
+    <string name="sleeplog_q_excellent">Excellent</string>
+    <string name="sleeplog_notes">Notes</string>
+    <string name="sleeplog_notes_hint">Add notes about your sleep...</string>
+    <string name="sleeplog_save">Save Sleep</string>
+    <string name="sleeplog_save_changes">Save Changes</string>
+    <string name="sleeplog_delete">Delete</string>
+    <string name="sleeplog_cancel">Cancel</string>
+    <string name="sleeplog_delete_title">Delete this sleep entry?</string>
+    <string name="sleeplog_delete_message">This will permanently remove this entry.</string>
+    <string name="sleeplog_error_same_time">Bedtime and wake-up time can\'t be the same</string>
+    <string name="sleeplog_error_quality">Please rate your sleep quality</string>
+    <string name="sleeplog_error_future">Wake-up time can\'t be in the future</string>
+    <string name="sleeplog_error_generic">Something went wrong. Please try again.</string>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sleeplog_title">Slaap</string>
+    <string name="sleeplog_add_title">Voeg slaap by</string>
+    <string name="sleeplog_edit_title">Wysig slaap</string>
+    <string name="sleeplog_total_sleep">Totale slaap</string>
+    <string name="sleeplog_quality">Slaapkwaliteit</string>
+    <string name="sleeplog_score">%1$d / 100</string>
+    <string name="sleeplog_score_none">— / 100</string>
+    <string name="sleeplog_quality_excellent">Uitstekend</string>
+    <string name="sleeplog_quality_good">Goed</string>
+    <string name="sleeplog_quality_fair">Redelik</string>
+    <string name="sleeplog_quality_poor">Swak</string>
+    <string name="sleeplog_weekly_patterns">Weeklikse patrone</string>
+    <string name="sleeplog_recent">Onlangse slaap</string>
+    <string name="sleeplog_empty">Nog geen slaap aangeteken nie. Tik + om jou eerste nag by te voeg.</string>
+    <string name="sleeplog_today">Vandag</string>
+    <string name="sleeplog_duration_short">%1$du %2$02dm</string>
+    <string name="sleeplog_duration_long">%1$du %2$02dmin</string>
+    <string name="sleeplog_none">—</string>
+    <string name="sleeplog_wake_date">Wakkerword-datum</string>
+    <string name="sleeplog_bedtime">Slaaptyd</string>
+    <string name="sleeplog_wake_time">Wakkerword-tyd</string>
+    <string name="sleeplog_total_caps">TOTALE SLAAP</string>
+    <string name="sleeplog_q_poor">Swak</string>
+    <string name="sleeplog_q_fair">Redelik</string>
+    <string name="sleeplog_q_okay">OK</string>
+    <string name="sleeplog_q_good">Goed</string>
+    <string name="sleeplog_q_excellent">Uitstekend</string>
+    <string name="sleeplog_notes">Notas</string>
+    <string name="sleeplog_notes_hint">Voeg notas oor jou slaap by...</string>
+    <string name="sleeplog_save">Stoor slaap</string>
+    <string name="sleeplog_save_changes">Stoor veranderinge</string>
+    <string name="sleeplog_delete">Skrap</string>
+    <string name="sleeplog_cancel">Kanselleer</string>
+    <string name="sleeplog_delete_title">Skrap hierdie slaapinskrywing?</string>
+    <string name="sleeplog_delete_message">Dit sal hierdie inskrywing permanent verwyder.</string>
+    <string name="sleeplog_error_same_time">Slaaptyd en wakkerword-tyd kan nie dieselfde wees nie</string>
+    <string name="sleeplog_error_quality">Gradeer asseblief jou slaapkwaliteit</string>
+    <string name="sleeplog_error_future">Wakkerword-tyd kan nie in die toekoms wees nie</string>
+    <string name="sleeplog_error_generic">Iets het skeefgeloop. Probeer asseblief weer.</string>
+</resources>

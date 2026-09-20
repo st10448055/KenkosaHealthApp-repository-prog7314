@@ -205,19 +205,25 @@
 
     <fragment
         android:id="@+id/sleepFragment"
-        android:name="com.example.kenkosahealthapp_prog7314.ui.sleep.SleepFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.sleeplog.SleepOverviewFragment"
         android:label="Sleep"
-        tools:layout="@layout/fragment_sleep">
-        <action
-            android:id="@+id/action_sleep_to_addSleep"
-            app:destination="@id/addSleepFragment" />
+        tools:layout="@layout/fragment_sleep_overview">
+        <action android:id="@+id/action_sleep_to_addSleep" app:destination="@id/addSleepFragment" />
+        <action android:id="@+id/action_sleep_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_sleep_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_sleep_to_settings" app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/addSleepFragment"
-        android:name="com.example.kenkosahealthapp_prog7314.ui.sleep.AddSleepFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.sleeplog.AddSleepLogFragment"
         android:label="Add Sleep"
-        tools:layout="@layout/fragment_add_sleep" />
+        tools:layout="@layout/fragment_add_sleep_log">
+        <argument android:name="sleepId" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <action android:id="@+id/action_addSleep_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_addSleep_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_addSleep_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
 
     <!-- Medication -->
     <fragment
@@ -316,19 +322,23 @@
 
     <fragment
         android:id="@+id/goalsFragment"
-        android:name="com.example.kenkosahealthapp_prog7314.ui.goals.GoalsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.goals.GoalTrackingFragment"
         android:label="Goals"
-        tools:layout="@layout/fragment_goals">
-        <action
-            android:id="@+id/action_goals_to_addGoal"
-            app:destination="@id/addGoalFragment" />
+        tools:layout="@layout/fragment_goal_tracking">
+        <action android:id="@+id/action_goals_to_addGoal" app:destination="@id/addGoalFragment" />
+        <action android:id="@+id/action_goals_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_goals_to_settings" app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/addGoalFragment"
-        android:name="com.example.kenkosahealthapp_prog7314.ui.goals.AddGoalFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.goals.AddGoalTrackingFragment"
         android:label="Add Goal"
-        tools:layout="@layout/fragment_add_goal" />
+        tools:layout="@layout/fragment_add_goal_tracking">
+        <argument android:name="goalId" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <action android:id="@+id/action_addGoal_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_addGoal_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/mealHistoryFragment"
