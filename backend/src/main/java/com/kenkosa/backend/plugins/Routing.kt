@@ -17,8 +17,10 @@ import com.kenkosa.backend.routes.fastRoutes
 import com.kenkosa.backend.repository.GoalTrackingRepository
 import com.kenkosa.backend.routes.goalTrackingRoutes
 import com.kenkosa.backend.repository.SleepLogRepository
+import com.kenkosa.backend.repository.WaterRepository
 import com.kenkosa.backend.routes.sleepLogRoutes
 import com.kenkosa.backend.repository.WgerClient
+import com.kenkosa.backend.routes.waterRoutes
 import com.kenkosa.backend.routes.workoutRoutes
 
 
@@ -32,6 +34,7 @@ fun Application.configureRouting() {
     val usdaFoodClient = UsdaFoodClient()
     val fastRepository = FastRepository()
     val wgerClient = WgerClient()
+    val waterRepository = WaterRepository()
 
     routing {
         goalTrackingRoutes(goalTrackingRepository)
@@ -41,6 +44,7 @@ fun Application.configureRouting() {
         diaryRoutes(mealRepository,openFoodFactsClient,usdaFoodClient)
         fastRoutes(fastRepository)
         workoutRoutes(wgerClient)
+        waterRoutes(waterRepository)
 
 
 

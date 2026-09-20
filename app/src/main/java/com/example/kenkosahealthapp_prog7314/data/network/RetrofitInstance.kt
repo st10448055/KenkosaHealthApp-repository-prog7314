@@ -37,4 +37,6 @@ object RetrofitInstance {
     val fastingApi: FastingApi by lazy { retrofit.create(FastingApi::class.java) }
 
     val workoutApi: WorkoutApi by lazy { retrofit.create(WorkoutApi::class.java) }
+
+    val waterApi: WaterApi by lazy { retrofit.create(WaterApi::class.java) }
 }

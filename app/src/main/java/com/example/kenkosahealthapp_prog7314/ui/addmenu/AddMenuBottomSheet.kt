@@ -53,6 +53,10 @@ class AddMenuBottomSheet : BottomSheetDialogFragment() {
             navController.navigate(R.id.action_global_mealHistory)
             dismiss()
         }
+        binding.optionWater.setOnClickListener {
+            navController.navigate(R.id.action_global_water)
+            dismiss()
+        }
 
     }
 

@@ -403,6 +403,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/waterFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.water.WaterFragment"
+        android:label="Water Intake"
+        tools:layout="@layout/fragment_water" />
+
+    <action
+        android:id="@+id/action_global_water"
+        app:destination="@id/waterFragment" />
+
+    <fragment
         android:id="@+id/healthArticleFragment"
         android:name="com.example.kenkosahealthapp_prog7314.ui.knowhealth.HealthArticleFragment"
         android:label="Article"
