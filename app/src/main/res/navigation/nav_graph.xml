@@ -88,7 +88,7 @@
             app:destination="@id/stepsFragment" />
         <action
             android:id="@+id/action_home_to_workouts"
-            app:destination="@id/workoutsFragment" />
+            app:destination="@id/fitnessFragment" />
         <action
             android:id="@+id/action_home_to_fasting"
             app:destination="@id/fastingFragment" />
@@ -341,6 +341,22 @@
     </fragment>
 
     <fragment
+        android:id="@+id/fitnessFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.fitness.FitnessFragment"
+        android:label="Fitness"
+        tools:layout="@layout/fragment_fitness">
+        <action
+            android:id="@+id/action_fitness_to_exerciseList"
+            app:destination="@id/exerciseListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/exerciseListFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.fitness.ExerciseListFragment"
+        android:label="Exercises"
+        tools:layout="@layout/fragment_exercise_list" />
+
+    <fragment
         android:id="@+id/mealHistoryFragment"
         android:name="com.example.kenkosahealthapp_prog7314.ui.diary.MealHistoryFragment"
         android:label="Today's Meals"
@@ -356,7 +372,7 @@
         android:label="Scan Barcode"
         tools:layout="@layout/fragment_barcode_scanner" />
 
-    <!-- Keep your existing food logging screen -->
+
     <fragment
         android:id="@+id/logFoodFragment"
         android:name="com.example.kenkosahealthapp_prog7314.ui.diary.LogFoodFragment"
