@@ -5,10 +5,12 @@ on:
     branches: [ "main", "feature/**" ]
     paths:
       - "backend/**"
+      - ".github/workflows/backend-ci.yml"
   pull_request:
     branches: [ "main" ]
     paths:
       - "backend/**"
+  workflow_dispatch:
 
 jobs:
   build:
@@ -38,7 +40,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Write Firebase service account key
-        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 -d > backend/serviceAccountKey.json
+        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 --decode > backend/serviceAccountKey.json
 
       - name: Run backend unit tests
         run: ./gradlew :backend:test --stacktrace
