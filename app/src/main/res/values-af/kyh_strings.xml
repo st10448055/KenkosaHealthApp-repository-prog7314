@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Afrikaans version of the Know Your Health articles. In each body, a line that starts with "## " is shown as a
+    sub-heading and every other line is a paragraph. Keep the string names identical to values/kyh_strings.xml.
+-->
 <resources>
+
+    <!-- Screen strings -->
     <string name="kyh_title">Ken jou gesondheid</string>
     <string name="kyh_search_hint">Soek \'n blog...</string>
     <string name="kyh_no_results">Geen artikels pas by jou soektog nie.</string>
@@ -7,4 +13,111 @@
     <string name="kyh_search_desc">Soek artikels</string>
     <string name="kyh_back">Terug</string>
     <string name="kyh_disclaimer">Dit is algemene inligting, nie mediese advies nie. Praat met \'n dokter of ander gesondheidswerker oor jou eie situasie.</string>
+
+    <!-- 1. Sleep -->
+    <string name="kyh_article_sleep_title">Hoe jou slaap jou lewe beïnvloed</string>
+    <string-array name="kyh_article_sleep_body">
+        <item>Slaap is nie vermorste tyd nie. Terwyl jy slaap, herstel jou liggaam homself, sorteer en stoor jou brein herinneringe, en word die hormone wat jou eetlus, gemoed en energie beheer, teruggestel vir die volgende dag.</item>
+        <item>## Wat gebeur as jy nie genoeg kry nie</item>
+        <item>\'n Kort nag maak dit moeiliker om te konsentreer, te leer en goeie besluite te neem. Jy kan prikkelbaar of neerslagtig voel, na soet kos hunker en makliker siek word. Oor maande en jare word swak slaap gekoppel aan \'n hoër risiko vir hoë bloeddruk, tipe 2-diabetes, gewigstoename en depressie.</item>
+        <item>## Hoeveel het jy nodig?</item>
+        <item>Die meeste volwassenes vaar die beste met 7 tot 9 uur per nag. Tieners het meer nodig. Gehalte tel ook: jy behoort binne ongeveer \'n halfuur aan die slaap te raak, meestal deur die nag te slaap en redelik uitgerus wakker te word.</item>
+        <item>## Gewoontes wat help</item>
+        <item>Gaan slaap en staan elke dag omtrent dieselfde tyd op, ook oor naweke.</item>
+        <item>Skakel skerms 30 tot 60 minute voor slaaptyd af en verdof die ligte.</item>
+        <item>Hou jou slaapkamer koel, donker en stil.</item>
+        <item>Vermy kafeïen in die middag en aand, en vermy groot maaltye en alkohol naby slaaptyd.</item>
+        <item>Kry soggens daglig en wees gedurende die dag aktief, maar nie net voor slaaptyd nie.</item>
+        <item>## Hou rekord</item>
+        <item>Teken jou nagte aan op die Slaap-skerm om patrone raak te sien, soos watter gewoontes saamgaan met jou beste slaap.</item>
+        <item>As jy gereeld sukkel om te slaap, hard snork met onderbrekings in jou asemhaling, of uitgeput voel selfs ná genoeg ure, praat met \'n dokter.</item>
+    </string-array>
+
+    <!-- 2. Stress in tasks -->
+    <string name="kyh_article_stress_tasks_title">Verminder stres in alle take</string>
+    <string-array name="kyh_article_stress_tasks_body">
+        <item>\'n Bietjie stres kan help om te fokus. Konstante stres put jou egter uit. Die goeie nuus is dat hoe jy jou take benader, verander hoe stresvol dit voel.</item>
+        <item>## Breek groot take in klein stappies op</item>
+        <item>\'n Groot taak voel oorweldigend; \'n kort lys klein stappies nie. Skryf die heel volgende aksie neer en begin daarmee.</item>
+        <item>## Besluit wat die belangrikste is</item>
+        <item>Kies aan die begin van die dag die twee of drie dinge wat die belangrikste is en doen dit eerste. Nie alles wat dringend is, is belangrik nie, en jy mag nee sê of vir meer tyd vra.</item>
+        <item>## Doen een ding op \'n slag</item>
+        <item>Om tussen take te wissel kos tyd en verhoog foute. Demp kennisgewings terwyl jy werk en kyk eerder op vaste tye na boodskappe.</item>
+        <item>## Neem kort breekies</item>
+        <item>Stap elke uur \'n paar minute weg: staan op, rek, drink water en kyk na iets ver weg. \'n Eenvoudige patroon is 25 minute fokus gevolg deur \'n breek van 5 minute.</item>
+        <item>## Sorg vir die basiese dinge</item>
+        <item>Slaap, gereelde maaltye, water en beweging maak elke taak makliker. Wanneer jy uitgeput is, voel alles moeiliker as wat dit is.</item>
+        <item>## Vra vir hulp</item>
+        <item>Om \'n taak te deel of dit met iemand deur te praat, maak dit dikwels ligter. Om hulp te vra is \'n verstandige manier van werk, nie \'n swakheid nie.</item>
+    </string-array>
+
+    <!-- 3. Stretches -->
+    <string name="kyh_article_stretches_title">Alledaagse rekoefeninge om jou dag aan die gang te kry</string>
+    <string-array name="kyh_article_stretches_body">
+        <item>\'n Paar minute sagte rekoefeninge soggens, of nadat jy lank gesit het, maak stywe spiere los en kry jou bloed aan die beweeg. Doen dit stadig en asem normaal.</item>
+        <item>## Voordat jy begin</item>
+        <item>Rek tot jy \'n effense trek voel, nooit pyn nie. Hou elke rekoefening 20 tot 30 sekondes vol en moenie wip nie. As jy \'n besering, \'n gesondheidstoestand of aanhoudende pyn het, raadpleeg eers \'n dokter of fisioterapeut.</item>
+        <item>## Die roetine</item>
+        <item>Nek: kantel jou oor na jou skouer toe en hou 20 sekondes vol, wissel dan kante.</item>
+        <item>Skouers: rol jou skouers agtertoe in stadige sirkels, 10 keer.</item>
+        <item>Bors: vou jou hande agter jou rug saam, maak jou arms reguit en lig hulle sag terwyl jy jou bors oopmaak.</item>
+        <item>Rug: op hande en knieë, boog en rond jou ruggraat stadig 8 tot 10 keer (kat-koei).</item>
+        <item>Hamstrings: staan en buig vanaf die heupe vorentoe met jou knieë effens gebuig, en laat jou arms hang.</item>
+        <item>Heupe: gee \'n uitvalstap en sak jou heupe sag vorentoe. Hou vol, wissel dan bene.</item>
+        <item>Kuite en enkels: druk jou hak agter jou af in \'n uitvalstap, sirkel dan elke enkel \'n paar keer.</item>
+        <item>Sluit af met drie stadige, diep asemteue.</item>
+    </string-array>
+
+    <!-- 4. Eating right -->
+    <string name="kyh_article_eat_right_title">Verbeter jou lewe deur reg te eet</string>
+    <string-array name="kyh_article_eat_right_body">
+        <item>Wat jy eet, beïnvloed jou energie, gemoed, gewig en jou risiko vir langtermynsiektes. Jy hoef nie \'n perfekte dieet te hê nie. \'n Bestendige patroon van meestal gesonde keuses doen die meeste van die werk.</item>
+        <item>## Bou \'n gebalanseerde bord</item>
+        <item>Mik daarvoor dat ongeveer die helfte van jou bord groente en vrugte is, \'n kwart volgraan soos bruinrys, hawermout of volkoringbrood, en \'n kwart proteïen soos boontjies, lensies, eiers, vis, hoender of maer vleis.</item>
+        <item>## Kies beter vette</item>
+        <item>Gebruik klein hoeveelhede onversadigde vette, soos olyfolie, neute, sade en avokado, in plaas van groot hoeveelhede botter, vetterige vleis of diepgebraaide kos.</item>
+        <item>## Gaan maklik met suiker en sout</item>
+        <item>Suikerdrankies, lekkers en baie souterige verwerkte kos voeg baie suiker of sout by sonder veel voedingswaarde. Water is die beste alledaagse drankie.</item>
+        <item>## Begin klein</item>
+        <item>Kies hierdie week een verandering, soos om \'n groente by middagete te voeg of \'n koeldrank met water te vervang. Klein veranderinge wat jy kan volhou, is beter as groot veranderinge wat jy laat vaar.</item>
+        <item>As jy \'n gesondheidstoestand of allergieë het, of swanger is of borsvoeding gee, vra \'n dokter of dieetkundige wat vir jou reg is.</item>
+    </string-array>
+
+    <!-- 5. Eating habits -->
+    <string name="kyh_article_eat_habits_title">Reg eet: klein gewoontes wat opstapel</string>
+    <string-array name="kyh_article_eat_habits_body">
+        <item>Gesonde eet gaan net soveel oor gewoontes as oor kos. Dit is maklike plekke om te begin.</item>
+        <item>## Beplan vooruit</item>
+        <item>Besluit ongeveer wat jy die volgende paar dae gaan eet en koop dit in. Wanneer daar \'n plan is, gryp jy minder gereeld na wegneemetes.</item>
+        <item>## Lees die etiket</item>
+        <item>Vergelyk verpakte produkte deur die per-100-g-kolom te gebruik. Kyk na suiker, sout (natrium) en versadigde vet, en kies die laer opsie wanneer alles anders soortgelyk is.</item>
+        <item>## Eet stadig</item>
+        <item>Versadigingseine neem \'n rukkie om jou brein te bereik. Om stadig te eet, sonder \'n skerm, help jou opmerk wanneer jy genoeg gehad het en maak die maaltyd aangenamer.</item>
+        <item>## Hou goeie versnaperinge byderhand</item>
+        <item>Vrugte, gewone jogurt, neute, rou groente of \'n gekookte eier is maklike keuses wanneer jy tussen maaltye honger is.</item>
+        <item>## Drink genoeg water</item>
+        <item>Drink deur die dag klein slukkies water. Jou behoeftes verander met die weer, oefening en jou liggaam, so laat dors jou lei en let op donkergeel urine as \'n teken om meer te drink.</item>
+        <item>## Wees goed vir jouself</item>
+        <item>Een ongesonde maaltyd maak nie jou vordering ongedaan nie. Gaan voort met jou volgende maaltyd en hou aan.</item>
+    </string-array>
+
+    <!-- 6. Stress methods -->
+    <string name="kyh_article_stress_methods_title">Metodes om met stres om te gaan</string>
+    <string-array name="kyh_article_stress_methods_body">
+        <item>Wanneer stres opbou, reageer jou liggaam: jou hart klop vinniger, jou spiere span en jou gedagtes jaag. Hierdie metodes help om daardie reaksie te bedaar.</item>
+        <item>## Vierkantasemhaling</item>
+        <item>Asem 4 sekondes deur jou neus in, hou 4 vol, asem stadig 4 sekondes uit en hou dan 4 vol. Herhaal vir ongeveer vier rondtes.</item>
+        <item>## Aard jouself</item>
+        <item>Kyk rond en noem 5 dinge wat jy kan sien, 4 wat jy kan aanraak, 3 wat jy kan hoor, 2 wat jy kan ruik en 1 wat jy kan proe. Dit trek jou aandag weg van jou bekommernisse en na die hede.</item>
+        <item>## Beweeg jou liggaam</item>
+        <item>\'n Vinnige stapmars van 10 minute of \'n paar rekoefeninge gebruik streshormone op en maak dikwels jou kop skoon.</item>
+        <item>## Ontspan spanning</item>
+        <item>Span \'n groep spiere, soos jou vuiste of skouers, 5 sekondes lank, en laat dan heeltemal los. Werk deur jou liggaam van jou voete tot jou gesig.</item>
+        <item>## Skryf dit neer of praat daaroor</item>
+        <item>Om bekommernisse uit jou kop en op papier te kry, of in \'n gesprek met iemand wat jy vertrou, maak dit makliker om te hanteer.</item>
+        <item>## Sny terug op wat stres voed</item>
+        <item>Te veel kafeïen, alkohol en laataand-blaai kan stres en swak slaap vererger.</item>
+        <item>## Wanneer om hulp te kry</item>
+        <item>As stres weke lank duur, jou slaap, werk of verhoudings ontwrig, of gepaard gaan met paniek, hopeloosheid of gedagtes daaraan om jouself seer te maak, praat asseblief met \'n dokter of \'n berader. As jy onveilig voel of in \'n krisis is, kontak jou plaaslike nooddienste of \'n krisislyn dadelik.</item>
+    </string-array>
 </resources>

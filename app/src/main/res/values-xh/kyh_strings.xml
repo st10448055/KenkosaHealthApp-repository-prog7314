@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    isiXhosa version of the Know Your Health articles. In each body, a line that starts with "## " is shown as a
+    sub-heading and every other line is a paragraph. Keep the string names identical to values/kyh_strings.xml.
+    This is health content: have it reviewed by a fluent isiXhosa speaker before release.
+-->
 <resources>
+
+    <!-- Screen strings -->
     <string name="kyh_title">Yazi impilo yakho</string>
     <string name="kyh_search_hint">Khangela i-blog...</string>
     <string name="kyh_no_results">Akukho zinqaku ziyahambelana nokukhangela kwakho.</string>
@@ -7,4 +14,111 @@
     <string name="kyh_search_desc">Khangela amanqaku</string>
     <string name="kyh_back">Buya umva</string>
     <string name="kyh_disclaimer">Eli lulwazi ngokubanzi, hayi icebiso lezonyango. Thetha nogqirha okanye omnye umsebenzi wezempilo malunga nemeko yakho.</string>
+
+    <!-- 1. Sleep -->
+    <string name="kyh_article_sleep_title">Indlela ubuthongo bakho obuchaphazela ngayo ubomi bakho</string>
+    <string-array name="kyh_article_sleep_body">
+        <item>Ubuthongo abulilahleko lexesha. Ngoxa ulele, umzimba wakho uyazilungisa, ingqondo yakho ihlela kwaye igcine izinkumbulo, kwaye iihomoni ezilawula umdla wakho wokutya, imo yakho namandla ziyabuyiselwa ekuqaleni kusuku olulandelayo.</item>
+        <item>## Kwenzeka ntoni xa ungalali ngokwaneleyo</item>
+        <item>Ubusuku obufutshane benza kube nzima ukugxila, ukufunda nokwenza izigqibo ezilungileyo. Unokuziva ucaphuka lula okanye udandathekile, unqwenela ukutya okumnandi okune-swekile kwaye ugule lula. Ngeenyanga nangeminyaka, ubuthongo obubi bunxulunyaniswa nomngcipheko ophezulu woxinzelelo lwegazi oluphezulu, isifo seswekile sohlobo lwesi-2, ukunyuka kobunzima bomzimba nokudakumba.</item>
+        <item>## Kufuneka bungakanani?</item>
+        <item>Uninzi lwabantu abadala luba ngcono ngeeyure ezi-7 ukuya kwezi-9 ebusuku. Ulutsha lufuna ngaphezulu. Umgangatho nawo ubalulekile: kufuneka ulale ngaphakathi kwesiqingatha seyure, ulale ubusuku bonke ubukhulu becala kwaye uvuke uziva uphumle ngokufanelekileyo.</item>
+        <item>## Imikhwa ekunceda</item>
+        <item>Yiya ebhedini kwaye uvuke ngexesha elinye qho ngosuku, kwanasempelaveki.</item>
+        <item>Cima izikrini imizuzu engama-30 ukuya kwengama-60 phambi kokulala kwaye wenze izibane zingacwebi kakhulu.</item>
+        <item>Gcina igumbi lakho lokulala lipholile, limnyama kwaye lithule.</item>
+        <item>Phepha ikhafini emva kwemini nangokuhlwa, kwaye uphephe ukutya okuninzi notywala ngaphambi kokulala.</item>
+        <item>Fumana ukukhanya kwemini ekuseni kwaye usebenze emzimbeni emini, kodwa hayi nje ngaphambi kokulala.</item>
+        <item>## Gcina irekhodi</item>
+        <item>Bhala ubusuku bakho kwisikrini seButhongo ukuze ubone iindlela, ezinje ngeyiphi imikhwa ehamba nobuthongo bakho obulungileyo.</item>
+        <item>Ukuba rhoqo uyasokola ukulala, uhona ngokuphakamileyo kunye nokumiswa kokuphefumla, okanye uziva udiniwe nasemva kweeyure ezaneleyo, thetha nogqirha.</item>
+    </string-array>
+
+    <!-- 2. Stress in tasks -->
+    <string name="kyh_article_stress_tasks_title">Ukunciphisa uxinzelelo kwimisebenzi yonke</string>
+    <string-array name="kyh_article_stress_tasks_body">
+        <item>Uxinzelelo oluncinci lunokukunceda ugxile. Kodwa uxinzelelo oluhlala luhleli luyakudinisa. Iindaba ezimnandi zezokuba indlela ojongana ngayo nemisebenzi yakho itshintsha ukuba iziva inoxinzelelo kangakanani.</item>
+        <item>## Yahlula imisebenzi emikhulu ibe ngamanyathelo amancinci</item>
+        <item>Umsebenzi omkhulu ubonakala unzima kakhulu; uluhlu olufutshane lwamanyathelo amancinci alunjalo. Bhala isenzo esilandelayo kwaye uqale ngaso.</item>
+        <item>## Nquma ukuba yintoni ebaluleke kakhulu</item>
+        <item>Ekuqaleni kosuku, khetha izinto ezimbini okanye ezintathu ezibaluleke kakhulu kwaye uzenze kuqala. Ayizizo zonke izinto ezingxamisekileyo ezibalulekileyo, kwaye uvumelekile ukuthi hayi okanye ucele ixesha elingakumbi.</item>
+        <item>## Yenza into enye ngexesha</item>
+        <item>Ukutshintshatshintsha phakathi kwemisebenzi kuthatha ixesha kwaye kwandisa iimpazamo. Thulisa izaziso xa usebenza kwaye ujonge imiyalezo ngamaxesha amiselweyo.</item>
+        <item>## Thatha ikhefu elifutshane</item>
+        <item>Yiya kude imizuzu embalwa iyure nganye: yima, otule, usele amanzi kwaye ujonge into ekude. Indlela elula yimizuzu engama-25 yokugxila elandelwa likhefu leemizuzu emi-5.</item>
+        <item>## Nakekela iziseko</item>
+        <item>Ubuthongo, ukutya rhoqo, amanzi nokushukuma kwenza yonke imisebenzi ibe lula. Xa udiniwe, yonke into iziva inzima ngakumbi kunokuba injalo.</item>
+        <item>## Cela uncedo</item>
+        <item>Ukwabelana ngomsebenzi okanye ukuthetha nomntu ngawo kudla ngokuwenza ube lula. Ukucela uncedo yindlela ehlakaniphileyo yokusebenza, ayisosiphako.</item>
+    </string-array>
+
+    <!-- 3. Stretches -->
+    <string name="kyh_article_stretches_title">Ukotula okulula kwemihla ngemihla ukuqalisa usuku lwakho</string>
+    <string-array name="kyh_article_stretches_body">
+        <item>Imizuzu embalwa yokotula ngobunono ekuseni, okanye emva kokuhlala ixesha elide, kukhulula imisipha enkqitha kwaye kushukumisa igazi. Yenza oku ngokucothayo kwaye uphefumle ngokuqhelekileyo.</item>
+        <item>## Phambi kokuba uqale</item>
+        <item>Otula ude uve ukutsalwa okuncinci, ungaze uve iintlungu. Bamba ukotula ngalunye imizuzwana engama-20 ukuya kwengama-30 kwaye musa ukutsiba-tsiba. Ukuba unenzakalo, imeko yempilo okanye iintlungu eziqhubekayo, jonga ugqirha okanye i-physiotherapist kuqala.</item>
+        <item>## Uthotho lokotula</item>
+        <item>Intamo: tyisa indlebe yakho ngasegxalabeni kwaye ubambe imizuzwana engama-20, ke utshintshe icala.</item>
+        <item>Amagxalaba: jikelezisa amagxalaba akho ngasemva ngokucothayo, amaxesha ali-10.</item>
+        <item>Isifuba: bamba izandla zakho ngasemva, uzolule iingalo zakho kwaye uzinyuse ngobunono ngoxa uvula isifuba sakho.</item>
+        <item>Umqolo: ngezandla nangamadolo, goba kwaye ujikeleze umqolo wakho ngokucothayo amaxesha ayi-8 ukuya kwali-10 (i-cat-cow).</item>
+        <item>Imisipha engemva kwethanga: yima uqubude phambili usuka ezinqeni ngamadolo agobe kancinci, uyeke iingalo zilenge.</item>
+        <item>Izinqe: yenza inyathelo elide phambili (i-lunge) kwaye uwise izinqe phambili ngobunono. Bamba, ke utshintshe imilenze.</item>
+        <item>Amathole emilenze namaqatha: cinezela isithende sakho ngasemva kwi-lunge, ke ujikeleze elinye iqatha ngalinye amaxesha ambalwa.</item>
+        <item>Gqiba ngokuphefumla ngokucothayo nangokunzulu amaxesha amathathu.</item>
+    </string-array>
+
+    <!-- 4. Eating right -->
+    <string name="kyh_article_eat_right_title">Phucula ubomi bakho ngokutya ngokufanelekileyo</string>
+    <string-array name="kyh_article_eat_right_body">
+        <item>Oko utya kuchaphazela amandla akho, imo yakho, ubunzima bomzimba wakho kunye nomngcipheko wakho wezifo zexesha elide. Akufuneki ube nokutya okugqibeleleyo. Umkhwa oqhubekayo wokukhetha okulungileyo ubukhulu becala wenza uninzi lomsebenzi.</item>
+        <item>## Yakha ipleyiti elinganisiweyo</item>
+        <item>Khangela ukuba malunga nesiqingatha sepleyiti yakho sibe yimifuno neziqhamo, ikota ibe ziinkozo ezipheleleyo ezifana nerayisi ebrown, i-oats okanye isonka esipheleleyo, kwaye ikota ibe yiprotheni efana neembotyi, iilentile, amaqanda, intlanzi, inkukhu okanye inyama engenamafutha.</item>
+        <item>## Khetha amafutha angcono</item>
+        <item>Sebenzisa amafutha angaxinelanga amancinci, afana neoli yeoliva, amantongomane, imbewu ne-avokhado, endaweni yebhotolo eninzi, inyama enamafutha okanye ukutya okuqhotsiweyo kakhulu.</item>
+        <item>## Ncipha iswekile netyuwa</item>
+        <item>Iziselo ezineswekile, iilekese nokutya okusetyenzisiweyo okune-tyuwa eninzi kongeza iswekile okanye ityuwa eninzi ngaphandle kwesondlo esininzi. Amanzi sisiselo esilungileyo semihla ngemihla.</item>
+        <item>## Qala ngokuncinci</item>
+        <item>Khetha utshintsho olunye kule veki, olunje ngokongeza umfuno kwisidlo sasemini okanye ukutshintsha isiselo esinegesi ngamanzi. Utshintsho oluncinci onokuluqhuba lungcono kunolukhulu oluyeka.</item>
+        <item>Ukuba unemeko yempilo, ii-alerji, okanye ukhulelwe okanye uyancancisa, buza kugqirha okanye kwingcali yezondlo ukuba yintoni elungele wena.</item>
+    </string-array>
+
+    <!-- 5. Eating habits -->
+    <string name="kyh_article_eat_habits_title">Ukutya ngokufanelekileyo: imikhwa emincinci eyongeza</string>
+    <string-array name="kyh_article_eat_habits_body">
+        <item>Ukutya okunempilo kunento yokwenza nemikhwa ngokufanayo nokutya ngokwako. Ezi ndawo zilula zokuqala.</item>
+        <item>## Cwangcisa kwangaphambili</item>
+        <item>Nquma ngokumalunga nokuba uza kutya ntoni kwiintsuku ezimbalwa ezizayo kwaye uthenge oko. Xa kukho isicwangciso, uthatha ukutya kwangaphandle kancinci.</item>
+        <item>## Funda ilebheli</item>
+        <item>Kukutya okupakishiweyo, thelekisa iimveliso usebenzisa ikholam yee-100 g. Jonga iswekile, ityuwa (isodium) namafutha agcweleyo, kwaye ukhethe elisezantsi xa zonke ezinye izinto zifana.</item>
+        <item>## Tya ngokucotha</item>
+        <item>Iimpawu zokuhlutha zithatha ixesha ukufika engqondweni yakho. Ukutya ngokucotha, ungenaso isikrini, kukunceda uqaphele xa ugqibile kwaye kwenza isidlo sonwabise ngakumbi.</item>
+        <item>## Gcina izinto ezilula ezilungileyo ezisondeleyo</item>
+        <item>Iziqhamo, iyogathi eyoqobo, amantongomane, imifuno eluhlaza okanye iqanda elibilisiweyo ziyindlela ezilula xa ulambile phakathi kwezidlo.</item>
+        <item>## Sela amanzi anele</item>
+        <item>Sela amanzi usuku lonke. Iimfuno zakho zitshintsha ngemozulu, ukuzilolonga nomzimba wakho, ngoko vumela unxano lukukhokele kwaye ujonge umchamo ophuzi ngokunzulu njengempawu yokuba usele ngakumbi.</item>
+        <item>## Zibonise inceba</item>
+        <item>Isidlo esinye esingenampilo asisichithi inkqubela yakho. Qhubeka nesidlo esilandelayo kwaye uqhubeke.</item>
+    </string-array>
+
+    <!-- 6. Stress methods -->
+    <string name="kyh_article_stress_methods_title">Iindlela zokujongana noxinzelelo</string>
+    <string-array name="kyh_article_stress_methods_body">
+        <item>Xa uxinzelelo lubuthelana, umzimba wakho uyaphendula: intliziyo yakho ibetha ngokukhawuleza, imisipha yakho iyanqumla kwaye iingcinga zakho ziyabaleka. Ezi ndlela zincedisa ukuzolisa loo mpendulo.</item>
+        <item>## Ukuphefumla ngamanyathelo amane</item>
+        <item>Phefumlela ngempumlo imizuzwana emi-4, bamba emi-4, phefumla ngaphandle ngokucothayo emi-4, ke ubambe emi-4. Phinda iiroundi ezimalunga nezine.</item>
+        <item>## Zimise emhlabeni</item>
+        <item>Jonga ujikeleze uze uthi zintlanu izinto onokuzibona, zine ezo onokuzichukumisa, zintathu ezo onokuzive, zimbini ezo onokuzinuka nenye onokuyinambitha. Oku kutsala ingqalelo yakho ekude neenkxalabo zakho ize iye kwixesha langoku.</item>
+        <item>## Shukumisa umzimba wakho</item>
+        <item>Ukuhamba ngokukhawuleza imizuzu eyi-10 okanye ukotula okumbalwa kusebenzisa iihomoni zoxinzelelo kwaye rhoqo kucoca intloko yakho.</item>
+        <item>## Khulula ukuxinana</item>
+        <item>Nyanzelisa iqela lemisipha, njengezandla zakho eziqinileyo okanye amagxalaba, imizuzwana emi-5, ke ukhulule ngokupheleleyo. Sebenza emzimbeni wakho usuka ezinyaweni ukuya ebusweni.</item>
+        <item>## Yibhale phantsi okanye uthethe ngayo</item>
+        <item>Ukukhupha iinkxalabo engqondweni yakho uzibeke ephepheni, okanye kwincoko nomntu omthembileyo, kuzenza zilula ukuzijongana nazo.</item>
+        <item>## Nciphisa oko kondla uxinzelelo</item>
+        <item>Ikhafini eninzi, utywala nokujonga umnxeba ebusuku kunokwenza uxinzelelo nobuthongo obubi bube bubi ngakumbi.</item>
+        <item>## Xa kufuneka ufune uncedo</item>
+        <item>Ukuba uxinzelelo luhlala iiveki, luphazamisa ubuthongo, umsebenzi okanye ubudlelwane bakho, okanye lufike nokoyika, ukuphelelwa themba okanye iingcinga zokuzenzakalisa, nceda uthethe nogqirha okanye umcebisi. Ukuba uziva ungakhuselekanga okanye usengxakini enkulu, unxibelelane neenkonzo zongxamiseko zasekhaya okanye nomnxeba wongxamiseko ngoko nangoko.</item>
+    </string-array>
 </resources>

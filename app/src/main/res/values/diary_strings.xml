@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="diary_back">Back</string>
+    <string name="diary_title">Diary</string>
+    <string name="diary_meals">Meals</string>
+    <string name="diary_water">Water</string>
+    <string name="diary_mood">Mood</string>
+    <string name="diary_no_mood_today">No mood logged yet today</string>
+    <string name="diary_notes">Notes</string>
+    <string name="diary_notes_hint">Write anything about your day...</string>
+</resources>

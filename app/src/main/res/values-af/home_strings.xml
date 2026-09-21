@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_title">Tuis</string>
+    <string name="home_greeting">Hallo, %1$s</string>
+    <string name="home_notifications">Kennisgewings</string>
+
+
+    <string name="home_tracking_diary">Volgdagboek</string>
+    <string name="home_nutrition">Voeding</string>
+    <string name="home_steps">Treë</string>
+    <string name="home_fitness">Oefeninge</string>
+    <string name="home_fasting">Vas</string>
+    <string name="home_sleep">Slaap</string>
+    <string name="home_medication">Medikasie</string>
+    <string name="home_goals">Doelwitte</string>
+</resources>

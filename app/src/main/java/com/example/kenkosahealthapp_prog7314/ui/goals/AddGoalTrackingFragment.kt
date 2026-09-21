@@ -89,6 +89,7 @@ class AddGoalTrackingFragment : Fragment() {
         }
         binding.rowReminderTime.setOnClickListener { pickReminderTime() }
         binding.buttonSave.setOnClickListener { attemptSave() }
+        binding.buttonCancel.setOnClickListener { findNavController().navigateUp() }
         binding.buttonDelete.setOnClickListener { confirmDelete() }
 
         updateReminderLabel()

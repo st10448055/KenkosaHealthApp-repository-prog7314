@@ -4,7 +4,7 @@ data class UserSettings(
     val userId: String = "",
     val unitSystem: String = "Metric",
     val language: String = "en",
-    val appearanceMode: String = "System",
+    val appearanceMode: String = "Light",
     val hapticsEnabled: Boolean = true,
     val notificationsEnabled: Boolean = true,
     val subscriptionStatus: String = "Free",

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="diary_back">Terug</string>
+    <string name="diary_title">Dagboek</string>
+    <string name="diary_meals">Maaltye</string>
+    <string name="diary_water">Water</string>
+    <string name="diary_mood">Gemoed</string>
+    <string name="diary_no_mood_today">Nog geen gemoed vandag aangeteken nie</string>
+    <string name="diary_notes">Notas</string>
+    <string name="diary_notes_hint">Skryf enigiets oor jou dag...</string>
+</resources>

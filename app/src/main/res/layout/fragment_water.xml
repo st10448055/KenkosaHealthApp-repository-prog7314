@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/tracking_bg"
     android:orientation="vertical"
-    android:background="#E8EFE3"
     android:padding="20dp">
 
     <ImageButton
@@ -11,25 +12,26 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:background="@android:color/transparent"
+        android:contentDescription="@string/tracking_back"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
-        android:contentDescription="Back" />
+        app:tint="@color/tracking_text_primary" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="Water Intake"
+        android:text="@string/water_title"
+        android:textColor="@color/tracking_text_primary"
         android:textSize="26sp"
-        android:textStyle="bold"
-        android:textColor="#1B3A1B" />
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textWaterSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:textSize="16sp"
-        android:textColor="#4A4A4A" />
+        android:textColor="@color/tracking_text_secondary"
+        android:textSize="16sp" />
 
     <ProgressBar
         android:id="@+id/progressLoading"
@@ -44,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:textColor="#B00020"
+        android:textColor="@color/tracking_error"
         android:visibility="gone" />
 
     <GridLayout

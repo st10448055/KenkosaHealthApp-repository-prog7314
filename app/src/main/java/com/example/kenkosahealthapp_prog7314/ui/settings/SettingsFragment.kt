@@ -3,7 +3,6 @@ package com.example.kenkosahealthapp_prog7314.ui.settings
 import android.Manifest
 import android.content.DialogInterface
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -269,14 +268,8 @@ class SettingsFragment : Fragment() {
     private fun formatDuration(totalMinutes: Int): String =
         String.format(Locale.getDefault(), "%dh %02dm", totalMinutes / 60, totalMinutes % 60)
 
-    private fun isDarkModeOn(appearanceMode: String): Boolean = when (appearanceMode) {
-        "Dark" -> true
-        "Light" -> false
-        else -> {
-            val nightMask = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
-            nightMask == Configuration.UI_MODE_NIGHT_YES
-        }
-    }
+    /** Light is the default: only an explicit "Dark" turns the switch on. */
+    private fun isDarkModeOn(appearanceMode: String): Boolean = appearanceMode == "Dark"
 
     private fun hasNotificationPermission(): Boolean =
         ContextCompat.checkSelfPermission(

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="logfood_back">Buya umva</string>
+    <string name="logfood_title">Bhala ukutya</string>
+    <string name="logfood_breakfast">Isidlo sakusasa</string>
+    <string name="logfood_lunch">Isidlo sasemini</string>
+    <string name="logfood_dinner">Isidlo sangokuhlwa</string>
+    <string name="logfood_snack">Isidlo esincinci</string>
+    <string name="logfood_search_hint">Khangela izinto zokutya...</string>
+    <string name="logfood_search">Khangela</string>
+    <string name="logfood_scan_barcode">Skena ibhakhowudi</string>
+    <string name="logfood_servings">Iinxalenye</string>
+    <string name="logfood_add_entry">Yongeza irekhodi</string>
+</resources>

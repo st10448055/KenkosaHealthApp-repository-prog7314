@@ -4,7 +4,10 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
 
 /**
- * Applies the user's Light / Dark / System choice.
+ * Applies the user's Light / Dark choice.
+ *
+ * Light is the default. Anything that isn't "Dark" (including a legacy
+ * "System" value) is treated as Light.
  *
  * The choice is also cached in SharedPreferences so it can be applied in
  * MainActivity.onCreate before any UI is inflated (Firestore is async, so
@@ -14,14 +17,15 @@ object ThemeManager {
 
     private const val PREFS = "kenkosa_prefs"
     private const val KEY_APPEARANCE = "appearance_mode"
+    private const val DEFAULT_MODE = "Light"
 
     fun applySaved(context: Context) {
         val mode = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-            .getString(KEY_APPEARANCE, "System") ?: "System"
+            .getString(KEY_APPEARANCE, DEFAULT_MODE) ?: DEFAULT_MODE
         AppCompatDelegate.setDefaultNightMode(toNightMode(mode))
     }
 
-    /** Saves [mode] ("Light" | "Dark" | "System") and applies it (recreates the activity if it changed). */
+    /** Saves [mode] ("Light" | "Dark") and applies it (recreates the activity if it changed). */
     fun set(context: Context, mode: String) {
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
             .edit()
@@ -32,7 +36,6 @@ object ThemeManager {
 
     private fun toNightMode(mode: String): Int = when (mode) {
         "Dark" -> AppCompatDelegate.MODE_NIGHT_YES
-        "Light" -> AppCompatDelegate.MODE_NIGHT_NO
-        else -> AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+        else -> AppCompatDelegate.MODE_NIGHT_NO // "Light", "System", or anything unknown
     }
 }
