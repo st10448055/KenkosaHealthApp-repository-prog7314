@@ -8,10 +8,12 @@ on:
       - "build.gradle.kts"
       - "settings.gradle.kts"
       - "gradle/**"
+      - ".github/workflows/android-ci.yml" # Added so updates to this file trigger a run
   pull_request:
     branches: [ "main" ]
     paths:
       - "app/**"
+  workflow_dispatch: # Allows manual trigger from the GitHub Actions UI
 
 jobs:
   build:
@@ -41,7 +43,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Write google-services.json
-        run: echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 -d > app/google-services.json
+        run: echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 --decode > app/google-services.json
 
       - name: Run unit tests
         run: ./gradlew :app:testDebugUnitTest --stacktrace
