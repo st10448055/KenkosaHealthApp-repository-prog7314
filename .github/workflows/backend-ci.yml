@@ -40,7 +40,9 @@ jobs:
         run: chmod +x gradlew
 
       - name: Write Firebase service account key
-        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 --decode > backend/serviceAccountKey.json
+        run: |
+          mkdir -p backend
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 --decode > backend/serviceAccountKey.json
 
       - name: Run backend unit tests
         run: ./gradlew :backend:test --stacktrace
