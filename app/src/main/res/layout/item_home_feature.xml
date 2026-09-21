@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="120dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp"
-    app:cardBackgroundColor="@android:color/white">
+    app:cardBackgroundColor="@color/home_card_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,16 +19,16 @@
             android:id="@+id/iconFeature"
             android:layout_width="36dp"
             android:layout_height="36dp"
-            app:tint="#4F7A5B"
-             />
+            app:tint="@color/home_card_icon" />
 
         <TextView
             android:id="@+id/textFeature"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Label"
-            android:textStyle="bold" />
+            android:textColor="@color/home_card_text"
+            android:textStyle="bold"
+            tools:text="Label" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

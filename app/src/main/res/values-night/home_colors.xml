@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="home_background">#121A13</color>
+    <color name="home_text_primary">#E6F0E4</color>
+    <color name="home_text_secondary">#A8C2A1</color>
+    <color name="home_circle_dark">#2A3F2C</color>
+    <color name="home_icon_on_dark">#E6F0E4</color>
+    <color name="home_badge_background">#A8C2A1</color>
+    <color name="home_badge_text">#0F2812</color>
+    <color name="home_fab_background">#A8C2A1</color>
+    <color name="home_fab_icon">#0F2812</color>
+    <color name="home_card_background">#FFFFFF</color>
+    <color name="home_card_icon">#4F7A5B</color>
+    <color name="home_card_text">#1C2E1E</color>
+</resources>

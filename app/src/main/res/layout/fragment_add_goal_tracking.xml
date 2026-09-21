@@ -338,6 +338,18 @@
                 app:backgroundTint="@color/goaltrack_btn_primary"
                 app:cornerRadius="26dp" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonCancel"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="10dp"
+                android:text="@string/goaltrack_cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/settings_title"
+                app:cornerRadius="26dp"
+                app:strokeColor="@color/goaltrack_btn_primary" />
+
             <!-- Edit mode only -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/buttonDelete"

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_title">Home</string>
+    <string name="home_greeting">Hi, %1$s</string>
+    <string name="home_notifications">Notifications</string>
+
+
+
+    <string name="home_tracking_diary">Tracking Diary</string>
+    <string name="home_nutrition">Nutrition</string>
+    <string name="home_steps">Steps</string>
+    <string name="home_fitness">Workouts</string>
+    <string name="home_fasting">Fasting</string>
+    <string name="home_sleep">Sleep</string>
+    <string name="home_medication">Medication</string>
+    <string name="home_goals">Goals</string>
+
+    <color name="home_background">#121A13</color>
+    <color name="home_text_primary">#E6F0E4</color>
+    <color name="home_text_secondary">#A8C2A1</color>
+    <color name="home_circle_dark">#2A3F2C</color>
+    <color name="home_icon_on_dark">#E6F0E4</color>
+    <color name="home_badge_background">#A8C2A1</color>
+    <color name="home_badge_text">#0F2812</color>
+    <color name="home_fab_background">#A8C2A1</color>
+    <color name="home_fab_icon">#0F2812</color>
+    <color name="home_card_background">#1F2E21</color>
+    <color name="home_card_icon">#A8C2A1</color>
+    <color name="home_card_text">#E6F0E4</color>
+</resources>

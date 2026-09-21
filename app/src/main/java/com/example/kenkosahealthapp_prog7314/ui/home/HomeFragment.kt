@@ -3,6 +3,7 @@ package com.example.kenkosahealthapp_prog7314.ui.home
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.annotation.StringRes
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.view.GravityCompat
@@ -130,28 +131,28 @@ class HomeFragment : Fragment() {
 
 
     private fun setupFeatureGrid() {
-        bindFeature(binding.cardTrackingDiary, R.drawable.ic_diary, "Tracking Diary") {
+        bindFeature(binding.cardTrackingDiary, R.drawable.ic_diary, R.string.home_tracking_diary) {
             findNavController().navigate(R.id.action_home_to_trackingDiary)
         }
-        bindFeature(binding.cardNutrition, R.drawable.ic_nutrition, "Nutrition") {
+        bindFeature(binding.cardNutrition, R.drawable.ic_nutrition, R.string.home_nutrition) {
             findNavController().navigate(R.id.action_home_to_nutrition)
         }
-        bindFeature(binding.cardSteps, R.drawable.ic_steps, "Steps") {
+        bindFeature(binding.cardSteps, R.drawable.ic_steps, R.string.home_steps) {
             findNavController().navigate(R.id.action_home_to_steps)
         }
-        bindFeature(binding.cardWorkouts, R.drawable.ic_workouts, "Workouts") {
+        bindFeature(binding.cardWorkouts, R.drawable.ic_fitness, R.string.home_fitness) {
             findNavController().navigate(R.id.action_home_to_workouts)
         }
-        bindFeature(binding.cardFasting, R.drawable.ic_fasting, "Fasting") {
+        bindFeature(binding.cardFasting, R.drawable.ic_fasting, R.string.home_fasting) {
             findNavController().navigate(R.id.action_home_to_fasting)
         }
-        bindFeature(binding.cardSleep, R.drawable.ic_sleep, "Sleep") {
+        bindFeature(binding.cardSleep, R.drawable.ic_sleep, R.string.home_sleep) {
             findNavController().navigate(R.id.action_home_to_sleep)
         }
-        bindFeature(binding.cardMedication, R.drawable.ic_medication, "Medication") {
+        bindFeature(binding.cardMedication, R.drawable.ic_medication, R.string.home_medication) {
             findNavController().navigate(R.id.action_home_to_medication)
         }
-        bindFeature(binding.cardGoals, R.drawable.ic_goals, "Goals") {
+        bindFeature(binding.cardGoals, R.drawable.ic_goals, R.string.home_goals) {
             findNavController().navigate(R.id.action_home_to_goals)
         }
     }
@@ -159,11 +160,11 @@ class HomeFragment : Fragment() {
     private fun bindFeature(
         card: ItemHomeFeatureBinding,
         iconRes: Int,
-        label: String,
+        @StringRes labelRes: Int,
         onClick: () -> Unit
     ) {
         card.iconFeature.setImageResource(iconRes)
-        card.textFeature.text = label
+        card.textFeature.setText(labelRes)
         card.root.setOnClickListener { onClick() }
     }
 
