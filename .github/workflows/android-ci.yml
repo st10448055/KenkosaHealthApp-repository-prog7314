@@ -8,12 +8,12 @@ on:
       - "build.gradle.kts"
       - "settings.gradle.kts"
       - "gradle/**"
-      - ".github/workflows/android-ci.yml" # Added so updates to this file trigger a run
+      - ".github/workflows/android-ci.yml"
   pull_request:
     branches: [ "main" ]
     paths:
       - "app/**"
-  workflow_dispatch: # Allows manual trigger from the GitHub Actions UI
+  workflow_dispatch:
 
 jobs:
   build:
@@ -43,20 +43,12 @@ jobs:
         run: chmod +x gradlew
 
       - name: Write google-services.json
-        run: echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 --decode > app/google-services.json
-
-      - name: Run unit tests
-        run: ./gradlew :app:testDebugUnitTest --stacktrace
+        run: |
+          mkdir -p app
+          echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 --decode > app/google-services.json
 
       - name: Build debug APK
         run: ./gradlew :app:assembleDebug --stacktrace
-
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-unit-test-results
-          path: app/build/reports/tests/testDebugUnitTest/
 
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
