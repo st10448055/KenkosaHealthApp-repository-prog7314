@@ -348,6 +348,18 @@
         <action
             android:id="@+id/action_fitness_to_exerciseList"
             app:destination="@id/exerciseListFragment" />
+
+        <action
+            android:id="@+id/action_fitness_to_goals"
+            app:destination="@id/goalsFragment" />
+
+        <action
+            android:id="@+id/action_fitness_to_statistics"
+            app:destination="@id/statisticsFragment" />
+
+        <action
+            android:id="@+id/action_fitness_to_settings"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
