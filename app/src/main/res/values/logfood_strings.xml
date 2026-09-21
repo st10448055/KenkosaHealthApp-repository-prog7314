@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="logfood_back">Back</string>
+    <string name="logfood_title">Log Food</string>
+    <string name="logfood_breakfast">Breakfast</string>
+    <string name="logfood_lunch">Lunch</string>
+    <string name="logfood_dinner">Dinner</string>
+    <string name="logfood_snack">Snack</string>
+    <string name="logfood_search_hint">Search food items...</string>
+    <string name="logfood_search">Search</string>
+    <string name="logfood_scan_barcode">Scan Barcode</string>
+    <string name="logfood_servings">Servings</string>
+    <string name="logfood_add_entry">Add Entry</string>
+</resources>

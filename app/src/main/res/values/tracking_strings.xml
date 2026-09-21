@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tracking_back">Back</string>
+
+    <!-- Fitness -->
+    <string name="fitness_title">Fitness</string>
+    <string name="fitness_categories">Categories</string>
+
+    <!-- Today's Meals -->
+    <string name="meals_title">Today\'s Meals</string>
+
+    <!-- Water Intake -->
+    <string name="water_title">Water Intake</string>
+</resources>

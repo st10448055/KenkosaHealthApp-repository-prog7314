@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tracking_back">Terug</string>
+
+    <!-- Fitness -->
+    <string name="fitness_title">Fiksheid</string>
+    <string name="fitness_categories">Kategorieë</string>
+
+    <!-- Today's Meals -->
+    <string name="meals_title">Vandag se maaltye</string>
+
+    <!-- Water Intake -->
+    <string name="water_title">Waterinname</string>
+</resources>

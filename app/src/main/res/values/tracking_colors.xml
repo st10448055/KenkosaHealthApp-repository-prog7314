@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tracking_bg">#E8EFE3</color>
+    <color name="tracking_text_primary">#1B3A1B</color>
+    <color name="tracking_text_secondary">#4A4A4A</color>
+    <color name="tracking_error">#B00020</color>
+</resources>

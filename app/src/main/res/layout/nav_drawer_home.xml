@@ -205,18 +205,7 @@
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
 
-            <TextView
-                android:id="@+id/navStatistics"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:text="@string/nav_statistics"
-                android:textColor="@android:color/white"
-                android:textSize="15sp"
-                android:textStyle="bold" />
 
-            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
 
             <TextView
                 android:id="@+id/navSettings"
