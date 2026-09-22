@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fasting_title">Vas</string>
+    <string name="fasting_for">Aan die vas vir</string>
+    <string name="fasting_not_fasting">Nie aan die vas nie</string>
+    <string name="fasting_ready">Gereed wanneer jy is</string>
+    <string name="fasting_goal_reached">Doelwit bereik</string>
+    <string name="fasting_end">Beëindig vas</string>
+    <string name="fasting_start_now">Begin vas</string>
+    <string name="fasting_start_label">Begin</string>
+    <string name="fasting_end_label">Einde</string>
+    <string name="fasting_none">—</string>
+    <string name="fasting_edit_start_desc">Wysig begintyd</string>
+    <string name="fasting_edit_end_desc">Wysig eindtyd</string>
+    <string name="fasting_tips">Wenke</string>
+    <string name="fasting_recent">Onlangse vasperiodes</string>
+    <string name="fasting_no_history">Nog geen voltooide vasperiodes nie.</string>
+    <string name="fasting_today_at">Vandag om %1$s</string>
+    <string name="fasting_yesterday_at">Gister om %1$s</string>
+    <string name="fasting_tomorrow_at">Môre om %1$s</string>
+    <string name="fasting_date_at">%1$s om %2$s</string>
+    <string name="fasting_add_title">Voeg vas by</string>
+    <string name="fasting_details_title">Vasbesonderhede</string>
+    <string name="fasting_start_fast">Begin van vas</string>
+    <string name="fasting_end_fast">Einde van vas</string>
+    <string name="fasting_duration">Duur: %1$s</string>
+    <string name="fasting_edit">Wysig vas</string>
+    <string name="fasting_save">Stoor</string>
+    <string name="fasting_cancel">Kanselleer</string>
+    <string name="fasting_delete">Skrap</string>
+    <string name="fasting_delete_title">Skrap hierdie vas?</string>
+    <string name="fasting_delete_message">Dit sal hierdie vas permanent verwyder.</string>
+    <string name="fasting_error_end_before_start">Die einde moet ná die begin wees</string>
+    <string name="fasting_error_too_long">\'n Vas kan hoogstens 7 dae lank wees</string>
+    <string name="fasting_error_start_future">Die begin kan nie in die toekoms wees nie</string>
+    <string name="fasting_error_finished_future">\'n Voltooide vas kan nie in die toekoms eindig nie</string>
+    <string name="fasting_error_generic">Iets het skeefgeloop. Probeer asseblief weer.</string>
+    <plurals name="fasting_hours">
+        <item quantity="one">%d Uur</item>
+        <item quantity="other">%d Ure</item>
+    </plurals>
+    <plurals name="fasting_minutes">
+        <item quantity="one">%d Min</item>
+        <item quantity="other">%d Min</item>
+    </plurals>
+    <string-array name="fasting_tips">
+        <item>Drink genoeg water en beplan jou maaltye vooruit. Kies voedsame, versadigende kos wanneer jy mag eet, en luister deur die vas na jou liggaam.</item>
+        <item>Water, swart koffie en gewone tee is gewoonlik reg tydens \'n vas. Sluk gereeld deur die dag.</item>
+        <item>Breek jou vas sag met \'n gebalanseerde maaltyd eerder as \'n baie groot of soet een.</item>
+        <item>Voel jy duiselig, flou of naar? Beëindig jou vas en eet iets. Jou gesondheid kom eerste.</item>
+        <item>Begin rustig: begin met korter vasperiodes en verleng dit geleidelik soos jou liggaam aanpas.</item>
+    </string-array>
+</resources>

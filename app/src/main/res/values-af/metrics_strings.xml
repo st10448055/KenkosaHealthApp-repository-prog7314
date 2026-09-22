@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="metrics_title_onboarding">Oor jou</string>
+    <string name="metrics_subtitle_onboarding">\'n Paar vinnige vrae sodat ons jou gesondheidsdoelwitte kan verpersoonlik. Jy kan dit enige tyd in Instellings verander.</string>
+    <string name="metrics_title_edit">Liggaamsmetings</string>
+    <string name="metrics_settings_row">Liggaamsmetings</string>
+    <string name="metrics_dob_label">Geboortedatum</string>
+    <string name="metrics_dob_hint">Kies jou geboortedatum</string>
+    <string name="metrics_age">Ouderdom: %d</string>
+    <string name="metrics_gender_label">Geslag</string>
+    <string name="gender_female">Vroulik</string>
+    <string name="gender_male">Manlik</string>
+    <string name="gender_non_binary">Nie-binêr</string>
+    <string name="gender_prefer_not">Verkies om nie te sê nie</string>
+    <string name="metrics_height_label">Lengte</string>
+    <string name="metrics_weight_label">Gewig</string>
+    <string name="unit_cm">cm</string>
+    <string name="unit_ft_in">vt / dm</string>
+    <string name="unit_ft">vt</string>
+    <string name="unit_in">dm</string>
+    <string name="unit_kg">kg</string>
+    <string name="unit_lb">pd</string>
+    <string name="metrics_hint_cm">bv. 170</string>
+    <string name="metrics_hint_ft">bv. 5</string>
+    <string name="metrics_hint_in">bv. 8</string>
+    <string name="metrics_hint_kg">bv. 65</string>
+    <string name="metrics_hint_lb">bv. 143</string>
+    <string name="metrics_activity_label">Aktiwiteitsvlak</string>
+    <string name="activity_sedentary"><b>Sittend</b>\nMin of geen oefening</string>
+    <string name="activity_light"><b>Ligtelik aktief</b>\nOefen 1–3 dae per week</string>
+    <string name="activity_moderate"><b>Matig aktief</b>\nOefen 3–5 dae per week</string>
+    <string name="activity_very_active"><b>Baie aktief</b>\nOefen 6–7 dae per week</string>
+    <string name="activity_extra_active"><b>Uiters aktief</b>\nHarde daaglikse oefening of fisiese werk</string>
+    <string name="metrics_skip">Slaan oor vir nou</string>
+    <string name="metrics_saved">Metings gestoor</string>
+    <string name="metrics_error_dob">Kies asseblief jou geboortedatum</string>
+    <string name="metrics_error_dob_invalid">Voer asseblief \'n geldige geboortedatum in</string>
+    <string name="metrics_error_gender">Kies asseblief \'n geslag</string>
+    <string name="metrics_error_height">Voer asseblief \'n geldige lengte in</string>
+    <string name="metrics_error_weight">Voer asseblief \'n geldige gewig in</string>
+    <string name="metrics_error_activity">Kies asseblief jou aktiwiteitsvlak</string>
+    <string name="metrics_error_generic">Kon nie jou metings stoor nie. Probeer asseblief weer.</string>
+    <string name="metrics_cancel">Kanselleer</string>
+</resources>

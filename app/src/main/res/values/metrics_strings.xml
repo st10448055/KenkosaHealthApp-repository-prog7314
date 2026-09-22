@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="metrics_title_onboarding">About You</string>
+    <string name="metrics_subtitle_onboarding">A few quick questions so we can personalise your health goals. You can change these any time in Settings.</string>
+    <string name="metrics_title_edit">Body Metrics</string>
+    <string name="metrics_settings_row">Body Metrics</string>
+    <string name="metrics_dob_label">Date of birth</string>
+    <string name="metrics_dob_hint">Select your date of birth</string>
+    <string name="metrics_age">Age: %d</string>
+    <string name="metrics_gender_label">Gender</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_non_binary">Non-binary</string>
+    <string name="gender_prefer_not">Prefer not to say</string>
+    <string name="metrics_height_label">Height</string>
+    <string name="metrics_weight_label">Weight</string>
+    <string name="unit_cm">cm</string>
+    <string name="unit_ft_in">ft / in</string>
+    <string name="unit_ft">ft</string>
+    <string name="unit_in">in</string>
+    <string name="unit_kg">kg</string>
+    <string name="unit_lb">lb</string>
+    <string name="metrics_hint_cm">e.g. 170</string>
+    <string name="metrics_hint_ft">e.g. 5</string>
+    <string name="metrics_hint_in">e.g. 8</string>
+    <string name="metrics_hint_kg">e.g. 65</string>
+    <string name="metrics_hint_lb">e.g. 143</string>
+    <string name="metrics_activity_label">Activity level</string>
+    <string name="activity_sedentary"><b>Sedentary</b>\nLittle or no exercise</string>
+    <string name="activity_light"><b>Lightly active</b>\nExercise 1–3 days a week</string>
+    <string name="activity_moderate"><b>Moderately active</b>\nExercise 3–5 days a week</string>
+    <string name="activity_very_active"><b>Very active</b>\nExercise 6–7 days a week</string>
+    <string name="activity_extra_active"><b>Extra active</b>\nHard daily exercise or a physical job</string>
+    <string name="metrics_skip">Skip for now</string>
+    <string name="metrics_saved">Metrics saved</string>
+    <string name="metrics_error_dob">Please select your date of birth</string>
+    <string name="metrics_error_dob_invalid">Please enter a valid date of birth</string>
+    <string name="metrics_error_gender">Please select a gender</string>
+    <string name="metrics_error_height">Please enter a valid height</string>
+    <string name="metrics_error_weight">Please enter a valid weight</string>
+    <string name="metrics_error_activity">Please select your activity level</string>
+    <string name="metrics_error_generic">Couldn\'t save your metrics. Please try again.</string>
+    <string name="metrics_cancel">Cancel</string>
+</resources>

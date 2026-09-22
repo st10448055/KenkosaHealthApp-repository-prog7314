@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Fasting ring: yellow = time fasted so far, green = what's left. -->
+    <color name="fast_ring_track">#86A583</color>
+    <color name="fast_ring_progress">#E8C94D</color>
+
+    <color name="fast_chip_bg">#C9DCC4</color>
+    <color name="fast_chip_text">#1C2E1E</color>
+
+    <color name="fast_btn_edit">#D6D08C</color>
+    <color name="fast_btn_save">#6FA6A0</color>
+    <color name="fast_btn_cancel">#8CA588</color>
+    <color name="fast_btn_primary">#DCE3DC</color>
+
+    <color name="fast_tip_start">#B9D0B3</color>
+    <color name="fast_tip_end">#8FAF87</color>
+</resources>

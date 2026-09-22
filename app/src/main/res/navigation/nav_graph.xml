@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.auth.StartFragment"
+        android:label="Start"
+        tools:layout="@layout/fragment_start">
+        <action
+            android:id="@+id/action_start_to_sso"
+            app:destination="@id/ssoFragment" />
+        <action
+            android:id="@+id/action_start_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ssoFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.auth.SsoFragment"
+        android:label="Sign in with SSO"
+        tools:layout="@layout/fragment_sso">
+        <action
+            android:id="@+id/action_sso_to_login"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_sso_to_sign_up"
+            app:destination="@id/signUpFragment" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.auth.SignUpFragment"
+        android:label="Create Account"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_sign_up_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_sign_up_to_login"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.auth.LoginFragment"
+        android:label="Welcome Back"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_login_to_sign_up"
+            app:destination="@id/signUpFragment" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            android:defaultValue="" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_settings"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_home_to_trackingDiary"
+            app:destination="@id/diaryFragment" />
+        <action
+            android:id="@+id/action_home_to_nutrition"
+            app:destination="@id/nutritionFragment" />
+        <action
+            android:id="@+id/action_home_to_steps"
+            app:destination="@id/stepsFragment" />
+        <action
+            android:id="@+id/action_home_to_workouts"
+            app:destination="@id/fitnessFragment" />
+        <action
+            android:id="@+id/action_home_to_fasting"
+            app:destination="@id/fastingFragment" />
+        <action
+            android:id="@+id/action_home_to_sleep"
+            app:destination="@id/sleepFragment" />
+        <action
+            android:id="@+id/action_home_to_medication"
+            app:destination="@id/medicationFragment" />
+        <action
+            android:id="@+id/action_home_to_goals"
+            app:destination="@id/goalsFragment" />
+        <!-- Wellness -->
+        <action
+            android:id="@+id/action_home_to_wellness"
+            app:destination="@id/wellnessFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.settings.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings">
+        <action
+            android:id="@+id/action_settings_to_start"
+            app:destination="@id/startFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_settings_to_goals"
+            app:destination="@id/goalsFragment" />
+        <action
+            android:id="@+id/action_settings_to_statistics"
+            app:destination="@id/statisticsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Statistics"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Statistics" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/trackingDiaryFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Tracking Diary"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Tracking Diary" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nutritionFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Nutrition"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Nutrition" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/stepsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Steps"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Steps" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/workoutsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:label="Workouts"
+        tools:layout="@layout/fragment_feature_placeholder">
+        <argument
+            android:name="featureTitle"
+            app:argType="string"
+            android:defaultValue="Workouts" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fastingFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.fasting.FastingFragment"
+        android:label="Fasting"
+        tools:layout="@layout/fragment_fasting">
+        <action android:id="@+id/action_fasting_to_addFast" app:destination="@id/addFastFragment" />
+        <action android:id="@+id/action_fasting_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_fasting_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_fasting_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addFastFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.fasting.AddFastFragment"
+        android:label="Add Fast"
+        tools:layout="@layout/fragment_add_fast">
+        <argument android:name="fastId" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <argument android:name="startEditing" android:defaultValue="false" app:argType="boolean" />
+        <action android:id="@+id/action_addFast_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_addFast_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_addFast_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sleepFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.sleeplog.SleepOverviewFragment"
+        android:label="Sleep"
+        tools:layout="@layout/fragment_sleep_overview">
+        <action android:id="@+id/action_sleep_to_addSleep" app:destination="@id/addSleepFragment" />
+        <action android:id="@+id/action_sleep_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_sleep_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_sleep_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addSleepFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.sleeplog.AddSleepLogFragment"
+        android:label="Add Sleep"
+        tools:layout="@layout/fragment_add_sleep_log">
+        <argument android:name="sleepId" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <action android:id="@+id/action_addSleep_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_addSleep_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_addSleep_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <!-- Medication -->
+    <fragment
+        android:id="@+id/medicationFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.medication.MedicationFragment"
+        android:label="Medication"
+        tools:layout="@layout/fragment_medication">
+        <action
+            android:id="@+id/action_medication_to_addMedication"
+            app:destination="@id/addMedicationFragment" />
+        <action
+            android:id="@+id/action_medication_to_goals"
+            app:destination="@id/goalsFragment" />
+        <action
+            android:id="@+id/action_medication_to_statistics"
+            app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_medication_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addMedicationFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.medication.AddMedicationFragment"
+        android:label="Add Medication"
+        tools:layout="@layout/fragment_add_medication">
+
+        <!-- Optional: opens as the details/edit view for a medication -->
+        <argument
+            android:name="medicationId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_addMedication_to_goals"
+            app:destination="@id/goalsFragment" />
+        <action
+            android:id="@+id/action_addMedication_to_statistics"
+            app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_addMedication_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <!-- Wellness -->
+    <fragment
+        android:id="@+id/wellnessFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.wellness.WellnessFragment"
+        android:label="Meditation and Wellness"
+        tools:layout="@layout/fragment_wellness">
+        <action
+            android:id="@+id/action_wellness_to_logMood"
+            app:destination="@id/logMoodFragment" />
+        <action
+            android:id="@+id/action_wellness_to_goals"
+            app:destination="@id/goalsFragment" />
+        <action
+            android:id="@+id/action_wellness_to_statistics"
+            app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_wellness_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/logMoodFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.wellness.LogMoodFragment"
+        android:label="Log Mood"
+        tools:layout="@layout/fragment_log_mood">
+
+        <!-- Optional: set to open the details/edit view of an existing entry -->
+        <argument
+            android:name="moodId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+
+        <!-- Optional: which face to preselect on a new entry -->
+        <argument
+            android:name="preselectMood"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_logMood_to_goals"
+            app:destination="@id/goalsFragment" />
+        <action
+            android:id="@+id/action_logMood_to_statistics"
+            app:destination="@id/statisticsFragment" />
+        <action
+            android:id="@+id/action_logMood_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/goalsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.goals.GoalTrackingFragment"
+        android:label="Goals"
+        tools:layout="@layout/fragment_goal_tracking">
+        <action android:id="@+id/action_goals_to_addGoal" app:destination="@id/addGoalFragment" />
+        <action android:id="@+id/action_goals_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_goals_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addGoalFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.goals.AddGoalTrackingFragment"
+        android:label="Add Goal"
+        tools:layout="@layout/fragment_add_goal_tracking">
+        <argument android:name="goalId" android:defaultValue="@null" app:argType="string" app:nullable="true" />
+        <action android:id="@+id/action_addGoal_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_addGoal_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fitnessFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.fitness.FitnessFragment"
+        android:label="Fitness"
+        tools:layout="@layout/fragment_fitness">
+        <action
+            android:id="@+id/action_fitness_to_exerciseList"
+            app:destination="@id/exerciseListFragment" />
+
+        <action
+            android:id="@+id/action_fitness_to_goals"
+            app:destination="@id/goalsFragment" />
+
+        <action
+            android:id="@+id/action_fitness_to_statistics"
+            app:destination="@id/statisticsFragment" />
+
+        <action
+            android:id="@+id/action_fitness_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/exerciseListFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.fitness.ExerciseListFragment"
+        android:label="Exercises"
+        tools:layout="@layout/fragment_exercise_list" />
+
+    <fragment
+        android:id="@+id/mealHistoryFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.diary.MealHistoryFragment"
+        android:label="Today's Meals"
+        tools:layout="@layout/fragment_meal_history">
+        <action
+            android:id="@+id/action_mealHistory_to_logFood"
+            app:destination="@id/logFoodFragment" />
+        <action android:id="@+id/action_mealHistory_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_mealHistory_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_mealHistory_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/barcodeScannerFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.diary.BarcodeScannerFragment"
+        android:label="Scan Barcode"
+        tools:layout="@layout/fragment_barcode_scanner" />
+
+
+    <fragment
+        android:id="@+id/logFoodFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.diary.LogFoodFragment"
+        android:label="Log Food"
+        tools:layout="@layout/fragment_log_food">
+
+        <argument
+            android:name="mealType"
+            app:argType="string"
+            android:defaultValue="breakfast" />
+        <action
+            android:id="@+id/action_logFood_to_barcodeScanner"
+            app:destination="@id/barcodeScannerFragment" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_mealHistory"
+        app:destination="@id/mealHistoryFragment" />
+    <fragment
+        android:id="@+id/knowYourHealthFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.knowhealth.KnowYourHealthFragment"
+        android:label="Know Your Health"
+        tools:layout="@layout/fragment_know_your_health">
+        <action android:id="@+id/action_kyh_to_article" app:destination="@id/healthArticleFragment" />
+        <action android:id="@+id/action_kyh_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_kyh_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_kyh_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/diaryFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.diary.DiaryFragment"
+        android:label="Diary"
+        tools:layout="@layout/fragment_diary" />
+
+    <action
+        android:id="@+id/action_global_diary"
+        app:destination="@id/diaryFragment" />
+
+    <fragment
+        android:id="@+id/waterFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.water.WaterFragment"
+        android:label="Water Intake"
+        tools:layout="@layout/fragment_water" />
+
+    <action
+        android:id="@+id/action_global_water"
+        app:destination="@id/waterFragment" />
+
+    <fragment
+        android:id="@+id/healthArticleFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.knowhealth.HealthArticleFragment"
+        android:label="Article"
+        tools:layout="@layout/fragment_health_article">
+        <argument android:name="articleId" android:defaultValue="" app:argType="string" />
+        <action android:id="@+id/action_article_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_article_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_article_to_settings" app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_knowYourHealth"
+        app:destination="@id/knowYourHealthFragment" />
+
+    <fragment
+        android:id="@+id/metricsFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.metrics.MetricsFragment"
+        android:label="Body Metrics"
+        tools:layout="@layout/fragment_metrics">
+        <argument
+            android:name="onboarding"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_metrics"
+        app:destination="@id/metricsFragment" />
+
+    <action
+        android:id="@+id/action_global_logFood"
+        app:destination="@id/logFoodFragment" />
+</navigation>

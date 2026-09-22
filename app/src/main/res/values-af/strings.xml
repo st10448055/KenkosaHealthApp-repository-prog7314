@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kenkosa</string>
+
+    <string name="tagline">Jou gesondheidsreis, vereenvoudig</string>
+    <string name="get_started">Begin</string>
+    <string name="already_have_account">Het jy reeds \'n rekening? Teken in</string>
+
+    <string name="nav_fitness">Fiksheid</string>
+    <string name="nav_meditation">Meditasie en Welstand</string>
+    <string name="nav_know_your_health">Ken jou gesondheid</string>
+
+    <string name="addmenu_log_food">Teken kos aan</string>
+    <string name="addmenu_water">Water</string>
+    <string name="addmenu_weight">Gewig</string>
+
+    <string name="sign_in_with_sso">Teken in met SSO</string>
+    <string name="sso_subtitle">Gebruik jou e-pos om veilig toegang tot Kenkosa Health te kry</string>
+    <string name="email_hint">E-posadres</string>
+    <string name="continue_action">Gaan voort</string>
+    <string name="no_account_sign_up">Het jy nie \'n rekening nie? Registreer</string>
+
+    <string name="create_account">Skep rekening</string>
+    <string name="create_account_subtitle">Begin vandag jou gesondheidsreis</string>
+    <string name="full_name_hint">Volle naam</string>
+    <string name="password_hint">Wagwoord</string>
+    <string name="confirm_password_hint">Bevestig wagwoord</string>
+    <string name="terms_notice">Deur te registreer, aanvaar jy ons Bepalings &amp; Voorwaardes en Privaatheidsbeleid</string>
+    <string name="sign_up_action">Registreer</string>
+    <string name="have_account_sign_in">Het jy reeds \'n rekening? Teken in</string>
+
+    <string name="welcome_back">Welkom terug</string>
+    <string name="welcome_back_subtitle">Teken in om jou gesondheidsreis voort te sit</string>
+    <string name="sign_in_action">Teken in</string>
+    <string name="sign_in_with_google">Teken in met Google</string>
+    <string name="use_fingerprint">Gebruik vingerafdruk vir toegang</string>
+
+    <string name="menu">Kieslys</string>
+    <string name="notifications">Kennisgewings</string>
+    <string name="hi_placeholder">Hallo, %1$s</string>
+    <string name="back">Terug</string>
+    <string name="add">Voeg by</string>
+    <string name="add_sleep">Voeg slaap by</string>
+
+    <string name="settings_title">Instellings</string>
+    <string name="settings_units">Eenhede</string>
+    <string name="settings_language">Taal</string>
+    <string name="settings_appearance">Voorkoms</string>
+    <string name="settings_haptics">Haptiese terugvoer</string>
+    <string name="settings_notifications">Kennisgewings</string>
+    <string name="settings_subscription">Intekening</string>
+    <string name="sign_out">Teken uit</string>
+
+    <string name="settings_section_profile">Profiel</string>
+    <string name="settings_section_preferences">Voorkeure</string>
+    <string name="settings_section_health_goals">Gesondheidsdoelwitte</string>
+    <string name="settings_push_notifications">Stootkennisgewings</string>
+    <string name="settings_dark_mode">Donker modus</string>
+    <string name="settings_daily_steps">Daaglikse stappe</string>
+    <string name="settings_calorie_target">Kaloriedoelwit</string>
+    <string name="settings_sleep_target">Slaapdoelwit</string>
+    <string name="settings_default_name">Gebruiker</string>
+    <string name="edit">Wysig</string>
+    <string name="save">Stoor</string>
+    <string name="edit_profile">Wysig profiel</string>
+    <string name="first_name_hint">Voornaam</string>
+    <string name="surname_hint">Van</string>
+    <string name="settings_error_name_required">Voornaam mag nie leeg wees nie</string>
+    <string name="settings_error_range">Voer \'n waarde tussen %1$d en %2$d in</string>
+    <string name="settings_steps_hint">Stappe per dag</string>
+    <string name="settings_calories_hint">Kalorieë per dag (kcal)</string>
+    <string name="settings_hours_label">u</string>
+    <string name="settings_minutes_label">min</string>
+    <string name="settings_notifications_blocked">Kennisgewings is geblokkeer. Aktiveer dit in jou foon se program-instellings.</string>
+    <string name="nav_home">Tuis</string>
+    <string name="nav_goals">Doelwitte</string>
+    <string name="nav_statistics">Statistiek</string>
+    <string name="nav_settings">Instellings</string>
+
+    <string name="feature_tracking_diary">Dagboek</string>
+    <string name="feature_nutrition">Voeding</string>
+    <string name="feature_steps">Stappe</string>
+    <string name="feature_workouts">Oefensessies</string>
+    <string name="feature_fasting">Vas</string>
+    <string name="feature_sleep">Slaap</string>
+    <string name="feature_medication">Medikasie</string>
+    <string name="feature_goals">Doelwitte</string>
+
+    <!-- Medication -->
+    <string name="cancel">Kanselleer</string>
+    <string name="delete">Skrap</string>
+    <string name="medication_title">Medikasie</string>
+    <string name="add_medication_title">Voeg medikasie by</string>
+    <string name="medication_details_title">Medikasiebesonderhede</string>
+    <string name="edit_medication">Wysig medikasie</string>
+    <string name="medication_hero_title_good">Hou so aan!</string>
+    <string name="medication_hero_msg_good">Jy het nog nie een pil gemis nie.</string>
+    <string name="medication_hero_title_missed">Kom ons kry weer op koers</string>
+    <plurals name="medication_hero_msg_missed">
+        <item quantity="one">Jy het %d dosis in die afgelope 7 dae gemis.</item>
+        <item quantity="other">Jy het %d dosisse in die afgelope 7 dae gemis.</item>
+    </plurals>
+    <string name="medication_hero_title_empty">Welkom!</string>
+    <string name="medication_hero_msg_empty">Voeg jou eerste medikasie by om te begin volg.</string>
+    <string name="medication_pills_today">Pille vir vandag</string>
+    <string name="medication_see_all">Sien alles</string>
+    <string name="medication_show_today">Slegs vandag</string>
+    <string name="medication_vitamins">Bykomende vitamiene</string>
+    <string name="medication_empty_pills">Geen pille vir vandag geskeduleer nie.</string>
+    <string name="medication_empty_vitamins">Geen vitamiene om te wys nie.</string>
+    <string name="medication_dosage">Dosis</string>
+    <string name="medication_time">Tyd</string>
+    <string name="medication_no_reminder">Geen herinnering</string>
+    <string name="medication_mark_taken">Merk as geneem</string>
+    <string name="medication_mark_not_taken">Merk as nie geneem nie</string>
+    <string name="medication_vitamin_subtitle">%1$s · %2$s</string>
+    <string name="medication_delete_title">Skrap medikasie?</string>
+    <string name="medication_delete_message">Dit sal \"%1$s\" permanent verwyder.</string>
+    <string name="medication_name_label">Medikasienaam</string>
+    <string name="medication_name_hint">bv. Panado</string>
+    <string name="medication_dosage_label">Medikasiedosis</string>
+    <string name="medication_dosage_hint">bv. 500mg</string>
+    <string name="medication_type_label">Tipe</string>
+    <string name="medication_type_pill">Medikasie</string>
+    <string name="medication_type_vitamin">Vitamien</string>
+    <string name="medication_frequency_label">Frekwensie</string>
+    <string name="frequency_daily">Daagliks</string>
+    <string name="frequency_weekly">Weekliks</string>
+    <string name="frequency_monthly">Maandeliks</string>
+    <string name="medication_reminders">Herinnerings</string>
+    <string name="medication_error_name_required">Voer asseblief \'n medikasienaam in</string>
+    <string name="medication_error_name_length">Naam mag hoogstens 60 karakters wees</string>
+    <string name="medication_error_dosage_required">Voer asseblief \'n dosis in</string>
+    <string name="medication_error_dosage_length">Dosis mag hoogstens 30 karakters wees</string>
+    <string name="medication_error_generic">Iets het skeefgeloop. Probeer asseblief weer.</string>
+</resources>

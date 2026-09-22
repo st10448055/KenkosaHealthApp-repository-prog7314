@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Article card gradients. Dark enough that the white titles stay readable in light and dark mode. -->
+    <color name="kyh_card_sleep_start">#3E4A6B</color>
+    <color name="kyh_card_sleep_end">#6B7A9E</color>
+    <color name="kyh_card_stress_tasks_start">#35526B</color>
+    <color name="kyh_card_stress_tasks_end">#5E8AA8</color>
+    <color name="kyh_card_stretches_start">#5B4636</color>
+    <color name="kyh_card_stretches_end">#8A6A52</color>
+    <color name="kyh_card_eat_right_start">#8A4B2A</color>
+    <color name="kyh_card_eat_right_end">#C97B3F</color>
+    <color name="kyh_card_eat_habits_start">#4E6B3A</color>
+    <color name="kyh_card_eat_habits_end">#7FA05C</color>
+    <color name="kyh_card_stress_methods_start">#4A3F5C</color>
+    <color name="kyh_card_stress_methods_end">#7A6B94</color>
+
+    <!-- Darkens a photo behind a title, if you add photos to the cards. -->
+    <color name="kyh_scrim">#66000000</color>
+</resources>

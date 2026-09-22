@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wellness_title">Meditation &amp; Wellness</string>
+    <string name="wellness_meditations">Guided Meditations</string>
+    <string name="wellness_log_mood_today">Log your Mood Today</string>
+    <string name="wellness_recent_moods">Recent Moods</string>
+    <string name="wellness_no_moods">No moods logged yet. Tap a face above to log how you feel.</string>
+    <string name="meditation_minutes">%d Mins</string>
+    <string name="meditation_play">Play %1$s</string>
+    <string name="meditation_open_error">Couldn\'t open the video. Install YouTube or a web browser.</string>
+    <string name="log_mood_title">Log Mood Today</string>
+    <string name="mood_details_title">Mood Details</string>
+    <string name="edit_mood">Edit Mood</string>
+    <string name="mood_select_label">Select mood today</string>
+    <string name="mood_feeling_label">Feeling</string>
+    <string name="mood_very_happy">Very happy</string>
+    <string name="mood_happy">Happy</string>
+    <string name="mood_neutral">Neutral</string>
+    <string name="mood_sad">Sad</string>
+    <string name="mood_very_sad">Very sad</string>
+    <string name="feeling_calm">Calm</string>
+    <string name="feeling_content">Content</string>
+    <string name="feeling_excited">Excited</string>
+    <string name="feeling_upset">Upset</string>
+    <string name="feeling_irritated">Irritated</string>
+    <string name="feeling_happy">Happy</string>
+    <string name="feeling_motivated">Motivated</string>
+    <string name="feeling_grateful">Grateful</string>
+    <string name="feeling_proud">Proud</string>
+    <string name="mood_error_select">Please select how you\'re feeling</string>
+    <string name="mood_error_future">You can\'t log a mood in the future</string>
+    <string name="mood_error_generic">Something went wrong. Please try again.</string>
+    <string name="mood_delete_title">Delete this mood entry?</string>
+    <string name="mood_delete_message">This will permanently remove this entry.</string>
+</resources>

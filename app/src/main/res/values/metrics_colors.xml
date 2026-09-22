@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="metrics_chip_selected_bg">#0F2812</color>
+    <color name="metrics_chip_selected_text">#FFFFFF</color>
+    <color name="metrics_btn_save">#6FA6A0</color>
+    <color name="metrics_btn_cancel">#8CA588</color>
+</resources>

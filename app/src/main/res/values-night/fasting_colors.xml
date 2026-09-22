@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="fast_btn_primary">#2A3D2E</color>
+    <color name="fast_tip_start">#3A5440</color>
+    <color name="fast_tip_end">#2A3D2E</color>
+</resources>

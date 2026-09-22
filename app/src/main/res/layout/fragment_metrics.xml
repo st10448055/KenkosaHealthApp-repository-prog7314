@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/scrollMetrics"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/settings_bg"
+    android:clipToPadding="false"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="40dp">
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/metrics_title_onboarding"
+            android:textColor="@color/settings_title"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/metrics_subtitle_onboarding"
+            android:textColor="@color/settings_text_secondary"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <!-- Date of birth -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/metrics_dob_label"
+                android:textColor="@color/settings_title"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/fieldDob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_metrics_input"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:hint="@string/metrics_dob_hint"
+            android:minHeight="52dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/settings_text"
+            android:textColorHint="@color/settings_text_secondary"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/textAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/settings_text_secondary"
+            android:textSize="13sp"
+            android:visibility="gone" />
+
+        <!-- Gender -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/metrics_gender_label"
+                android:textColor="@color/settings_title"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:selectionRequired="false"
+            app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipFemale"
+                    style="@style/Widget.Metrics.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender_female" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipMale"
+                    style="@style/Widget.Metrics.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender_male" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipNonBinary"
+                    style="@style/Widget.Metrics.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender_non_binary" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPreferNot"
+                    style="@style/Widget.Metrics.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gender_prefer_not" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Height -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/metrics_height_label"
+                android:textColor="@color/settings_title"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupHeightUnit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipHeightCm"
+                    style="@style/Widget.Metrics.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/unit_cm" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipHeightFtIn"
+                    style="@style/Widget.Metrics.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/unit_ft_in" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editHeightPrimary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_metrics_input"
+                    android:hint="@string/metrics_hint_cm"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:minHeight="52dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/settings_text"
+                    android:textColorHint="@color/settings_text_secondary"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/textHeightPrimarySuffix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/unit_cm"
+                    android:textColor="@color/settings_text_secondary"
+                    android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/layoutHeightSecondary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/editHeightSecondary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_metrics_input"
+                    android:hint="@string/metrics_hint_in"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:minHeight="52dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/settings_text"
+                    android:textColorHint="@color/settings_text_secondary"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/textHeightSecondarySuffix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/unit_in"
+                    android:textColor="@color/settings_text_secondary"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Weight -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="20dp"
+                android:text="@string/metrics_weight_label"
+                android:textColor="@color/settings_title"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroupWeightUnit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipWeightKg"
+                    style="@style/Widget.Metrics.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/unit_kg" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipWeightLb"
+                    style="@style/Widget.Metrics.Chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/unit_lb" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/editWeight"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_metrics_input"
+                    android:hint="@string/metrics_hint_kg"
+                    android:importantForAutofill="no"
+                    android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:minHeight="52dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/settings_text"
+                    android:textColorHint="@color/settings_text_secondary"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/textWeightSuffix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="0dp"
+                    android:text="@string/unit_kg"
+                    android:textColor="@color/settings_text_secondary"
+                    android:textSize="14sp" />
+        </LinearLayout>
+
+        <!-- Activity level -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/metrics_activity_label"
+                android:textColor="@color/settings_title"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:cardBackgroundColor="@color/settings_card"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="1dp"
+            app:strokeWidth="0dp">
+
+            <RadioGroup
+                android:id="@+id/radioGroupActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                    <RadioButton
+                        android:id="@+id/radioSedentary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="56dp"
+                        android:paddingStart="8dp"
+                        android:text="@string/activity_sedentary"
+                        android:textColor="@color/settings_text"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/radioLight"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="56dp"
+                        android:paddingStart="8dp"
+                        android:text="@string/activity_light"
+                        android:textColor="@color/settings_text"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/radioModerate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="56dp"
+                        android:paddingStart="8dp"
+                        android:text="@string/activity_moderate"
+                        android:textColor="@color/settings_text"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/radioVeryActive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="56dp"
+                        android:paddingStart="8dp"
+                        android:text="@string/activity_very_active"
+                        android:textColor="@color/settings_text"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/radioExtraActive"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="56dp"
+                        android:paddingStart="8dp"
+                        android:text="@string/activity_extra_active"
+                        android:textColor="@color/settings_text"
+                        android:textSize="14sp" />
+            </RadioGroup>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/textError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/error_red"
+            android:visibility="gone" />
+
+        <ProgressBar
+            android:id="@+id/progressSaving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
+
+        <!-- Actions -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSave"
+            android:layout_width="220dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="28dp"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/metrics_btn_save"
+            app:cornerRadius="24dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonSecondary"
+            android:layout_width="220dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="@string/metrics_cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:backgroundTint="@color/metrics_btn_cancel"
+            app:cornerRadius="24dp" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

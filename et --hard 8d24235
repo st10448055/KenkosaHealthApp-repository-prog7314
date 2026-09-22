@@ -1,0 +1,29 @@
+[33ma69c605[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mfeature/ui[m[33m, [m[1;31morigin/feature/settings[m[33m)[m HEAD@{0}: reset: moving to origin/feature/settings
+[33m8d24235[m[33m ([m[1;31morigin/feature/diary[m[33m, [m[1;32mfeature/diary[m[33m)[m HEAD@{1}: checkout: moving from feature/diary to feature/ui
+[33m8d24235[m[33m ([m[1;31morigin/feature/diary[m[33m, [m[1;32mfeature/diary[m[33m)[m HEAD@{2}: commit: Implemented Diary for Meal and Water Intake Tracking, and Mood Logging
+[33m45c4569[m[33m ([m[1;31morigin/feature/user-metrics[m[33m, [m[1;32mfeature/water-intake[m[33m)[m HEAD@{3}: checkout: moving from feature/water-intake to feature/diary
+[33m45c4569[m[33m ([m[1;31morigin/feature/user-metrics[m[33m, [m[1;32mfeature/water-intake[m[33m)[m HEAD@{4}: pull origin feature/user-metrics: Fast-forward
+[33m72503dd[m[33m ([m[1;31morigin/feature/water-intake[m[33m)[m HEAD@{5}: commit: Implemented Water Intake Feature
+[33m80586b7[m[33m ([m[1;31morigin/feature/workouts[m[33m, [m[1;32mfeature/workouts[m[33m)[m HEAD@{6}: checkout: moving from feature/workouts to feature/water-intake
+[33m80586b7[m[33m ([m[1;31morigin/feature/workouts[m[33m, [m[1;32mfeature/workouts[m[33m)[m HEAD@{7}: commit: Implement .wger REST API and Workout Feature
+[33m28936a3[m[33m ([m[1;31morigin/feature/fasting[m[33m)[m HEAD@{8}: merge origin/feature/fasting: Fast-forward
+[33m6b989f8[m[33m ([m[1;31morigin/feature/food-search[m[33m, [m[1;32mfeature/food-search[m[33m)[m HEAD@{9}: checkout: moving from feature/food-search to feature/workouts
+[33m6b989f8[m[33m ([m[1;31morigin/feature/food-search[m[33m, [m[1;32mfeature/food-search[m[33m)[m HEAD@{10}: commit: Implemented Food Barcode Scanner
+[33mca3a856[m HEAD@{11}: commit: Fixed Food Log History Display Bug
+[33m925d04c[m[33m ([m[1;31morigin/feature/wellness[m[33m)[m HEAD@{12}: reset: moving to HEAD
+[33m925d04c[m[33m ([m[1;31morigin/feature/wellness[m[33m)[m HEAD@{13}: pull origin feature/wellness: Fast-forward
+[33m5307b42[m HEAD@{14}: reset: moving to 5307b42
+[33mcc8d718[m HEAD@{15}: pull origin feature/wellness: Fast-forward
+[33m54dc95f[m HEAD@{16}: pull origin feature/wellness: Fast-forward
+[33m5307b42[m HEAD@{17}: commit: Implement Food Log History Screen
+[33m2dcc47c[m[33m ([m[1;31morigin/feature/medication[m[33m)[m HEAD@{18}: pull origin feature/medication: Fast-forward
+[33m261697d[m HEAD@{19}: commit: Implemented Food Search User Interface
+[33mb0afc89[m[33m ([m[1;31morigin/updated-settings[m[33m, [m[1;32mupdated-settings[m[33m)[m HEAD@{20}: merge origin/updated-settings: Fast-forward
+[33m4150ab7[m HEAD@{21}: checkout: moving from updated-settings to feature/food-search
+[33mb0afc89[m[33m ([m[1;31morigin/updated-settings[m[33m, [m[1;32mupdated-settings[m[33m)[m HEAD@{22}: checkout: moving from feature/food-search to updated-settings
+[33m4150ab7[m HEAD@{23}: commit: Update application.conf
+[33mb3ba71b[m HEAD@{24}: commit: Implemented Backend Code for Food Search Feature
+[33mbaa1120[m[33m ([m[1;31morigin/feature/dev[m[33m, [m[1;32mfeature/dev[m[33m)[m HEAD@{25}: checkout: moving from feature/dev to feature/food-search
+[33mbaa1120[m[33m ([m[1;31morigin/feature/dev[m[33m, [m[1;32mfeature/dev[m[33m)[m HEAD@{26}: pull: Fast-forward
+[33m96ad1e5[m HEAD@{27}: checkout: moving from main to feature/dev
+[33m6b1ea99[m[33m ([m[1;32mmain[m[33m)[m HEAD@{28}: clone: from https://github.com/st10448055/KenkosaHealthApp-repository-prog7314.git

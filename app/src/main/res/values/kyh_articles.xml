@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    The articles on the Know Your Health screen. In each body, a line that starts with "## " is shown as a
+    sub-heading and every other line is a paragraph. To add an article, add a title + body here, then add it to
+    HealthArticles.kt. Written in English only for now: have health content translated by a fluent speaker.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+
+    <!-- 1. Sleep -->
+    <string name="kyh_article_sleep_title">How your sleep affects your life</string>
+    <string-array name="kyh_article_sleep_body">
+        <item>Sleep isn\'t wasted time. While you sleep, your body repairs itself, your brain sorts and stores memories, and the hormones that control your appetite, mood and energy are reset for the next day.</item>
+        <item>## What happens when you don\'t get enough</item>
+        <item>A short night makes it harder to concentrate, learn and make good decisions. You may feel irritable or low, crave sugary food and get sick more easily. Over months and years, poor sleep is linked to a higher risk of high blood pressure, type 2 diabetes, weight gain and depression.</item>
+        <item>## How much do you need?</item>
+        <item>Most adults do best with 7 to 9 hours a night. Teenagers need more. Quality counts too: you should fall asleep within about half an hour, sleep mostly through the night and wake up feeling reasonably rested.</item>
+        <item>## Habits that help</item>
+        <item>Go to bed and get up at about the same time every day, including weekends.</item>
+        <item>Switch off screens 30 to 60 minutes before bed and dim the lights.</item>
+        <item>Keep your bedroom cool, dark and quiet.</item>
+        <item>Avoid caffeine in the afternoon and evening, and avoid large meals and alcohol close to bedtime.</item>
+        <item>Get daylight in the morning and be active during the day, but not right before bed.</item>
+        <item>## Keep track</item>
+        <item>Log your nights on the Sleep screen to spot patterns, such as which habits go with your best sleep.</item>
+        <item>If you regularly struggle to sleep, snore loudly with pauses in your breathing, or feel exhausted even after enough hours, talk to a doctor.</item>
+    </string-array>
+
+    <!-- 2. Stress in tasks -->
+    <string name="kyh_article_stress_tasks_title">Reducing stress in all tasks</string>
+    <string-array name="kyh_article_stress_tasks_body">
+        <item>A little stress can help you focus. Constant stress, though, wears you down. The good news is that how you approach your tasks changes how stressful they feel.</item>
+        <item>## Break big tasks into small steps</item>
+        <item>A huge task feels overwhelming; a short list of small steps doesn\'t. Write down the very next action and start with that.</item>
+        <item>## Decide what matters most</item>
+        <item>At the start of the day, pick the two or three things that matter most and do them first. Not everything that is urgent is important, and you are allowed to say no or to ask for more time.</item>
+        <item>## Do one thing at a time</item>
+        <item>Switching between tasks costs time and increases mistakes. Silence notifications while you work and check messages at set times instead.</item>
+        <item>## Take short breaks</item>
+        <item>Step away for a few minutes every hour: stand up, stretch, drink some water and look at something far away. A simple pattern is 25 minutes of focus followed by a 5 minute break.</item>
+        <item>## Look after the basics</item>
+        <item>Sleep, regular meals, water and movement make every task easier. When you are worn out, everything feels harder than it is.</item>
+        <item>## Ask for help</item>
+        <item>Sharing a task or talking it through with someone often makes it lighter. Asking for help is a sensible way of working, not a weakness.</item>
+    </string-array>
+
+    <!-- 3. Stretches -->
+    <string name="kyh_article_stretches_title">Everyday stretches to get your day going</string>
+    <string-array name="kyh_article_stretches_body">
+        <item>A few minutes of gentle stretching in the morning, or after sitting for a long time, loosens stiff muscles and gets your blood moving. Do these slowly and breathe normally.</item>
+        <item>## Before you start</item>
+        <item>Stretch until you feel a mild pull, never pain. Hold each stretch for 20 to 30 seconds and don\'t bounce. If you have an injury, a health condition or ongoing pain, check with a doctor or physiotherapist first.</item>
+        <item>## The routine</item>
+        <item>Neck: tilt your ear towards your shoulder and hold for 20 seconds, then switch sides.</item>
+        <item>Shoulders: roll your shoulders backwards in slow circles, 10 times.</item>
+        <item>Chest: clasp your hands behind your back, straighten your arms and lift them gently while you open your chest.</item>
+        <item>Back: on hands and knees, slowly arch and round your spine 8 to 10 times (cat-cow).</item>
+        <item>Hamstrings: stand and fold forward from the hips with your knees slightly bent, letting your arms hang.</item>
+        <item>Hips: step into a lunge and gently sink your hips forward. Hold, then switch legs.</item>
+        <item>Calves and ankles: press your heel down behind you in a lunge, then circle each ankle a few times.</item>
+        <item>Finish with three slow, deep breaths.</item>
+    </string-array>
+
+    <!-- 4. Eating right -->
+    <string name="kyh_article_eat_right_title">Improve your life by eating right</string>
+    <string-array name="kyh_article_eat_right_body">
+        <item>What you eat affects your energy, mood, weight and your risk of long-term illness. You don\'t need a perfect diet. A steady pattern of mostly healthy choices does most of the work.</item>
+        <item>## Build a balanced plate</item>
+        <item>Aim for about half your plate to be vegetables and fruit, a quarter whole grains such as brown rice, oats or wholewheat bread, and a quarter protein such as beans, lentils, eggs, fish, chicken or lean meat.</item>
+        <item>## Choose better fats</item>
+        <item>Use small amounts of unsaturated fats, such as olive oil, nuts, seeds and avocado, instead of large amounts of butter, fatty meat or deep-fried food.</item>
+        <item>## Go easy on sugar and salt</item>
+        <item>Sugary drinks, sweets and very salty processed foods add a lot of sugar or salt without much nutrition. Water is the best everyday drink.</item>
+        <item>## Start small</item>
+        <item>Pick one change this week, such as adding a vegetable to lunch or swapping a fizzy drink for water. Small changes you can keep are better than big ones you drop.</item>
+        <item>If you have a health condition, allergies, or are pregnant or breastfeeding, ask a doctor or dietitian what is right for you.</item>
+    </string-array>
+
+    <!-- 5. Eating habits -->
+    <string name="kyh_article_eat_habits_title">Eating right: small habits that add up</string>
+    <string-array name="kyh_article_eat_habits_body">
+        <item>Healthy eating is as much about habits as it is about food. These are easy places to start.</item>
+        <item>## Plan ahead</item>
+        <item>Decide roughly what you will eat for the next few days and shop for it. When there is a plan, you reach for a takeaway less often.</item>
+        <item>## Read the label</item>
+        <item>On packaged food, compare products using the per 100 g column. Look at sugar, salt (sodium) and saturated fat, and choose the lower option when everything else is similar.</item>
+        <item>## Eat slowly</item>
+        <item>Fullness signals take a while to reach your brain. Eating slowly, without a screen, helps you notice when you\'ve had enough and makes the meal more enjoyable.</item>
+        <item>## Keep good snacks handy</item>
+        <item>Fruit, plain yoghurt, nuts, raw vegetables or a boiled egg are easy choices when you\'re hungry between meals.</item>
+        <item>## Drink enough water</item>
+        <item>Sip water through the day. Your needs change with the weather, exercise and your body, so let thirst guide you and pay attention to dark yellow urine as a sign to drink more.</item>
+        <item>## Be kind to yourself</item>
+        <item>One unhealthy meal doesn\'t undo your progress. Carry on with your next meal and keep going.</item>
+    </string-array>
+
+    <!-- 6. Stress methods -->
+    <string name="kyh_article_stress_methods_title">Methods to deal with stress</string>
+    <string-array name="kyh_article_stress_methods_body">
+        <item>When stress builds up, your body reacts: your heart beats faster, your muscles tense and your thoughts race. These methods help you calm that reaction down.</item>
+        <item>## Box breathing</item>
+        <item>Breathe in through your nose for 4 seconds, hold for 4, breathe out slowly for 4, then hold for 4. Repeat for about four rounds.</item>
+        <item>## Ground yourself</item>
+        <item>Look around and name 5 things you can see, 4 you can touch, 3 you can hear, 2 you can smell and 1 you can taste. It pulls your attention out of your worries and into the present.</item>
+        <item>## Move your body</item>
+        <item>A brisk 10 minute walk or a few stretches uses up stress hormones and often clears your head.</item>
+        <item>## Release tension</item>
+        <item>Tense a group of muscles, such as your fists or shoulders, for 5 seconds, then let go completely. Work through your body from your feet to your face.</item>
+        <item>## Write it down or talk it through</item>
+        <item>Getting worries out of your head and onto paper, or into a conversation with someone you trust, makes them easier to handle.</item>
+        <item>## Cut back on what feeds stress</item>
+        <item>Too much caffeine, alcohol and late-night scrolling can make stress and poor sleep worse.</item>
+        <item>## When to get help</item>
+        <item>If stress lasts for weeks, disrupts your sleep, work or relationships, or comes with panic, hopelessness or thoughts of harming yourself, please talk to a doctor or a counsellor. If you feel unsafe or in crisis, contact your local emergency services or a crisis helpline straight away.</item>
+    </string-array>
+</resources>

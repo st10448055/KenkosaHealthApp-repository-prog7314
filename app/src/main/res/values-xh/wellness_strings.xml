@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="wellness_title">Ukucamngca kunye nempilo</string>
+    <string name="wellness_meditations">Ukucamngca okukhokelwayo</string>
+    <string name="wellness_log_mood_today">Bhala imo yakho namhlanje</string>
+    <string name="wellness_recent_moods">Iimo zamva nje</string>
+    <string name="wellness_no_moods">Akukabikho mo ibhaliweyo. Cofa ubuso apha ngentla ukubhala indlela oziva ngayo.</string>
+    <string name="meditation_minutes">%d Imizuzu</string>
+    <string name="meditation_play">Dlala %1$s</string>
+    <string name="meditation_open_error">Ayikwazanga ukuvula ividiyo. Faka i-YouTube okanye isikhangeli sewebhu.</string>
+    <string name="log_mood_title">Bhala imo</string>
+    <string name="mood_details_title">Iinkcukacha zemo</string>
+    <string name="edit_mood">Hlela imo</string>
+    <string name="mood_select_label">Khetha imo yanamhlanje</string>
+    <string name="mood_feeling_label">Indlela oziva ngayo</string>
+    <string name="mood_very_happy">Ovuya kakhulu</string>
+    <string name="mood_happy">Ovuyile</string>
+    <string name="mood_neutral">Ophakathi</string>
+    <string name="mood_sad">Unosizi</string>
+    <string name="mood_very_sad">Unosizi kakhulu</string>
+    <string name="feeling_calm">Uzolile</string>
+    <string name="feeling_content">Wanelisekile</string>
+    <string name="feeling_excited">Unemincili</string>
+    <string name="feeling_upset">Ucaphukile</string>
+    <string name="feeling_irritated">Ucaphukisiwe</string>
+    <string name="feeling_happy">Ovuyile</string>
+    <string name="feeling_motivated">Unomdla</string>
+    <string name="feeling_grateful">Unombulelo</string>
+    <string name="feeling_proud">Uyazidla</string>
+    <string name="mood_error_select">Nceda ukhethe indlela oziva ngayo</string>
+    <string name="mood_error_future">Awunako ukubhala imo yexesha elizayo</string>
+    <string name="mood_error_generic">Kukho into engahambanga kakuhle. Nceda uzame kwakhona.</string>
+    <string name="mood_delete_title">Cima ingeniso yemo?</string>
+    <string name="mood_delete_message">Oku kuya kususa le ngeniso ngokusisigxina.</string>
+</resources>

@@ -10,6 +10,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+
 }
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
@@ -24,4 +25,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "kenkosaHealthApp_PROG7314"
 include(":app")
- 
+include(":backend")

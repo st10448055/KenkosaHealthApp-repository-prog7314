@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="logfood_back">Terug</string>
+    <string name="logfood_title">Teken kos aan</string>
+    <string name="logfood_breakfast">Ontbyt</string>
+    <string name="logfood_lunch">Middagete</string>
+    <string name="logfood_dinner">Aandete</string>
+    <string name="logfood_snack">Versnapering</string>
+    <string name="logfood_search_hint">Soek kositems...</string>
+    <string name="logfood_search">Soek</string>
+    <string name="logfood_scan_barcode">Skandeer streepieskode</string>
+    <string name="logfood_servings">Porsies</string>
+    <string name="logfood_add_entry">Voeg inskrywing by</string>
+</resources>

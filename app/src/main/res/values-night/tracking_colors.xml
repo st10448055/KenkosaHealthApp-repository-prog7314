@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tracking_bg">#121A13</color>
+    <color name="tracking_text_primary">#E6F0E4</color>
+    <color name="tracking_text_secondary">#A8C2A1</color>
+    <color name="tracking_text_muted">#8FA48C</color>
+    <color name="tracking_error">#FF8A80</color>
+    <color name="tracking_card">#1F2E21</color>
+    <color name="tracking_stroke">#3A4F3D</color>
+</resources>

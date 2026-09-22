@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="match_parent"
+    android:background="#83A682"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Top Bar with Hamburger Menu Icon -->
+    <ImageButton
+        android:id="@+id/buttonCloseDrawer"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/menu"
+        android:src="@android:drawable/ic_menu_sort_by_size"
+        app:tint="@android:color/white" />
+
+    <!-- Centered Profile Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="12dp"
+        android:paddingBottom="24dp">
+
+        <ImageView
+            android:id="@+id/imageDrawerAvatar"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:importantForAccessibility="no"
+            android:src="@android:drawable/ic_menu_myplaces"
+            app:tint="@android:color/white" />
+
+        <!-- Name and email are filled in from HomeFragment at runtime -->
+        <TextView
+            android:id="@+id/textDrawerName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/settings_default_name"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textDrawerEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            tools:text="user@email.com" />
+
+        <!-- Subtle Underline beneath Email -->
+        <View
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="2dp"
+            android:background="#B0C4AF" />
+    </LinearLayout>
+
+    <!-- Scrollable Navigation Items -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/navHome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/nav_home"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
+
+            <TextView
+                android:id="@+id/navTrackingDiary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/feature_tracking_diary"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
+
+            <TextView
+                android:id="@+id/navNutrition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/feature_nutrition"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
+
+            <TextView
+                android:id="@+id/navFitness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/nav_fitness"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
+
+            <TextView
+                android:id="@+id/navFasting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/feature_fasting"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
+
+            <TextView
+                android:id="@+id/navMeditation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/nav_meditation"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
+
+            <TextView
+                android:id="@+id/navSleep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/feature_sleep"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
+
+            <TextView
+                android:id="@+id/navMedication"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/feature_medication"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
+
+            <TextView
+                android:id="@+id/navGoals"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/nav_goals"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
+
+            <TextView
+                android:id="@+id/navKnowYourHealth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/nav_know_your_health"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
+
+
+
+            <TextView
+                android:id="@+id/navSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:text="@string/nav_settings"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#B0C4AF" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Bottom Dark Green Pill Logout Button -->
+    <Button
+        android:id="@+id/buttonDrawerLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_pill_dark_green"
+        android:minWidth="120dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="@string/sign_out"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null" />
+
+</LinearLayout>

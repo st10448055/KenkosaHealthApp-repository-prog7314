@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="fasting_title">Fasting</string>
+    <string name="fasting_for">Fasting for</string>
+    <string name="fasting_not_fasting">Not fasting</string>
+    <string name="fasting_ready">Ready when you are</string>
+    <string name="fasting_goal_reached">Goal reached</string>
+    <string name="fasting_end">End Fasting</string>
+    <string name="fasting_start_now">Start Fasting</string>
+    <string name="fasting_start_label">Start</string>
+    <string name="fasting_end_label">End</string>
+    <string name="fasting_none">—</string>
+    <string name="fasting_edit_start_desc">Edit start time</string>
+    <string name="fasting_edit_end_desc">Edit end time</string>
+    <string name="fasting_tips">Tips</string>
+    <string name="fasting_recent">Recent Fasts</string>
+    <string name="fasting_no_history">No finished fasts yet.</string>
+    <string name="fasting_today_at">Today at %1$s</string>
+    <string name="fasting_yesterday_at">Yesterday at %1$s</string>
+    <string name="fasting_tomorrow_at">Tomorrow at %1$s</string>
+    <string name="fasting_date_at">%1$s at %2$s</string>
+    <string name="fasting_add_title">Add Fast</string>
+    <string name="fasting_details_title">Fast Details</string>
+    <string name="fasting_start_fast">Start Fast</string>
+    <string name="fasting_end_fast">End Fast</string>
+    <string name="fasting_duration">Duration: %1$s</string>
+    <string name="fasting_edit">Edit Fast</string>
+    <string name="fasting_save">Save</string>
+    <string name="fasting_cancel">Cancel</string>
+    <string name="fasting_delete">Delete</string>
+    <string name="fasting_delete_title">Delete this fast?</string>
+    <string name="fasting_delete_message">This will permanently remove this fast.</string>
+    <string name="fasting_error_end_before_start">The end must be after the start</string>
+    <string name="fasting_error_too_long">A fast can be at most 7 days long</string>
+    <string name="fasting_error_start_future">The start can\'t be in the future</string>
+    <string name="fasting_error_finished_future">A finished fast can\'t end in the future</string>
+    <string name="fasting_error_generic">Something went wrong. Please try again.</string>
+    <plurals name="fasting_hours">
+        <item quantity="one">%d Hour</item>
+        <item quantity="other">%d Hours</item>
+    </plurals>
+    <plurals name="fasting_minutes">
+        <item quantity="one">%d Min</item>
+        <item quantity="other">%d Mins</item>
+    </plurals>
+    <string-array name="fasting_tips">
+        <item>Stay hydrated and plan your meals ahead of time. Choose nutritious, filling foods when you can eat, and listen to your body throughout the fast.</item>
+        <item>Water, black coffee and plain tea are usually fine during a fast. Sip regularly through the day.</item>
+        <item>Break your fast gently with a balanced meal rather than a very large or sugary one.</item>
+        <item>Feeling dizzy, faint or unwell? End your fast and eat something. Your health comes first.</item>
+        <item>Ease in: start with shorter fasts and lengthen them gradually as your body adjusts.</item>
+    </string-array>
+</resources>

@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/logfood_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top bar: back button -->
+        <ImageButton
+            android:id="@+id/buttonBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/logfood_back"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="@color/logfood_text_primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@string/logfood_title"
+            android:textColor="@color/logfood_text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <!-- Meal type pills (selected state is driven by view.isSelected) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/mealTypeBreakfast"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_logfood_pill"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/logfood_breakfast"
+                android:textColor="@color/logfood_pill_text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/mealTypeLunch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_logfood_pill"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/logfood_lunch"
+                android:textColor="@color/logfood_pill_text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/mealTypeDinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_logfood_pill"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/logfood_dinner"
+                android:textColor="@color/logfood_pill_text"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/mealTypeSnack"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_logfood_pill"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/logfood_snack"
+                android:textColor="@color/logfood_pill_text"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Search bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_logfood_card"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <EditText
+                android:id="@+id/editSearchQuery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/logfood_search_hint"
+                android:imeOptions="actionSearch"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="@color/logfood_text_primary"
+                android:textColorHint="@color/logfood_text_secondary" />
+
+            <Button
+                android:id="@+id/buttonSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logfood_search" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonScanBarcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/logfood_scan_barcode"
+            app:icon="@drawable/ic_barcode"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="@android:color/white"
+            app:cornerRadius="24dp"
+            android:backgroundTint="#83A682"
+            android:textColor="@android:color/white" />
+
+        <!-- Loading indicator for search -->
+        <ProgressBar
+            android:id="@+id/progressSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
+
+        <!-- Search error message -->
+        <TextView
+            android:id="@+id/textSearchError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/logfood_error"
+            android:visibility="gone" />
+
+        <!-- Found food result group -->
+        <LinearLayout
+            android:id="@+id/groupFoodResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_logfood_card"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textFoodName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/logfood_text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textCalories"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/logfood_text_primary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/textProtein"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/logfood_text_secondary" />
+
+            <TextView
+                android:id="@+id/textCarbs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/logfood_text_secondary" />
+
+            <TextView
+                android:id="@+id/textFat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/logfood_text_secondary" />
+
+            <!-- Servings input -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/logfood_servings"
+                android:textColor="@color/logfood_text_secondary" />
+
+            <EditText
+                android:id="@+id/editServings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_logfood_input"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:text="1"
+                android:textColor="@color/logfood_text_primary" />
+        </LinearLayout>
+
+        <!-- Add Entry button -->
+        <Button
+            android:id="@+id/buttonAddEntry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/logfood_add_entry"
+            android:textColor="@color/logfood_btn_text"
+            app:backgroundTint="@color/logfood_btn_bg" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Filter chip for the Gender and unit pickers on the body metrics screen -->
+    <style name="Widget.Metrics.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textColor">@color/metrics_chip_text</item>
+        <item name="chipBackgroundColor">@color/metrics_chip_bg</item>
+        <item name="chipStrokeWidth">0dp</item>
+        <item name="chipCornerRadius">18dp</item>
+        <item name="checkedIconVisible">false</item>
+        <item name="android:checkable">true</item>
+    </style>
+</resources>

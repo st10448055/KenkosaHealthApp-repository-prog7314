@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Pastel "Feeling" chips. Text on them is always dark so they read the same in light and dark mode. -->
+    <color name="feeling_text">#1C2E1E</color>
+    <color name="feeling_calm">#8FE0D2</color>
+    <color name="feeling_content">#F0A6E4</color>
+    <color name="feeling_excited">#8DE29A</color>
+    <color name="feeling_upset">#F2B47C</color>
+    <color name="feeling_irritated">#A9B2F0</color>
+    <color name="feeling_happy">#F2E58A</color>
+    <color name="feeling_motivated">#C9A2EA</color>
+    <color name="feeling_grateful">#F5A7B8</color>
+    <color name="feeling_proud">#B3E89A</color>
+    <color name="wellness_chip_bg">#C9DCC4</color>
+</resources>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sleeplog_title">Ubuthongo</string>
+    <string name="sleeplog_add_title">Yongeza ubuthongo</string>
+    <string name="sleeplog_edit_title">Hlela ubuthongo</string>
+    <string name="sleeplog_total_sleep">Ubuthongo bonke</string>
+    <string name="sleeplog_quality">Umgangatho wobuthongo</string>
+    <string name="sleeplog_score">%1$d / 100</string>
+    <string name="sleeplog_score_none">— / 100</string>
+    <string name="sleeplog_quality_excellent">Kuhle kakhulu</string>
+    <string name="sleeplog_quality_good">Kuhle</string>
+    <string name="sleeplog_quality_fair">Kuyamkeleka</string>
+    <string name="sleeplog_quality_poor">Kubi</string>
+    <string name="sleeplog_weekly_patterns">Iipatheni zeveki</string>
+    <string name="sleeplog_recent">Ubuthongo bamva nje</string>
+    <string name="sleeplog_empty">Akukabikho buthongo bubhaliweyo. Cofa + ukongeza ubusuku bakho bokuqala.</string>
+    <string name="sleeplog_today">Namhlanje</string>
+    <string name="sleeplog_duration_short">%1$dh %2$02dm</string>
+    <string name="sleeplog_duration_long">%1$dh %2$02dmin</string>
+    <string name="sleeplog_none">—</string>
+    <string name="sleeplog_wake_date">Umhla wokuvuka</string>
+    <string name="sleeplog_bedtime">Ixesha lokulala</string>
+    <string name="sleeplog_wake_time">Ixesha lokuvuka</string>
+    <string name="sleeplog_total_caps">UBUTHONGO BONKE</string>
+    <string name="sleeplog_q_poor">Kubi</string>
+    <string name="sleeplog_q_fair">Kuyamkeleka</string>
+    <string name="sleeplog_q_okay">Kulungile</string>
+    <string name="sleeplog_q_good">Kuhle</string>
+    <string name="sleeplog_q_excellent">Kuhle kakhulu</string>
+    <string name="sleeplog_notes">Amanqaku</string>
+    <string name="sleeplog_notes_hint">Yongeza amanqaku malunga nobuthongo bakho...</string>
+    <string name="sleeplog_save">Gcina ubuthongo</string>
+    <string name="sleeplog_save_changes">Gcina utshintsho</string>
+    <string name="sleeplog_delete">Cima</string>
+    <string name="sleeplog_cancel">Rhoxisa</string>
+    <string name="sleeplog_delete_title">Cima olu ngeniso lobuthongo?</string>
+    <string name="sleeplog_delete_message">Oku kuya kususa le ngeniso ngokusisigxina.</string>
+    <string name="sleeplog_error_same_time">Ixesha lokulala nelokuvuka aliyi kufana</string>
+    <string name="sleeplog_error_quality">Nceda ulinganise umgangatho wobuthongo bakho</string>
+    <string name="sleeplog_error_future">Ixesha lokuvuka alinakuba kwixesha elizayo</string>
+    <string name="sleeplog_error_generic">Kukho into engahambanga kakuhle. Nceda uzame kwakhona.</string>
+</resources>

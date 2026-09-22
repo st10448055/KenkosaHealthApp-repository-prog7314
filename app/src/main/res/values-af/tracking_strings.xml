@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tracking_back">Terug</string>
+
+    <!-- Fitness -->
+    <string name="fitness_title">Fiksheid</string>
+    <string name="fitness_subtitle">Kies \'n kategorie om te begin</string>
+    <string name="fitness_categories">Kategorieë</string>
+
+    <string name="mealtype_breakfast">Ontbyt</string>
+    <string name="mealtype_lunch">Middagete</string>
+    <string name="mealtype_dinner">Aandete</string>
+    <string name="mealtype_snack">Versnapering</string>
+
+    <!-- Exercise list -->
+    <string name="exercise_search_hint">Soek oefeninge...</string>
+    <string name="exercise_things_needed">Wat jy nodig het</string>
+    <string name="exercise_description">Beskrywing</string>
+
+    <!-- Today's Meals / meal sections (also used by the Diary) -->
+    <string name="meals_title">Vandag se maaltye</string>
+    <string name="meals_add">+ Voeg by</string>
+    <string name="meals_empty_section">Nog geen items aangeteken nie</string>
+
+    <!-- Water Intake -->
+    <string name="water_title">Waterinname</string>
+    <string name="water_summary">%1$d / %2$d koppies vandag</string>
+</resources>

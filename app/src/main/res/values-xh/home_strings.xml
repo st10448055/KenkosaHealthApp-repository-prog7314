@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_title">Ekhaya</string>
+    <string name="home_greeting">Molo, %1$s</string>
+    <string name="home_notifications">Izaziso</string>
+
+
+    <string name="home_tracking_diary">Idayari yokulandelela</string>
+    <string name="home_nutrition">Isondlo</string>
+    <string name="home_steps">Ukucamngca noBulunga</string>
+    <string name="home_fitness">Ukuzilolonga</string>
+    <string name="home_fasting">Ukuzila ukutya</string>
+    <string name="home_sleep">Ubuthongo</string>
+    <string name="home_medication">Amayeza</string>
+    <string name="home_goals">Iinjongo</string>
+</resources>

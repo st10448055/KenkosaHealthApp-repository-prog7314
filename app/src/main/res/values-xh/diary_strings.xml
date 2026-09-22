@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="diary_back">Buya umva</string>
+    <string name="diary_title">Idayari</string>
+    <string name="diary_meals">Izidlo</string>
+    <string name="diary_water">Amanzi</string>
+    <string name="diary_mood">Imo</string>
+    <string name="diary_no_mood_today">Akukho mo ibhaliweyo namhlanje okwangoku</string>
+    <string name="diary_notes">Amanqaku</string>
+    <string name="diary_notes_hint">Bhala nantoni na ngosuku lwakho...</string>
+</resources>

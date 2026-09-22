@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Ring -->
+    <color name="sleeplog_ring_track">#E3E8E1</color>
+    <color name="sleeplog_ring_progress">#0F2812</color>
+
+    <!-- Weekly bars -->
+    <color name="sleeplog_bar">#86A583</color>
+    <color name="sleeplog_bar_selected">#0F2812</color>
+
+    <!-- Quality pill -->
+    <color name="sleeplog_pill_bg">#EFE3C2</color>
+    <color name="sleeplog_pill_text">#5A4A1F</color>
+
+    <color name="sleeplog_icon_circle">#DCE6D9</color>
+    <color name="sleeplog_btn_save">#86A583</color>
+</resources>

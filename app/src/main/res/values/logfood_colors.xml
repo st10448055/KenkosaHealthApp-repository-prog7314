@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="logfood_bg">#E8EFE3</color>
+    <color name="logfood_text_primary">#1B3A1B</color>
+    <color name="logfood_text_secondary">#4A4A4A</color>
+    <color name="logfood_card">#FFFFFF</color>
+    <color name="logfood_stroke">#C5D3C0</color>
+    <color name="logfood_pill_bg">#FFFFFF</color>
+    <color name="logfood_pill_bg_selected">#1B3A1B</color>
+    <color name="logfood_pill_text_selected">#FFFFFF</color>
+    <color name="logfood_error">#B00020</color>
+    <color name="logfood_btn_bg">#1B3A1B</color>
+    <color name="logfood_btn_text">#FFFFFF</color>
+</resources>
