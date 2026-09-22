@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -11,8 +14,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentMealHistoryBinding
 import com.example.kenkosahealthapp_prog7314.databinding.ItemMealSectionBinding
+import com.example.kenkosahealthapp_prog7314.ui.addmenu.AddMenuBottomSheet
 import kotlinx.coroutines.launch
 
 class MealHistoryFragment : Fragment() {
@@ -34,6 +39,29 @@ class MealHistoryFragment : Fragment() {
         return binding.root
     }
 
+    private fun setupWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+            binding.scrollMealHistory.updatePadding(top = bars.top)
+            binding.bottomNav.root.updatePadding(bottom = bars.bottom)
+            insets
+        }
+    }
+
+    private fun setupBottomNav() {
+        with(binding.bottomNav) {
+            navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
+            navGoals.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_goals) }
+            navStats.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_statistics) }
+            navSettings.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_settings) }
+            fabAdd.setOnClickListener {
+                AddMenuBottomSheet().show(childFragmentManager, "AddMenuBottomSheet")
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -43,6 +71,9 @@ class MealHistoryFragment : Fragment() {
         setupSection(binding.sectionLunch, "Lunch", MealType.LUNCH)
         setupSection(binding.sectionDinner, "Dinner", MealType.DINNER)
         setupSection(binding.sectionSnack, "Snack", MealType.SNACK)
+
+        setupWindowInsets()
+        setupBottomNav()
 
         observeState()
     }

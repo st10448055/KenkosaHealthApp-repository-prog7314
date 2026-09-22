@@ -10,6 +10,10 @@ import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.data.model.UserMetrics
@@ -21,6 +25,7 @@ import com.example.kenkosahealthapp_prog7314.ui.metrics.MetricsPromptState
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -29,6 +34,8 @@ class HomeFragment : Fragment() {
 
     private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
+
+    private val calorieViewModel: CalorieRingViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -40,6 +47,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeCalories()
+        calorieViewModel.loadCalories()
         setupDrawer()
         setupGreeting()
         setupFeatureGrid()
@@ -52,6 +61,11 @@ class HomeFragment : Fragment() {
         // Notification bell is intentionally non-functional for now.
     }
 
+    override fun onResume() {
+        super.onResume()
+        calorieViewModel.loadCalories()
+    }
+
     /** Settings' menu button pops back here and asks for the drawer to be opened. */
     private fun observeOpenDrawerRequest() {
         val handle = findNavController().currentBackStackEntry?.savedStateHandle ?: return
@@ -59,6 +73,37 @@ class HomeFragment : Fragment() {
             if (open == true) {
                 binding.drawerLayout.openDrawer(GravityCompat.START)
                 handle.remove<Boolean>(KEY_OPEN_DRAWER)
+            }
+        }
+    }
+
+    private fun observeCalories() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                calorieViewModel.uiState.collect { state ->
+                    val card = binding.cardCalorieRing
+                    when (state) {
+                        is CalorieUiState.Loading -> {
+                            card.progressCalorieRing.visibility = View.VISIBLE
+                            card.textCalorieError.visibility = View.GONE
+                        }
+                        is CalorieUiState.Success -> {
+                            card.progressCalorieRing.visibility = View.GONE
+                            card.textCalorieError.visibility = View.GONE
+                            card.textCaloriesRemaining.text = "${state.remaining} kcal"
+                            card.textMacroCarbs.text = "Carbs: ${state.carbsG}g"
+                            card.textMacroProtein.text = "Protein: ${state.proteinG}g"
+                            card.textMacroFat.text = "Fats: ${state.fatG}g"
+                            card.textCalorieStatus.text = state.statusLabel
+                            card.ringCalories.consumedFraction = state.consumed.toFloat() / state.target.toFloat()
+                        }
+                        is CalorieUiState.Error -> {
+                            card.progressCalorieRing.visibility = View.GONE
+                            card.textCalorieError.visibility = View.VISIBLE
+                            card.textCalorieError.text = state.message
+                        }
+                    }
+                }
             }
         }
     }

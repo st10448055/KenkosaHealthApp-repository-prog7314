@@ -7,7 +7,7 @@
     android:layout_height="180dp"
     app:cardCornerRadius="28dp"
     app:cardElevation="6dp"
-    app:cardBackgroundColor="@color/home_card_background">
+    app:cardBackgroundColor="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                app:tint="@color/home_card_icon" />
+                app:tint="@android:color/white" />
 
         </FrameLayout>
 
@@ -39,7 +39,7 @@
             android:layout_weight="1"
             android:layout_marginTop="14dp"
             android:gravity="top|center_horizontal"
-            android:textColor="@color/home_card_text"
+            android:textColor="#1B3A1B"
             android:textSize="16sp"
             android:textStyle="bold"
             tools:text="Label" />

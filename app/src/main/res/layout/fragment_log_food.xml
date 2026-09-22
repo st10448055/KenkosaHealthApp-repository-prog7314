@@ -119,12 +119,19 @@
                 android:text="@string/logfood_search" />
         </LinearLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonScanBarcode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/logfood_scan_barcode" />
+            android:text="@string/logfood_scan_barcode"
+            app:icon="@drawable/ic_barcode"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp"
+            app:iconTint="@android:color/white"
+            app:cornerRadius="24dp"
+            android:backgroundTint="#83A682"
+            android:textColor="@android:color/white" />
 
         <!-- Loading indicator for search -->
         <ProgressBar

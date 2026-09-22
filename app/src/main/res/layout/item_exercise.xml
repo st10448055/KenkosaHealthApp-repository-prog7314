@@ -15,38 +15,14 @@
         android:gravity="center_vertical"
         android:padding="16dp">
 
-        <!-- Text column: name, equipment, description -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/textExerciseName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textExerciseName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="#1B3A1B" />
-
-            <TextView
-                android:id="@+id/textExerciseEquipment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="13sp"
-                android:textColor="#4A5A4A" />
-
-            <TextView
-                android:id="@+id/textExerciseDescription"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="13sp"
-                android:textColor="#6B6B6B" />
-
-        </LinearLayout>
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#1B3A1B" />
 
         <TextView
             android:layout_width="wrap_content"

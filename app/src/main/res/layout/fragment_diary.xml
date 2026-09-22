@@ -1,136 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/diary_bg">
+    android:background="@color/diary_bg"
+    android:clipChildren="false">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollDiary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <ImageButton
-            android:id="@+id/buttonBack"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/diary_back"
-            android:src="@android:drawable/ic_menu_close_clear_cancel"
-            app:tint="@color/diary_text_primary" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/diary_title"
-            android:textColor="@color/diary_text_primary"
-            android:textSize="28sp"
-            android:textStyle="bold" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/diary_meals"
-            android:textColor="@color/diary_text_primary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <include
-            android:id="@+id/sectionBreakfast"
-            layout="@layout/item_meal_section" />
-
-        <include
-            android:id="@+id/sectionLunch"
-            layout="@layout/item_meal_section" />
-
-        <include
-            android:id="@+id/sectionDinner"
-            layout="@layout/item_meal_section" />
-
-        <include
-            android:id="@+id/sectionSnack"
-            layout="@layout/item_meal_section" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/diary_water"
-            android:textColor="@color/diary_text_primary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textWaterSummary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:textColor="@color/diary_text_secondary"
-            android:textSize="15sp" />
-
-        <GridLayout
-            android:id="@+id/gridCups"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:columnCount="4"
-            android:rowCount="2" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/diary_mood"
-            android:textColor="@color/diary_text_primary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNav"
+        android:clipToPadding="false"
+        android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/containerMoodEntries"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="120dp">
 
-        <TextView
-            android:id="@+id/textNoMoodToday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/diary_no_mood_today"
-            android:textColor="@color/diary_text_muted"
-            android:visibility="gone" />
+            <ImageButton
+                android:id="@+id/buttonBack"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/diary_back"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                app:tint="@color/diary_text_primary" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/diary_title"
+                android:textColor="@color/diary_text_primary"
+                android:textSize="28sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/diary_notes"
-            android:textColor="@color/diary_text_primary"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/diary_meals"
+                android:textColor="@color/diary_text_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/editNotes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_diary_input"
-            android:gravity="top"
-            android:hint="@string/diary_notes_hint"
-            android:importantForAutofill="no"
-            android:inputType="textMultiLine"
-            android:minLines="4"
-            android:padding="12dp"
-            android:textColor="@color/diary_text_primary"
-            android:textColorHint="@color/diary_text_muted" />
+            <include
+                android:id="@+id/sectionBreakfast"
+                layout="@layout/item_meal_section" />
 
-    </LinearLayout>
-</ScrollView>
+            <include
+                android:id="@+id/sectionLunch"
+                layout="@layout/item_meal_section" />
+
+            <include
+                android:id="@+id/sectionDinner"
+                layout="@layout/item_meal_section" />
+
+            <include
+                android:id="@+id/sectionSnack"
+                layout="@layout/item_meal_section" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/diary_water"
+                android:textColor="@color/diary_text_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textWaterSummary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/diary_text_secondary"
+                android:textSize="15sp" />
+
+            <GridLayout
+                android:id="@+id/gridCups"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:columnCount="4"
+                android:rowCount="2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/diary_mood"
+                android:textColor="@color/diary_text_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/containerMoodEntries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical" />
+
+            <TextView
+                android:id="@+id/textNoMoodToday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/diary_no_mood_today"
+                android:textColor="@color/diary_text_muted"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/diary_notes"
+                android:textColor="@color/diary_text_primary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/editNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_diary_input"
+                android:gravity="top"
+                android:hint="@string/diary_notes_hint"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:padding="12dp"
+                android:textColor="@color/diary_text_primary"
+                android:textColorHint="@color/diary_text_muted" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/bottomNav"
+        layout="@layout/layout_bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kenkosahealthapp_prog7314.data.network.MoodEntryDto
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentDiaryBinding
 import com.example.kenkosahealthapp_prog7314.databinding.ItemMealSectionBinding
+import com.example.kenkosahealthapp_prog7314.ui.addmenu.AddMenuBottomSheet
 import com.example.kenkosahealthapp_prog7314.ui.water.WaterUiState
 import com.example.kenkosahealthapp_prog7314.ui.water.WaterViewModel
 import com.example.kenkosahealthapp_prog7314.ui.wellness.MoodUiState
@@ -25,6 +29,7 @@ import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import com.example.kenkosahealthapp_prog7314.R
 
 class DiaryFragment : Fragment() {
 
@@ -59,10 +64,35 @@ class DiaryFragment : Fragment() {
         setupMealSections()
         setupNotes()
 
+        setupWindowInsets()
+        setupBottomNav()
         observeMeals()
         observeWater()
         observeMood()
         observeNotes()
+    }
+
+    private fun setupWindowInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+            val bars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
+            )
+            binding.scrollDiary.updatePadding(top = bars.top)
+            binding.bottomNav.root.updatePadding(bottom = bars.bottom)
+            insets
+        }
+    }
+
+    private fun setupBottomNav() {
+        with(binding.bottomNav) {
+            navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
+            navGoals.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_goals) }
+            navStats.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_statistics) }
+            navSettings.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_settings) }
+            fabAdd.setOnClickListener {
+                AddMenuBottomSheet().show(childFragmentManager, "AddMenuBottomSheet")
+            }
+        }
     }
 
     override fun onResume() {
