@@ -5,25 +5,32 @@ import com.google.firebase.cloud.FirestoreClient
 import com.kenkosa.backend.models.*
 import java.util.UUID
 
+// Firestore collection used to store mood entries.
 private const val MOODS_COLLECTION = "moods"
 
 class MoodRepository {
 
+    // Gets the Firestore database instance.
     private val db get() = FirestoreClient.getFirestore()
 
+    // Retrieves all mood entries belonging to a specific user.
     suspend fun getMoodsForUser(userId: String): List<MoodEntryResponse> {
         val snapshot = db.collection(MOODS_COLLECTION)
             .whereEqualTo("userId", userId)
             .get()
             .await()
+
+        // Convert the documents and show the most recently logged moods first.
         return snapshot.documents
             .mapNotNull { it.toMoodEntryResponse() }
             .sortedByDescending { it.loggedAt }
     }
 
+    // Retrieves a specific mood entry by its ID.
     suspend fun getMood(moodId: String): MoodEntryResponse? =
         db.collection(MOODS_COLLECTION).document(moodId).get().await().toMoodEntryResponse()
 
+    // Creates and stores a new mood entry.
     suspend fun createMood(userId: String, request: CreateMoodRequest): MoodEntryResponse {
         val moodId = UUID.randomUUID().toString()
         val now = System.currentTimeMillis()
@@ -40,6 +47,7 @@ class MoodRepository {
         return getMood(moodId)!!
     }
 
+    // Updates the mood details provided in the request.
     suspend fun updateMood(moodId: String, request: UpdateMoodRequest): MoodEntryResponse? {
         val docRef = db.collection(MOODS_COLLECTION).document(moodId)
         val updates = mutableMapOf<String, Any>("updatedAt" to System.currentTimeMillis())
@@ -50,10 +58,12 @@ class MoodRepository {
         return getMood(moodId)
     }
 
+    // Deletes a mood entry from Firestore.
     suspend fun deleteMood(moodId: String) {
         db.collection(MOODS_COLLECTION).document(moodId).delete().await()
     }
 
+    // Converts a Firestore document into a MoodEntryResponse.
     private fun DocumentSnapshot.toMoodEntryResponse(): MoodEntryResponse? {
         if (!exists()) return null
         return MoodEntryResponse(
@@ -70,3 +80,5 @@ class MoodRepository {
         )
     }
 }
+
+// ------------------ END OF FILE ------------------ //

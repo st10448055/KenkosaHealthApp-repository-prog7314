@@ -12,14 +12,17 @@ import io.ktor.server.routing.*
 
 
 fun Route.goalTrackingRoutes(repository: GoalTrackingRepository) {
+    // Requires Firebase authentication for all goal tracking routes.
     authenticate("firebase-auth") {
         route("/api/goal-tracking") {
 
+            // Gets all tracked goals for the authenticated user.
             get {
                 val principal = call.principal<FirebaseUserPrincipal>()!!
                 call.respond(HttpStatusCode.OK, repository.getGoalsForUser(principal.uid))
             }
 
+            // Creates a new tracked goal.
             post {
                 val principal = call.principal<FirebaseUserPrincipal>()!!
                 val request = try {
@@ -28,6 +31,7 @@ fun Route.goalTrackingRoutes(repository: GoalTrackingRepository) {
                     return@post call.respond(HttpStatusCode.BadRequest, TrackingErrorResponse(listOf("Malformed request body")))
                 }
 
+                // Validates the goal before saving it.
                 val errors = request.validate()
                 if (errors.isNotEmpty()) {
                     return@post call.respond(HttpStatusCode.UnprocessableEntity, TrackingErrorResponse(errors))
@@ -36,11 +40,13 @@ fun Route.goalTrackingRoutes(repository: GoalTrackingRepository) {
                 call.respond(HttpStatusCode.Created, repository.createGoal(principal.uid, request))
             }
 
+            // Gets a specific tracked goal.
             get("/{id}") {
                 val principal = call.principal<FirebaseUserPrincipal>()!!
                 val id = call.parameters["id"]
                     ?: return@get call.respond(HttpStatusCode.BadRequest, TrackingErrorResponse(listOf("Missing goal id")))
 
+                // Makes sure the goal exists and belongs to the current user.
                 val existing = repository.getGoal(id)
                 if (existing == null || existing.userId != principal.uid) {
                     return@get call.respond(HttpStatusCode.NotFound, TrackingErrorResponse(listOf("Goal not found")))
@@ -48,11 +54,13 @@ fun Route.goalTrackingRoutes(repository: GoalTrackingRepository) {
                 call.respond(HttpStatusCode.OK, existing)
             }
 
+            // Updates the details of an existing goal.
             put("/{id}") {
                 val principal = call.principal<FirebaseUserPrincipal>()!!
                 val id = call.parameters["id"]
                     ?: return@put call.respond(HttpStatusCode.BadRequest, TrackingErrorResponse(listOf("Missing goal id")))
 
+                // Prevents users from updating another user's goal.
                 val existing = repository.getGoal(id)
                 if (existing == null || existing.userId != principal.uid) {
                     return@put call.respond(HttpStatusCode.NotFound, TrackingErrorResponse(listOf("Goal not found")))
@@ -64,6 +72,7 @@ fun Route.goalTrackingRoutes(repository: GoalTrackingRepository) {
                     return@put call.respond(HttpStatusCode.BadRequest, TrackingErrorResponse(listOf("Malformed request body")))
                 }
 
+                // Validates the updated goal details.
                 val errors = request.validate()
                 if (errors.isNotEmpty()) {
                     return@put call.respond(HttpStatusCode.UnprocessableEntity, TrackingErrorResponse(errors))
@@ -72,11 +81,13 @@ fun Route.goalTrackingRoutes(repository: GoalTrackingRepository) {
                 call.respond(HttpStatusCode.OK, repository.updateGoal(id, request)!!)
             }
 
+            // Records progress for an existing goal.
             put("/{id}/progress") {
                 val principal = call.principal<FirebaseUserPrincipal>()!!
                 val id = call.parameters["id"]
                     ?: return@put call.respond(HttpStatusCode.BadRequest, TrackingErrorResponse(listOf("Missing goal id")))
 
+                // Checks that the goal exists and belongs to the current user.
                 val existing = repository.getGoal(id)
                 if (existing == null || existing.userId != principal.uid) {
                     return@put call.respond(HttpStatusCode.NotFound, TrackingErrorResponse(listOf("Goal not found")))
@@ -88,27 +99,34 @@ fun Route.goalTrackingRoutes(repository: GoalTrackingRepository) {
                     return@put call.respond(HttpStatusCode.BadRequest, TrackingErrorResponse(listOf("Malformed request body")))
                 }
 
+                // Validates the progress entry before saving it.
                 val errors = request.validate()
                 if (errors.isNotEmpty()) {
                     return@put call.respond(HttpStatusCode.UnprocessableEntity, TrackingErrorResponse(errors))
                 }
 
+                // Saves the progress value for the specified date.
                 call.respond(HttpStatusCode.OK, repository.logProgress(id, request.date, request.value)!!)
             }
 
+            // Deletes an existing tracked goal.
             delete("/{id}") {
                 val principal = call.principal<FirebaseUserPrincipal>()!!
                 val id = call.parameters["id"]
                     ?: return@delete call.respond(HttpStatusCode.BadRequest, TrackingErrorResponse(listOf("Missing goal id")))
 
+                // Checks that the goal belongs to the authenticated user.
                 val existing = repository.getGoal(id)
                 if (existing == null || existing.userId != principal.uid) {
                     return@delete call.respond(HttpStatusCode.NotFound, TrackingErrorResponse(listOf("Goal not found")))
                 }
 
+                // Removes the goal from the repository.
                 repository.deleteGoal(id)
                 call.respond(HttpStatusCode.NoContent)
             }
         }
     }
 }
+
+// ------------------ END OF FILE ------------------ //

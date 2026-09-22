@@ -13,15 +13,19 @@ import io.ktor.server.routing.*
 import java.time.LocalDate
 
 fun Route.waterRoutes(waterRepository: WaterRepository) {
+
+    // Requires Firebase authentication for all water routes.
     authenticate("firebase-auth") {
         route("/api/water") {
 
+            // Gets the user's water intake for the requested date or today by default.
             get {
                 val principal = call.principal<FirebaseUserPrincipal>()!!
                 val date = call.request.queryParameters["date"] ?: LocalDate.now().toString()
                 call.respond(HttpStatusCode.OK, waterRepository.getTodaysWater(principal.uid, date))
             }
 
+            // Updates today's water intake after validating the request.
             patch {
                 val principal = call.principal<FirebaseUserPrincipal>()!!
                 val request = try {
@@ -30,6 +34,7 @@ fun Route.waterRoutes(waterRepository: WaterRepository) {
                     return@patch call.respond(HttpStatusCode.BadRequest, ErrorResponse(listOf("Malformed request body")))
                 }
 
+                // Checks that the water intake value is valid before saving it.
                 val errors = request.validate()
                 if (errors.isNotEmpty()) {
                     return@patch call.respond(HttpStatusCode.UnprocessableEntity, ErrorResponse(errors))
@@ -42,3 +47,5 @@ fun Route.waterRoutes(waterRepository: WaterRepository) {
         }
     }
 }
+
+// ------------------ END OF FILE ------------------ //

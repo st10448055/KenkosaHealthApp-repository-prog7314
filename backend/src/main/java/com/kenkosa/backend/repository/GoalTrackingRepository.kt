@@ -7,25 +7,32 @@ import com.kenkosa.backend.models.*
 import java.util.UUID
 
 
+// Firestore collection used to store tracked goals.
 private const val GOALS_COLLECTION = "goals"
 
 class GoalTrackingRepository {
 
+    // Gets the Firestore database instance.
     private val db get() = FirestoreClient.getFirestore()
 
+    // Retrieves all goals belonging to a specific user.
     suspend fun getGoalsForUser(userId: String): List<TrackedGoalResponse> {
         val snapshot = db.collection(GOALS_COLLECTION)
             .whereEqualTo("userId", userId)
             .get()
             .await()
+
+        // Convert the documents to goals and sort them by creation date.
         return snapshot.documents
             .mapNotNull { it.toTrackedGoal() }
             .sortedBy { it.createdAt }
     }
 
+    // Retrieves a specific goal using its ID.
     suspend fun getGoal(goalId: String): TrackedGoalResponse? =
         db.collection(GOALS_COLLECTION).document(goalId).get().await().toTrackedGoal()
 
+    // Creates a new goal and stores it in Firestore.
     suspend fun createGoal(userId: String, request: SaveTrackedGoalRequest): TrackedGoalResponse {
         val goalId = UUID.randomUUID().toString()
         val now = System.currentTimeMillis()
@@ -50,6 +57,7 @@ class GoalTrackingRepository {
         return getGoal(goalId)!!
     }
 
+    // Updates the main details of an existing goal.
     suspend fun updateGoal(goalId: String, request: SaveTrackedGoalRequest): TrackedGoalResponse? {
         val updates = mapOf<String, Any>(
             "category" to request.category.name,
@@ -66,6 +74,7 @@ class GoalTrackingRepository {
     }
 
 
+    // Records progress for a specific date and updates the current value.
     suspend fun logProgress(goalId: String, date: String, value: Double): TrackedGoalResponse? {
         db.collection(GOALS_COLLECTION).document(goalId).update(
             FieldPath.of("progressLog", date), value,
@@ -75,13 +84,16 @@ class GoalTrackingRepository {
         return getGoal(goalId)
     }
 
+    // Deletes a goal from Firestore.
     suspend fun deleteGoal(goalId: String) {
         db.collection(GOALS_COLLECTION).document(goalId).delete().await()
     }
 
+    // Converts a Firestore document into a TrackedGoalResponse.
     private fun DocumentSnapshot.toTrackedGoal(): TrackedGoalResponse? {
         if (!exists()) return null
 
+        // Converts the stored progress log into a map of dates and values.
         val log = (get("progressLog") as? Map<*, *>)
             ?.mapNotNull { (key, value) ->
                 val date = key as? String
@@ -109,3 +121,5 @@ class GoalTrackingRepository {
         )
     }
 }
+
+// ------------------ END OF FILE ------------------ //

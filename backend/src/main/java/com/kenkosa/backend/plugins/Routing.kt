@@ -1,6 +1,5 @@
 package com.kenkosa.backend.plugins
 
-
 import com.kenkosa.backend.repository.MealDiaryRepository
 import com.kenkosa.backend.repository.MedicationRepository
 import com.kenkosa.backend.repository.MoodRepository
@@ -25,8 +24,9 @@ import com.kenkosa.backend.routes.notesRoutes
 import com.kenkosa.backend.routes.waterRoutes
 import com.kenkosa.backend.routes.workoutRoutes
 
-
+// Configures the API routes and connects them to their repositories and clients.
 fun Application.configureRouting() {
+    // Create the repositories and external API clients used by the routes.
     val goalTrackingRepository = GoalTrackingRepository()
     val sleepLogRepository = SleepLogRepository()
     val medicationRepository = MedicationRepository()
@@ -39,6 +39,7 @@ fun Application.configureRouting() {
     val waterRepository = WaterRepository()
     val notesRepository = NotesRepository()
 
+    // Register all application endpoints.
     routing {
         goalTrackingRoutes(goalTrackingRepository)
         sleepLogRoutes(sleepLogRepository)
@@ -49,8 +50,7 @@ fun Application.configureRouting() {
         workoutRoutes(wgerClient)
         waterRoutes(waterRepository)
         notesRoutes(notesRepository)
-
-
-
     }
 }
+
+// ------------------ END OF FILE ------------------ //
