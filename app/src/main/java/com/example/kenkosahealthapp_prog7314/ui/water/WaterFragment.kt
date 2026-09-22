@@ -1,16 +1,19 @@
 package com.example.kenkosahealthapp_prog7314.ui.water
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentWaterBinding
 import kotlinx.coroutines.launch
 
@@ -42,9 +45,15 @@ class WaterFragment : Fragment() {
 
         binding.gridCups.columnCount = 4
 
+        // Tint follows light / dark mode (dark green in light mode, light green in dark mode).
+        val cupTint = ColorStateList.valueOf(
+            ContextCompat.getColor(requireContext(), R.color.tracking_text_primary)
+        )
+
         for (i in 1..targetCups) {
             val cup = ImageView(requireContext()).apply {
                 setImageResource(android.R.drawable.ic_menu_report_image) // placeholder icon; swap for a real cup drawable
+                imageTintList = cupTint
                 layoutParams = android.widget.GridLayout.LayoutParams().apply {
                     width = 120
                     height = 120
@@ -75,8 +84,11 @@ class WaterFragment : Fragment() {
                         }
                         is WaterUiState.Success -> {
                             binding.progressLoading.visibility = View.GONE
-                            binding.textWaterSummary.text =
-                                "${state.cupsConsumed} / ${state.targetCups} cups today"
+                            binding.textWaterSummary.text = getString(
+                                R.string.water_summary,
+                                state.cupsConsumed,
+                                state.targetCups
+                            )
                             buildCups(state.targetCups)
                             updateCupVisuals(state.cupsConsumed)
                         }

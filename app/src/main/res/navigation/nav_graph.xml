@@ -376,6 +376,9 @@
         <action
             android:id="@+id/action_mealHistory_to_logFood"
             app:destination="@id/logFoodFragment" />
+        <action android:id="@+id/action_mealHistory_to_goals" app:destination="@id/goalsFragment" />
+        <action android:id="@+id/action_mealHistory_to_statistics" app:destination="@id/statisticsFragment" />
+        <action android:id="@+id/action_mealHistory_to_settings" app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment

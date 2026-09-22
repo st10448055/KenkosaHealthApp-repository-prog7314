@@ -53,9 +53,9 @@ class MealHistoryFragment : Fragment() {
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
-            navGoals.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_goals) }
-            navStats.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_statistics) }
-            navSettings.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_settings) }
+            navGoals.setOnClickListener { findNavController().navigate(R.id.action_mealHistory_to_goals) }
+            navStats.setOnClickListener { findNavController().navigate(R.id.action_mealHistory_to_statistics) }
+            navSettings.setOnClickListener { findNavController().navigate(R.id.action_mealHistory_to_settings) }
             fabAdd.setOnClickListener {
                 AddMenuBottomSheet().show(childFragmentManager, "AddMenuBottomSheet")
             }
@@ -67,10 +67,10 @@ class MealHistoryFragment : Fragment() {
 
         binding.buttonBack.setOnClickListener { findNavController().navigateUp() }
 
-        setupSection(binding.sectionBreakfast, "Breakfast", MealType.BREAKFAST)
-        setupSection(binding.sectionLunch, "Lunch", MealType.LUNCH)
-        setupSection(binding.sectionDinner, "Dinner", MealType.DINNER)
-        setupSection(binding.sectionSnack, "Snack", MealType.SNACK)
+        setupSection(binding.sectionBreakfast, MealType.BREAKFAST)
+        setupSection(binding.sectionLunch, MealType.LUNCH)
+        setupSection(binding.sectionDinner, MealType.DINNER)
+        setupSection(binding.sectionSnack, MealType.SNACK)
 
         setupWindowInsets()
         setupBottomNav()
@@ -85,8 +85,8 @@ class MealHistoryFragment : Fragment() {
         viewModel.loadTodaysMeals()
     }
 
-    private fun setupSection(section: ItemMealSectionBinding, title: String, mealType: MealType) {
-        section.textSectionTitle.text = title
+    private fun setupSection(section: ItemMealSectionBinding, mealType: MealType) {
+        section.textSectionTitle.setText(mealType.labelRes)
 
         val adapter = MealEntryAdapter(
             onSaveServings = { mealId, newServings -> viewModel.updateServings(mealId, newServings) },
@@ -113,7 +113,7 @@ class MealHistoryFragment : Fragment() {
             putString("mealType", mealType.apiValue)
         }
         findNavController().navigate(
-            com.example.kenkosahealthapp_prog7314.R.id.action_mealHistory_to_logFood,
+            com.example.kenkosahealthapp_prog7314.R.id.action_global_logFood,
             bundle
         )
     }

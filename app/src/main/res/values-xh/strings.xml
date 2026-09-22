@@ -10,6 +10,10 @@
     <string name="nav_meditation">Ukuzindla nempilo entle</string>
     <string name="nav_know_your_health">Yazi impilo yakho</string>
 
+    <string name="addmenu_log_food">Bhala ukutya</string>
+    <string name="addmenu_water">Amanzi</string>
+    <string name="addmenu_weight">Ubunzima</string>
+
     <string name="sign_in_with_sso">Ngena nge-SSO</string>
     <string name="sso_subtitle">Sebenzisa i-imeyile yakho ukufikelela ngokukhuselekileyo kwi-Kenkosa Health</string>
     <string name="email_hint">Idilesi ye-imeyile</string>

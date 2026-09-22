@@ -4,11 +4,29 @@
 
     <!-- Fitness -->
     <string name="fitness_title">Fitness</string>
+    <string name="fitness_subtitle">Pick a category to get started</string>
     <string name="fitness_categories">Categories</string>
 
-    <!-- Today's Meals -->
+    <string name="mealtype_breakfast">Breakfast</string>
+    <string name="mealtype_lunch">Lunch</string>
+    <string name="mealtype_dinner">Dinner</string>
+    <string name="mealtype_snack">Snack</string>
+
+
+    <string name="addmenu_log_food">Log food</string>
+    <string name="addmenu_water">Water</string>
+    <string name="addmenu_weight">Weight</string>
+    <!-- Exercise list -->
+    <string name="exercise_search_hint">Search exercises...</string>
+    <string name="exercise_things_needed">Things you\'ll need</string>
+    <string name="exercise_description">Description</string>
+
+    <!-- Today's Meals / meal sections (also used by the Diary) -->
     <string name="meals_title">Today\'s Meals</string>
+    <string name="meals_add">+ Add</string>
+    <string name="meals_empty_section">No items logged yet</string>
 
     <!-- Water Intake -->
     <string name="water_title">Water Intake</string>
+    <string name="water_summary">%1$d / %2$d cups today</string>
 </resources>

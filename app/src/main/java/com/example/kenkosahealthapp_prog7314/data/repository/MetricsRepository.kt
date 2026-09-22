@@ -23,6 +23,17 @@ class MetricsRepository(private val db: FirebaseFirestore = FirebaseFirestore.ge
         return doc.getString("unitSystem") ?: "Metric"
     }
 
+    /**
+     * Writes the chosen unit system back to Settings, so switching units on the Metrics form
+     * keeps the Settings screen in sync. Merges, so it never disturbs the rest of userSettings.
+     */
+    suspend fun setUnitSystem(userId: String, unitSystem: String) {
+        require(userId.isNotBlank()) { "User ID cannot be blank" }
+        db.collection(SETTINGS_COLLECTION).document(userId)
+            .set(mapOf("unitSystem" to unitSystem), SetOptions.merge())
+            .await()
+    }
+
     /** Merges into users/{uid}, so name, email and the other profile fields are left untouched. */
     suspend fun saveMetrics(userId: String, metrics: UserMetrics) {
         require(userId.isNotBlank()) { "User ID cannot be blank" }

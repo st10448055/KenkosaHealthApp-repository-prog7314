@@ -44,6 +44,9 @@ import java.util.Locale
  * - Opened without it (from Settings): same form, pre-filled, with Cancel.
  *
  * Height can be entered in cm or ft/in and weight in kg or lb. Switching unit converts what's already typed.
+ * Which unit is shown by default always follows the Settings unit-of-measurement picker
+ * (Metric / Imperial / UK); saving here also writes the resulting unit system back to Settings,
+ * so the two screens stay in sync in both directions.
  */
 class MetricsFragment : Fragment() {
 
@@ -56,6 +59,10 @@ class MetricsFragment : Fragment() {
     private var dateOfBirth: LocalDate? = null
     private var heightUnit = HeightUnit.CM
     private var weightUnit = WeightUnit.KG
+
+    /** Raw Settings value ("Metric" / "Imperial" / "UK"), kept so saving can preserve "UK" rather
+     *  than collapsing it into "Imperial" when the chips already match what Settings had. */
+    private var currentUnitSystem = "Metric"
 
     /** True while we set chips from code, so their listeners don't react to it. */
     private var isApplyingState = false
@@ -118,6 +125,7 @@ class MetricsFragment : Fragment() {
                 .takeIf { it != Long.MIN_VALUE }?.let { LocalDate.ofEpochDay(it) }
             heightUnit = HeightUnit.valueOf(savedInstanceState.getString(STATE_HEIGHT_UNIT, HeightUnit.CM.name))
             weightUnit = WeightUnit.valueOf(savedInstanceState.getString(STATE_WEIGHT_UNIT, WeightUnit.KG.name))
+            currentUnitSystem = savedInstanceState.getString(STATE_UNIT_SYSTEM, "Metric")
             applyHeightUnitUi()
             applyWeightUnitUi()
             renderDateOfBirth()
@@ -140,6 +148,7 @@ class MetricsFragment : Fragment() {
         super.onSaveInstanceState(outState)
         outState.putString(STATE_HEIGHT_UNIT, heightUnit.name)
         outState.putString(STATE_WEIGHT_UNIT, weightUnit.name)
+        outState.putString(STATE_UNIT_SYSTEM, currentUnitSystem)
         dateOfBirth?.let { outState.putLong(STATE_DOB_EPOCH_DAY, it.toEpochDay()) }
     }
 
@@ -203,8 +212,11 @@ class MetricsFragment : Fragment() {
     private fun fillForm(data: MetricsFormData) {
         val saved = data.existing
 
-        heightUnit = saved?.heightUnit ?: data.defaultHeightUnit
-        weightUnit = saved?.weightUnit ?: data.defaultWeightUnit
+        // The unit shown always follows Settings, not whatever was saved with a previous
+        // metrics entry - that's what keeps the Settings and Metrics screens in sync.
+        heightUnit = data.defaultHeightUnit
+        weightUnit = data.defaultWeightUnit
+        currentUnitSystem = data.unitSystem
         applyHeightUnitUi()
         applyWeightUnitUi()
 
@@ -325,6 +337,21 @@ class MetricsFragment : Fragment() {
     private fun formatNumber(value: Double): String =
         String.format(Locale.US, "%.1f", value).trimEnd('0').trimEnd('.')
 
+    /**
+     * What to write back to Settings' unitSystem field. Metric/Imperial are decided by the
+     * chips; "UK" is preserved only when it was already the active Settings value and the user
+     * hasn't switched to metric - there's no way to tell "UK" and "Imperial" apart from the
+     * chips alone, since both use ft/in and lb.
+     */
+    private fun resolveUnitSystemForSave(): String {
+        val isImperial = heightUnit == HeightUnit.FT_IN || weightUnit == WeightUnit.LB
+        return when {
+            !isImperial -> "Metric"
+            currentUnitSystem == "UK" -> "UK"
+            else -> "Imperial"
+        }
+    }
+
     // ----------------------------------------------------------------- save
 
     private fun attemptSave() {
@@ -363,7 +390,7 @@ class MetricsFragment : Fragment() {
 
         hideError()
         setLoading(true)
-        viewModel.save(metrics) { success, errorMessage ->
+        viewModel.save(metrics, resolveUnitSystemForSave()) { success, errorMessage ->
             if (_binding == null) return@save
             setLoading(false)
             if (success) {
@@ -412,6 +439,7 @@ class MetricsFragment : Fragment() {
         const val ARG_ONBOARDING = "onboarding"
         private const val STATE_HEIGHT_UNIT = "state_height_unit"
         private const val STATE_WEIGHT_UNIT = "state_weight_unit"
+        private const val STATE_UNIT_SYSTEM = "state_unit_system"
         private const val STATE_DOB_EPOCH_DAY = "state_dob_epoch_day"
     }
 }

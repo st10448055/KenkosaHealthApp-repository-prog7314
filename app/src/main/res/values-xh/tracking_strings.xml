@@ -4,11 +4,25 @@
 
     <!-- Fitness -->
     <string name="fitness_title">Ukomelela komzimba</string>
+    <string name="fitness_subtitle">Khetha udidi ukuze uqale</string>
     <string name="fitness_categories">Iindidi</string>
 
-    <!-- Today's Meals -->
+    <string name="mealtype_breakfast">Isidlo sakusasa</string>
+    <string name="mealtype_lunch">Isidlo sasemini</string>
+    <string name="mealtype_dinner">Isidlo sangokuhlwa</string>
+    <string name="mealtype_snack">Isidlo esincinci</string>
+
+    <!-- Exercise list -->
+    <string name="exercise_search_hint">Khangela imithambo...</string>
+    <string name="exercise_things_needed">Izinto ozifunayo</string>
+    <string name="exercise_description">Inkcazo</string>
+
+    <!-- Today's Meals / meal sections (also used by the Diary) -->
     <string name="meals_title">Izidlo zanamhlanje</string>
+    <string name="meals_add">+ Yongeza</string>
+    <string name="meals_empty_section">Akukho zinto zibhaliweyo okwangoku</string>
 
     <!-- Water Intake -->
     <string name="water_title">Ukusela amanzi</string>
+    <string name="water_summary">%1$d / %2$d iindebe namhlanje</string>
 </resources>

@@ -191,7 +191,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_home_to_trackingDiary)
         }
         bindFeature(binding.cardNutrition, R.drawable.ic_nutrition, R.string.home_nutrition, Color.parseColor("#4F7A5B"), Color.parseColor("#E0EBE3")) {
-            findNavController().navigate(R.id.action_home_to_nutrition)
+            findNavController().navigate(R.id.action_global_mealHistory)
         }
         bindFeature(binding.cardSteps, R.drawable.ic_wellness, R.string.home_steps, Color.parseColor("#3F8C7E"), Color.parseColor("#DFEFEC")) {
             findNavController().navigate(R.id.action_home_to_wellness)
@@ -237,7 +237,10 @@ class HomeFragment : Fragment() {
             closeDrawer(); findNavController().navigate(R.id.action_home_to_trackingDiary)
         }
         drawer.navNutrition.setOnClickListener {
-            closeDrawer(); findNavController().navigate(R.id.action_home_to_nutrition)
+            closeDrawer(); findNavController().navigate(R.id.action_global_mealHistory)
+        }
+        drawer.navFitness.setOnClickListener {
+            closeDrawer(); findNavController().navigate(R.id.action_home_to_workouts)
         }
         drawer.navFasting.setOnClickListener {
             closeDrawer(); findNavController().navigate(R.id.action_home_to_fasting)

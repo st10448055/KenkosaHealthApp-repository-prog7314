@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8EFE3"
+    android:background="@color/tracking_bg"
     android:clipChildren="false">
 
     <androidx.core.widget.NestedScrollView
@@ -36,7 +36,7 @@
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/menu"
                     android:src="@drawable/ic_menu"
-                    app:tint="#1B3A1B" />
+                    app:tint="@color/tracking_text_primary" />
 
                 <FrameLayout
                     android:id="@+id/buttonNotifications"
@@ -60,27 +60,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Fitness"
+                android:text="@string/fitness_title"
+                android:textColor="@color/tracking_text_primary"
                 android:textSize="28sp"
-                android:textStyle="bold"
-                android:textColor="#1B3A1B" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Pick a category to get started"
-                android:textSize="14sp"
-                android:textColor="#4A4A4A" />
+                android:text="@string/fitness_subtitle"
+                android:textColor="@color/tracking_text_secondary"
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Categories"
+                android:text="@string/fitness_categories"
+                android:textColor="@color/tracking_text_primary"
                 android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="#1B3A1B" />
+                android:textStyle="bold" />
 
             <ProgressBar
                 android:id="@+id/progressLoading"
@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:textColor="#B00020"
+                android:textColor="@color/tracking_error"
                 android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView

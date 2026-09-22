@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E8EFE3"
+    android:background="@color/tracking_bg"
     android:clipChildren="false">
 
     <androidx.core.widget.NestedScrollView
@@ -23,7 +23,6 @@
             android:paddingEnd="20dp"
             android:paddingBottom="120dp">
 
-            <!-- Header: back + menu + notification bell -->
             <!-- Header: back + notification bell -->
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -35,9 +34,9 @@
                     android:layout_height="32dp"
                     android:layout_centerVertical="true"
                     android:background="@android:color/transparent"
-                    android:contentDescription="Back"
+                    android:contentDescription="@string/tracking_back"
                     android:src="@drawable/ic_arrow_back"
-                    app:tint="#1B3A1B" />
+                    app:tint="@color/tracking_text_primary" />
 
                 <FrameLayout
                     android:id="@+id/buttonNotifications"
@@ -63,19 +62,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
+                android:textColor="@color/tracking_text_primary"
                 android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="#1B3A1B" />
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/editSearch"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Search exercises..."
-                android:background="@android:color/white"
+                android:background="@drawable/bg_tracking_search"
+                android:hint="@string/exercise_search_hint"
+                android:importantForAutofill="no"
+                android:inputType="text"
                 android:padding="14dp"
-                android:inputType="text" />
+                android:textColor="@color/tracking_text_primary"
+                android:textColorHint="@color/tracking_text_secondary" />
 
             <ProgressBar
                 android:id="@+id/progressLoading"
@@ -90,7 +92,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:textColor="#B00020"
+                android:textColor="@color/tracking_error"
                 android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView

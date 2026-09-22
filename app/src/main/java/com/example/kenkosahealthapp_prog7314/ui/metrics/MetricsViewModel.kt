@@ -11,11 +11,18 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-/** What the form needs to start: the saved metrics (if any) and which units to default to. */
+/**
+ * What the form needs to start: the saved metrics (if any) and which units to default to.
+ *
+ * [unitSystem] is the raw Settings value ("Metric" / "Imperial" / "UK"), kept alongside the
+ * derived [defaultHeightUnit] / [defaultWeightUnit] so that saving can preserve "UK" instead of
+ * collapsing it into "Imperial" when nothing on the form actually changed.
+ */
 data class MetricsFormData(
     val existing: UserMetrics?,
     val defaultHeightUnit: HeightUnit,
-    val defaultWeightUnit: WeightUnit
+    val defaultWeightUnit: WeightUnit,
+    val unitSystem: String
 )
 
 class MetricsViewModel(
@@ -45,17 +52,23 @@ class MetricsViewModel(
                 unitSystem = runCatching { metricsRepository.getUnitSystem(uid) }.getOrNull() ?: "Metric"
             }
 
-            // New users start in the unit system they picked in Settings (Metric / Imperial / UK).
+            // Units shown always follow Settings (Metric / Imperial / UK), not whatever was
+            // saved with a previous metrics entry - that keeps the two screens in sync.
             val imperial = unitSystem != "Metric"
             _formData.value = MetricsFormData(
                 existing = existing,
                 defaultHeightUnit = if (imperial) HeightUnit.FT_IN else HeightUnit.CM,
-                defaultWeightUnit = if (imperial) WeightUnit.LB else WeightUnit.KG
+                defaultWeightUnit = if (imperial) WeightUnit.LB else WeightUnit.KG,
+                unitSystem = unitSystem
             )
         }
     }
 
-    fun save(metrics: UserMetrics, onResult: (success: Boolean, errorMessage: String?) -> Unit) {
+    /**
+     * Saves the metrics, then best-effort syncs [unitSystem] back to Settings so a unit change
+     * made on this form (e.g. switching to ft/in) is reflected there too.
+     */
+    fun save(metrics: UserMetrics, unitSystem: String, onResult: (success: Boolean, errorMessage: String?) -> Unit) {
         val uid = userId
         if (uid == null) {
             onResult(false, null)
@@ -64,6 +77,8 @@ class MetricsViewModel(
         viewModelScope.launch {
             try {
                 metricsRepository.saveMetrics(uid, metrics)
+                // A Settings sync hiccup shouldn't block the metrics save itself.
+                runCatching { metricsRepository.setUnitSystem(uid, unitSystem) }
                 onResult(true, null)
             } catch (e: Exception) {
                 onResult(false, e.message)

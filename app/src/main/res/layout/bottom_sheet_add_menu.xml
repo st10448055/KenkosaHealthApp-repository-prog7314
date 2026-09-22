@@ -45,7 +45,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:contentDescription="Log Food"
+                        android:contentDescription="@string/addmenu_log_food"
                         android:src="@drawable/ic_search"
                         app:tint="#2B124C" />
                 </FrameLayout>
@@ -54,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="Log food"
+                    android:text="@string/addmenu_log_food"
                     android:textColor="#1C1C1C"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -89,7 +89,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:contentDescription="Water"
+                        android:contentDescription="@string/addmenu_water"
                         android:src="@drawable/ic_water"
                         app:tint="#1B4D3E" />
                 </FrameLayout>
@@ -98,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="Water"
+                    android:text="@string/addmenu_water"
                     android:textColor="#1C1C1C"
                     android:textSize="13sp"
                     android:textStyle="bold" />
@@ -133,7 +133,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:contentDescription="Weight"
+                        android:contentDescription="@string/addmenu_weight"
                         android:src="@drawable/ic_scale"
                         app:tint="#4A5B31" />
                 </FrameLayout>
@@ -142,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="Weight"
+                    android:text="@string/addmenu_weight"
                     android:textColor="#1C1C1C"
                     android:textSize="13sp"
                     android:textStyle="bold" />

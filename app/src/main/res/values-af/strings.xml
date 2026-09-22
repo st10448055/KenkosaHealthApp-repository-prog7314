@@ -10,6 +10,10 @@
     <string name="nav_meditation">Meditasie en Welstand</string>
     <string name="nav_know_your_health">Ken jou gesondheid</string>
 
+    <string name="addmenu_log_food">Teken kos aan</string>
+    <string name="addmenu_water">Water</string>
+    <string name="addmenu_weight">Gewig</string>
+
     <string name="sign_in_with_sso">Teken in met SSO</string>
     <string name="sso_subtitle">Gebruik jou e-pos om veilig toegang tot Kenkosa Health te kry</string>
     <string name="email_hint">E-posadres</string>

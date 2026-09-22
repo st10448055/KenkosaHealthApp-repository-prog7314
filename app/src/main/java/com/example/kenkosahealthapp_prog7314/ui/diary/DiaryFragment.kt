@@ -113,10 +113,10 @@ class DiaryFragment : Fragment() {
         dinnerAdapter = buildMealAdapter()
         snackAdapter = buildMealAdapter()
 
-        configureSection(binding.sectionBreakfast, "Breakfast", MealType.BREAKFAST, breakfastAdapter)
-        configureSection(binding.sectionLunch, "Lunch", MealType.LUNCH, lunchAdapter)
-        configureSection(binding.sectionDinner, "Dinner", MealType.DINNER, dinnerAdapter)
-        configureSection(binding.sectionSnack, "Snack", MealType.SNACK, snackAdapter)
+        configureSection(binding.sectionBreakfast, MealType.BREAKFAST, breakfastAdapter)
+        configureSection(binding.sectionLunch, MealType.LUNCH, lunchAdapter)
+        configureSection(binding.sectionDinner, MealType.DINNER, dinnerAdapter)
+        configureSection(binding.sectionSnack, MealType.SNACK, snackAdapter)
     }
 
     private fun buildMealAdapter() = MealEntryAdapter(
@@ -125,15 +125,15 @@ class DiaryFragment : Fragment() {
     )
 
     private fun configureSection(
-        section: ItemMealSectionBinding, title: String, mealType: MealType, adapter: MealEntryAdapter
+        section: ItemMealSectionBinding, mealType: MealType, adapter: MealEntryAdapter
     ) {
-        section.textSectionTitle.text = title
+        section.textSectionTitle.setText(mealType.labelRes)
         section.recyclerMealEntries.layoutManager = LinearLayoutManager(requireContext())
         section.recyclerMealEntries.adapter = adapter
         section.buttonAddToSection.setOnClickListener {
             val bundle = Bundle().apply { putString("mealType", mealType.apiValue) }
             findNavController().navigate(
-                com.example.kenkosahealthapp_prog7314.R.id.action_global_logFood, bundle
+                R.id.action_global_logFood, bundle
             )
         }
     }
