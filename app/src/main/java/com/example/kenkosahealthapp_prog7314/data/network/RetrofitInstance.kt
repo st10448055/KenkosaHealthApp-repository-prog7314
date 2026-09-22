@@ -12,8 +12,7 @@ object RetrofitInstance {
 
     // Base URL of the deployed Kenkosa Health backend hosted on Azure.
     // All Retrofit API endpoints are appended to this URL.
-    private const val BASE_URL = "https://kenkosa-health-api-dmeag0d4bbgaggg9.southafricanorth-01.azurewebsites.net/"
-
+    private const val BASE_URL = "http://localhost:8080/"
     // HTTP logging interceptor used to log network requests and responses.
     // BODY logs request and response details, which is useful during development
     // and debugging API communication.
