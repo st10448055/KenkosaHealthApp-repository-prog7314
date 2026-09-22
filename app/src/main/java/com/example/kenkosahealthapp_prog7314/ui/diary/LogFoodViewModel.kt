@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.Date
 
+// Represents the state of a food lookup (by text search or barcode scan)
 sealed class FoodSearchState{
     object Idle : FoodSearchState()
     object Loading : FoodSearchState()
@@ -21,6 +22,7 @@ sealed class FoodSearchState{
     data class Error(val message: String) : FoodSearchState()
 }
 
+// Represents the state of saving the currently found food as a diary meal entry
 sealed class LogMealState {
     object Idle : LogMealState()
     object Saving : LogMealState()
@@ -28,6 +30,8 @@ sealed class LogMealState {
     data class Error(val message: String) : LogMealState()
 }
 
+// ViewModel backing LogFoodFragment - handles food search (text/barcode) and
+// logging the selected food with a chosen meal type and serving size.
 class LogFoodViewModel(
     private val foodRepository: FoodRepository = FoodRepository(),
     private val diaryRepository: DiaryRepository = DiaryRepository()
@@ -39,7 +43,7 @@ class LogFoodViewModel(
     private val _logState = MutableStateFlow<LogMealState>(LogMealState.Idle)
     val logState: StateFlow<LogMealState> = _logState
 
-
+    // Currently selected meal type and serving size, defaults chosen for a fresh screen
     var selectedMealType: MealType = MealType.BREAKFAST
         private set
     var selectedServings: Double = 1.0
@@ -53,6 +57,7 @@ class LogFoodViewModel(
         selectedServings = servings
     }
 
+    // Looks up a food item by scanned barcode value
     fun searchByBarcode(barcode: String) {
         viewModelScope.launch {
             _searchState.value = FoodSearchState.Loading
@@ -70,6 +75,7 @@ class LogFoodViewModel(
         }
     }
 
+    // Looks up a food item by free-text search query
     fun searchByText(query: String) {
         viewModelScope.launch {
             _searchState.value = FoodSearchState.Loading
@@ -87,6 +93,7 @@ class LogFoodViewModel(
         }
     }
 
+    // Saves the currently found food as a meal entry for today, using the selected meal type and servings
     fun logCurrentFood() {
         val currentFood = (_searchState.value as? FoodSearchState.Found)?.food ?: run {
             _logState.value = LogMealState.Error("No food selected")
@@ -112,7 +119,9 @@ class LogFoodViewModel(
         }
     }
 
+    // Clears the search result, e.g. when starting a fresh search
     fun resetSearch() {
         _searchState.value = FoodSearchState.Idle
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

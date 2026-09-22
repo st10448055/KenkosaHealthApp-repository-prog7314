@@ -15,9 +15,16 @@ import com.example.kenkosahealthapp_prog7314.databinding.FragmentSignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
+// Sign-up screen fragment - collects new user details, creates the account via AuthViewModel,
+// then signs the user back out and routes them to Login so their first proper login is what
+// triggers the body metrics onboarding flow.
+
 class SignUpFragment : Fragment() {
 
+    // Nullable backing field for view binding, cleared in onDestroyView to avoid leaks
     private var _binding: FragmentSignUpBinding? = null
+
+    // Non-null accessor, only safe to use between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
     private val viewModel: AuthViewModel by viewModels {
@@ -39,6 +46,8 @@ class SignUpFragment : Fragment() {
             findNavController().navigate(R.id.action_sign_up_to_login)
         }
 
+        // Observe auth state only while the view is at least STARTED, to avoid
+        // updating views that don't exist yet or have already been destroyed
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
@@ -66,6 +75,8 @@ class SignUpFragment : Fragment() {
         }
     }
 
+    // Validates the sign-up form locally (required fields, matching passwords, min length)
+    // before delegating account creation to the ViewModel
     private fun attemptSignUp() {
         val fullName = binding.editFullName.text.toString().trim()
         val email = binding.editEmail.text.toString().trim()
@@ -85,6 +96,8 @@ class SignUpFragment : Fragment() {
             return
         }
 
+        // Split the full name into first name / surname for storage,
+        // treating everything after the first space as the surname
         val parts = fullName.split(" ", limit = 2)
         val name = parts.getOrElse(0) { "" }
         val surname = parts.getOrElse(1) { "" }
@@ -93,18 +106,22 @@ class SignUpFragment : Fragment() {
         viewModel.signUp(name, surname, email, password)
     }
 
+    // Toggles the progress bar and disables the sign-up button while a request is in flight
     private fun setLoading(loading: Boolean) {
         binding.progressBar.visibility = if (loading) View.VISIBLE else View.GONE
         binding.buttonSignUp.isEnabled = !loading
     }
 
+    // Displays an inline error message below the form
     private fun showError(message: String) {
         binding.textError.text = message
         binding.textError.visibility = View.VISIBLE
     }
 
+    // Prevent memory leaks by releasing the binding reference
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

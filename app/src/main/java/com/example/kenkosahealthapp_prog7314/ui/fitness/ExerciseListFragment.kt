@@ -19,6 +19,8 @@ import com.example.kenkosahealthapp_prog7314.databinding.FragmentExerciseListBin
 import com.example.kenkosahealthapp_prog7314.ui.addmenu.AddMenuBottomSheet
 import kotlinx.coroutines.launch
 
+// Shows the list of exercises within a single category (e.g. "Cardio", "Strength"),
+// with a search box to filter by name and a tap target that opens exercise details.
 class ExerciseListFragment : Fragment() {
 
     private var _binding: FragmentExerciseListBinding? = null
@@ -40,18 +42,22 @@ class ExerciseListFragment : Fragment() {
         setupWindowInsets()
         setupBottomNav()
 
+        // Which category we're showing; -1/"Exercises" are safe fallbacks if
+        // this screen is somehow opened without arguments.
         val categoryId = arguments?.getInt("categoryId") ?: -1
         val categoryName = arguments?.getString("categoryName") ?: "Exercises"
 
         binding.textCategoryTitle.text = categoryName
         binding.buttonBack.setOnClickListener { findNavController().navigateUp() }
 
+        // Tapping an exercise opens its details in a bottom sheet.
         adapter = ExerciseAdapter { exercise ->
             ExerciseDetailBottomSheet(exercise).show(parentFragmentManager, "exerciseDetail")
         }
         binding.recyclerExercises.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerExercises.adapter = adapter
 
+        // Live-filters the list as the user types in the search box.
         binding.editSearch.addTextChangedListener(object : android.text.TextWatcher {
             override fun afterTextChanged(s: android.text.Editable?) {
                 viewModel.search(s.toString())
@@ -62,11 +68,14 @@ class ExerciseListFragment : Fragment() {
 
         observeState()
 
+        // Only fetch exercises if we actually got a valid category ID.
         if (categoryId != -1) {
             viewModel.loadExercises(categoryId)
         }
     }
 
+    // Applies system bar/cutout insets as padding so content isn't drawn under
+    // the status bar and the bottom nav isn't drawn under gesture/nav bars.
     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
@@ -90,6 +99,7 @@ class ExerciseListFragment : Fragment() {
         }
     }
 
+    // Collects the ViewModel's exercise-list state and updates loading/error/content UI.
     private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -101,6 +111,8 @@ class ExerciseListFragment : Fragment() {
                         }
                         is ExerciseListUiState.Success -> {
                             binding.progressLoading.visibility = View.GONE
+                            // Always render the filtered list, which defaults to
+                            // the full list when there's no active search query.
                             adapter.submitList(state.filtered)
                         }
                         is ExerciseListUiState.Error -> {
@@ -119,3 +131,4 @@ class ExerciseListFragment : Fragment() {
         _binding = null
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

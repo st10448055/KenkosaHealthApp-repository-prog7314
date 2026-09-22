@@ -9,6 +9,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.example.kenkosahealthapp_prog7314.data.network.ExerciseDto
 import com.example.kenkosahealthapp_prog7314.databinding.BottomSheetExerciseDetailBinding
 
+// Bottom sheet shown when an exercise is tapped, displaying its name, required
+// equipment, and a plain-text description (the description arrives as HTML
+// from the API, so it's stripped down before display).
 class ExerciseDetailBottomSheet(private val exercise: ExerciseDto) : BottomSheetDialogFragment() {
 
     private var _binding: BottomSheetExerciseDetailBinding? = null
@@ -26,12 +29,15 @@ class ExerciseDetailBottomSheet(private val exercise: ExerciseDto) : BottomSheet
 
         binding.textDetailName.text = exercise.name
 
+        // Show a friendly fallback when no equipment is required, rather than
+        // leaving the field blank.
         binding.textDetailEquipment.text = if (exercise.equipment.isNotEmpty()) {
             exercise.equipment.joinToString(", ")
         } else {
             "No equipment needed"
         }
 
+        // Strip HTML markup out of the API-provided description down to plain text.
         val plainDescription = Html.fromHtml(exercise.description, Html.FROM_HTML_MODE_LEGACY)
             .toString()
             .trim()
@@ -44,3 +50,4 @@ class ExerciseDetailBottomSheet(private val exercise: ExerciseDto) : BottomSheet
         _binding = null
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

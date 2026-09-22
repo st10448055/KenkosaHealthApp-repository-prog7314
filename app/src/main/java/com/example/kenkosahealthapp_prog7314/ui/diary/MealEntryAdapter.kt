@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kenkosahealthapp_prog7314.data.network.MealEntryDto
 import com.example.kenkosahealthapp_prog7314.databinding.ItemMealEntryBinding
 
+// RecyclerView adapter for a single meal-type section's list of logged food entries,
+// with inline servings editing and a delete action per row.
 class MealEntryAdapter(
     private val onSaveServings: (mealId: String, newServings: Double) -> Unit,
     private val onDeleteClicked: (mealId: String) -> Unit
@@ -44,6 +46,7 @@ class MealEntryAdapter(
             }
         }
 
+        // Drops the decimal point for whole numbers (e.g. shows "2" instead of "2.0")
         private fun formatServings(value: Double): String =
             if (value == value.toLong().toDouble()) value.toLong().toString() else value.toString()
     }
@@ -56,3 +59,4 @@ class MealEntryAdapter(
             oldItem == newItem
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

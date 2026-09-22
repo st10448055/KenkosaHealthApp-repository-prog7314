@@ -14,13 +14,17 @@ import com.example.kenkosahealthapp_prog7314.databinding.FragmentLogFoodBinding
 import kotlinx.coroutines.launch
 import com.example.kenkosahealthapp_prog7314.R
 
+// Screen for logging a food item to the diary — pick a meal type, search by text
+// or barcode, review the matched food's macros, adjust servings, then save.
 class LogFoodFragment : Fragment() {
 
+    // Nullable backing field for view binding, cleared in onDestroyView to avoid leaks
     private var _binding: FragmentLogFoodBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: LogFoodViewModel by viewModels()
 
+    // Maps each meal type to its corresponding selector button in the layout
     private lateinit var mealTypeViews: Map<MealType, android.widget.TextView>
 
     override fun onCreateView(
@@ -35,10 +39,12 @@ class LogFoodFragment : Fragment() {
 
         binding.buttonBack.setOnClickListener { findNavController().navigateUp() }
 
+        // Pre-select the meal type passed in as an argument (e.g. tapped "Add" under Lunch),
+        // defaulting to Breakfast if nothing was passed
         val incomingMealType = arguments?.getString("mealType")
         val initialMealType = MealType.entries.find { it.apiValue == incomingMealType } ?: MealType.BREAKFAST
 
-        // --- Meal type selector: fixed buttons, no free text, matches your design mockup ---
+        // Meal type selector
         mealTypeViews = mapOf(
             MealType.BREAKFAST to binding.mealTypeBreakfast,
             MealType.LUNCH to binding.mealTypeLunch,
@@ -50,7 +56,7 @@ class LogFoodFragment : Fragment() {
         }
         selectMealType(initialMealType)
 
-        // --- Search: text search ---
+        // Search: text search
         binding.buttonSearch.setOnClickListener {
             val query = binding.editSearchQuery.text.toString().trim()
             if (query.isNotEmpty()) viewModel.searchByText(query)
@@ -68,7 +74,7 @@ class LogFoodFragment : Fragment() {
                 findNavController().currentBackStackEntry?.savedStateHandle?.remove<String>("scanned_barcode")
             }
 
-        // --- Servings input ---
+        // Servings input
         binding.editServings.addTextChangedListener(object : android.text.TextWatcher {
             override fun afterTextChanged(s: android.text.Editable?) {
                 s.toString().toDoubleOrNull()?.let { viewModel.updateServings(it) }
@@ -83,6 +89,7 @@ class LogFoodFragment : Fragment() {
         observeLogState()
     }
 
+    // Updates the selected meal type in the ViewModel and toggles the selected visual state of each button
     private fun selectMealType(type: MealType) {
         viewModel.selectMealType(type)
         mealTypeViews.forEach { (mealType, view) ->
@@ -90,6 +97,7 @@ class LogFoodFragment : Fragment() {
         }
     }
 
+    // Observes the food search result and updates the loading/result/error UI accordingly
     private fun observeSearchState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -124,6 +132,7 @@ class LogFoodFragment : Fragment() {
         }
     }
 
+    // Observes the save/log result, disabling the add button while saving and navigating back on success
     private fun observeLogState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -148,6 +157,8 @@ class LogFoodFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        // Prevent memory leaks by releasing the binding reference
         _binding = null
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

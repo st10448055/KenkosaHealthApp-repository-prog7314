@@ -9,12 +9,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+// State of the category grid shown on the top-level Fitness screen.
 sealed class FitnessUiState {
     object Loading : FitnessUiState()
     data class Success(val categories: List<ExerciseCategoryDto>) : FitnessUiState()
     data class Error(val message: String) : FitnessUiState()
 }
 
+// Backs FitnessFragment: loads the list of exercise categories on init.
 class FitnessViewModel(
     private val workoutRepository: WorkoutRepository = WorkoutRepository()
 ) : ViewModel() {
@@ -23,6 +25,8 @@ class FitnessViewModel(
     val uiState: StateFlow<FitnessUiState> = _uiState
 
     init {
+        // Kick off loading as soon as the ViewModel is created, so categories
+        // are ready (or already loading) by the time the fragment observes state.
         loadCategories()
     }
 
@@ -38,3 +42,4 @@ class FitnessViewModel(
         }
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

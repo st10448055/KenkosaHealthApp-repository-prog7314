@@ -26,30 +26,41 @@ import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
 
-/**
- * Add Goal, and (when opened with [ARG_GOAL_ID]) the Edit Goal screen for an existing goal, with a Delete button.
- * Sleep goals are locked to "hours" and 24 at most, because the Sleep screen reads a SLEEP goal's target as hours.
- */
+// Fragment for creating a new goal or editing/deleting an existing goal.
+// Sleep goals are restricted to "hours" and capped at 24.
 class AddGoalTrackingFragment : Fragment() {
 
+    // Backing variable for binding layout instance
     private var _binding: FragmentAddGoalTrackingBinding? = null
+
+    // Non-null binding property valid between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
+    // ViewModel handling goal persistence and business logic
     private val viewModel: GoalTrackingViewModel by viewModels()
 
+    // Identifier passed when editing an existing goal
     private var goalId: String? = null
+
+    // Flag indicating whether the screen is in Edit mode
     private val isEditMode get() = goalId != null
 
-    /** The goal as loaded from the server (edit mode only). */
+    // Original goal entity fetched from server when editing
     private var original: TrackedGoalDto? = null
 
+    // Stored hour for reminder picker (default 6 AM)
     private var reminderHour = 6
+
+    // Stored minute for reminder picker (default 0)
     private var reminderMinute = 0
 
-    /** The unit we last filled in ourselves, so we only overwrite units the user hasn't typed. */
+    // Stores unit autofilled by category selection to avoid overwriting user edits
     private var lastDefaultUnit = ""
+
+    // Flag preventing programmatic updates from triggering UI change listeners
     private var isApplyingState = false
 
+    // Maps chip view IDs to category enum options
     private val categoryChips by lazy {
         mapOf(
             R.id.chipSteps to GoalCategoryOption.STEPS,
@@ -60,6 +71,7 @@ class AddGoalTrackingFragment : Fragment() {
         )
     }
 
+    // Maps chip view IDs to goal frequency string constants
     private val frequencyChips by lazy {
         mapOf(
             R.id.chipDaily to GoalProgress.DAILY,
@@ -68,6 +80,7 @@ class AddGoalTrackingFragment : Fragment() {
         )
     }
 
+    // Inflates the layout and initializes binding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -75,18 +88,23 @@ class AddGoalTrackingFragment : Fragment() {
         return binding.root
     }
 
+    // Configures views, event listeners, and initial state upon view creation
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Extract passed goal ID argument
         goalId = arguments?.getString(ARG_GOAL_ID)
 
         setupWindowInsets()
         setupHeader()
         setupBottomNav()
 
+        // Handle category chip changes
         binding.chipGroupCategory.setOnCheckedStateChangeListener { _, _ ->
             if (!isApplyingState) onCategoryChanged()
         }
+
+        // Action button click handlers
         binding.rowReminderTime.setOnClickListener { pickReminderTime() }
         binding.buttonSave.setOnClickListener { attemptSave() }
         binding.buttonCancel.setOnClickListener { findNavController().navigateUp() }
@@ -94,6 +112,7 @@ class AddGoalTrackingFragment : Fragment() {
 
         updateReminderLabel()
 
+        // Configure layout based on mode (Edit vs Add)
         if (isEditMode) {
             binding.textTitle.setText(R.string.goaltrack_edit_title)
             binding.buttonSave.setText(R.string.goaltrack_save_changes)
@@ -110,7 +129,7 @@ class AddGoalTrackingFragment : Fragment() {
     }
 
     // ---------------------------------------------------------------- setup
-
+// Adjusts padding to prevent UI from hiding behind system bars and notch cutouts
     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
@@ -122,6 +141,7 @@ class AddGoalTrackingFragment : Fragment() {
         }
     }
 
+    // Sets up header actions and navigation drawer trigger
     private fun setupHeader() {
         binding.buttonMenu.setOnClickListener {
             val nav = findNavController()
@@ -133,6 +153,7 @@ class AddGoalTrackingFragment : Fragment() {
         // Notification bell is intentionally non-functional for now (same as the other screens).
     }
 
+    // Sets up click listeners for bottom navigation bar items
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
@@ -144,14 +165,15 @@ class AddGoalTrackingFragment : Fragment() {
     }
 
     // ------------------------------------------------------------- category
-
+    // Returns currently selected category from chip group
     private fun selectedCategory(): GoalCategoryOption =
         categoryChips[binding.chipGroupCategory.checkedChipId] ?: GoalCategoryOption.STEPS
 
+    // Returns currently selected frequency string from chip group
     private fun selectedFrequency(): String =
         frequencyChips[binding.chipGroupFrequency.checkedChipId] ?: GoalProgress.DAILY
 
-    /** Fills in a sensible unit for the category (unless the user typed their own) and locks it for Sleep. */
+    // Autofills unit field for chosen category and locks editing if category is Sleep
     private fun onCategoryChanged() {
         val category = selectedCategory()
         val newDefault = category.defaultUnitRes?.let { getString(it) } ?: ""
@@ -165,7 +187,7 @@ class AddGoalTrackingFragment : Fragment() {
     }
 
     // ------------------------------------------------------------ edit mode
-
+    // Observes goal edit state changes from ViewModel
     private fun observeEditState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -189,7 +211,7 @@ class AddGoalTrackingFragment : Fragment() {
             }
         }
     }
-
+    // Fills input fields with existing goal values when in Edit mode
     private fun populate(goal: TrackedGoalDto) {
         original = goal
 
@@ -222,7 +244,7 @@ class AddGoalTrackingFragment : Fragment() {
     }
 
     // ------------------------------------------------------------- reminder
-
+    // Parses HH:mm string into hour and minute integers
     private fun parseTime(hhmm: String?): Pair<Int, Int>? {
         val parts = hhmm?.split(":") ?: return null
         val hour = parts.getOrNull(0)?.toIntOrNull()?.takeIf { it in 0..23 } ?: return null
@@ -230,6 +252,7 @@ class AddGoalTrackingFragment : Fragment() {
         return hour to minute
     }
 
+    // Displays time picker dialog for reminder selection
     private fun pickReminderTime() {
         TimePickerDialog(
             requireContext(),
@@ -244,6 +267,7 @@ class AddGoalTrackingFragment : Fragment() {
         ).show()
     }
 
+    // Updates reminder time text label according to user time format preferences
     private fun updateReminderLabel() {
         val calendar = Calendar.getInstance().apply {
             set(Calendar.HOUR_OF_DAY, reminderHour)
@@ -254,13 +278,14 @@ class AddGoalTrackingFragment : Fragment() {
     }
 
     // ----------------------------------------------------------------- save
-
+    // Validates form input and triggers goal creation or update request
     private fun attemptSave() {
         val name = binding.editGoalName.text.toString().trim()
         val target = binding.editTargetValue.text.toString().trim().replace(',', '.').toDoubleOrNull()
         val unit = binding.editUnit.text.toString().trim()
         val category = selectedCategory()
 
+        // Form validations
         if (name.isEmpty()) return showError(getString(R.string.goaltrack_error_name))
         if (name.length > 60) return showError(getString(R.string.goaltrack_error_name_length))
         if (target == null || target <= 0) return showError(getString(R.string.goaltrack_error_target))
@@ -298,6 +323,7 @@ class AddGoalTrackingFragment : Fragment() {
         if (id == null) viewModel.createGoal(request, onResult) else viewModel.updateGoal(id, request, onResult)
     }
 
+    // Displays confirmation dialog before deleting goal
     private fun confirmDelete() {
         val id = goalId ?: return
         val name = original?.name ?: binding.editGoalName.text.toString()
@@ -320,20 +346,24 @@ class AddGoalTrackingFragment : Fragment() {
             .show()
     }
 
+    // Shows error message UI label
     private fun showError(message: String) {
         binding.textError.text = message
         binding.textError.isVisible = true
     }
 
+    // Hides error message UI label
     private fun hideError() {
         binding.textError.isVisible = false
     }
 
+    // Sets save loading state and enables/disables save button
     private fun setLoading(loading: Boolean) {
         binding.progressSaving.isVisible = loading
         binding.buttonSave.isEnabled = !loading
     }
 
+    // Cleans up binding reference when view is destroyed
     override fun onDestroyView() {
         super.onDestroyView()
         original = null // the next view gets filled from the ViewModel again
@@ -341,6 +371,8 @@ class AddGoalTrackingFragment : Fragment() {
     }
 
     companion object {
+        // Navigation argument key for passing existing goal ID
         const val ARG_GOAL_ID = "goalId"
     }
 }
+//---------------------------------------END OF FILE-------------------------------------------------

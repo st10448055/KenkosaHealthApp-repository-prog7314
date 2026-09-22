@@ -20,9 +20,14 @@ import com.example.kenkosahealthapp_prog7314.databinding.ItemMealSectionBinding
 import com.example.kenkosahealthapp_prog7314.ui.addmenu.AddMenuBottomSheet
 import kotlinx.coroutines.launch
 
+// Screen showing today's logged meals grouped by meal type (breakfast/lunch/dinner/snack),
+// each with edit-servings and delete actions, plus a shortcut into Log Food per section.
 class MealHistoryFragment : Fragment() {
 
+    // Nullable backing field for view binding, cleared in onDestroyView to avoid leaks
     private var _binding: FragmentMealHistoryBinding? = null
+
+    // Non-null accessor, only safe to use between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
     private val viewModel: MealHistoryViewModel by viewModels()
@@ -39,6 +44,7 @@ class MealHistoryFragment : Fragment() {
         return binding.root
     }
 
+    // Applies system bar insets as padding so content isn't drawn under the status/nav bars
     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
@@ -50,6 +56,7 @@ class MealHistoryFragment : Fragment() {
         }
     }
 
+    // Wires up the shared bottom navigation bar and the FAB's quick-add menu
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
@@ -85,6 +92,8 @@ class MealHistoryFragment : Fragment() {
         viewModel.loadTodaysMeals()
     }
 
+    // Sets a section's title, builds its adapter, wires the RecyclerView, and stores
+    // the adapter reference in the matching field so observeState can update it later
     private fun setupSection(section: ItemMealSectionBinding, mealType: MealType) {
         section.textSectionTitle.setText(mealType.labelRes)
 
@@ -108,6 +117,7 @@ class MealHistoryFragment : Fragment() {
         }
     }
 
+    // Navigates to Log Food pre-filled with the meal type of the section that was tapped
     private fun navigateToLogFood(mealType: MealType) {
         val bundle = Bundle().apply {
             putString("mealType", mealType.apiValue)
@@ -118,6 +128,7 @@ class MealHistoryFragment : Fragment() {
         )
     }
 
+    // Observes overall UI state (loading/error) and pushes each meal type's items into its section
     private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -140,6 +151,7 @@ class MealHistoryFragment : Fragment() {
         }
     }
 
+    // Submits the meal list to the adapter and toggles the empty-state message
     private fun bindSection(
         section: ItemMealSectionBinding,
         adapter: MealEntryAdapter,
@@ -152,6 +164,8 @@ class MealHistoryFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        // Prevent memory leaks by releasing the binding reference
         _binding = null
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

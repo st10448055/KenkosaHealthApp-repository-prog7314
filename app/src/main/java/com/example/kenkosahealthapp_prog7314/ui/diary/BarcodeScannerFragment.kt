@@ -21,14 +21,21 @@ import com.google.mlkit.vision.common.InputImage
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+// Camera-based barcode scanner screen. Requests camera permission, streams frames
+// through CameraX + ML Kit to detect a product barcode, then sends the scanned value
+// back to LogFoodFragment via the previous back stack entry's saved state handle.
 class BarcodeScannerFragment : Fragment() {
 
+    // Nullable backing field for view binding, cleared in onDestroyView to avoid leaks
     private var _binding: FragmentBarcodeScannerBinding? = null
+
+    // Non-null accessor, only safe to use between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
     private lateinit var cameraExecutor: ExecutorService
     private var hasScanned = false // prevents firing multiple times once a barcode is found
 
+    // Handles the result of the camera permission request, starting the camera if granted
     private val requestPermissionLauncher =
         registerForActivityResult(androidx.activity.result.contract.ActivityResultContracts.RequestPermission()) { granted ->
             if (granted) {
@@ -48,10 +55,12 @@ class BarcodeScannerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Dedicated single-thread executor for camera frame analysis, kept off the main thread
         cameraExecutor = Executors.newSingleThreadExecutor()
 
         binding.buttonBack.setOnClickListener { findNavController().navigateUp() }
 
+        // Only start the camera if permission is already granted, otherwise request it first
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
             == PackageManager.PERMISSION_GRANTED
         ) {
@@ -61,16 +70,20 @@ class BarcodeScannerFragment : Fragment() {
         }
     }
 
+    // Binds a CameraX preview and image analysis use case to the fragment's lifecycle
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
         cameraProviderFuture.addListener({
             val cameraProvider = cameraProviderFuture.get()
 
+            // Preview use case, renders the live camera feed into the PreviewView
             val preview = androidx.camera.core.Preview.Builder().build().also {
                 it.setSurfaceProvider(binding.previewView.surfaceProvider)
             }
 
+            // Analysis use case, only keeps the latest frame so analysis never backs up
+            // behind slow processing (STRATEGY_KEEP_ONLY_LATEST drops older frames)
             val imageAnalysis = ImageAnalysis.Builder()
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
@@ -83,6 +96,7 @@ class BarcodeScannerFragment : Fragment() {
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
+                // Unbind any previous use cases before rebinding, required by CameraX
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
                     viewLifecycleOwner, cameraSelector, preview, imageAnalysis
@@ -93,6 +107,7 @@ class BarcodeScannerFragment : Fragment() {
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
+    // Called when a barcode value is successfully decoded from a frame
     private fun onBarcodeDetected(barcodeValue: String) {
         if (hasScanned) return // only act on the first successful scan
         hasScanned = true
@@ -104,11 +119,12 @@ class BarcodeScannerFragment : Fragment() {
         findNavController().navigateUp()
     }
 
-    /** Wraps ML Kit's barcode detection as a CameraX ImageAnalysis.Analyzer */
+    // Wraps ML Kit's barcode detection as a CameraX ImageAnalysis.Analyzer
     private class BarcodeAnalyzer(
         private val onBarcodeFound: (String) -> Unit
     ) : ImageAnalysis.Analyzer {
 
+        // Restrict detection to common retail barcode formats to reduce false positives
         private val scannerOptions = BarcodeScannerOptions.Builder()
             .setBarcodeFormats(
                 Barcode.FORMAT_EAN_13,
@@ -151,3 +167,4 @@ class BarcodeScannerFragment : Fragment() {
         _binding = null
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

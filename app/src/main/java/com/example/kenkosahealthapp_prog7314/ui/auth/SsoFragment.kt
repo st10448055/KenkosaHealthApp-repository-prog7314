@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentSsoBinding
 
+//"Continue with email" screen shown before login — collects the user's email
+// and passes it forward to the Login screen so it's pre-filled there.
 class SsoFragment : Fragment() {
 
     private var _binding: FragmentSsoBinding? = null
@@ -25,6 +27,7 @@ class SsoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Navigate back to the previous screen (e.g. Start screen)
         binding.buttonBack.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -32,15 +35,18 @@ class SsoFragment : Fragment() {
         binding.buttonContinue.setOnClickListener {
             val email = binding.editEmail.text.toString().trim()
             if (email.isEmpty()) {
+                // Show inline validation error and stop navigation
                 binding.editEmail.error = "Enter your email to continue"
                 return@setOnClickListener
             }
+
+            // Pass the entered email forward so the Login screen can pre-fill it
             findNavController().navigate(
                 R.id.action_sso_to_login,
                 bundleOf("email" to email)
             )
         }
-
+        // Shortcut for new users to skip straight to account creation
         binding.textGoToSignUp.setOnClickListener {
             findNavController().navigate(R.id.action_sso_to_sign_up)
         }
@@ -51,3 +57,4 @@ class SsoFragment : Fragment() {
         _binding = null
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

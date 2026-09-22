@@ -31,27 +31,32 @@ import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
 
-/**
- * Goal Tracking: the weekly streak row, the goal cards with their progress, and the menu for logging progress,
- * editing and deleting a goal.
- */
+// Displays weekly streak row, goal card progress lists, and options for logging progress, editing, or deleting goals
 class GoalTrackingFragment : Fragment() {
 
+    // View binding backing reference
     private var _binding: FragmentGoalTrackingBinding? = null
+
+    // View binding property accessor
     private val binding get() = _binding!!
 
+    // ViewModel instance for goal operations
     private val viewModel: GoalTrackingViewModel by viewModels()
 
+    // RecyclerView adapter for goal items
     private lateinit var adapter: GoalTrackingAdapter
+
+    // List of loaded tracked goals
     private var goals: List<TrackedGoalDto> = emptyList()
 
+    // Inflates the fragment layout
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGoalTrackingBinding.inflate(inflater, container, false)
         return binding.root
     }
-
+    // Sets up UI components, RecyclerView adapter, window insets, and observers
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -67,6 +72,7 @@ class GoalTrackingFragment : Fragment() {
         observeState()
     }
 
+    // Refreshes goals on fragment resume
     override fun onResume() {
         super.onResume()
         viewModel.loadGoals()
@@ -74,6 +80,7 @@ class GoalTrackingFragment : Fragment() {
 
     // ---------------------------------------------------------------- setup
 
+    // Adjusts padding to respect system bars and cutouts
     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
@@ -85,6 +92,7 @@ class GoalTrackingFragment : Fragment() {
         }
     }
 
+    // Configures header buttons and navigation drawer action
     private fun setupHeader() {
         binding.buttonMenu.setOnClickListener {
             val nav = findNavController()
@@ -96,6 +104,7 @@ class GoalTrackingFragment : Fragment() {
         // Notification bell is intentionally non-functional for now (same as the other screens).
     }
 
+    // Sets click listeners for bottom navigation bar
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
@@ -107,7 +116,7 @@ class GoalTrackingFragment : Fragment() {
     }
 
     // ---------------------------------------------------------------- state
-
+    // Observes goal list UI state from ViewModel
     private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -133,6 +142,7 @@ class GoalTrackingFragment : Fragment() {
         }
     }
 
+    // Renders loaded goal rows and updates streak bar
     private fun render() {
         val today = LocalDate.now()
 
@@ -147,7 +157,7 @@ class GoalTrackingFragment : Fragment() {
         renderStreak()
     }
 
-    /** The seven circles for this week (Mon-Sun) plus the "current streak" line. */
+    // Renders seven daily indicators (Mon-Sun) and summary count for current streak
     private fun renderStreak() {
         val today = LocalDate.now()
         val days = GoalProgress.weekDays(goals, today)
@@ -196,6 +206,7 @@ class GoalTrackingFragment : Fragment() {
 
     // -------------------------------------------------------------- actions
 
+    // Shows goal options menu (Log progress, Edit, Delete)
     private fun showGoalMenu(goal: TrackedGoalDto) {
         val items = arrayOf(
             getString(R.string.goaltrack_action_log),
@@ -214,6 +225,7 @@ class GoalTrackingFragment : Fragment() {
             .show()
     }
 
+    // Navigates to edit screen with selected goal ID
     private fun openEditor(goal: TrackedGoalDto) {
         findNavController().navigate(
             R.id.action_goals_to_addGoal,
@@ -221,7 +233,7 @@ class GoalTrackingFragment : Fragment() {
         )
     }
 
-    /** "Today's total" for the goal; saving replaces today's value, so re-logging corrects it. */
+    // Shows dialog to input progress value for today
     private fun showLogProgressDialog(goal: TrackedGoalDto) {
         val today = LocalDate.now()
         val todayValue = GoalProgress.valueOn(goal, today)
@@ -260,6 +272,7 @@ class GoalTrackingFragment : Fragment() {
             .show()
     }
 
+    // Prompts confirmation dialog to delete goal
     private fun confirmDelete(goal: TrackedGoalDto) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.goaltrack_delete_title)
@@ -273,6 +286,7 @@ class GoalTrackingFragment : Fragment() {
             .show()
     }
 
+    // Displays toast message with error text
     private fun showToast(message: String?) {
         Toast.makeText(
             requireContext(),
@@ -281,8 +295,10 @@ class GoalTrackingFragment : Fragment() {
         ).show()
     }
 
+    // Cleans up view binding when fragment view is destroyed
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
+//---------------------------------------END OF FILE-------------------------------------------------

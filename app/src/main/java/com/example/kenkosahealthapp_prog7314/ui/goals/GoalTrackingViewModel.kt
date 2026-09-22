@@ -10,13 +10,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+// UI state representations for goal tracking list screen
 sealed class GoalTrackingUiState {
     object Loading : GoalTrackingUiState()
     data class Success(val goals: List<TrackedGoalDto>) : GoalTrackingUiState()
     data class Error(val message: String) : GoalTrackingUiState()
 }
 
-/** State of the single goal loaded by the Add / Edit Goal screen. */
+
+// UI state representations for adding/editing a single goal
 sealed class GoalEditState {
     object Idle : GoalEditState()
     object Loading : GoalEditState()
@@ -24,14 +26,21 @@ sealed class GoalEditState {
     data class Error(val message: String) : GoalEditState()
 }
 
+// ViewModel managing states and operations for goal tracking screens
 class GoalTrackingViewModel(
     private val repository: GoalTrackingRepository = GoalTrackingRepository()
 ) : ViewModel() {
 
+    // Internal state flow for goal list screen
     private val _uiState = MutableStateFlow<GoalTrackingUiState>(GoalTrackingUiState.Loading)
+
+    // Public state flow for goal list screen
     val uiState: StateFlow<GoalTrackingUiState> = _uiState
 
+    // Internal state flow for add/edit goal screen
     private val _editState = MutableStateFlow<GoalEditState>(GoalEditState.Idle)
+
+    // Public state flow for add/edit goal screen
     val editState: StateFlow<GoalEditState> = _editState
 
     // ------------------------------------------------------------------ list
@@ -47,7 +56,7 @@ class GoalTrackingViewModel(
         }
     }
 
-    /** Sets the total for [date] (not an increment), then refreshes so the bars and the streak update. */
+    // Logs progress amount for target date and refreshes goal list
     fun logProgress(
         goalId: String, date: String, value: Double,
         onResult: (success: Boolean, errorMessage: String?) -> Unit
@@ -59,6 +68,7 @@ class GoalTrackingViewModel(
         }
     }
 
+    // Deletes specified goal and refreshes goal list
     fun deleteGoal(
         goalId: String,
         onResult: ((success: Boolean, errorMessage: String?) -> Unit)? = null
@@ -72,6 +82,7 @@ class GoalTrackingViewModel(
 
     // ------------------------------------------------------------- add / edit
 
+    // Loads single goal entity for editing
     fun loadGoal(goalId: String) {
         viewModelScope.launch {
             _editState.value = GoalEditState.Loading
@@ -82,6 +93,7 @@ class GoalTrackingViewModel(
         }
     }
 
+    // Creates new goal entry
     fun createGoal(
         request: SaveTrackedGoalRequest,
         onResult: (success: Boolean, errorMessage: String?) -> Unit
@@ -92,6 +104,7 @@ class GoalTrackingViewModel(
         }
     }
 
+    // Updates existing goal entry
     fun updateGoal(
         goalId: String, request: SaveTrackedGoalRequest,
         onResult: (success: Boolean, errorMessage: String?) -> Unit
@@ -102,6 +115,7 @@ class GoalTrackingViewModel(
         }
     }
 
+    // Extracts error message string from repository result
     private fun TrackingResult<*>.errorMessage(): String? = when (this) {
         is TrackingResult.Success -> null
         is TrackingResult.ValidationError -> message
@@ -110,3 +124,4 @@ class GoalTrackingViewModel(
         is TrackingResult.ServerError -> message
     }
 }
+//---------------------------------------END OF FILE-------------------------------------------------

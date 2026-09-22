@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+// Groups today's meal entries by meal type for display, plus loading/error state
 data class MealHistoryUiState(
     val isLoading: Boolean = false,
     val breakfast: List<MealEntryDto> = emptyList(),
@@ -21,6 +22,8 @@ data class MealHistoryUiState(
     val errorMessage: String? = null
 )
 
+// ViewModel shared by MealHistoryFragment and DiaryFragment - loads today's meals
+// grouped by type, and handles updating servings or deleting an entry.
 class MealHistoryViewModel(
     private val diaryRepository: DiaryRepository = DiaryRepository()
 ) : ViewModel() {
@@ -32,6 +35,7 @@ class MealHistoryViewModel(
         loadTodaysMeals()
     }
 
+    // Fetches today's meals and buckets them into breakfast/lunch/dinner/snack lists
     fun loadTodaysMeals() {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true, errorMessage = null)
@@ -62,6 +66,7 @@ class MealHistoryViewModel(
         }
     }
 
+    // Updates a meal entry's serving size, then reloads so totals reflect the change
     fun updateServings(mealId: String, newServings: Double) {
         viewModelScope.launch {
             when (diaryRepository.updateServings(mealId, newServings)) {
@@ -73,6 +78,7 @@ class MealHistoryViewModel(
         }
     }
 
+    // Deletes a meal entry, then reloads to refresh the lists
     fun deleteMeal(mealId: String) {
         viewModelScope.launch {
             when (diaryRepository.deleteMeal(mealId)) {
@@ -82,3 +88,4 @@ class MealHistoryViewModel(
         }
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

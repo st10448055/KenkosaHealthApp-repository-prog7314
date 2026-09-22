@@ -20,6 +20,8 @@ import com.example.kenkosahealthapp_prog7314.ui.addmenu.AddMenuBottomSheet
 import com.example.kenkosahealthapp_prog7314.ui.home.HomeFragment
 import kotlinx.coroutines.launch
 
+// Top-level fitness screen: shows a 2-column grid of exercise categories
+// (Cardio, Strength, etc). Tapping one drills into ExerciseListFragment.
 class FitnessFragment : Fragment() {
 
     private var _binding: FragmentFitnessBinding? = null
@@ -41,6 +43,8 @@ class FitnessFragment : Fragment() {
         setupWindowInsets()
         setupHeader()
 
+        // Tapping a category navigates to the exercise list, passing along the
+        // category's ID and display name as arguments.
         adapter = CategoryAdapter { category ->
             val bundle = Bundle().apply {
                 putInt("categoryId", category.id)
@@ -49,6 +53,7 @@ class FitnessFragment : Fragment() {
             findNavController().navigate(R.id.action_fitness_to_exerciseList, bundle)
         }
 
+        // 2-column grid layout for the category tiles.
         binding.recyclerCategories.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.recyclerCategories.adapter = adapter
 
@@ -70,6 +75,8 @@ class FitnessFragment : Fragment() {
     private fun setupHeader() {
         binding.buttonMenu.setOnClickListener {
             val nav = findNavController()
+            // Tell the home screen to open its nav drawer once we pop back to it.
+            // Wrapped in runCatching in case the home fragment isn't on the back stack.
             runCatching {
                 nav.getBackStackEntry(R.id.homeFragment).savedStateHandle.set(HomeFragment.KEY_OPEN_DRAWER, true)
             }
@@ -90,6 +97,7 @@ class FitnessFragment : Fragment() {
         }
     }
 
+    // Collects the ViewModel's category-list state and updates loading/error/content UI.
     private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -119,3 +127,4 @@ class FitnessFragment : Fragment() {
         _binding = null
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

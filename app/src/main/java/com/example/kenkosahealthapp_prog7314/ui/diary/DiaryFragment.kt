@@ -31,9 +31,14 @@ import java.util.Date
 import java.util.Locale
 import com.example.kenkosahealthapp_prog7314.R
 
+// Main diary/journal screen — combines meals, water, mood, and a free-text note
+// for the current day into a single scrollable view, each backed by its own ViewModel.
 class DiaryFragment : Fragment() {
 
+    // Nullable backing field for view binding, cleared in onDestroyView to avoid leaks
     private var _binding: FragmentDiaryBinding? = null
+
+    // Non-null accessor, only safe to use between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
     private val mealViewModel: MealHistoryViewModel by viewModels()
@@ -72,6 +77,7 @@ class DiaryFragment : Fragment() {
         observeNotes()
     }
 
+    // Applies system bar insets as padding so content isn't drawn under the status/nav bars
     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
@@ -83,6 +89,7 @@ class DiaryFragment : Fragment() {
         }
     }
 
+    // Wires up the shared bottom navigation bar and the FAB's quick-add menu
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
@@ -95,6 +102,8 @@ class DiaryFragment : Fragment() {
         }
     }
 
+    // Refresh everything each time Diary becomes visible, so edits made
+    // elsewhere (FAB water screen, Wellness mood screen, Log Food) show up here.
     override fun onResume() {
         super.onResume()
         // Refresh everything each time Diary becomes visible, so edits made
@@ -106,7 +115,7 @@ class DiaryFragment : Fragment() {
     }
 
     // ---------------------------------------------------------------- Meals
-
+    // Creates one adapter per meal section and wires each section's RecyclerView/title/add button
     private fun setupMealSections() {
         breakfastAdapter = buildMealAdapter()
         lunchAdapter = buildMealAdapter()
@@ -119,11 +128,13 @@ class DiaryFragment : Fragment() {
         configureSection(binding.sectionSnack, MealType.SNACK, snackAdapter)
     }
 
+    // Shared adapter construction so all four meal sections wire up saves/deletes identically
     private fun buildMealAdapter() = MealEntryAdapter(
         onSaveServings = { mealId, newServings -> mealViewModel.updateServings(mealId, newServings) },
         onDeleteClicked = { mealId -> mealViewModel.deleteMeal(mealId) }
     )
 
+    // Sets the section title, RecyclerView layout/adapter, and "add" navigation for one meal section
     private fun configureSection(
         section: ItemMealSectionBinding, mealType: MealType, adapter: MealEntryAdapter
     ) {
@@ -138,6 +149,7 @@ class DiaryFragment : Fragment() {
         }
     }
 
+    // Observes the shared meal state and pushes each meal type's list into its own section
     private fun observeMeals() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -151,6 +163,7 @@ class DiaryFragment : Fragment() {
         }
     }
 
+    // Submits the meal list to the adapter and toggles the empty-state message
     private fun bindMealSection(
         section: ItemMealSectionBinding, adapter: MealEntryAdapter,
         items: List<com.example.kenkosahealthapp_prog7314.data.network.MealEntryDto>
@@ -161,7 +174,7 @@ class DiaryFragment : Fragment() {
     }
 
     // ---------------------------------------------------------------- Water
-
+    // Lazily builds the grid of tappable "cup" icons, one per target cup, only once
     private fun buildCups(targetCups: Int) {
         if (cupViews.isNotEmpty()) return
 
@@ -173,6 +186,8 @@ class DiaryFragment : Fragment() {
                     height = 100
                     setMargins(10, 10, 10, 10)
                 }
+
+                // Tapping a cup sets consumption to that cup's position (e.g. tapping cup 3 sets 3 cups)
                 setOnClickListener { waterViewModel.setCups(i) }
             }
             cupViews.add(cup)
@@ -180,12 +195,14 @@ class DiaryFragment : Fragment() {
         }
     }
 
+
     private fun updateCupVisuals(cupsConsumed: Int) {
         cupViews.forEachIndexed { index, cup ->
             cup.alpha = if (index + 1 <= cupsConsumed) 1.0f else 0.3f
         }
     }
 
+    // Observes water state, builds the cup grid on first load, and updates its visuals on every change
     private fun observeWater() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -201,8 +218,8 @@ class DiaryFragment : Fragment() {
     }
 
     // ----------------------------------------------------------------- Mood
-
-    private fun observeMood() {
+    // Observes mood state and filters it down to only today's entries before rendering
+        private fun observeMood() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 moodViewModel.uiState.collect { state ->
@@ -220,6 +237,7 @@ class DiaryFragment : Fragment() {
         }
     }
 
+    // Dynamically builds a row per mood entry logged today (no XML list item, built in code)
     private fun renderMoodEntries(entries: List<MoodEntryDto>) {
         binding.containerMoodEntries.removeAllViews()
 
@@ -249,7 +267,7 @@ class DiaryFragment : Fragment() {
     }
 
     // ---------------------------------------------------------------- Notes
-
+    // Saves the note only when the field loses focus, avoiding a save on every keystroke
     private fun setupNotes() {
         binding.editNotes.setOnFocusChangeListener { _, hasFocus ->
             if (!hasFocus) {
@@ -258,6 +276,7 @@ class DiaryFragment : Fragment() {
         }
     }
 
+    // Observes note state, only writing into the field when the user isn't actively editing it
     private fun observeNotes() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -275,6 +294,8 @@ class DiaryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         cupViews.clear()
+        // Prevent memory leaks by releasing the binding reference
         _binding = null
     }
 }
+// ------------------------------------------------------- END OF FILE -----------------------------------------------------------------
