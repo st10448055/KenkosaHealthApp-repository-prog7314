@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import com.google.android.gms.common.api.ApiException
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
@@ -35,12 +36,16 @@ class LoginFragment : Fragment() {
     private val googleSignInLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-            val account = task.result
-            val idToken = account?.idToken
-            if (idToken != null) {
-                viewModel.signInWithGoogle(idToken)
-            } else {
-                showError("Google sign in was cancelled or failed")
+            try {
+                val account = task.getResult(ApiException::class.java)
+                val idToken = account?.idToken
+                if (idToken != null) {
+                    viewModel.signInWithGoogle(idToken)
+                } else {
+                    showError("Google sign in was cancelled or failed")
+                }
+            } catch (e: ApiException) {
+                showError("Google sign in failed (code ${e.statusCode})")
             }
         }
 

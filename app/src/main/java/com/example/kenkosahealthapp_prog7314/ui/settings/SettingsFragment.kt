@@ -35,9 +35,13 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import java.util.Locale
 
+// Main settings screen — profile editing, units/language/dark-mode/notification toggles,
+// body metrics shortcut, and numeric goal targets (steps, calories, sleep).
 class SettingsFragment : Fragment() {
 
+    // Nullable backing field for view binding, cleared in onDestroyView to avoid leaks
     private var _binding: FragmentSettingsBinding? = null
+    // Non-null accessor, only safe to use between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
     private val viewModel: SettingsViewModel by viewModels { SettingsViewModelFactory() }
@@ -45,12 +49,14 @@ class SettingsFragment : Fragment() {
     private val unitOptions = listOf("Metric", "Imperial", "UK")
     private val languages = listOf("English" to "en", "Afrikaans" to "af", "isiXhosa" to "xh")
 
-    /** Latest settings snapshot, used to pre-fill dialogs. */
+    // Latest settings snapshot, used to pre-fill dialogs.
     private var currentSettings = UserSettings()
 
-    /** True while we push stored values into the views, so listeners don't write them straight back. */
+    // True while we push stored values into the views, so listeners don't write them straight back.
     private var isApplyingRemoteState = false
 
+    // Handles the result of the notification permission prompt, reverting the switch
+    // and showing an explanation if the user denies it
     private val notificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
             viewModel.setNotificationsEnabled(granted)
@@ -87,6 +93,7 @@ class SettingsFragment : Fragment() {
 
         binding.buttonEditProfile.setOnClickListener { showEditProfileDialog() }
 
+        // Observe settings and profile in parallel, only while the view is at least STARTED
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 launch { viewModel.settings.collect { applySettings(it) } }
@@ -97,7 +104,7 @@ class SettingsFragment : Fragment() {
 
     // ---------------------------------------------------------------- setup
 
-    /** The app is edge-to-edge (targetSdk 36), so keep content clear of the system bars. */
+    // The app is edge-to-edge (targetSdk 36), so keep content clear of the system bars.
     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
@@ -141,6 +148,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    // Wires up units, language, notifications, and dark mode rows/toggles
     private fun setupPreferenceListeners() {
         binding.rowUnits.root.setOnClickListener {
             showChoiceDialog(
@@ -187,6 +195,7 @@ class SettingsFragment : Fragment() {
         }
     }
 
+    // Wires up the body metrics shortcut and the numeric goal target rows
     private fun setupGoalListeners() {
         // Body metrics (date of birth, gender, height, weight, activity level)
         binding.rowBodyMetrics.root.setOnClickListener {
@@ -218,6 +227,7 @@ class SettingsFragment : Fragment() {
 
     // -------------------------------------------------------------- render
 
+    // Pushes a settings snapshot into all the rows, suppressing listener callbacks while doing so
     private fun applySettings(settings: UserSettings) {
         currentSettings = settings
         isApplyingRemoteState = true
@@ -239,6 +249,8 @@ class SettingsFragment : Fragment() {
         isApplyingRemoteState = false
     }
 
+    // Renders the profile header, falling back through Firestore name -> FirebaseAuth display name
+    // -> email prefix -> a generic default, in case the Firestore profile doc isn't populated yet
     private fun applyProfile(user: User?) {
         val authUser = FirebaseAuth.getInstance().currentUser
         val fullName = listOfNotNull(user?.name, user?.surname)
@@ -256,6 +268,8 @@ class SettingsFragment : Fragment() {
         binding.textAvatar.text = initialsOf(displayName)
     }
 
+    // Builds initials for the avatar circle: first+last initial for multi-word names,
+    // first two letters for a single word, "?" if there's nothing to work with
     private fun initialsOf(name: String): String {
         val parts = name.trim().split(Regex("\\s+")).filter { it.isNotEmpty() }
         return when {
@@ -268,7 +282,7 @@ class SettingsFragment : Fragment() {
     private fun formatDuration(totalMinutes: Int): String =
         String.format(Locale.getDefault(), "%dh %02dm", totalMinutes / 60, totalMinutes % 60)
 
-    /** Light is the default: only an explicit "Dark" turns the switch on. */
+    // Light is the default: only an explicit "Dark" turns the switch on.
     private fun isDarkModeOn(appearanceMode: String): Boolean = appearanceMode == "Dark"
 
     private fun hasNotificationPermission(): Boolean =
@@ -278,6 +292,7 @@ class SettingsFragment : Fragment() {
 
     // -------------------------------------------------------------- dialogs
 
+    // Generic single-choice picker dialog (used for units and language)
     private fun showChoiceDialog(
         @StringRes title: Int,
         options: List<String>,
@@ -294,6 +309,8 @@ class SettingsFragment : Fragment() {
             .show()
     }
 
+    // Generic numeric input dialog with range validation (used for steps and calorie target).
+    // Overrides the positive button's default dismiss behavior so an invalid value keeps the dialog open.
     private fun showNumberDialog(
         @StringRes title: Int,
         @StringRes hint: Int,
@@ -328,6 +345,7 @@ class SettingsFragment : Fragment() {
         dialog.show()
     }
 
+    // Sleep target dialog using two number pickers: hours (4-12) and minutes in 15-min steps
     private fun showSleepTargetDialog() {
         val dialogBinding = DialogSleepTargetBinding.inflate(layoutInflater)
         val minuteSteps = arrayOf("00", "15", "30", "45")
@@ -355,6 +373,7 @@ class SettingsFragment : Fragment() {
             .show()
     }
 
+    // Edit profile dialog for first name / surname, with basic required-field validation
     private fun showEditProfileDialog() {
         val dialogBinding = DialogEditProfileBinding.inflate(layoutInflater)
         val profile = viewModel.profile.value
@@ -385,6 +404,7 @@ class SettingsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        // Prevent memory leaks by releasing the binding reference
         _binding = null
     }
 }

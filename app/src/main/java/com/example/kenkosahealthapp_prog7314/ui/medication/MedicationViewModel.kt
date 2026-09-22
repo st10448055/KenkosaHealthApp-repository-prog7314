@@ -9,32 +9,45 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+// Represents the possible states of the medication list screen.
 sealed class MedicationUiState {
+    // The medication list is currently loading.
     object Loading : MedicationUiState()
+
+    // The medication list was successfully retrieved.
     data class Success(val medications: List<MedicationDto>) : MedicationUiState()
+
+    // An error occurred while loading the medication list.
     data class Error(val message: String) : MedicationUiState()
 }
 
-/** State of the single medication loaded by the Add / Edit screen. */
+// Represents the possible states of the medication list screen.
 sealed class MedicationEditState {
     object Idle : MedicationEditState()
+
+    // The medication list is currently loading.
     object Loading : MedicationEditState()
     data class Loaded(val medication: MedicationDto) : MedicationEditState()
     data class Error(val message: String) : MedicationEditState()
 }
 
+// ViewModel responsible for managing medication-related screen state
+// and communicating with the MedicationRepository.
 class MedicationViewModel(
     private val repository: MedicationRepository = MedicationRepository()
 ) : ViewModel() {
 
+    // Public read-only version of the medication list state.
     private val _uiState = MutableStateFlow<MedicationUiState>(MedicationUiState.Loading)
     val uiState: StateFlow<MedicationUiState> = _uiState
 
+    // Internal state for the Add/Edit Medication screen.
     private val _editState = MutableStateFlow<MedicationEditState>(MedicationEditState.Idle)
     val editState: StateFlow<MedicationEditState> = _editState
 
     // ------------------------------------------------------------------ list
 
+    // Retrieves all medications from the repository.
     fun loadMedications() {
         viewModelScope.launch {
             // Only show the spinner on the very first load so returning to the screen doesn't flicker.
@@ -48,10 +61,15 @@ class MedicationViewModel(
         }
     }
 
-    /** Ticks the dose on/off. Updates the UI straight away and rolls back (by reloading) if the call fails. */
+    // Marks a medication as taken or not taken for a specific date.
     fun setTaken(medication: MedicationDto, date: String, taken: Boolean) {
+        // Get the currently displayed medication list.
+        // If there is no successful list yet, there is nothing to update.
         val current = (_uiState.value as? MedicationUiState.Success)?.medications ?: return
         val newDates = if (taken) (medication.takenDates + date).distinct() else medication.takenDates - date
+
+        // Immediately update the local UI.
+        // This gives the user instant feedback without waiting for the API.
         _uiState.value = MedicationUiState.Success(
             current.map {
                 if (it.medicationId == medication.medicationId) it.copy(takenDates = newDates) else it
@@ -77,7 +95,7 @@ class MedicationViewModel(
     }
 
     // ------------------------------------------------------------- add / edit
-
+    // Loads one medication from the server for the edit screen.
     fun loadMedication(medicationId: String) {
         viewModelScope.launch {
             _editState.value = MedicationEditState.Loading
@@ -101,6 +119,7 @@ class MedicationViewModel(
         }
     }
 
+    // Updates an existing medication.
     fun updateMedication(
         medicationId: String,
         category: String, name: String, dosage: String, frequency: String,
@@ -115,6 +134,8 @@ class MedicationViewModel(
         }
     }
 
+    // Converts the different ApiResult error types into one String message.
+    // This keeps error handling in the ViewModel simple for the Fragment.
     private fun ApiResult<*>.errorMessage(): String? = when (this) {
         is ApiResult.Success -> null
         is ApiResult.ValidationError -> message
@@ -122,3 +143,4 @@ class MedicationViewModel(
         is ApiResult.ServerError -> message
     }
 }
+//---------------------------------------END OF FILE-------------------------------------------------

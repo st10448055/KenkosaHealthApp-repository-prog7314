@@ -21,15 +21,17 @@ import com.example.kenkosahealthapp_prog7314.databinding.FragmentKnowYourHealthB
 import com.example.kenkosahealthapp_prog7314.ui.home.HomeFragment
 import java.util.Locale
 
-/** Know Your Health: a searchable list of short health articles. Tap a card to read it. */
+// Fragment listing searchable health articles in a RecyclerView
 class KnowYourHealthFragment : Fragment() {
 
+    // ViewBinding instance references
     private var _binding: FragmentKnowYourHealthBinding? = null
     private val binding get() = _binding!!
 
+
     private lateinit var adapter: HealthArticleAdapter
 
-    /** article id -> lower-case title + text, built once so typing in the search box stays quick. */
+    // Cached search index mapping article IDs to search text
     private lateinit var searchIndex: Map<String, String>
 
     override fun onCreateView(
@@ -42,17 +44,23 @@ class KnowYourHealthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Setup screen padding, header actions, and navigation handlers
         setupWindowInsets()
         setupHeader()
         setupBottomNav()
 
+        // Build search index once on load to keep typing quick
         searchIndex = HealthArticles.all.associate { it.id to HealthArticles.searchText(requireContext(), it) }
 
+        // Setup RecyclerView adapter and layout manager
         adapter = HealthArticleAdapter(onClick = { article -> openArticle(article) })
         binding.recyclerArticles.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerArticles.adapter = adapter
 
+        // Search box text change listener
         binding.editSearch.doAfterTextChanged { applyFilter(it?.toString().orEmpty()) }
+
+        // Hide soft keyboard when pressing keyboard search button
         binding.editSearch.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideKeyboard()
@@ -62,11 +70,12 @@ class KnowYourHealthFragment : Fragment() {
             }
         }
 
+        // Apply default filter on initial display
         applyFilter(binding.editSearch.text.toString())
     }
 
     // ---------------------------------------------------------------- setup
-
+    // Adjusts view padding to prevent overlap with status bar and navigation bar
     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
@@ -78,6 +87,7 @@ class KnowYourHealthFragment : Fragment() {
         }
     }
 
+    // Sets up top header button click handlers
     private fun setupHeader() {
         binding.buttonMenu.setOnClickListener {
             val nav = findNavController()
@@ -89,6 +99,7 @@ class KnowYourHealthFragment : Fragment() {
         // Notification bell is intentionally non-functional for now (same as the other screens).
     }
 
+    // Sets up bottom navigation bar item actions
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
@@ -102,7 +113,7 @@ class KnowYourHealthFragment : Fragment() {
 
     // --------------------------------------------------------------- search
 
-    /** Shows the articles whose title or text contains what was typed (all of them when the box is empty). */
+    // Filters articles matching the typed query string and updates empty state view
     private fun applyFilter(query: String) {
         val needle = query.trim().lowercase(Locale.getDefault())
         val matches = if (needle.isEmpty()) {
@@ -114,6 +125,7 @@ class KnowYourHealthFragment : Fragment() {
         binding.textNoResults.isVisible = matches.isEmpty()
     }
 
+    // Utility method to dismiss soft keyboard and clear search box focus
     private fun hideKeyboard() {
         val manager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         manager.hideSoftInputFromWindow(binding.editSearch.windowToken, 0)
@@ -121,7 +133,7 @@ class KnowYourHealthFragment : Fragment() {
     }
 
     // -------------------------------------------------------------- actions
-
+    // Opens article detail view passing article ID as a argument bundle
     private fun openArticle(article: HealthArticle) {
         hideKeyboard()
         findNavController().navigate(
@@ -130,8 +142,10 @@ class KnowYourHealthFragment : Fragment() {
         )
     }
 
+    // Clear view binding reference on view destruction to prevent memory leaks
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
+//---------------------------------------END OF FILE-------------------------------------------------

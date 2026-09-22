@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+// ViewModel backing SettingsFragment - loads/saves the user's settings document
+// and Firestore profile (name/surname), exposing both as observable state.
 class SettingsViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     private val _settings = MutableStateFlow(UserSettings())
@@ -26,6 +28,7 @@ class SettingsViewModel(private val userRepository: UserRepository) : ViewModel(
         loadProfile()
     }
 
+    // Loads the user's settings doc, or creates one with defaults if it doesn't exist yet
     private fun load() {
         val uid = userId ?: return
         viewModelScope.launch {
@@ -42,6 +45,7 @@ class SettingsViewModel(private val userRepository: UserRepository) : ViewModel(
         }
     }
 
+    // Loads the user's Firestore profile document (name/surname)
     private fun loadProfile() {
         val uid = userId ?: return
         viewModelScope.launch {
@@ -53,6 +57,8 @@ class SettingsViewModel(private val userRepository: UserRepository) : ViewModel(
         }
     }
 
+    // Updates local state immediately (optimistic update) so the UI reflects the
+    // change right away, then persists it to Firestore in the background
     private fun save(updated: UserSettings) {
         val uid = userId ?: return
         val withUserId = updated.copy(userId = uid)
@@ -60,6 +66,8 @@ class SettingsViewModel(private val userRepository: UserRepository) : ViewModel(
         viewModelScope.launch { userRepository.updateSettings(withUserId) }
     }
 
+    // Updates the profile name/surname optimistically, then persists to Firestore.
+    // Builds a fresh User with the current auth email if no profile doc exists yet.
     fun updateProfile(name: String, surname: String) {
         val uid = userId ?: return
         val current = _profile.value ?: User(
@@ -76,6 +84,7 @@ class SettingsViewModel(private val userRepository: UserRepository) : ViewModel(
         }
     }
 
+    // One setter per settings field, each just applying a copy() with the new value and saving it
     fun setUnitSystem(value: String) = save(_settings.value.copy(unitSystem = value))
     fun setLanguage(value: String) = save(_settings.value.copy(language = value))
     fun setAppearanceMode(value: String) = save(_settings.value.copy(appearanceMode = value))

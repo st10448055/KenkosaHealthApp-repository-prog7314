@@ -24,10 +24,8 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-/**
- * Add screen, and (when opened with [ARG_MEDICATION_ID]) the details / edit screen for an existing
- * medication. In edit mode the fields start locked; "Edit Medication" unlocks them.
- */
+// Add screen, and (when opened with ARG_MEDICATION_ID) the details / edit screen for an existing
+// medication. In edit mode the fields start locked; "Edit Medication" unlocks them.
 class AddMedicationFragment : Fragment() {
 
     private var _binding: FragmentAddMedicationBinding? = null
@@ -38,13 +36,14 @@ class AddMedicationFragment : Fragment() {
     private var medicationId: String? = null
     private val isEditMode get() = medicationId != null
 
-    /** The medication as loaded from the server (edit mode only). */
+    // The medication as loaded from the server (edit mode only).
     private var original: MedicationDto? = null
 
     private var reminderHour = 8
     private var reminderMinute = 0
     private var isLocked = false
 
+    // Creates the screen using the FragmentAddMedication layout.
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -52,6 +51,7 @@ class AddMedicationFragment : Fragment() {
         return binding.root
     }
 
+    // Called after the screen has been created.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -82,7 +82,7 @@ class AddMedicationFragment : Fragment() {
     }
 
     // ---------------------------------------------------------------- setup
-
+    // Handles system bar spacing for edge-to-edge layouts.
     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
@@ -94,6 +94,7 @@ class AddMedicationFragment : Fragment() {
         }
     }
 
+    // Sets up the header menu button.
     private fun setupHeader() {
         binding.buttonMenu.setOnClickListener {
             val nav = findNavController()
@@ -105,6 +106,7 @@ class AddMedicationFragment : Fragment() {
         // Notification bell is intentionally non-functional for now (same as Home / Settings).
     }
 
+    // Sets up the bottom navigation buttons.
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
@@ -116,7 +118,7 @@ class AddMedicationFragment : Fragment() {
     }
 
     // ------------------------------------------------------------ edit mode
-
+    // Observes the state of the medication being loaded for editing.
     private fun observeEditState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -141,6 +143,7 @@ class AddMedicationFragment : Fragment() {
         }
     }
 
+    // Places the loaded medication data into the form fields.
     private fun populate(medication: MedicationDto) {
         original = medication
 
@@ -167,7 +170,7 @@ class AddMedicationFragment : Fragment() {
         binding.buttonEditMedication.isEnabled = true
     }
 
-    /** Locked = read-only details view; unlocked = editable form. */
+    // Locks or unlocks the medication form.
     private fun setLocked(locked: Boolean) {
         isLocked = locked
 
@@ -184,7 +187,7 @@ class AddMedicationFragment : Fragment() {
     }
 
     // ------------------------------------------------------------- reminder
-
+    // Opens the Android time picker so the user can choose a reminder time.
     private fun pickReminderTime() {
         if (isLocked) return
         TimePickerDialog(
@@ -206,7 +209,7 @@ class AddMedicationFragment : Fragment() {
     }
 
     // ----------------------------------------------------------------- save
-
+    // Validates the form and then creates or updates the medication.
     private fun attemptSave() {
         val name = binding.editName.text.toString().trim()
         val dosage = binding.editDosage.text.toString().trim()
@@ -306,3 +309,4 @@ class AddMedicationFragment : Fragment() {
         const val ARG_MEDICATION_ID = "medicationId"
     }
 }
+//---------------------------------------END OF FILE-------------------------------------------------

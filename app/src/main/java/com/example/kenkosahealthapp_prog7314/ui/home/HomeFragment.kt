@@ -27,16 +27,25 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 
+// Home Fragment serving as the main hub containing feature navigation, user greeting, and calorie progress ring
 class HomeFragment : Fragment() {
 
+    // View binding backing property
     private var _binding: FragmentHomeBinding? = null
+
+    // View binding property accessor
     private val binding get() = _binding!!
 
+    // Firebase Auth instance reference
     private val auth = FirebaseAuth.getInstance()
+
+    // Firestore database instance reference
     private val firestore = FirebaseFirestore.getInstance()
 
+    // ViewModel instance for managing calorie ring progress
     private val calorieViewModel: CalorieRingViewModel by viewModels()
 
+    // Inflates the fragment view layout
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -44,6 +53,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    // Initialises fragment UI logic, observers, navigation listeners, and drawer setups
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -61,12 +71,13 @@ class HomeFragment : Fragment() {
         // Notification bell is intentionally non-functional for now.
     }
 
+    // Reloads calorie data when returning to home view
     override fun onResume() {
         super.onResume()
         calorieViewModel.loadCalories()
     }
 
-    /** Settings' menu button pops back here and asks for the drawer to be opened. */
+    // Observes request from other screens to open navigation drawer when navigating back
     private fun observeOpenDrawerRequest() {
         val handle = findNavController().currentBackStackEntry?.savedStateHandle ?: return
         handle.getLiveData<Boolean>(KEY_OPEN_DRAWER).observe(viewLifecycleOwner) { open ->
@@ -77,6 +88,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Listens for calorie UI state updates and updates the card UI components
     private fun observeCalories() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -108,6 +120,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Sets up navigation drawer toggle and back button drawer closure logic
     private fun setupDrawer() {
         binding.buttonMenu.setOnClickListener {
             binding.drawerLayout.openDrawer(GravityCompat.START)
@@ -129,6 +142,7 @@ class HomeFragment : Fragment() {
         )
     }
 
+    // Fetches user profile data from Firestore to personalize header greeting
     private fun setupGreeting() {
         val user = auth.currentUser
         binding.navDrawerHome.textDrawerEmail.text = user?.email.orEmpty()
@@ -158,10 +172,7 @@ class HomeFragment : Fragment() {
             }
     }
 
-    /**
-     * A new account (metricsPending = true) that hasn't filled in the body metrics yet is sent to the form.
-     * Saving the form clears the flag. "Skip for now" only silences it until the app restarts.
-     */
+    // Directs newly registered users to the metrics setup flow if required
     private fun promptForMetricsIfNeeded(uid: String, doc: DocumentSnapshot) {
         if (!UserMetrics.isPromptPending(doc)) return
         if (MetricsPromptState.skippedForUid == uid) return
@@ -171,12 +182,14 @@ class HomeFragment : Fragment() {
         nav.navigate(R.id.action_global_metrics, bundleOf(MetricsFragment.ARG_ONBOARDING to true))
     }
 
+    // Sets click listener for the bottom FAB to display quick add options
     private fun setupAddButton() {
         binding.bottomNav.fabAdd.setOnClickListener {
             AddMenuBottomSheet().show(childFragmentManager, "AddMenuBottomSheet")
         }
     }
 
+    // Binds navigation click handlers to bottom navigation items
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { /* already home, no-op */ }
@@ -186,6 +199,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Initialises home screen feature grid cards with icons, labels, colors, and navigation destinations
     private fun setupFeatureGrid() {
         bindFeature(binding.cardTrackingDiary, R.drawable.ic_diary, R.string.home_tracking_diary, Color.parseColor("#6B9080"), Color.parseColor("#E3ECE7")) {
             findNavController().navigate(R.id.action_home_to_trackingDiary)
@@ -213,6 +227,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Utility function to bind dynamic icons, text, colors, and click actions to home feature card views
     private fun bindFeature(
         card: ItemHomeFeatureBinding,
         iconRes: Int,
@@ -228,6 +243,7 @@ class HomeFragment : Fragment() {
         card.root.setOnClickListener { onClick() }
     }
 
+    // Configures navigation click listeners and logout action for the navigation drawer items
     private fun setupDrawerNavigation() {
         val drawer = binding.navDrawerHome
 
@@ -274,10 +290,12 @@ class HomeFragment : Fragment() {
         }
     }
 
+    // Closes the navigation drawer menu
     private fun closeDrawer() {
         binding.drawerLayout.closeDrawer(GravityCompat.START)
     }
 
+    // Nullifies view binding reference to prevent memory leaks when fragment view is destroyed
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -287,3 +305,4 @@ class HomeFragment : Fragment() {
         const val KEY_OPEN_DRAWER = "open_drawer"
     }
 }
+//---------------------------------------END OF FILE-------------------------------------------------
