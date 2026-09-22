@@ -10,10 +10,7 @@ import androidx.core.content.ContextCompat
 import com.example.kenkosahealthapp_prog7314.R
 import kotlin.math.ceil
 
-/**
- * One article on the Know Your Health screen. The text lives in res/values/kyh_articles.xml.
- * To put a photo behind a card, add the image to res/drawable and pass it as [imageRes].
- */
+// Data model holding reference IDs for article content and styling resources
 data class HealthArticle(
     val id: String,
     @StringRes val titleRes: Int,
@@ -23,9 +20,10 @@ data class HealthArticle(
     @DrawableRes val imageRes: Int? = null
 )
 
+// Data source helper and resource utility singleton
 object HealthArticles {
 
-    /** The list shown on the screen, in order. */
+    // Complete list of health articles available in the app
     val all = listOf(
         HealthArticle(
             "sleep", R.string.kyh_article_sleep_title, R.array.kyh_article_sleep_body,
@@ -53,9 +51,10 @@ object HealthArticles {
         )
     )
 
+    // Lookup helper to retrieve an article by its unique ID
     fun byId(id: String?): HealthArticle? = all.firstOrNull { it.id == id }
 
-    /** The diagonal colour wash used behind a card title and on the article banner. */
+    // Generates gradient drawable background using article start and end color resources
     fun gradient(context: Context, article: HealthArticle): GradientDrawable = GradientDrawable(
         GradientDrawable.Orientation.TL_BR,
         intArrayOf(
@@ -64,16 +63,18 @@ object HealthArticles {
         )
     )
 
+    // Retrieves string array containing article lines from resources
     fun body(context: Context, article: HealthArticle): Array<String> =
         context.resources.getStringArray(article.bodyRes)
 
-    /** About 200 words a minute, never less than one minute. */
+    // Calculates estimated reading time in minutes (assuming ~200 words per minute)
     fun readingMinutes(context: Context, article: HealthArticle): Int {
         val words = body(context, article).sumOf { line -> line.trim().split(Regex("\\s+")).count { it.isNotEmpty() } }
         return maxOf(1, ceil(words / 200.0).toInt())
     }
 
-    /** Lower-case title + text, so the search box can match either. */
+    // Combines title and body text into a single lower-case string for fast search matching
     fun searchText(context: Context, article: HealthArticle): String =
         (context.getString(article.titleRes) + " " + body(context, article).joinToString(" ")).lowercase()
 }
+//---------------------------------------END OF FILE-------------------------------------------------

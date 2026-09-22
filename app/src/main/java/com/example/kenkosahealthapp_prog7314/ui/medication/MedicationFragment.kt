@@ -24,21 +24,34 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 import java.time.LocalDate
 
+// Fragment responsible for displaying the user's medications.
+// It handles the medication lists, navigation, loading states and user interactions.
 class MedicationFragment : Fragment() {
 
+    // View binding reference.
+    // It is nullable because the Fragment's view can be destroyed while the Fragment remains alive.
     private var _binding: FragmentMedicationBinding? = null
+
+    // Non-null shortcut used between onCreateView() and onDestroyView().
     private val binding get() = _binding!!
 
+    // Gets the MedicationViewModel associated with this Fragment.
     private val viewModel: MedicationViewModel by viewModels()
 
+    // Adapter for normal medications.
     private lateinit var pillAdapter: MedicationAdapter
+
+    // Adapter for vitamins.
     private lateinit var vitaminAdapter: MedicationAdapter
 
+    // Stores the complete list of medications returned from the server.
     private var medications: List<MedicationDto> = emptyList()
 
-    /** false = only what's due today, true = every medication the user has added. */
+    // false = only medications due today are displayed.
+    // true = all medications added by the user are displayed.
     private var showAll = false
 
+    // Creates the Fragment's view using the FragmentMedication XML layout.
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -46,14 +59,25 @@ class MedicationFragment : Fragment() {
         return binding.root
     }
 
+    // Called after the Fragment's view has been created.
+    // This is where the screen's components and listeners are set up.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Set up spacing around the system status/navigation bars.
         setupWindowInsets()
+
+        // Set up the menu button.
         setupHeader()
+
+        // Set up the bottom navigation buttons.
         setupBottomNav()
+
+        // Create and connect the RecyclerView adapters.
         setupLists()
 
+
+        // Toggle between today's medications and all medications.
         binding.textSeeAll.setOnClickListener {
             showAll = !showAll
             render()
@@ -62,6 +86,7 @@ class MedicationFragment : Fragment() {
         observeState()
     }
 
+    // Reload medications whenever the Fragment becomes visible again.
     override fun onResume() {
         super.onResume()
         viewModel.loadMedications()
@@ -69,7 +94,8 @@ class MedicationFragment : Fragment() {
 
     // ---------------------------------------------------------------- setup
 
-    /** Edge-to-edge (targetSdk 36): keep content clear of the system bars, same as Settings. */
+    // Handles edge-to-edge screen layout.
+    // Adds padding so content does not overlap the phone's system bars.
     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
@@ -81,6 +107,7 @@ class MedicationFragment : Fragment() {
         }
     }
 
+    // Sets up the buttons at the top of the screen.
     private fun setupHeader() {
         // The nav drawer lives in HomeFragment, so the menu button goes back to Home and asks it to open the drawer.
         binding.buttonMenu.setOnClickListener {
@@ -93,6 +120,7 @@ class MedicationFragment : Fragment() {
         // Notification bell is intentionally non-functional for now (same as Home / Settings).
     }
 
+    // Sets up the buttons at the bottom of the medication screen.
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
@@ -103,6 +131,7 @@ class MedicationFragment : Fragment() {
         }
     }
 
+    // Creates the two RecyclerViews used on the screen.
     private fun setupLists() {
         pillAdapter = newAdapter()
         vitaminAdapter = newAdapter()
@@ -113,6 +142,7 @@ class MedicationFragment : Fragment() {
         binding.recyclerVitamins.adapter = vitaminAdapter
     }
 
+    // Creates a MedicationAdapter and connects its actions to the ViewModel/navigation.
     private fun newAdapter() = MedicationAdapter(
         onTakenToggle = { row ->
             viewModel.setTaken(row.medication, LocalDate.now().toString(), !row.takenToday)
@@ -123,8 +153,12 @@ class MedicationFragment : Fragment() {
 
     // ---------------------------------------------------------------- state
 
+    // Observes the current state of the medication list from the ViewModel.
     private fun observeState() {
         viewLifecycleOwner.lifecycleScope.launch {
+
+            // Only collect the Flow while the Fragment is visible/started.
+            // This prevents unnecessary work when the screen is not active.
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
                     when (state) {
@@ -140,6 +174,7 @@ class MedicationFragment : Fragment() {
                             medications = state.medications
                             render()
                         }
+                        // Something went wrong while loading medications.
                         is MedicationUiState.Error -> {
                             binding.progressLoading.isVisible = false
                             binding.layoutContent.isVisible = false
@@ -152,9 +187,13 @@ class MedicationFragment : Fragment() {
         }
     }
 
+    // Rebuilds the content displayed on the screen using the current medication list.
     private fun render() {
+        // Get today's date.
         val today = LocalDate.now()
 
+        // If showAll is false, only medications due today are displayed.
+        // If showAll is true, every medication is displayed.
         val visible = medications.filter { showAll || MedicationSchedule.isDueOn(it, today) }
         val pills = visible.filter { it.category != MedicationSchedule.CATEGORY_VITAMIN }
         val vitamins = visible.filter { it.category == MedicationSchedule.CATEGORY_VITAMIN }
@@ -169,6 +208,7 @@ class MedicationFragment : Fragment() {
         renderHero(today)
     }
 
+    // Converts a MedicationDto into a MedicationRow for the RecyclerView.
     private fun toRow(medication: MedicationDto, today: LocalDate) = MedicationRow(
         medication = medication,
         takenToday = MedicationSchedule.isTaken(medication, today),
@@ -179,7 +219,8 @@ class MedicationFragment : Fragment() {
         }
     )
 
-    /** Encouragement card + bell badge, both driven by the user's actual medication (vitamins excluded). */
+    // Updates the encouragement card and the number shown on the notification badge.
+    // Vitamins are excluded from these calculations.
     private fun renderHero(today: LocalDate) {
         val tracked = medications.filter { it.category != MedicationSchedule.CATEGORY_VITAMIN }
         val missed = MedicationSchedule.missedDoses(tracked, today)
@@ -208,7 +249,7 @@ class MedicationFragment : Fragment() {
     }
 
     // -------------------------------------------------------------- actions
-
+    // Opens the AddMedicationFragment in edit mode for an existing medication.
     private fun openEditor(medication: MedicationDto) {
         findNavController().navigate(
             R.id.action_medication_to_addMedication,
@@ -216,6 +257,7 @@ class MedicationFragment : Fragment() {
         )
     }
 
+    // Displays a confirmation dialog before deleting a medication.
     private fun confirmDelete(medication: MedicationDto) {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.medication_delete_title)
@@ -225,8 +267,10 @@ class MedicationFragment : Fragment() {
             .show()
     }
 
+    // Called when the Fragment's view is destroyed.
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 }
+//---------------------------------------END OF FILE-------------------------------------------------

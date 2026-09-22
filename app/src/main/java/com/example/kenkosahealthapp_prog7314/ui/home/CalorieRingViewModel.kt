@@ -16,6 +16,7 @@ import java.util.Date
 import java.util.Locale
 import kotlin.math.roundToInt
 
+// Represents the UI state states for the calorie ring card on the home screen
 sealed class CalorieUiState {
     object Loading : CalorieUiState()
     data class Success(
@@ -30,24 +31,35 @@ sealed class CalorieUiState {
     data class Error(val message: String) : CalorieUiState()
 }
 
+// ViewModel responsible for fetching profile metrics and calculating macro breakdown
 class CalorieRingViewModel(
     private val diaryRepository: DiaryRepository = DiaryRepository()
 ) : ViewModel() {
 
+    // Firebase Auth instance reference
     private val auth = FirebaseAuth.getInstance()
+
+    // Firestore database instance reference
     private val firestore = FirebaseFirestore.getInstance()
 
+    // Internal state flow for calorie UI state
     private val _uiState = MutableStateFlow<CalorieUiState>(CalorieUiState.Loading)
+
+    // Exposed read-only state flow for UI observations
     val uiState: StateFlow<CalorieUiState> = _uiState
 
+
+    // Fetches user profile metrics and logged meals to update state
     fun loadCalories() {
         val uid = auth.currentUser?.uid ?: run {
             _uiState.value = CalorieUiState.Error("Not signed in")
             return
         }
 
+        // Emit loading state before fetching data
         _uiState.value = CalorieUiState.Loading
 
+        // Retrieve user metrics from Firestore
         firestore.collection("users").document(uid).get()
             .addOnSuccessListener { doc ->
                 val metrics = UserMetrics.fromSnapshot(doc)
@@ -56,9 +68,11 @@ class CalorieRingViewModel(
                     return@addOnSuccessListener
                 }
 
+                // Compute daily target calories based on user metrics
                 val target = CalorieCalculator.dailyCalorieTarget(metrics)
                 val today = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
+                // Fetch meal entries logged for today from repository
                 viewModelScope.launch {
                     when (val result = diaryRepository.getMeals(today)) {
                         is ApiResult.Success -> {
@@ -70,6 +84,7 @@ class CalorieRingViewModel(
                             val remaining = (target - consumed).coerceAtLeast(0)
                             val status = if (consumed <= target) "On Track" else "Over Target"
 
+                            // Emit success state with calculated macros and status
                             _uiState.value = CalorieUiState.Success(
                                 consumed = consumed,
                                 target = target,
@@ -91,3 +106,4 @@ class CalorieRingViewModel(
             }
     }
 }
+//---------------------------------------END OF FILE-------------------------------------------------

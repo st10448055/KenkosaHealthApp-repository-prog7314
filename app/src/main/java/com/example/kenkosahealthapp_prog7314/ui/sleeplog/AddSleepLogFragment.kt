@@ -33,15 +33,15 @@ import java.time.LocalTime
 import java.time.ZoneId
 import java.util.Date
 
-/**
- * Add Sleep, and (when opened with [ARG_SLEEP_ID]) the Edit Sleep screen for an existing night, with a Delete button.
- *
- * You enter a bedtime and a wake-up time (and the wake-up date, which defaults to today). If the bedtime is later in
- * the day than the wake-up time, the night started the evening before, so 10:30 PM -> 6:30 AM is 8 hours.
- */
+// Add Sleep, and (when opened with ARG_SLEEP_ID) the Edit Sleep screen for an existing night, with a Delete button.
+//
+// You enter a bedtime and a wake-up time (and the wake-up date, which defaults to today). If the bedtime is later in
+// the day than the wake-up time, the night started the evening before, so 10:30 PM -> 6:30 AM is 8 hours.
 class AddSleepLogFragment : Fragment() {
 
+    // Nullable backing field for view binding, cleared in onDestroyView to avoid leaks
     private var _binding: FragmentAddSleepLogBinding? = null
+    // Non-null accessor, only safe to use between onCreateView and onDestroyView
     private val binding get() = _binding!!
 
     private val viewModel: SleepLogViewModel by viewModels()
@@ -49,14 +49,14 @@ class AddSleepLogFragment : Fragment() {
     private var sleepId: String? = null
     private val isEditMode get() = sleepId != null
 
-    /** The record as loaded from the server (edit mode only). */
+    // The record as loaded from the server (edit mode only).
     private var original: SleepLogDto? = null
 
     private var wakeDate: LocalDate = LocalDate.now()
     private var bedTime: LocalTime = LocalTime.of(22, 30)
     private var wakeTime: LocalTime = LocalTime.of(6, 30)
 
-    /** 1 (Poor) to 5 (Excellent); 0 = not chosen yet. */
+    // 1 (Poor) to 5 (Excellent); 0 = not chosen yet.
     private var quality = 0
 
     private lateinit var faceButtons: List<ImageButton>
@@ -105,6 +105,7 @@ class AddSleepLogFragment : Fragment() {
 
     // ---------------------------------------------------------------- setup
 
+    // Applies system bar insets as padding so content isn't drawn under the status/nav bars
     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
@@ -147,7 +148,7 @@ class AddSleepLogFragment : Fragment() {
         }
     }
 
-    /** Ring the chosen face and dim the others. */
+    // Ring the chosen face and dim the others.
     private fun renderFaces() {
         faceButtons.forEachIndexed { index, button ->
             val chosen = quality == index + 1
@@ -158,6 +159,7 @@ class AddSleepLogFragment : Fragment() {
 
     // ------------------------------------------------------------ edit mode
 
+    // Observes the record load state and fills the form once loading succeeds
     private fun observeEditState() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -182,6 +184,7 @@ class AddSleepLogFragment : Fragment() {
         }
     }
 
+    // Fills all form fields from a loaded sleep record, converting epoch millis to local date/time
     private fun populate(record: SleepLogDto) {
         original = record
 
@@ -202,20 +205,23 @@ class AddSleepLogFragment : Fragment() {
 
     // ------------------------------------------------------------ date/time
 
-    /** Start and end as epoch millis, or null if bedtime and wake-up time are the same. */
+    // Start and end as epoch millis, or null if bedtime and wake-up time are the same.
     private fun startAndEnd(): Pair<Long, Long>? {
         if (bedTime == wakeTime) return null
         val end = LocalDateTime.of(wakeDate, wakeTime)
+        // If bedtime is later in the day than wake time, the night started the day before
         val startDate = if (bedTime.isAfter(wakeTime)) wakeDate.minusDays(1) else wakeDate
         val start = LocalDateTime.of(startDate, bedTime)
         return start.atZone(zone).toInstant().toEpochMilli() to end.atZone(zone).toInstant().toEpochMilli()
     }
 
+    // Formats a LocalTime using the device's 12/24-hour system setting
     private fun formatTime(time: LocalTime): String =
         DateFormat.getTimeFormat(requireContext()).format(
             Date.from(time.atDate(LocalDate.now()).atZone(zone).toInstant())
         )
 
+    // Refreshes all the displayed labels (bedtime, wake time, wake date, total sleep) from current state
     private fun updateLabels() {
         binding.textBedtime.text = formatTime(bedTime)
         binding.textWakeTime.text = formatTime(wakeTime)
@@ -263,6 +269,7 @@ class AddSleepLogFragment : Fragment() {
 
     // ----------------------------------------------------------------- save
 
+    // Validates the entered times/quality and calls create or update depending on mode
     private fun attemptSave() {
         val range = startAndEnd() ?: return showError(getString(R.string.sleeplog_error_same_time))
         if (quality == 0) return showError(getString(R.string.sleeplog_error_quality))
@@ -281,6 +288,7 @@ class AddSleepLogFragment : Fragment() {
         hideError()
         setLoading(true)
 
+        // Shared callback for both create and update, since they handle success/failure identically
         val onResult: (Boolean, String?) -> Unit = { success, errorMessage ->
             if (_binding != null) {
                 setLoading(false)
@@ -296,6 +304,7 @@ class AddSleepLogFragment : Fragment() {
         if (id == null) viewModel.createSleep(request, onResult) else viewModel.updateSleep(id, request, onResult)
     }
 
+    // Shows a confirmation dialog before deleting the current sleep record
     private fun confirmDelete() {
         val id = sleepId ?: return
         MaterialAlertDialogBuilder(requireContext())
@@ -334,6 +343,7 @@ class AddSleepLogFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         original = null // the next view gets filled from the ViewModel again
+        // Prevent memory leaks by releasing the binding reference
         _binding = null
     }
 

@@ -11,13 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-/**
- * What the form needs to start: the saved metrics (if any) and which units to default to.
- *
- * [unitSystem] is the raw Settings value ("Metric" / "Imperial" / "UK"), kept alongside the
- * derived [defaultHeightUnit] / [defaultWeightUnit] so that saving can preserve "UK" instead of
- * collapsing it into "Imperial" when nothing on the form actually changed.
- */
+// Contains the saved metrics and the unit settings used to display the form.
 data class MetricsFormData(
     val existing: UserMetrics?,
     val defaultHeightUnit: HeightUnit,
@@ -29,10 +23,11 @@ class MetricsViewModel(
     private val metricsRepository: MetricsRepository = MetricsRepository()
 ) : ViewModel() {
 
-    /** null while loading. */
+    // Holds the form data once it has been loaded.
     private val _formData = MutableStateFlow<MetricsFormData?>(null)
     val formData: StateFlow<MetricsFormData?> = _formData
 
+    // Gets the currently signed-in Firebase user's ID.
     private val userId: String?
         get() = FirebaseAuth.getInstance().currentUser?.uid
 
@@ -40,6 +35,7 @@ class MetricsViewModel(
         load()
     }
 
+    // Loads the user's saved metrics and unit preference.
     private fun load() {
         viewModelScope.launch {
             val uid = userId
@@ -64,12 +60,10 @@ class MetricsViewModel(
         }
     }
 
-    /**
-     * Saves the metrics, then best-effort syncs [unitSystem] back to Settings so a unit change
-     * made on this form (e.g. switching to ft/in) is reflected there too.
-     */
+    // Saves the metrics and updates the user's unit preference in Settings.
     fun save(metrics: UserMetrics, unitSystem: String, onResult: (success: Boolean, errorMessage: String?) -> Unit) {
         val uid = userId
+        // Cannot save metrics without a signed-in user.
         if (uid == null) {
             onResult(false, null)
             return
@@ -85,4 +79,4 @@ class MetricsViewModel(
             }
         }
     }
-}
+}//---------------------------------------END OF FILE-------------------------------------------------

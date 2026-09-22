@@ -16,12 +16,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentHealthArticleBinding
 
-/**
- * One article, read-only: a coloured banner, the title, how long it takes to read, the text (sub-headings and
- * paragraphs) and a short "not medical advice" note.
- */
+// Displays full read-only content of a single selected article
 class HealthArticleFragment : Fragment() {
 
+    // ViewBinding instance lifecycle references
     private var _binding: FragmentHealthArticleBinding? = null
     private val binding get() = _binding!!
 
@@ -35,10 +33,12 @@ class HealthArticleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Setup screen padding, header actions, and navigation handlers
         setupWindowInsets()
         setupHeader()
         setupBottomNav()
 
+        // Fetch target article using argument ID passed through Navigation component
         val article = HealthArticles.byId(arguments?.getString(ARG_ARTICLE_ID))
         if (article == null) {
             findNavController().navigateUp() // unknown article: nothing to show
@@ -49,6 +49,7 @@ class HealthArticleFragment : Fragment() {
 
     // ---------------------------------------------------------------- setup
 
+    // Adjusts view padding for top system status bar and bottom navigation bar
     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
@@ -60,7 +61,9 @@ class HealthArticleFragment : Fragment() {
         }
     }
 
+    // Configures header buttons for menu drawer and back navigation
     private fun setupHeader() {
+        // Sets state flag on HomeFragment to open side navigation drawer
         binding.buttonMenu.setOnClickListener {
             val nav = findNavController()
             runCatching {
@@ -68,10 +71,12 @@ class HealthArticleFragment : Fragment() {
             }
             nav.popBackStack(R.id.homeFragment, false)
         }
+        // Navigate back to previous screen
         binding.buttonBack.setOnClickListener { findNavController().navigateUp() }
         // Notification bell is intentionally non-functional for now (same as the other screens).
     }
 
+    // Sets up click listeners for bottom navigation bar icons
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
@@ -85,13 +90,16 @@ class HealthArticleFragment : Fragment() {
 
     // ------------------------------------------------------------- content
 
+    // Populates article header, metadata, and body views dynamically
     private fun showArticle(article: HealthArticle) {
         val context = requireContext()
 
+        // Apply visual banner gradient, title, and reading time estimate
         binding.viewBanner.background = HealthArticles.gradient(context, article)
         binding.textTitle.setText(article.titleRes)
         binding.textMeta.text = getString(R.string.kyh_min_read, HealthArticles.readingMinutes(context, article))
 
+        // Clear existing views and dynamically parse body string array
         binding.layoutBody.removeAllViews()
         for (line in HealthArticles.body(context, article)) {
             if (line.startsWith(HEADING_PREFIX)) {
@@ -102,18 +110,21 @@ class HealthArticleFragment : Fragment() {
         }
     }
 
+    // Adds a styled heading TextView to the layout body
     private fun addHeading(text: String) {
         binding.layoutBody.addView(
             newText(text, sizeSp = 17f, colorRes = R.color.settings_title, bold = true, topMarginDp = 20)
         )
     }
 
+    // Adds a styled paragraph TextView to the layout body
     private fun addParagraph(text: String) {
         binding.layoutBody.addView(
             newText(text, sizeSp = 15f, colorRes = R.color.settings_text, bold = false, topMarginDp = 10)
         )
     }
 
+    // Factory method for creating custom styled TextViews for dynamic rendering
     private fun newText(text: String, sizeSp: Float, colorRes: Int, bold: Boolean, topMarginDp: Int): TextView =
         TextView(requireContext()).apply {
             this.text = text
@@ -127,15 +138,21 @@ class HealthArticleFragment : Fragment() {
             ).apply { topMargin = dp(topMarginDp) }
         }
 
+    // Converts DP values to pixels based on device display density
     private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 
+    // Clear binding reference on view destroy to prevent memory leaks
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
     companion object {
+        // Navigation argument key for passing article ID
         const val ARG_ARTICLE_ID = "articleId"
+
+        // Prefix used in raw string resources to designate subheadings
         private const val HEADING_PREFIX = "## "
     }
 }
+//---------------------------------------END OF FILE-------------------------------------------------

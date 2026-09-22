@@ -36,22 +36,22 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.Locale
 
-/**
- * Asks for date of birth, gender, height, weight and activity level.
- *
- * - Opened with [ARG_ONBOARDING] = true (Home does this for a user with no metrics): first-login prompt, with a
- *   "Skip for now" button and the system back button disabled.
- * - Opened without it (from Settings): same form, pre-filled, with Cancel.
- *
- * Height can be entered in cm or ft/in and weight in kg or lb. Switching unit converts what's already typed.
- * Which unit is shown by default always follows the Settings unit-of-measurement picker
- * (Metric / Imperial / UK); saving here also writes the resulting unit system back to Settings,
- * so the two screens stay in sync in both directions.
- */
-class MetricsFragment : Fragment() {
 
-    private var _binding: FragmentMetricsBinding? = null
-    private val binding get() = _binding!!
+ // Asks for date of birth, gender, height, weight and activity level.
+ // - Opened with [ARG_ONBOARDING] = true (Home does this for a user with no metrics): first-login prompt, with a
+ //   "Skip for now" button and the system back button disabled.
+ // - Opened without it (from Settings): same form, pre-filled, with Cancel.
+ //
+ // Height can be entered in cm or ft/in and weight in kg or lb. Switching unit converts what's already typed.
+ // Which unit is shown by default always follows the Settings unit-of-measurement picker
+ // (Metric / Imperial / UK); saving here also writes the resulting unit system back to Settings,
+ // so the two screens stay in sync in both directions.
+ //
+class MetricsFragment : Fragment() {
+     // Nullable backing field for view binding, cleared in onDestroyView to avoid leaks
+     private var _binding: FragmentMetricsBinding? = null
+     // Non-null accessor, only safe to use between onCreateView and onDestroyView
+     private val binding get() = _binding!!
 
     private val viewModel: MetricsViewModel by viewModels()
 
@@ -60,16 +60,19 @@ class MetricsFragment : Fragment() {
     private var heightUnit = HeightUnit.CM
     private var weightUnit = WeightUnit.KG
 
-    /** Raw Settings value ("Metric" / "Imperial" / "UK"), kept so saving can preserve "UK" rather
-     *  than collapsing it into "Imperial" when the chips already match what Settings had. */
-    private var currentUnitSystem = "Metric"
+     // Raw Settings value ("Metric" / "Imperial" / "UK"), kept so saving can preserve "UK" rather
+     // than collapsing it into "Imperial" when the chips already match what Settings had.
+     private var currentUnitSystem = "Metric"
 
-    /** True while we set chips from code, so their listeners don't react to it. */
+     // True while we set chips from code, so their listeners don't react to it.
     private var isApplyingState = false
 
-    /** The form is filled from saved data once per view; false again after a rotation with saved state restored. */
-    private var formFilled = false
 
+     // The form is filled from saved data once per view; false again after a rotation with saved state restored.
+
+     private var formFilled = false
+
+     // Maps each gender chip's view ID to its corresponding Gender enum value
     private val genderChips by lazy {
         mapOf(
             R.id.chipFemale to Gender.FEMALE,
@@ -79,6 +82,7 @@ class MetricsFragment : Fragment() {
         )
     }
 
+     // Maps each activity level radio button's view ID to its corresponding ActivityLevel enum value
     private val activityRadios by lazy {
         mapOf(
             R.id.radioSedentary to ActivityLevel.SEDENTARY,
@@ -109,6 +113,7 @@ class MetricsFragment : Fragment() {
         binding.buttonSave.setOnClickListener { attemptSave() }
         binding.buttonSecondary.setOnClickListener { onSecondaryClicked() }
 
+        // They have to answer or explicitly skip; back must not silently dismiss the prompt.
         if (isOnboarding) {
             // They have to answer or explicitly skip; back must not silently dismiss the prompt.
             requireActivity().onBackPressedDispatcher.addCallback(
@@ -132,6 +137,8 @@ class MetricsFragment : Fragment() {
             formFilled = true
         }
 
+        // Fills the form from saved backend data once it arrives, but only the first time
+        // (formFilled guards against overwriting user edits on later emissions)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.formData.collect { data ->
@@ -153,8 +160,8 @@ class MetricsFragment : Fragment() {
     }
 
     // ---------------------------------------------------------------- setup
-
-    private fun setupWindowInsets() {
+     // Applies system bar insets as padding so content isn't drawn under the status/nav bars
+     private fun setupWindowInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
             val bars = insets.getInsets(
                 WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout()
@@ -164,7 +171,8 @@ class MetricsFragment : Fragment() {
         }
     }
 
-    private fun setupModeTexts() {
+     // Swaps title/subtitle/secondary button text depending on onboarding vs. edit mode
+     private fun setupModeTexts() {
         if (isOnboarding) {
             binding.textTitle.setText(R.string.metrics_title_onboarding)
             binding.textSubtitle.isVisible = true
@@ -180,7 +188,9 @@ class MetricsFragment : Fragment() {
         binding.fieldDob.setOnClickListener { pickDateOfBirth() }
     }
 
-    private fun setupUnitChips() {
+     // Wires the height/weight unit toggle chips, converting the currently entered
+     // value into the newly selected unit instead of just clearing the field
+     private fun setupUnitChips() {
         binding.chipGroupHeightUnit.setOnCheckedStateChangeListener { _, checkedIds ->
             if (isApplyingState) return@setOnCheckedStateChangeListener
             val newUnit = if (checkedIds.firstOrNull() == R.id.chipHeightFtIn) HeightUnit.FT_IN else HeightUnit.CM
@@ -209,7 +219,9 @@ class MetricsFragment : Fragment() {
 
     // ----------------------------------------------------------------- fill
 
-    private fun fillForm(data: MetricsFormData) {
+     // Populates the form from previously saved metrics, or just applies the default
+     // unit system if the user has no saved metrics yet
+     private fun fillForm(data: MetricsFormData) {
         val saved = data.existing
 
         // The unit shown always follows Settings, not whatever was saved with a previous
@@ -251,7 +263,8 @@ class MetricsFragment : Fragment() {
         }.show()
     }
 
-    private fun renderDateOfBirth() {
+     // Formats the selected date of birth into the DOB field and updates the computed age label
+     private fun renderDateOfBirth() {
         val dob = dateOfBirth
         if (dob == null) {
             binding.fieldDob.text = null
@@ -264,8 +277,8 @@ class MetricsFragment : Fragment() {
     }
 
     // ------------------------------------------------------- height / weight
-
-    private fun applyHeightUnitUi() {
+    // Updates chip selection and field hints/suffixes/input type to match the active height unit
+     private fun applyHeightUnitUi() {
         isApplyingState = true
         binding.chipGroupHeightUnit.check(
             if (heightUnit == HeightUnit.CM) R.id.chipHeightCm else R.id.chipHeightFtIn
@@ -283,7 +296,8 @@ class MetricsFragment : Fragment() {
         }
     }
 
-    private fun applyWeightUnitUi() {
+     // Updates chip selection and field hint/suffix to match the active weight unit
+     private fun applyWeightUnitUi() {
         isApplyingState = true
         binding.chipGroupWeightUnit.check(
             if (weightUnit == WeightUnit.KG) R.id.chipWeightKg else R.id.chipWeightLb
@@ -294,7 +308,7 @@ class MetricsFragment : Fragment() {
         binding.editWeight.setHint(if (weightUnit == WeightUnit.KG) R.string.metrics_hint_kg else R.string.metrics_hint_lb)
     }
 
-    /** Puts a height that's stored in cm into the fields for whichever unit is showing. */
+     // Puts a height that's stored in cm into the fields for whichever unit is showing.
     private fun showHeight(cm: Double) {
         if (heightUnit == HeightUnit.CM) {
             binding.editHeightPrimary.setText(formatNumber(cm))
@@ -316,7 +330,7 @@ class MetricsFragment : Fragment() {
         binding.editWeight.setText(formatNumber(value))
     }
 
-    /** Height in cm from whatever is typed, or null if it's blank / not a number. */
+     // Height in cm from whatever is typed, or null if it's blank / not a number
     private fun readHeightCm(): Double? = when (heightUnit) {
         HeightUnit.CM -> parseNumber(binding.editHeightPrimary)
         HeightUnit.FT_IN -> {
@@ -325,25 +339,25 @@ class MetricsFragment : Fragment() {
         }
     }
 
+     // Weight in kg from whatever is typed, converting from lb if that's the active unit
     private fun readWeightKg(): Double? {
         val value = parseNumber(binding.editWeight) ?: return null
         return if (weightUnit == WeightUnit.KG) value else UnitConversions.lbToKg(value)
     }
 
+
     private fun parseNumber(field: EditText): Double? =
         field.text.toString().trim().replace(',', '.').toDoubleOrNull()
 
-    /** 70.0 -> "70", 70.5 -> "70.5". */
+     // 70.0 -> "70", 70.5 -> "70.5".
     private fun formatNumber(value: Double): String =
         String.format(Locale.US, "%.1f", value).trimEnd('0').trimEnd('.')
 
-    /**
-     * What to write back to Settings' unitSystem field. Metric/Imperial are decided by the
-     * chips; "UK" is preserved only when it was already the active Settings value and the user
-     * hasn't switched to metric - there's no way to tell "UK" and "Imperial" apart from the
-     * chips alone, since both use ft/in and lb.
-     */
-    private fun resolveUnitSystemForSave(): String {
+     // What to write back to Settings' unitSystem field. Metric/Imperial are decided by the
+     // chips; "UK" is preserved only when it was already the active Settings value and the user
+     // hasn't switched to metric - there's no way to tell "UK" and "Imperial" apart from the
+     // chips alone, since both use ft/in and lb.
+     private fun resolveUnitSystemForSave(): String {
         val isImperial = heightUnit == HeightUnit.FT_IN || weightUnit == WeightUnit.LB
         return when {
             !isImperial -> "Metric"
@@ -353,8 +367,8 @@ class MetricsFragment : Fragment() {
     }
 
     // ----------------------------------------------------------------- save
-
-    private fun attemptSave() {
+    // Validates every field, builds a UserMetrics object, and saves it via the ViewModel
+     private fun attemptSave() {
         val dob = dateOfBirth
         if (dob == null) return showError(R.string.metrics_error_dob)
         val age = Period.between(dob, LocalDate.now()).years
@@ -404,7 +418,9 @@ class MetricsFragment : Fragment() {
 
     private fun round2(value: Double): Double = Math.round(value * 100.0) / 100.0
 
-    private fun onSecondaryClicked() {
+     // Handles Skip (onboarding) / Cancel (edit) — records the skip so the onboarding
+     // prompt doesn't reappear this session, then just navigates back
+     private fun onSecondaryClicked() {
         if (isOnboarding) {
             MetricsPromptState.skippedForUid = FirebaseAuth.getInstance().currentUser?.uid
         }
@@ -432,6 +448,7 @@ class MetricsFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         formFilled = false
+        // Prevent memory leaks by releasing the binding reference
         _binding = null
     }
 
@@ -443,3 +460,4 @@ class MetricsFragment : Fragment() {
         private const val STATE_DOB_EPOCH_DAY = "state_dob_epoch_day"
     }
 }
+//---------------------------------------END OF FILE-------------------------------------------------
