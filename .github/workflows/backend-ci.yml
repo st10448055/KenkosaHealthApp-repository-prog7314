@@ -45,4 +45,4 @@ jobs:
           echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_KEY }}" | base64 --decode > backend/serviceAccountKey.json
 
       - name: Build backend
-        run: ./gradlew :backend:build -x test --stacktrace
+        run: ./gradlew :backend:build -x test -x shadowDistTar -x shadowDistZip -x startShadowScripts --stacktrace
