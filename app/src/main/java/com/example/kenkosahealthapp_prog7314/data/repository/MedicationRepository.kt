@@ -9,30 +9,70 @@ import com.example.kenkosahealthapp_prog7314.data.network.UpdateMedicationReques
 import retrofit2.HttpException
 import java.io.IOException
 
-class MedicationRepository(private val api: MedicationApi = RetrofitInstance.medicationApi) {
+// Repository responsible for managing medication and vitamin records.
+// It communicates with the backend through MedicationApi.
+class MedicationRepository(
+    // Uses the shared Retrofit MedicationApi instance by default.
+    private val api: MedicationApi = RetrofitInstance.medicationApi
+) {
 
-    suspend fun getMedications(): ApiResult<List<MedicationDto>> = safeCall { api.getMedications() }
+    // Retrieves all medications belonging to the authenticated user.
+    suspend fun getMedications(): ApiResult<List<MedicationDto>> =
+        safeCall {
+            api.getMedications()
+        }
 
-    suspend fun getMedication(medicationId: String): ApiResult<MedicationDto> =
-        safeCall { api.getMedication(medicationId) }
+    // Retrieves a specific medication using its unique medication ID.
+    suspend fun getMedication(
+        medicationId: String
+    ): ApiResult<MedicationDto> =
+        safeCall {
+            api.getMedication(medicationId)
+        }
 
+    // Creates a new medication or vitamin record.
     suspend fun createMedication(
+        // Category of the item, such as MEDICATION or VITAMIN.
         category: String,
+
+        // Name of the medication or vitamin.
         name: String,
+
+        // Dosage information.
         dosage: String,
+
+        // Frequency, such as DAILY, WEEKLY or MONTHLY.
         frequency: String,
+
+        // Determines whether reminders are enabled.
         remindersEnabled: Boolean,
+
+        // Time at which the reminder should occur.
         reminderTime: String,
+
+        // Date on which the medication starts.
         startDate: String
     ): ApiResult<MedicationDto> {
-        validate(name, dosage)?.let { return ApiResult.ValidationError(it) }
+
+        // Validates the medication name and dosage before
+        // sending the request to the backend.
+        validate(name, dosage)?.let {
+            return ApiResult.ValidationError(it)
+        }
 
         return safeCall {
+
+            // Creates the request object and sends it to the backend.
             api.createMedication(
                 CreateMedicationRequest(
                     category = category,
+
+                    // Removes unnecessary whitespace from the medication name.
                     name = name.trim(),
+
+                    // Removes unnecessary whitespace from the dosage.
                     dosage = dosage.trim(),
+
                     frequency = frequency,
                     remindersEnabled = remindersEnabled,
                     reminderTime = reminderTime,
@@ -42,19 +82,42 @@ class MedicationRepository(private val api: MedicationApi = RetrofitInstance.med
         }
     }
 
+    // Updates an existing medication or vitamin record.
     suspend fun updateMedication(
+        // ID of the medication being updated.
         medicationId: String,
+
+        // Updated medication category.
         category: String,
+
+        // Updated medication name.
         name: String,
+
+        // Updated dosage.
         dosage: String,
+
+        // Updated medication frequency.
         frequency: String,
+
+        // Updated reminder setting.
         remindersEnabled: Boolean,
+
+        // Updated reminder time.
         reminderTime: String,
+
+        // Updated starting date.
         startDate: String?
     ): ApiResult<MedicationDto> {
-        validate(name, dosage)?.let { return ApiResult.ValidationError(it) }
+
+        // Validates the medication name and dosage before
+        // sending the update to the backend.
+        validate(name, dosage)?.let {
+            return ApiResult.ValidationError(it)
+        }
 
         return safeCall {
+
+            // Creates the update request and sends it to the backend.
             api.updateMedication(
                 medicationId,
                 UpdateMedicationRequest(
@@ -70,28 +133,91 @@ class MedicationRepository(private val api: MedicationApi = RetrofitInstance.med
         }
     }
 
-    suspend fun setTaken(medicationId: String, date: String, taken: Boolean): ApiResult<MedicationDto> =
-        safeCall { api.setTaken(medicationId, SetTakenRequest(date, taken)) }
+    // Updates whether a medication was taken on a specific date.
+    suspend fun setTaken(
+        medicationId: String,
+        date: String,
+        taken: Boolean
+    ): ApiResult<MedicationDto> =
+        safeCall {
+            api.setTaken(
+                medicationId,
+                SetTakenRequest(date, taken)
+            )
+        }
 
-    suspend fun deleteMedication(medicationId: String): ApiResult<Unit> =
-        safeCall { api.deleteMedication(medicationId) }
+    // Deletes a medication or vitamin record using its unique ID.
+    suspend fun deleteMedication(
+        medicationId: String
+    ): ApiResult<Unit> =
+        safeCall {
+            api.deleteMedication(medicationId)
+        }
 
-    private fun validate(name: String, dosage: String): String? = when {
-        name.isBlank() -> "Medication name cannot be empty"
-        name.trim().length > 60 -> "Medication name must be 60 characters or fewer"
-        dosage.isBlank() -> "Dosage cannot be empty"
-        dosage.trim().length > 30 -> "Dosage must be 30 characters or fewer"
+    // Validates the medication name and dosage.
+    // Returns an error message when validation fails,
+    // or null when the supplied values are valid.
+    private fun validate(
+        name: String,
+        dosage: String
+    ): String? = when {
+
+        // Medication name cannot be empty.
+        name.isBlank() ->
+            "Medication name cannot be empty"
+
+        // Medication name cannot exceed 60 characters.
+        name.trim().length > 60 ->
+            "Medication name must be 60 characters or fewer"
+
+        // Dosage cannot be empty.
+        dosage.isBlank() ->
+            "Dosage cannot be empty"
+
+        // Dosage cannot exceed 30 characters.
+        dosage.trim().length > 30 ->
+            "Dosage must be 30 characters or fewer"
+
+        // No validation errors were found.
         else -> null
     }
 
-    private suspend fun <T> safeCall(block: suspend () -> T): ApiResult<T> = try {
+    // Executes an API operation safely and converts exceptions
+    // into the appropriate ApiResult type.
+    private suspend fun <T> safeCall(
+        block: suspend () -> T
+    ): ApiResult<T> = try {
+
+        // API request completed successfully.
         ApiResult.Success(block())
+
     } catch (e: HttpException) {
-        val message = e.response()?.errorBody()?.string() ?: e.message()
-        ApiResult.ServerError(e.code(), message ?: "Server error")
+
+        // Handles HTTP errors returned by the backend.
+        val message = e.response()?.errorBody()?.string()
+            ?: e.message()
+
+        // Returns the HTTP status code and server error message.
+        ApiResult.ServerError(
+            e.code(),
+            message ?: "Server error"
+        )
+
     } catch (e: IOException) {
-        ApiResult.NetworkError("Couldn't reach the server. Check your connection.")
+
+        // Handles network connectivity problems.
+        ApiResult.NetworkError(
+            "Couldn't reach the server. Check your connection."
+        )
+
     } catch (e: Exception) {
-        ApiResult.ServerError(0, e.message ?: "Unknown error")
+
+        // Handles unexpected errors.
+        ApiResult.ServerError(
+            0,
+            e.message ?: "Unknown error"
+        )
     }
 }
+
+// ------------------ END OF FILE ------------------ //

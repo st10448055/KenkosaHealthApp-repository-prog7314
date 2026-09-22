@@ -5,40 +5,106 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.tasks.await
 
+// Firestore collection containing the user's profile information and metrics.
 private const val USERS_COLLECTION = "users"
+
+// Firestore collection containing the user's application settings.
 private const val SETTINGS_COLLECTION = "userSettings"
 
-class MetricsRepository(private val db: FirebaseFirestore = FirebaseFirestore.getInstance()) {
+// Repository responsible for reading and saving user health metrics
+// and the selected unit system using Firebase Firestore.
+class MetricsRepository(
+    // Uses the default Firebase Firestore instance unless another instance
+    // is supplied, which can also make the repository easier to test.
+    private val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+) {
 
-    /** The user's saved metrics, or null if they haven't completed them yet. */
+    // Retrieves the user's saved health metrics.
+    // Returns null if the metrics have not been completed or saved yet.
     suspend fun getMetrics(userId: String): UserMetrics? {
-        require(userId.isNotBlank()) { "User ID cannot be blank" }
-        return UserMetrics.fromSnapshot(db.collection(USERS_COLLECTION).document(userId).get().await())
+
+        // Ensures that a valid Firebase user ID has been supplied.
+        require(userId.isNotBlank()) {
+            "User ID cannot be blank"
+        }
+
+        // Retrieves the user's document from the users collection
+        // and converts the Firestore document into a UserMetrics object.
+        return UserMetrics.fromSnapshot(
+            db.collection(USERS_COLLECTION)
+                .document(userId)
+                .get()
+                .await()
+        )
     }
 
-    /** "Metric", "Imperial" or "UK" from the user's Settings, or "Metric" if they haven't chosen. */
+    // Retrieves the unit system selected by the user from Firestore.
+    // Supported values include "Metric", "Imperial" and "UK".
+    // If no unit system has been saved, Metric is used as the default.
     suspend fun getUnitSystem(userId: String): String {
-        require(userId.isNotBlank()) { "User ID cannot be blank" }
-        val doc = db.collection(SETTINGS_COLLECTION).document(userId).get().await()
+
+        // Ensures that a valid Firebase user ID has been supplied.
+        require(userId.isNotBlank()) {
+            "User ID cannot be blank"
+        }
+
+        // Retrieves the user's settings document.
+        val doc = db.collection(SETTINGS_COLLECTION)
+            .document(userId)
+            .get()
+            .await()
+
+        // Gets the saved unit system or defaults to Metric.
         return doc.getString("unitSystem") ?: "Metric"
     }
 
-    /**
-     * Writes the chosen unit system back to Settings, so switching units on the Metrics form
-     * keeps the Settings screen in sync. Merges, so it never disturbs the rest of userSettings.
-     */
-    suspend fun setUnitSystem(userId: String, unitSystem: String) {
-        require(userId.isNotBlank()) { "User ID cannot be blank" }
-        db.collection(SETTINGS_COLLECTION).document(userId)
-            .set(mapOf("unitSystem" to unitSystem), SetOptions.merge())
+    // Saves the selected unit system to the user's Settings document.
+    // SetOptions.merge() ensures that existing settings are not overwritten.
+    suspend fun setUnitSystem(
+        userId: String,
+        unitSystem: String
+    ) {
+
+        // Ensures that a valid Firebase user ID has been supplied.
+        require(userId.isNotBlank()) {
+            "User ID cannot be blank"
+        }
+
+        // Updates only the unitSystem field in the user's settings.
+        // Other settings remain unchanged because SetOptions.merge()
+        // is used.
+        db.collection(SETTINGS_COLLECTION)
+            .document(userId)
+            .set(
+                mapOf("unitSystem" to unitSystem),
+                SetOptions.merge()
+            )
             .await()
     }
 
-    /** Merges into users/{uid}, so name, email and the other profile fields are left untouched. */
-    suspend fun saveMetrics(userId: String, metrics: UserMetrics) {
-        require(userId.isNotBlank()) { "User ID cannot be blank" }
-        db.collection(USERS_COLLECTION).document(userId)
-            .set(metrics.toFirestoreMap(), SetOptions.merge())
+    // Saves the user's health metrics to their users/{uid} Firestore document.
+    // SetOptions.merge() ensures that existing profile information such as
+    // the user's name and email is not removed or overwritten.
+    suspend fun saveMetrics(
+        userId: String,
+        metrics: UserMetrics
+    ) {
+
+        // Ensures that a valid Firebase user ID has been supplied.
+        require(userId.isNotBlank()) {
+            "User ID cannot be blank"
+        }
+
+        // Converts the UserMetrics object into a Firestore-compatible map
+        // and merges the metrics into the existing user document.
+        db.collection(USERS_COLLECTION)
+            .document(userId)
+            .set(
+                metrics.toFirestoreMap(),
+                SetOptions.merge()
+            )
             .await()
     }
 }
+
+// ------------------ END OF FILE ------------------ //
