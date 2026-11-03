@@ -34,6 +34,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 import java.util.Locale
+import com.example.kenkosahealthapp_prog7314.security.BiometricAvailability
+import com.example.kenkosahealthapp_prog7314.security.BiometricHelper
+import com.example.kenkosahealthapp_prog7314.security.BiometricPreferences
 
 // Main settings screen — profile editing, units/language/dark-mode/notification toggles,
 // body metrics shortcut, and numeric goal targets (steps, calories, sleep).
@@ -121,6 +124,7 @@ class SettingsFragment : Fragment() {
         binding.rowPushNotifications.textLabel.setText(R.string.settings_push_notifications)
         binding.rowDarkMode.textLabel.setText(R.string.settings_dark_mode)
         binding.rowLanguage.textLabel.setText(R.string.settings_language)
+        binding.rowBiometric.textLabel.setText(R.string.settings_biometric_login)
         binding.rowBodyMetrics.textLabel.setText(R.string.metrics_settings_row)
         binding.rowDailySteps.textLabel.setText(R.string.settings_daily_steps)
         binding.rowCalorieTarget.textLabel.setText(R.string.settings_calorie_target)
@@ -150,6 +154,7 @@ class SettingsFragment : Fragment() {
 
     // Wires up units, language, notifications, and dark mode rows/toggles
     private fun setupPreferenceListeners() {
+        setupBiometricToggle()
         binding.rowUnits.root.setOnClickListener {
             showChoiceDialog(
                 R.string.settings_units,
@@ -192,6 +197,65 @@ class SettingsFragment : Fragment() {
             viewModel.setAppearanceMode(mode)
             // Applying the theme recreates the activity, so save first.
             ThemeManager.set(requireContext().applicationContext, mode)
+        }
+    }
+
+    // Biometric login toggle. Turning ON checks the hardware and requires a successful scan
+    // before saving. The flag lives on the device because biometrics are per device.
+    private fun setupBiometricToggle() {
+        val prefs = BiometricPreferences(requireContext())
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
+
+        isApplyingRemoteState = true
+        binding.rowBiometric.switchToggle.isChecked = prefs.isEnabled(uid)
+        isApplyingRemoteState = false
+
+        binding.rowBiometric.root.setOnClickListener { binding.rowBiometric.switchToggle.toggle() }
+        binding.rowBiometric.switchToggle.setOnCheckedChangeListener { _, isChecked ->
+            if (isApplyingRemoteState) return@setOnCheckedChangeListener
+
+            if (!isChecked) {
+                prefs.setEnabled(uid, false)
+                Toast.makeText(requireContext(), R.string.biometric_disabled_toast, Toast.LENGTH_SHORT).show()
+                return@setOnCheckedChangeListener
+            }
+
+            val message = when (BiometricHelper.checkAvailability(requireActivity())) {
+                BiometricAvailability.AVAILABLE -> null
+                BiometricAvailability.NONE_ENROLLED -> R.string.biometric_none_enrolled
+                BiometricAvailability.NO_HARDWARE -> R.string.biometric_no_hardware
+                BiometricAvailability.UNAVAILABLE -> R.string.biometric_unavailable
+            }
+            if (message != null) {
+                setBiometricSwitch(false)
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+                return@setOnCheckedChangeListener
+            }
+
+            BiometricHelper.authenticate(
+                fragment = this,
+                title = getString(R.string.biometric_confirm_title),
+                subtitle = getString(R.string.biometric_confirm_subtitle),
+                negativeText = getString(android.R.string.cancel),
+                onSuccess = {
+                    prefs.setEnabled(uid, true)
+                    Toast.makeText(requireContext(), R.string.biometric_enabled_toast, Toast.LENGTH_SHORT).show()
+                },
+                onCancelled = { setBiometricSwitch(false) },
+                onError = { error ->
+                    setBiometricSwitch(false)
+                    Toast.makeText(requireContext(), error, Toast.LENGTH_LONG).show()
+                }
+            )
+        }
+    }
+
+    // Sets the biometric switch without firing its listener (safe if the view is gone).
+    private fun setBiometricSwitch(checked: Boolean) {
+        _binding?.let {
+            isApplyingRemoteState = true
+            it.rowBiometric.switchToggle.isChecked = checked
+            isApplyingRemoteState = false
         }
     }
 

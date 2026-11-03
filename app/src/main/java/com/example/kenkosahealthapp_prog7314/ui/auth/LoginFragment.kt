@@ -16,6 +16,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentLoginBinding
 import kotlinx.coroutines.launch
+import android.util.Log
+import android.widget.Toast
+import com.example.kenkosahealthapp_prog7314.security.BiometricAvailability
+import com.example.kenkosahealthapp_prog7314.security.BiometricHelper
+import com.example.kenkosahealthapp_prog7314.security.BiometricPreferences
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.FirebaseAuth
 
 // Login screen fragment - handles email/password login, Google sign-in, and navigation
 // to sign-up. Also listens to AuthViewModel's state to show loading/errors and navigate on success.
@@ -74,9 +81,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_login_to_sign_up)
         }
 
-        binding.textUseFingerprint.setOnClickListener {
-            showError("Fingerprint sign-in isn't set up yet")
-        }
+        binding.textUseFingerprint.setOnClickListener { onBiometricLinkClicked() }
 
         // Observe auth state only while the view is at least STARTED, to avoid
         // updating views that don't exist yet or have already been destroyed
@@ -88,7 +93,9 @@ class LoginFragment : Fragment() {
                         is AuthUiState.Success -> {
                             setLoading(false)
                             // Login succeeded, move on to the home screen
-                            findNavController().navigate(R.id.action_login_to_home)
+                            viewModel.resetState()
+                            // Login succeeded: offer biometric login once, then go Home
+                            offerBiometricThenContinue()
                         }
                         is AuthUiState.Error -> {
                             setLoading(false)
@@ -100,6 +107,60 @@ class LoginFragment : Fragment() {
             }
         }
     }
+    // Handles a tap on "Use Fingerprint to Access".
+    private fun onBiometricLinkClicked() {
+        val user = FirebaseAuth.getInstance().currentUser
+        val prefs = BiometricPreferences(requireContext())
+        if (user != null && prefs.isEnabled(user.uid)) {
+            findNavController().navigate(R.id.biometricLockFragment)
+        } else {
+            showError(getString(R.string.biometric_sign_in_first))
+        }
+    }
+
+    // After sign-in, offer biometric login ONCE (if the phone supports it).
+    // The user must pass a biometric check before the setting is switched on.
+    private fun offerBiometricThenContinue() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val prefs = BiometricPreferences(requireContext())
+        val availability = BiometricHelper.checkAvailability(requireActivity())
+
+        if (uid == null || availability != BiometricAvailability.AVAILABLE ||
+            prefs.isEnabled(uid) || prefs.wasOfferShown(uid)
+        ) {
+            goHome()
+            return
+        }
+        prefs.setOfferShown(uid)
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.biometric_enable_title)
+            .setMessage(R.string.biometric_enable_message)
+            .setCancelable(false)
+            .setPositiveButton(R.string.biometric_enable_yes) { _, _ ->
+                BiometricHelper.authenticate(
+                    fragment = this,
+                    title = getString(R.string.biometric_confirm_title),
+                    subtitle = getString(R.string.biometric_confirm_subtitle),
+                    negativeText = getString(android.R.string.cancel),
+                    onSuccess = {
+                        prefs.setEnabled(uid, true)
+                        Toast.makeText(requireContext(), R.string.biometric_enabled_toast, Toast.LENGTH_SHORT).show()
+                        goHome()
+                    },
+                    onCancelled = { goHome() },
+                    onError = { goHome() }
+                )
+            }
+            .setNegativeButton(R.string.biometric_enable_later) { _, _ -> goHome() }
+            .show()
+    }
+
+    private fun goHome() {
+        if (_binding == null) return
+        Log.d("LoginFragment", "Navigating to Home")
+        findNavController().navigate(R.id.action_login_to_home)
+    }
+
     // Validates the entered credentials locally before delegating the actual sign-in to the ViewModel
     private fun attemptLogin() {
         val email = binding.editEmail.text.toString().trim()

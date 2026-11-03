@@ -133,4 +133,25 @@
     <string name="medication_error_dosage_required">Nceda ufake umthamo</string>
     <string name="medication_error_dosage_length">Umthamo mawungabi ngaphezu koonobumba abangama-30</string>
     <string name="medication_error_generic">Kukho into engahambanga kakuhle. Nceda uzame kwakhona.</string>
+
+    <!-- Ungqinisiso lwebhayometriki -->
+    <string name="settings_biometric_login">Ukungena ngebhayometriki</string>
+    <string name="biometric_prompt_title">Vula i-Kenkosa</string>
+    <string name="biometric_prompt_subtitle">Sebenzisa isikhondo somnwe okanye ubuso ukuqhubeka</string>
+    <string name="biometric_use_password">Sebenzisa iphasiwedi endaweni yoko</string>
+    <string name="biometric_unlock">Vula</string>
+    <string name="biometric_lock_subtitle">Qinisekisa ukuba nguwe ukuvula idatha yempilo yakho</string>
+    <string name="biometric_unavailable_now">Ibhayometriki ayisafumaneki kule fowuni, ngoko ukungena ngebhayometriki kucinyiwe.</string>
+    <string name="biometric_enable_title">Vula ukungena ngebhayometriki?</string>
+    <string name="biometric_enable_message">Sebenzisa isikhondo somnwe okanye ubuso ukuvula i-Kenkosa ngokukhawuleza nangokukhuselekileyo ngomso.</string>
+    <string name="biometric_enable_yes">Vula</string>
+    <string name="biometric_enable_later">Hayi ngoku</string>
+    <string name="biometric_confirm_title">Qinisekisa ukungena ngebhayometriki</string>
+    <string name="biometric_confirm_subtitle">Qinisekisa ngoku ukuze uyivule</string>
+    <string name="biometric_enabled_toast">Ukungena ngebhayometriki kuvuliwe</string>
+    <string name="biometric_disabled_toast">Ukungena ngebhayometriki kucinyiwe</string>
+    <string name="biometric_none_enrolled">Akukho sikhondo somnwe okanye buso busetiweyo. Yongeza esinye kuseto lokhuseleko lwefowuni yakho kuqala.</string>
+    <string name="biometric_no_hardware">Esi sixhobo asinayo isenzi sebhayometriki.</string>
+    <string name="biometric_unavailable">Ibhayometriki ayifumaneki okwangoku. Zama kwakhona kamva.</string>
+    <string name="biometric_sign_in_first">Ngena kanye ngephasiwedi okanye nge-Google, emva koko vula Ukungena ngebhayometriki kuSeto.</string>
 </resources>

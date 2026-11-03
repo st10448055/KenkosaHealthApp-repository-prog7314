@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+import com.example.kenkosahealthapp_prog7314.security.BiometricPreferences
 
 // Home Fragment serving as the main hub containing feature navigation, user greeting, and calorie progress ring
 class HomeFragment : Fragment() {
@@ -281,7 +282,12 @@ class HomeFragment : Fragment() {
         }
 
         drawer.buttonDrawerLogout.setOnClickListener {
-            auth.signOut()
+            // With biometric login ON, logging out only "locks" the app: the session is kept
+            // so the fingerprint can unlock it. Otherwise sign out fully as before.
+            val uid = auth.currentUser?.uid
+            val keepSession = uid != null &&
+                    BiometricPreferences(requireContext()).isEnabled(uid)
+            if (!keepSession) auth.signOut()
             findNavController().navigate(
                 R.id.startFragment,
                 null,
