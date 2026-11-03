@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.jetbrains.kotlin.jvm)
     kotlin("plugin.serialization") version "2.0.0"
-    id("com.gradleup.shadow") version "8.3.5"
+    id("com.gradleup.shadow") version "9.0.0"
     application
 }
 

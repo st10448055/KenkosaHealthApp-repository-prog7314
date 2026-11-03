@@ -133,4 +133,25 @@
     <string name="medication_error_dosage_required">Voer asseblief \'n dosis in</string>
     <string name="medication_error_dosage_length">Dosis mag hoogstens 30 karakters wees</string>
     <string name="medication_error_generic">Iets het skeefgeloop. Probeer asseblief weer.</string>
+
+    <!-- Biometriese verifikasie -->
+    <string name="settings_biometric_login">Biometriese aanmelding</string>
+    <string name="biometric_prompt_title">Ontsluit Kenkosa</string>
+    <string name="biometric_prompt_subtitle">Gebruik jou vingerafdruk of gesig om voort te gaan</string>
+    <string name="biometric_use_password">Gebruik eerder wagwoord</string>
+    <string name="biometric_unlock">Ontsluit</string>
+    <string name="biometric_lock_subtitle">Verifieer dat dit jy is om jou gesondheidsdata te open</string>
+    <string name="biometric_unavailable_now">Biometrie is nie meer op hierdie toestel beskikbaar nie, daarom is biometriese aanmelding afgeskakel.</string>
+    <string name="biometric_enable_title">Skakel biometriese aanmelding aan?</string>
+    <string name="biometric_enable_message">Gebruik jou vingerafdruk of gesig om Kenkosa volgende keer vinnig en veilig oop te maak.</string>
+    <string name="biometric_enable_yes">Skakel aan</string>
+    <string name="biometric_enable_later">Nie nou nie</string>
+    <string name="biometric_confirm_title">Bevestig biometriese aanmelding</string>
+    <string name="biometric_confirm_subtitle">Verifieer nou om dit aan te skakel</string>
+    <string name="biometric_enabled_toast">Biometriese aanmelding aangeskakel</string>
+    <string name="biometric_disabled_toast">Biometriese aanmelding afgeskakel</string>
+    <string name="biometric_none_enrolled">Geen vingerafdruk of gesig is opgestel nie. Voeg eers een by in jou foon se sekuriteitsinstellings.</string>
+    <string name="biometric_no_hardware">Hierdie toestel het nie \'n biometriese sensor nie.</string>
+    <string name="biometric_unavailable">Biometrie is tans nie beskikbaar nie. Probeer later weer.</string>
+    <string name="biometric_sign_in_first">Meld eers een keer met jou wagwoord of Google aan, skakel dan Biometriese aanmelding in Instellings aan.</string>
 </resources>

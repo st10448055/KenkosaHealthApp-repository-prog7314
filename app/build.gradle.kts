@@ -61,6 +61,8 @@ dependencies {
     // Navigation Component
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    // Biometric authentication (fingerprint / face)
+    implementation("androidx.biometric:biometric:1.1.0")
 
     // Lifecycle / ViewModel / coroutines
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")

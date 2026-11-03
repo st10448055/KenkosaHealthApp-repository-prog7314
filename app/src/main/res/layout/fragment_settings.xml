@@ -187,6 +187,12 @@
                         android:layout_height="wrap_content" />
 
                     <include
+                        android:id="@+id/rowBiometric"
+                        layout="@layout/item_settings_toggle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <include
                         android:id="@+id/rowLanguage"
                         layout="@layout/item_settings_row"
                         android:layout_width="match_parent"
