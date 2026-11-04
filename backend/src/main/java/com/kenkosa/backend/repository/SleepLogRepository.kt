@@ -5,6 +5,7 @@ import com.google.firebase.cloud.FirestoreClient
 import com.kenkosa.backend.models.SaveSleepLogRequest
 import com.kenkosa.backend.models.SleepLogResponse
 import java.util.UUID
+import com.kenkosa.backend.models.sleepsOverlap
 
 // Same collection as the original sleep endpoint on purpose, so existing records are kept.
 private const val SLEEP_LOG_COLLECTION = "sleepRecords"
@@ -13,6 +14,12 @@ class SleepLogRepository {
 
     // Gets the Firestore database instance.
     private val db get() = FirestoreClient.getFirestore()
+
+    /** True if start and end overlaps any of this user's logged sleeps. */
+    suspend fun hasOverlap(userId: String, start: Long, end: Long, exceptId: String? = null): Boolean =
+        getSleepForUser(userId).any {
+            it.sleepId != exceptId && sleepsOverlap(start, end, it.sleepStart, it.sleepEnd)
+        }
 
     // Retrieves all sleep records belonging to a specific user.
     suspend fun getSleepForUser(userId: String): List<SleepLogResponse> {

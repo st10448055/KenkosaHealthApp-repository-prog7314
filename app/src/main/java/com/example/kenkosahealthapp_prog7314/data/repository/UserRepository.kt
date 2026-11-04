@@ -81,6 +81,14 @@ class UserRepository {
             .await()
     }
 
+    /** Merges any profile fields (name, gender, heightCm, weightKg ...) into users/{uid}. */
+    suspend fun updateProfile(userId: String, fields: Map<String, Any?>) {
+        require(userId.isNotBlank()) { "User ID cannot be blank" }
+        db.collection(USERS_COLLECTION).document(userId)
+            .set(fields, SetOptions.merge())
+            .await()
+    }
+
     // Creates the user's settings document using the default settings.
     suspend fun createDefaultSettings(
         userId: String

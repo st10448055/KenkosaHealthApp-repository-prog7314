@@ -130,6 +130,17 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/textProfileStats"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/settings_text_secondary"
+                        android:textSize="12sp"
+                        android:visibility="gone" />
+
+                    <TextView
                         android:id="@+id/buttonEditProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -37,6 +37,12 @@ import java.util.Locale
 import com.example.kenkosahealthapp_prog7314.security.BiometricAvailability
 import com.example.kenkosahealthapp_prog7314.security.BiometricHelper
 import com.example.kenkosahealthapp_prog7314.security.BiometricPreferences
+import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
+import com.example.kenkosahealthapp_prog7314.data.model.Gender
+import com.example.kenkosahealthapp_prog7314.data.model.MetricsLimits
+import com.example.kenkosahealthapp_prog7314.data.model.UnitConversions
+
 
 // Main settings screen — profile editing, units/language/dark-mode/notification toggles,
 // body metrics shortcut, and numeric goal targets (steps, calories, sleep).
@@ -160,7 +166,11 @@ class SettingsFragment : Fragment() {
                 R.string.settings_units,
                 unitOptions,
                 unitOptions.indexOf(currentSettings.unitSystem)
-            ) { viewModel.setUnitSystem(unitOptions[it]) }
+            ) {
+                val system = unitOptions[it]
+                viewModel.setUnitSystem(system)
+                UnitFormatter.save(requireContext(), system)   // every other screen reads this cache
+            }
         }
 
         binding.rowLanguage.root.setOnClickListener {
@@ -310,6 +320,11 @@ class SettingsFragment : Fragment() {
             String.format(Locale.getDefault(), "%,d kcal", settings.calorieTarget)
         binding.rowSleepTarget.textValue.text = formatDuration(settings.sleepTargetMinutes)
 
+        // Keep the cache in step with Firestore (e.g. after a reinstall or on a second phone).
+        if (settings.userId.isNotBlank()) UnitFormatter.save(requireContext(), settings.unitSystem)
+        // Height and weight on the profile card follow the chosen units
+        applyProfile(viewModel.profile.value)
+
         isApplyingRemoteState = false
     }
 
@@ -330,6 +345,15 @@ class SettingsFragment : Fragment() {
         binding.textProfileName.text = displayName
         binding.textProfileEmail.text = email
         binding.textAvatar.text = initialsOf(displayName)
+
+        val ctx = requireContext()
+        val stats = listOfNotNull(
+            user?.heightCm?.let { UnitFormatter.height(ctx, it) },
+            user?.weightKg?.let { UnitFormatter.weight(ctx, it) }
+        )
+        binding.textProfileStats.isVisible = stats.isNotEmpty()
+        binding.textProfileStats.text = stats.joinToString("  •  ")
+
     }
 
     // Builds initials for the avatar circle: first+last initial for multi-word names,
@@ -439,28 +463,94 @@ class SettingsFragment : Fragment() {
 
     // Edit profile dialog for first name / surname, with basic required-field validation
     private fun showEditProfileDialog() {
-        val dialogBinding = DialogEditProfileBinding.inflate(layoutInflater)
+        val ctx = requireContext()
+        val b = DialogEditProfileBinding.inflate(layoutInflater)
         val profile = viewModel.profile.value
-        dialogBinding.editFirstName.setText(profile?.name.orEmpty())
-        dialogBinding.editSurname.setText(profile?.surname.orEmpty())
+        val metric = UnitFormatter.current(ctx) == "Metric"
 
-        val dialog = MaterialAlertDialogBuilder(requireContext())
+        b.editFirstName.setText(profile?.name.orEmpty())
+        b.editSurname.setText(profile?.surname.orEmpty())
+
+        // Gender dropdown (stored as the same enum names the Body Metrics screen uses)
+        val genders = listOf(
+            Gender.FEMALE to R.string.gender_female,
+            Gender.MALE to R.string.gender_male,
+            Gender.NON_BINARY to R.string.gender_non_binary,
+            Gender.PREFER_NOT_TO_SAY to R.string.gender_prefer_not
+        )
+        b.dropdownGender.setAdapter(
+            ArrayAdapter(ctx, android.R.layout.simple_list_item_1, genders.map { getString(it.second) })
+        )
+        var selectedGender: String? = profile?.gender
+        genders.firstOrNull { it.first.name == selectedGender }
+            ?.let { b.dropdownGender.setText(getString(it.second), false) }
+        b.dropdownGender.setOnItemClickListener { _, _, position, _ -> selectedGender = genders[position].first.name }
+
+        // Height: cm, or feet + inches. Weight: kg, or lb (UK shows stones elsewhere but is typed in lb).
+        b.layoutHeight.hint = getString(if (metric) R.string.settings_height_cm_hint else R.string.settings_height_ft_hint)
+        b.layoutHeightInches.isVisible = !metric
+        b.layoutWeight.hint = getString(if (metric) R.string.settings_weight_kg_hint else R.string.settings_weight_lb_hint)
+        if (!metric) b.editHeight.inputType = android.text.InputType.TYPE_CLASS_NUMBER
+
+        fun plain(v: Double) = if (v == Math.floor(v)) v.toLong().toString() else String.format(Locale.US, "%.1f", v)
+        fun number(text: CharSequence?): Double? = text?.toString()?.trim()?.replace(',', '.')?.toDoubleOrNull()
+
+        profile?.heightCm?.let { cm ->
+            if (metric) b.editHeight.setText(plain(cm))
+            else UnitConversions.cmToFtIn(cm).let { (ft, inch) ->
+                b.editHeight.setText(ft.toString())
+                b.editHeightInches.setText(plain(inch))
+            }
+        }
+        profile?.weightKg?.let { kg -> b.editWeight.setText(plain(if (metric) kg else UnitConversions.kgToLb(kg))) }
+
+        val dialog = MaterialAlertDialogBuilder(ctx)
             .setTitle(R.string.edit_profile)
-            .setView(dialogBinding.root)
+            .setView(b.root)
             .setNegativeButton(android.R.string.cancel, null)
-            .setPositiveButton(R.string.save, null)
+            .setPositiveButton(R.string.save, null) // overridden so invalid input keeps the dialog open
             .create()
 
         dialog.setOnShowListener {
             dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-                val name = dialogBinding.editFirstName.text?.toString()?.trim().orEmpty()
-                val surname = dialogBinding.editSurname.text?.toString()?.trim().orEmpty()
+                b.layoutFirstName.error = null
+                b.layoutHeight.error = null
+                b.layoutWeight.error = null
+
+                val name = b.editFirstName.text?.toString()?.trim().orEmpty()
+                val surname = b.editSurname.text?.toString()?.trim().orEmpty()
                 if (name.isEmpty()) {
-                    dialogBinding.layoutFirstName.error = getString(R.string.settings_error_name_required)
-                } else {
-                    viewModel.updateProfile(name, surname)
-                    dialog.dismiss()
+                    b.layoutFirstName.error = getString(R.string.settings_error_name_required)
+                    return@setOnClickListener
                 }
+
+                // Height (blank keeps the saved value)
+                var heightCm: Double? = profile?.heightCm
+                if (!b.editHeight.text.isNullOrBlank()) {
+                    val first = number(b.editHeight.text)
+                    val cm = if (metric) first
+                    else first?.let { UnitConversions.ftInToCm(it.toInt(), number(b.editHeightInches.text) ?: 0.0) }
+                    if (cm == null || cm !in MetricsLimits.MIN_HEIGHT_CM..MetricsLimits.MAX_HEIGHT_CM) {
+                        b.layoutHeight.error = getString(R.string.settings_error_height)
+                        return@setOnClickListener
+                    }
+                    heightCm = cm
+                }
+
+                // Weight (blank keeps the saved value)
+                var weightKg: Double? = profile?.weightKg
+                if (!b.editWeight.text.isNullOrBlank()) {
+                    val typed = number(b.editWeight.text)
+                    val kg = if (metric) typed else typed?.let { UnitConversions.lbToKg(it) }
+                    if (kg == null || kg !in MetricsLimits.MIN_WEIGHT_KG..MetricsLimits.MAX_WEIGHT_KG) {
+                        b.layoutWeight.error = getString(R.string.settings_error_weight)
+                        return@setOnClickListener
+                    }
+                    weightKg = kg
+                }
+
+                viewModel.updateProfileDetails(name, surname, selectedGender, heightCm, weightKg)
+                dialog.dismiss()
             }
         }
         dialog.show()

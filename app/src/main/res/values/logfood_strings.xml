@@ -11,4 +11,5 @@
     <string name="logfood_scan_barcode">Scan Barcode</string>
     <string name="logfood_servings">Servings</string>
     <string name="logfood_add_entry">Add Entry</string>
+    <string name="logfood_choose_result">Choose a food</string>
 </resources>

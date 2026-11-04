@@ -23,6 +23,7 @@ import com.kenkosa.backend.repository.WgerClient
 import com.kenkosa.backend.routes.notesRoutes
 import com.kenkosa.backend.routes.waterRoutes
 import com.kenkosa.backend.routes.workoutRoutes
+import com.kenkosa.backend.routes.statsRoutes
 import io.ktor.server.response.*
 
 // Configures the API routes and connects them to their repositories and clients.
@@ -42,6 +43,7 @@ fun Application.configureRouting() {
 
     // Register all application endpoints.
     routing {
+        // Used by Render's health check and to wake the free instance
         get("/health") { call.respondText("OK") }
         goalTrackingRoutes(goalTrackingRepository)
         sleepLogRoutes(sleepLogRepository)
@@ -52,6 +54,7 @@ fun Application.configureRouting() {
         workoutRoutes(wgerClient)
         waterRoutes(waterRepository)
         notesRoutes(notesRepository)
+        statsRoutes(waterRepository, mealRepository, sleepLogRepository, goalTrackingRepository)
     }
 }
 

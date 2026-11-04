@@ -17,6 +17,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.data.model.UserMetrics
+import com.example.kenkosahealthapp_prog7314.data.repository.AuthRepository
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentHomeBinding
 import com.example.kenkosahealthapp_prog7314.databinding.ItemHomeFeatureBinding
 import com.example.kenkosahealthapp_prog7314.ui.addmenu.AddMenuBottomSheet
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
 import com.example.kenkosahealthapp_prog7314.security.BiometricPreferences
+import com.example.kenkosahealthapp_prog7314.ui.auth.AuthViewModelFactory
 
 // Home Fragment serving as the main hub containing feature navigation, user greeting, and calorie progress ring
 class HomeFragment : Fragment() {
@@ -195,7 +197,7 @@ class HomeFragment : Fragment() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { /* already home, no-op */ }
             navGoals.setOnClickListener { findNavController().navigate(R.id.action_home_to_goals) }
-            // navStats.setOnClickListener { findNavController().navigate(R.id.action_home_to_statistics) }
+            navStats.setOnClickListener { findNavController().navigate(R.id.action_global_statistics) }
             navSettings.setOnClickListener { findNavController().navigate(R.id.action_home_to_settings) }
         }
     }
@@ -209,7 +211,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_global_mealHistory)
         }
         bindFeature(binding.cardSteps, R.drawable.ic_wellness, R.string.home_steps, Color.parseColor("#3F8C7E"), Color.parseColor("#DFEFEC")) {
-            findNavController().navigate(R.id.action_home_to_wellness)
+            findNavController().navigate(R.id.action_home_to_steps)
         }
         bindFeature(binding.cardWorkouts, R.drawable.ic_fitness, R.string.home_fitness, Color.parseColor("#1B3A1B"), Color.parseColor("#E2E8E2")) {
             findNavController().navigate(R.id.action_home_to_workouts)
@@ -282,12 +284,14 @@ class HomeFragment : Fragment() {
         }
 
         drawer.buttonDrawerLogout.setOnClickListener {
-            // With biometric login ON, logging out only "locks" the app: the session is kept
-            // so the fingerprint can unlock it. Otherwise sign out fully as before.
-            val uid = auth.currentUser?.uid
-            val keepSession = uid != null &&
-                    BiometricPreferences(requireContext()).isEnabled(uid)
-            if (!keepSession) auth.signOut()
+            auth.signOut()
+            // Also clear Credential Manager's remembered Google sign-in (runs on the activity so it isn't cancelled)
+            requireActivity().lifecycleScope.launch {
+                AuthRepository(
+                    requireContext().applicationContext,
+                    AuthViewModelFactory.WEB_CLIENT_ID
+                ).signOut()
+            }
             findNavController().navigate(
                 R.id.startFragment,
                 null,

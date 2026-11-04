@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auth_forgot_password">Forgot password?</string>
+    <string name="auth_forgot_enter_email">Enter your email address above first</string>
+    <string name="auth_forgot_sent">If an account exists for that email, a reset link is on its way.</string>
+    <string name="auth_google_failed">Google sign-in failed. Please try again.</string>
+    <string name="auth_google_no_account">No Google account found on this phone. Add one in Settings and try again.</string>
+    <string name="auth_enter_email_password">Please enter your email and password</string>
+    <string name="auth_enter_email_continue">Enter your email to continue</string>
+    <string name="auth_fill_all">Please fill in all fields</string>
+    <string name="auth_passwords_mismatch">Passwords do not match</string>
+    <string name="auth_password_short">Password must be at least 6 characters</string>
+    <string name="auth_fingerprint_not_ready">Sign in once, then turn on Biometric login in Settings</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auth_forgot_password">Wagwoord vergeet?</string>
+    <string name="auth_forgot_enter_email">Voer eers jou e-posadres hierbo in</string>
+    <string name="auth_forgot_sent">As daar \'n rekening vir daardie e-pos bestaan, is \'n herstelskakel oppad.</string>
+    <string name="auth_google_failed">Google-aanmelding het misluk. Probeer asseblief weer.</string>
+    <string name="auth_google_no_account">Geen Google-rekening op hierdie foon gevind nie. Voeg een by in Instellings en probeer weer.</string>
+    <string name="auth_enter_email_password">Voer asseblief jou e-pos en wagwoord in</string>
+    <string name="auth_enter_email_continue">Voer jou e-pos in om voort te gaan</string>
+    <string name="auth_fill_all">Vul asseblief al die velde in</string>
+    <string name="auth_passwords_mismatch">Wagwoorde stem nie ooreen nie</string>
+    <string name="auth_password_short">Wagwoord moet minstens 6 karakters wees</string>
+    <string name="auth_fingerprint_not_ready">Meld een keer aan, skakel dan Biometriese aanmelding in Instellings aan</string>
+</resources>

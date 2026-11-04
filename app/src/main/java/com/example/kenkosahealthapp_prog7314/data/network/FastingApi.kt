@@ -9,6 +9,7 @@ interface FastingApi {
 
     // Sends a GET request to /api/fasts.
     // Retrieves all fasting records belonging to the authenticated user.
+    @GET("api/fasts")
     suspend fun getFasts(): List<FastDto>
 
     // Sends a GET request to /api/fasts/{id}.

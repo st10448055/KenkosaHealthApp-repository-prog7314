@@ -11,4 +11,5 @@
     <string name="logfood_scan_barcode">Skandeer streepieskode</string>
     <string name="logfood_servings">Porsies</string>
     <string name="logfood_add_entry">Voeg inskrywing by</string>
+    <string name="logfood_choose_result">Kies ‘n kossoort</string>
 </resources>

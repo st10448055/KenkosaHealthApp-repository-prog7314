@@ -29,8 +29,10 @@ private data class UsdaSearchResponse(
 @Serializable
 private data class UsdaNutrient(
     @SerialName("nutrientName") val nutrientName: String? = null,
+    @SerialName("unitName") val unitName: String? = null,
     val value: Double? = null
 )
+
 
 class UsdaFoodClient {
     // Reads the USDA API key from the environment.
@@ -44,44 +46,34 @@ class UsdaFoodClient {
     }
 
     // Searches the USDA database and converts the result into the app's food model.
-    suspend fun searchFood(query: String): FoodItemResponse? {
-        // Returns null instead of failing if the API key is not configured.
-        if(apiKey.isEmpty()) return null //fail safe rather than a crash if the key isn't configured
-
-        // Sends the food search request to the USDA API.
+    suspend fun searchFoods(query: String, limit: Int = 10): List<FoodItemResponse> {
+        if (apiKey.isEmpty()) return emptyList()
         val response: UsdaSearchResponse = client
-            .get("https://api.nal.usda.gov/fdc/v1/foods/search"){
-                url{
+            .get("https://api.nal.usda.gov/fdc/v1/foods/search") {
+                url {
                     parameters.append("query", query)
                     parameters.append("api_key", apiKey)
-                    parameters.append("pageSize", "1")
+                    parameters.append("pageSize", limit.toString())
                 }
-            }
-            .body()
+            }.body()
 
-        // Uses the first matching food returned by the search.
-        val food = response.foods.firstOrNull() ?: return null
-
-        // Gets the main nutrition values from the USDA response.
-        val calories = food.findNutrient("Energy") ?: 0.0
-        val protein = food.findNutrient("Protein") ?: 0.0
-        val carbs = food.findNutrient("Carbohydrate, by difference") ?: 0.0
-        val fat = food.findNutrient("Total lipid (fat)") ?: 0.0
-
-        // Maps the USDA food data into the format used by the application.
-        return FoodItemResponse(
-            foodId = food.fdcId?.toString() ?: query,
-            name = food.description ?: query,
-            barcode = null,
-            servingSizeG = 100.0,
-            calories = calories,
-            proteinG = protein,
-            carbsG = carbs,
-            fatG = fat,
-            source = "USDA"
-        )
-
+        return response.foods.map { food ->
+            FoodItemResponse(
+                foodId = food.fdcId?.toString() ?: query,
+                name = food.description ?: query,
+                barcode = null,
+                servingSizeG = 100.0,
+                calories = food.foodNutrients.firstOrNull { it.nutrientName == "Energy" && it.unitName == "KCAL" }?.value
+                    ?: food.findNutrient("Energy") ?: 0.0,
+                proteinG = food.findNutrient("Protein") ?: 0.0,
+                carbsG = food.findNutrient("Carbohydrate, by difference") ?: 0.0,
+                fatG = food.findNutrient("Total lipid (fat)") ?: 0.0,
+                source = "USDA"
+            )
+        }
     }
+
+    suspend fun searchFood(query: String): FoodItemResponse? = searchFoods(query, 1).firstOrNull()
 
     // Finds a specific nutrient by its USDA nutrient name.
     private fun UsdaFood.findNutrient(name: String): Double? =

@@ -60,9 +60,9 @@ class MealHistoryFragment : Fragment() {
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
-            navGoals.setOnClickListener { findNavController().navigate(R.id.action_mealHistory_to_goals) }
-            navStats.setOnClickListener { findNavController().navigate(R.id.action_mealHistory_to_statistics) }
-            navSettings.setOnClickListener { findNavController().navigate(R.id.action_mealHistory_to_settings) }
+            navGoals.setOnClickListener { findNavController().navigate(R.id.action_global_goals) }
+            navStats.setOnClickListener { findNavController().navigate(R.id.action_global_statistics) }
+            navSettings.setOnClickListener { findNavController().navigate(R.id.action_global_settings) }
             fabAdd.setOnClickListener {
                 AddMenuBottomSheet().show(childFragmentManager, "AddMenuBottomSheet")
             }

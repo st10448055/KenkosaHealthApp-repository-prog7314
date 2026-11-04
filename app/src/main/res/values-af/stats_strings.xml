@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="stats_title">Statistiek</string>
+    <string name="stats_subtitle">Laaste 7 dae</string>
+    <string name="stats_water">Water (glase)</string>
+    <string name="stats_sleep">Slaap (ure)</string>
+    <string name="stats_calories">Kalorieë (kcal)</string>
+    <string name="stats_avg_water">Gemiddeld: %1$s glase per dag</string>
+    <string name="stats_avg_sleep">Gemiddeld: %1$s h per nag</string>
+    <string name="stats_avg_calories">Gemiddeld: %1$s kcal per dag</string>
+    <string name="stats_error">Kon nie jou statistiek laai nie. Kontroleer jou verbinding en probeer weer.</string>
+
+    <string name="steps_title">Treë</string>
+    <string name="steps_goal">Teiken: %1$s treë</string>
+    <string name="steps_info">Getel deur jou foon se treëteller terwyl die app gebruik word.</string>
+    <string name="steps_permission_needed">Laat aktiwiteitsherkenning toe om jou treë te tel.</string>
+    <string name="steps_no_sensor">Hierdie foon het nie \'n treëteller nie.</string>
+
+    <string name="goaltrack_auto_tracked">Werk outomaties by vanaf jou aangetekende data</string>
+
+    <string name="logfood_macro_protein">Proteïen: %1$s</string>
+    <string name="logfood_macro_carbs">Koolhidrate: %1$s</string>
+    <string name="logfood_macro_fat">Vet: %1$s</string>
+
+    <string name="settings_height_cm_hint">Lengte (cm)</string>
+    <string name="settings_height_ft_hint">Lengte (ft)</string>
+    <string name="settings_height_in_hint">Duim</string>
+    <string name="settings_weight_kg_hint">Gewig (kg)</string>
+    <string name="settings_weight_lb_hint">Gewig (lb)</string>
+    <string name="settings_error_height">Voer \'n realistiese lengte in</string>
+    <string name="settings_error_weight">Voer \'n realistiese gewig in</string>
+</resources>

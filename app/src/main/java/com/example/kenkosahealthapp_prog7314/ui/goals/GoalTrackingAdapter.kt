@@ -2,6 +2,7 @@ package com.example.kenkosahealthapp_prog7314.ui.goals
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -16,10 +17,14 @@ data class GoalRow(
     val percent: Int
 )
 
+/** Goal categories whose progress is filled in automatically from logged data. */
+private val AUTO_TRACKED = setOf("WATER", "SLEEP", "STEPS")
+
 // ListAdapter for displaying goal cards in a RecyclerView
 class GoalTrackingAdapter(
     private val onClick: (TrackedGoalDto) -> Unit
 ) : ListAdapter<GoalRow, GoalTrackingAdapter.ViewHolder>(DiffCallback) {
+
 
     // Inflates item layout binding and creates ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -48,7 +53,7 @@ class GoalTrackingAdapter(
                 context.getString(frequencyLabelRes(goal.frequency)),
                 goal.unit
             )
-
+            binding.textGoalAuto.isVisible = goal.category in AUTO_TRACKED
             // Register tap and long press interactions
             binding.root.setOnClickListener { onClick(goal) }
             binding.root.setOnLongClickListener {

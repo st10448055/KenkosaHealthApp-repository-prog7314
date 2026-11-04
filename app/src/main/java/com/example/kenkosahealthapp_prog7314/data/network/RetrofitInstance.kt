@@ -10,14 +10,18 @@ import java.util.concurrent.TimeUnit
 // access to all of the application's backend API interfaces.
 object RetrofitInstance {
 
+
     // Base URL of the deployed Kenkosa Health backend hosted on Azure.
     // All Retrofit API endpoints are appended to this URL.
-    private const val BASE_URL = "http://localhost:8080/"
+    private val BASE_URL = ApiConfig.BASE_URL
     // HTTP logging interceptor used to log network requests and responses.
     // BODY logs request and response details, which is useful during development
     // and debugging API communication.
+
+
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
-        level = HttpLoggingInterceptor.Level.BODY
+        // BASIC logs only the URL and status code, so bearer tokens never reach Logcat
+        level = HttpLoggingInterceptor.Level.BASIC
     }
 
     // OkHttp client used by Retrofit to handle HTTP communication.
@@ -53,6 +57,8 @@ object RetrofitInstance {
         .addConverterFactory(GsonConverterFactory.create())
 
         .build()
+    // Weekly statistics and goal syncing
+    val statsApi: StatsApi by lazy { retrofit.create(StatsApi::class.java) }
 
     // Retrofit implementation of the goal tracking API.
     // 'lazy' means the API object is created only when it is first used.

@@ -15,8 +15,7 @@ private const val SLEEP_MAX_DURATION_MS = 24L * 60 * 60 * 1000
 data class SleepLogErrorResponse(val errors: List<String>)
 
 /**
- * One night's sleep. Same Firestore documents ("sleepRecords") as the original sleep endpoint, so anything already
- * logged still shows up. [qualityScore] is kept as rating x 20 for compatibility; the app works out its own
+ * One night's sleep, the app works out its own
  * 0-100 sleep score from the rating and the duration.
  */
 // Represents a sleep record returned by the backend.
@@ -69,7 +68,11 @@ data class SaveSleepLogRequest(
 
         return errors
     }
+
 }
 
+/** True when two sleeps share any time. */
+fun sleepsOverlap(startA: Long, endA: Long, startB: Long, endB: Long): Boolean =
+    startA < endB && endA > startB
 
 // ------------------ END OF FILE ------------------ //

@@ -24,5 +24,5 @@
 
     <!-- Water Intake -->
     <string name="water_title">Ukusela amanzi</string>
-    <string name="water_summary">%1$d / %2$d iindebe namhlanje</string>
+    <string name="water_summary">%1$d / %2$d iindebe namhlanje (%3$s)</string>
 </resources>

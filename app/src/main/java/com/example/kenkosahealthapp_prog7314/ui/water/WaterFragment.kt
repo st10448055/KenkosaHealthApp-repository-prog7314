@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentWaterBinding
 import kotlinx.coroutines.launch
+import com.example.kenkosahealthapp_prog7314.ui.settings.UnitFormatter
 
 class WaterFragment : Fragment() {
 
@@ -55,26 +56,22 @@ class WaterFragment : Fragment() {
         // Arrange the cups into four columns inside the GridLayout.
         binding.gridCups.columnCount = 4
 
-        // Get the appropriate colour from the app's current theme.
-        val cupTint = ColorStateList.valueOf(
-            ContextCompat.getColor(requireContext(), R.color.tracking_text_primary)
-        )
+        // Cup size in pixels (56dp), so it looks the same on every screen density.
+        val cupSize = (56 * resources.displayMetrics.density).toInt()
+        val cupMargin = (4 * resources.displayMetrics.density).toInt()
 
         // Create one cup ImageView for every cup in the user's daily target.
         for (i in 1..targetCups) {
             val cup = ImageView(requireContext()).apply {
 
-                // Temporary placeholder image for each cup.
-                setImageResource(android.R.drawable.ic_menu_report_image)
-
-                // Apply the selected tint colour to the cup.
-                imageTintList = cupTint
+                // Cups start empty; updateCupVisuals() fills them in.
+                setImageResource(R.drawable.ic_cup_empty)
 
                 // Set the size and spacing of each cup in the grid.
                 layoutParams = android.widget.GridLayout.LayoutParams().apply {
-                    width = 120
-                    height = 120
-                    setMargins(12, 12, 12, 12)
+                    width = cupSize
+                    height = cupSize
+                    setMargins(cupMargin, cupMargin, cupMargin, cupMargin)
                 }
 
                 // When a cup is clicked, update the number of cups consumed.
@@ -92,8 +89,10 @@ class WaterFragment : Fragment() {
         cupViews.forEachIndexed { index, cup ->
             val cupNumber = index + 1
 
-            // Consumed cups are fully visible, while remaining cups are faded.
-            cup.alpha = if (cupNumber <= cupsConsumed) 1.0f else 0.3f
+            // Consumed cups show water in the glass, remaining cups are empty outlines.
+            cup.setImageResource(
+                if (cupNumber <= cupsConsumed) R.drawable.ic_cup_filled else R.drawable.ic_cup_empty
+            )
         }
     }
 
@@ -120,7 +119,8 @@ class WaterFragment : Fragment() {
                             binding.textWaterSummary.text = getString(
                                 R.string.water_summary,
                                 state.cupsConsumed,
-                                state.targetCups
+                                state.targetCups,
+                                UnitFormatter.volume(requireContext(), state.cupsConsumed * 250.0)
                             )
 
                             // Create the correct number of cups based on the target.

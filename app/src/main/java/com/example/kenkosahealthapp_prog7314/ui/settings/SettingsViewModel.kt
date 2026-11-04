@@ -1,5 +1,6 @@
 package com.example.kenkosahealthapp_prog7314.ui.settings
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
@@ -80,6 +81,34 @@ class SettingsViewModel(private val userRepository: UserRepository) : ViewModel(
                 userRepository.updateUserName(uid, name, surname)
             } catch (e: Exception) {
                 // Local state already updated; Firestore retries queued writes when back online.
+            }
+        }
+    }
+
+    /** Saves the whole profile (not just the name). Height is in cm and weight in kg, whatever unit was typed. */
+    fun updateProfileDetails(
+        name: String, surname: String, gender: String?, heightCm: Double?, weightKg: Double?
+    ) {
+        val uid = userId ?: return
+        val current = _profile.value ?: User(
+            userId = uid,
+            email = FirebaseAuth.getInstance().currentUser?.email.orEmpty()
+        )
+        _profile.value = current.copy(
+            name = name, surname = surname, gender = gender, heightCm = heightCm, weightKg = weightKg
+        )
+        viewModelScope.launch {
+            try {
+                userRepository.updateProfile(
+                    uid,
+                    mapOf(
+                        "name" to name, "surname" to surname, "gender" to gender,
+                        "heightCm" to heightCm, "weightKg" to weightKg
+                    )
+                )
+                Log.d("SettingsVM", "Profile saved")
+            } catch (e: Exception) {
+                Log.e("SettingsVM", "Profile update failed", e)
             }
         }
     }

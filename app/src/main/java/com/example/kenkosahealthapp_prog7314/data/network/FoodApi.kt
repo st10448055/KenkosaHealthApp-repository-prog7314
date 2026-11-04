@@ -15,6 +15,9 @@ interface FoodApi {
         @Query("barcode") barcode: String
     ): FoodItemDto
 
+    @GET("api/food/results")
+    suspend fun searchMany(@Query("query") query: String): List<FoodItemDto>
+
     // Sends a GET request to /api/food/search.
     // Searches for a food item using a text-based query.
     // The search text is added to the request as a query parameter:
