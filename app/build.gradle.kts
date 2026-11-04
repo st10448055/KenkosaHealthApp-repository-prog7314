@@ -13,6 +13,7 @@ val apiBaseUrl: String = localProps.getProperty("api.baseUrl")?.trim()?.ifEmpty 
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -104,4 +105,11 @@ dependencies {
 
 // ML Kit barcode scanning
     implementation("com.google.mlkit:barcode-scanning:17.3.0")
+    // Room (local database)
+    implementation("androidx.room:room-runtime:2.8.4")
+    implementation("androidx.room:room-ktx:2.8.4")
+    ksp("androidx.room:room-compiler:2.8.4")
+
+    // WorkManager (background sync)
+    implementation("androidx.work:work-runtime-ktx:2.10.0")
 }
