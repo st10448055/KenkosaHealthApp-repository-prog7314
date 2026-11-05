@@ -78,3 +78,13 @@ object BiometricHelper {
         BiometricPrompt(fragment, executor, callback).authenticate(info)
     }
 }
+
+// References:
+// Android Developers (n.d.) Show a biometric authentication dialog. Available at:
+//   https://developer.android.com/identity/sign-in/biometric-auth (Accessed: 3 November 2026).
+// Android Developers (n.d.) BiometricPrompt (API reference). Available at:
+//   https://developer.android.com/reference/androidx/biometric/BiometricPrompt (Accessed: 3 November 2026).
+// Android Developers (n.d.) BiometricManager (API reference). Available at:
+//   https://developer.android.com/reference/androidx/biometric/BiometricManager (Accessed: 3 November 2026).
+// Android Developers (n.d.) BiometricManager.Authenticators (API reference). Available at:
+//   https://developer.android.com/reference/kotlin/androidx/biometric/BiometricManager.Authenticators (Accessed: 3 November 2026).

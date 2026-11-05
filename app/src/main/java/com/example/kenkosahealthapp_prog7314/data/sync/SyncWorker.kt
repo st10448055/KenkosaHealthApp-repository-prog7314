@@ -46,3 +46,6 @@ class SyncWorker(
 // 401/403 (auth), 408 (timeout) and 429 (rate limit) are treated as temporary.
 fun HttpException.isPermanentClientError(): Boolean =
     code() in 400..499 && code() !in listOf(401, 403, 408, 429)
+// References:
+// Android Developers (n.d.) Getting started with WorkManager. Available at:
+//   https://developer.android.com/guide/background/persistent/getting-started (Accessed: 5 November 2026).

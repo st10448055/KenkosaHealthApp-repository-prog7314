@@ -46,3 +46,8 @@ fun MoodEntryDto.toEntity(userId: String, syncState: String) = MoodEntryEntity(
     updatedAt = updatedAt,
     syncState = syncState
 )
+// References:
+// Android Developers (n.d.) Save data in a local database using Room. Available at:
+//   https://developer.android.com/training/data-storage/room (Accessed: 5 November 2026).
+// Android Developers (n.d.) Build an offline-first app. Available at:
+//   https://developer.android.com/topic/architecture/data-layer/offline-first (Accessed: 5 November 2026).

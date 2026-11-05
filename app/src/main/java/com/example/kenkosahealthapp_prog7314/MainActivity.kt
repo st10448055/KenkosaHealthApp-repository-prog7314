@@ -166,4 +166,9 @@ class MainActivity : AppCompatActivity() {
         private const val TAG = "MainActivity"
     }
 }
+// References:
+// Android Developers (n.d.) The activity lifecycle. Available at:
+//   https://developer.android.com/guide/components/activities/activity-lifecycle (Accessed: 3 November 2026).
+// Android Developers (n.d.) Show a biometric authentication dialog. Available at:
+//   https://developer.android.com/identity/sign-in/biometric-auth (Accessed: 3 November 2026).
 // ------------------ END OF FILE ------------------ //

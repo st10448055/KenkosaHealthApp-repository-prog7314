@@ -40,3 +40,8 @@ object NetworkMonitor {
         })
     }
 }
+// References:
+// Android Developers (n.d.) Read network state. Available at:
+//   https://developer.android.com/training/basics/network-ops/reading-network-state (Accessed: 5 November 2026).
+// Android Developers (n.d.) Monitor connectivity status and connection metering. Available at:
+//   https://developer.android.com/training/monitoring-device-state/connectivity-monitoring (Accessed: 5 November 2026).

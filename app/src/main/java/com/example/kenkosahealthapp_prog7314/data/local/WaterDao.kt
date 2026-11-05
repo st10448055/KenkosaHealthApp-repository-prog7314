@@ -16,3 +16,6 @@ interface WaterDao {
     @Upsert
     suspend fun upsert(entry: WaterEntryEntity)
 }
+// References:
+// Android Developers (n.d.) Save data in a local database using Room. Available at:
+//   https://developer.android.com/training/data-storage/room (Accessed: 5 November 2026).

@@ -134,4 +134,9 @@ class BiometricLockFragment : Fragment() {
         const val ARG_RELOCK = "relock"
     }
 }
+// References:
+// Android Developers (n.d.) Show a biometric authentication dialog. Available at:
+//   https://developer.android.com/identity/sign-in/biometric-auth (Accessed: 3 November 2026).
+// Android Developers (n.d.) BiometricPrompt (API reference). Available at:
+//   https://developer.android.com/reference/androidx/biometric/BiometricPrompt (Accessed: 3 November 2026).
 // ------------------------------------------------------- END OF FILE -----------------------------------------------------------------

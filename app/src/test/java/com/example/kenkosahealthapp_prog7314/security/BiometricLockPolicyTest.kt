@@ -48,3 +48,7 @@ class BiometricLockPolicyTest {
         assertFalse(BiometricLockPolicy.canEnable(BiometricAvailability.UNAVAILABLE))
     }
 }
+
+// References:
+// Android Developers (n.d.) Build local unit tests. Available at:
+//   https://developer.android.com/training/testing/local-tests (Accessed: 3 November 2026).

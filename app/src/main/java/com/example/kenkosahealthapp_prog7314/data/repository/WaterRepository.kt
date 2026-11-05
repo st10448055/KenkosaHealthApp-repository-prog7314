@@ -143,3 +143,8 @@ class WaterRepository(
         private val syncMutex = Mutex()
     }
 }
+// References:
+// Android Developers (n.d.) Build an offline-first app. Available at:
+//   https://developer.android.com/topic/architecture/data-layer/offline-first (Accessed: 5 November 2026).
+// Android (n.d.) Now in Android: Architecture Learning Journey. GitHub. Available at:
+//   https://github.com/android/nowinandroid/blob/main/docs/ArchitectureLearningJourney.md (Accessed: 5 November 2026).

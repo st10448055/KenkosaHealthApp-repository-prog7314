@@ -49,3 +49,10 @@ object SyncScheduler {
         )
     }
 }
+// References:
+// Android Developers (n.d.) Define work requests. Available at:
+//   https://developer.android.com/guide/background/persistent/getting-started/define-work (Accessed: 5 November 2026).
+// Android Developers (n.d.) Managing work. Available at:
+//   https://developer.android.com/guide/background/persistent/how-to/manage-work (Accessed: 5 November 2026).
+// Android Developers (n.d.) WorkManager (API reference). Available at:
+//   https://developer.android.com/reference/kotlin/androidx/work/WorkManager (Accessed: 5 November 2026).

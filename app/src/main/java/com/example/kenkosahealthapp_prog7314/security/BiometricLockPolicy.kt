@@ -38,3 +38,9 @@ enum class BiometricAvailability {
     NO_HARDWARE,      // device has no biometric sensor
     UNAVAILABLE       // temporarily unavailable / security update needed / unsupported
 }
+
+// References:
+// Android Developers (n.d.) Show a biometric authentication dialog. Available at:
+//   https://developer.android.com/identity/sign-in/biometric-auth (Accessed: 3 November 2026).
+// Android Developers (n.d.) Build local unit tests. Available at:
+//   https://developer.android.com/training/testing/local-tests (Accessed: 3 November 2026).

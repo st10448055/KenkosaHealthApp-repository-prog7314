@@ -51,3 +51,6 @@ class Converters {
     fun toList(json: String): List<String> =
         gson.fromJson(json, object : TypeToken<List<String>>() {}.type) ?: emptyList()
 }
+// References:
+// Android Developers (n.d.) Save data in a local database using Room. Available at:
+//   https://developer.android.com/training/data-storage/room (Accessed: 5 November 2026).

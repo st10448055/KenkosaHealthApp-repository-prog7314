@@ -40,3 +40,6 @@ interface MoodDao {
     )
     suspend fun deleteSyncedNotIn(userId: String, keepIds: List<String>)
 }
+// References:
+// Android Developers (n.d.) Save data in a local database using Room. Available at:
+//   https://developer.android.com/training/data-storage/room (Accessed: 5 November 2026).

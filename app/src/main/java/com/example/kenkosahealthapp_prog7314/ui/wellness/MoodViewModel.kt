@@ -121,3 +121,6 @@ class MoodViewModel(
         is ApiResult.ServerError -> message
     }
 }
+// References:
+// Android Developers (n.d.) Read network state. Available at:
+//   https://developer.android.com/training/basics/network-ops/reading-network-state (Accessed: 5 November 2026).

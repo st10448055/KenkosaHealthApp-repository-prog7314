@@ -34,3 +34,8 @@ class KenkosaApp : Application() {
             private set
     }
 }
+// References:
+// Android Developers (n.d.) Getting started with WorkManager. Available at:
+//   https://developer.android.com/guide/background/persistent/getting-started (Accessed: 5 November 2026).
+// Android Developers (n.d.) Read network state. Available at:
+//   https://developer.android.com/training/basics/network-ops/reading-network-state (Accessed: 5 November 2026).

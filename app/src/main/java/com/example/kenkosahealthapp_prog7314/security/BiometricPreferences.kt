@@ -39,3 +39,7 @@ class BiometricPreferences(context: Context) {
         private const val KEY_BACKGROUNDED = "backgrounded_at"
     }
 }
+
+// References:
+// Android Developers (n.d.) Save simple data with SharedPreferences. Available at:
+//   https://developer.android.com/training/data-storage/shared-preferences (Accessed: 3 November 2026).
