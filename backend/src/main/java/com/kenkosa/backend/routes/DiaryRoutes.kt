@@ -21,6 +21,17 @@ fun Route.diaryRoutes(
 ){
     // Requires Firebase authentication for all food and diary routes.
     authenticate("firebase-auth") {
+        // Text search: returns several USDA matches so the user can choose between them.
+        route("/api/food/results") {
+            get {
+                val query = call.request.queryParameters["query"]
+                if (query.isNullOrBlank()) {
+                    return@get call.respond(HttpStatusCode.BadRequest, ErrorResponse(listOf("query is required")))
+                }
+                call.respond(HttpStatusCode.OK, usdaFoodClient.searchFoods(query.trim()))
+            }
+        }
+
         // Searches for food using a barcode or text query.
         route("/api/food/search"){
             get{
@@ -91,46 +102,37 @@ fun Route.diaryRoutes(
             }
 
             patch("/{id}") {
-                // Gets the meal ID from the URL.
+                val principal = call.principal<FirebaseUserPrincipal>()!!
                 val mealId = call.parameters["id"] ?: return@patch call.respond(
-                    HttpStatusCode.BadRequest, ErrorResponse(listOf("Missing meal id"))
-                )
+                    HttpStatusCode.BadRequest, ErrorResponse(listOf("Missing meal id")))
 
-                // Reads the updated serving amount from the request.
-                val request = try {
-                    call.receive<UpdateMealEntryRequest>()
-                } catch (e: Exception) {
-                    return@patch call.respond(HttpStatusCode.BadRequest, ErrorResponse(listOf("Malformed request body")))
+                // Ownership check: another user's entry looks like "not found", never "forbidden"
+                val existing = mealRepository.getMealEntry(mealId)
+                if (existing == null || existing.userId != principal.uid) {
+                    return@patch call.respond(HttpStatusCode.NotFound, ErrorResponse(listOf("Meal entry not found")))
                 }
 
-                // Validates the updated meal data.
+                val request = try { call.receive<UpdateMealEntryRequest>() } catch (e: Exception) {
+                    return@patch call.respond(HttpStatusCode.BadRequest, ErrorResponse(listOf("Malformed request body")))
+                }
                 val errors = request.validate()
                 if (errors.isNotEmpty()) {
                     return@patch call.respond(HttpStatusCode.UnprocessableEntity, ErrorResponse(errors))
                 }
-
-                // Updates the servings and recalculates the meal values.
-                val updated = mealRepository.updateMealEntryServings(mealId, request.servings)
-                if (updated != null) {
-                    call.respond(HttpStatusCode.OK, updated)
-                } else {
-                    call.respond(HttpStatusCode.NotFound, ErrorResponse(listOf("Meal entry not found")))
-                }
+                call.respond(HttpStatusCode.OK, mealRepository.updateMealEntryServings(mealId, request.servings)!!)
             }
 
             delete("/{id}") {
-                // Gets the meal ID that should be deleted.
+                val principal = call.principal<FirebaseUserPrincipal>()!!
                 val mealId = call.parameters["id"] ?: return@delete call.respond(
-                    HttpStatusCode.BadRequest, ErrorResponse(listOf("Missing meal id"))
-                )
+                    HttpStatusCode.BadRequest, ErrorResponse(listOf("Missing meal id")))
 
-                // Deletes the meal entry and returns the appropriate result.
-                val deleted = mealRepository.deleteMealEntry(mealId)
-                if (deleted) {
-                    call.respond(HttpStatusCode.NoContent)
-                } else {
-                    call.respond(HttpStatusCode.NotFound, ErrorResponse(listOf("Meal entry not found")))
+                val existing = mealRepository.getMealEntry(mealId)
+                if (existing == null || existing.userId != principal.uid) {
+                    return@delete call.respond(HttpStatusCode.NotFound, ErrorResponse(listOf("Meal entry not found")))
                 }
+                mealRepository.deleteMealEntry(mealId)
+                call.respond(HttpStatusCode.NoContent)
             }
         }
     }

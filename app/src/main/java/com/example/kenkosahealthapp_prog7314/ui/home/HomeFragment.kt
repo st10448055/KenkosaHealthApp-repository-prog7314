@@ -17,6 +17,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.kenkosahealthapp_prog7314.R
 import com.example.kenkosahealthapp_prog7314.data.model.UserMetrics
+import com.example.kenkosahealthapp_prog7314.data.repository.AuthRepository
 import com.example.kenkosahealthapp_prog7314.databinding.FragmentHomeBinding
 import com.example.kenkosahealthapp_prog7314.databinding.ItemHomeFeatureBinding
 import com.example.kenkosahealthapp_prog7314.ui.addmenu.AddMenuBottomSheet
@@ -26,7 +27,15 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.launch
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import com.example.kenkosahealthapp_prog7314.KenkosaApp
+import com.example.kenkosahealthapp_prog7314.notifications.FcmTokenManager
+import com.example.kenkosahealthapp_prog7314.notifications.NotificationPreferences
 import com.example.kenkosahealthapp_prog7314.security.BiometricPreferences
+import com.example.kenkosahealthapp_prog7314.ui.auth.AuthViewModelFactory
 
 // Home Fragment serving as the main hub containing feature navigation, user greeting, and calorie progress ring
 class HomeFragment : Fragment() {
@@ -45,6 +54,12 @@ class HomeFragment : Fragment() {
 
     // ViewModel instance for managing calorie ring progress
     private val calorieViewModel: CalorieRingViewModel by viewModels()
+
+    // Android 13+ asks before an app may show notifications. If allowed, register for push right away.
+    private val notificationPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+            if (granted) FcmTokenManager.syncInBackground(KenkosaApp.instance)
+        }
 
     // Inflates the fragment view layout
     override fun onCreateView(
@@ -68,6 +83,7 @@ class HomeFragment : Fragment() {
         setupBottomNav()
 
         observeOpenDrawerRequest()
+        askForNotificationPermissionOnce()
 
         // Notification bell is intentionally non-functional for now.
     }
@@ -195,7 +211,7 @@ class HomeFragment : Fragment() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { /* already home, no-op */ }
             navGoals.setOnClickListener { findNavController().navigate(R.id.action_home_to_goals) }
-            // navStats.setOnClickListener { findNavController().navigate(R.id.action_home_to_statistics) }
+            navStats.setOnClickListener { findNavController().navigate(R.id.action_global_statistics) }
             navSettings.setOnClickListener { findNavController().navigate(R.id.action_home_to_settings) }
         }
     }
@@ -209,7 +225,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.action_global_mealHistory)
         }
         bindFeature(binding.cardSteps, R.drawable.ic_wellness, R.string.home_steps, Color.parseColor("#3F8C7E"), Color.parseColor("#DFEFEC")) {
-            findNavController().navigate(R.id.action_home_to_wellness)
+            findNavController().navigate(R.id.action_home_to_steps)
         }
         bindFeature(binding.cardWorkouts, R.drawable.ic_fitness, R.string.home_fitness, Color.parseColor("#1B3A1B"), Color.parseColor("#E2E8E2")) {
             findNavController().navigate(R.id.action_home_to_workouts)
@@ -282,18 +298,34 @@ class HomeFragment : Fragment() {
         }
 
         drawer.buttonDrawerLogout.setOnClickListener {
-            // With biometric login ON, logging out only "locks" the app: the session is kept
-            // so the fingerprint can unlock it. Otherwise sign out fully as before.
-            val uid = auth.currentUser?.uid
-            val keepSession = uid != null &&
-                    BiometricPreferences(requireContext()).isEnabled(uid)
-            if (!keepSession) auth.signOut()
-            findNavController().navigate(
-                R.id.startFragment,
-                null,
-                androidx.navigation.navOptions { popUpTo(R.id.nav_graph) { inclusive = true } }
-            )
+            drawer.buttonDrawerLogout.isEnabled = false   // avoid a second tap while we clean up
+            val nav = findNavController()
+            val appContext = requireContext().applicationContext
+            // Runs on the activity so it isn't cancelled when this fragment goes away.
+            requireActivity().lifecycleScope.launch {
+                // Stop push notifications for this phone first (needs the login still active).
+                FcmTokenManager.detachDevice(appContext)
+                auth.signOut()
+                // Also clear Credential Manager's remembered Google sign-in
+                AuthRepository(appContext, AuthViewModelFactory.WEB_CLIENT_ID).signOut()
+                nav.navigate(
+                    R.id.startFragment,
+                    null,
+                    androidx.navigation.navOptions { popUpTo(R.id.nav_graph) { inclusive = true } }
+                )
+            }
         }
+    }
+
+    // Shows the system notification permission prompt the first time Home opens. Asked once only.
+    private fun askForNotificationPermissionOnce() {
+        val ctx = requireContext()
+        val prefs = NotificationPreferences(ctx)
+        val granted = ContextCompat.checkSelfPermission(ctx, Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_GRANTED
+        if (granted || prefs.permissionAsked) return
+        prefs.permissionAsked = true
+        notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
     }
 
     // Closes the navigation drawer menu

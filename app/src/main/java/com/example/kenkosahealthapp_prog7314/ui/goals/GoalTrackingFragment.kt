@@ -30,6 +30,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
+import android.content.Context
 
 // Displays weekly streak row, goal card progress lists, and options for logging progress, editing, or deleting goals
 class GoalTrackingFragment : Fragment() {
@@ -75,7 +76,11 @@ class GoalTrackingFragment : Fragment() {
     // Refreshes goals on fragment resume
     override fun onResume() {
         super.onResume()
-        viewModel.loadGoals()
+        // Today's steps, if the Steps screen has taken a reading today (see StepsFragment)
+        val stepPrefs = requireContext().getSharedPreferences("steps", Context.MODE_PRIVATE)
+        val todaySteps = if (stepPrefs.getString("day", null) == LocalDate.now().toString())
+            stepPrefs.getInt("today_steps", 0) else null
+        viewModel.loadGoals(todaySteps)
     }
 
     // ---------------------------------------------------------------- setup

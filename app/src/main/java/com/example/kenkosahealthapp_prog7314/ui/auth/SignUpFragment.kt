@@ -84,15 +84,15 @@ class SignUpFragment : Fragment() {
         val confirmPassword = binding.editConfirmPassword.text.toString()
 
         if (fullName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            showError("Please fill in all fields")
+            showError(getString(R.string.auth_fill_all))
             return
         }
         if (password != confirmPassword) {
-            showError("Passwords do not match")
+            showError(getString(R.string.auth_passwords_mismatch))
             return
         }
         if (password.length < 6) {
-            showError("Password must be at least 6 characters")
+            showError(getString(R.string.auth_password_short))
             return
         }
 

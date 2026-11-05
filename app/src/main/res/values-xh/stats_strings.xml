@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="stats_title">Izibalo</string>
+    <string name="stats_subtitle">Iintsuku ezi-7 zokugqibela</string>
+    <string name="stats_water">Amanzi (iiglasi)</string>
+    <string name="stats_sleep">Ubuthongo (iiyure)</string>
+    <string name="stats_calories">Iikhalori (kcal)</string>
+    <string name="stats_avg_water">Isilinganiselo: iiglasi ezi-%1$s ngemini</string>
+    <string name="stats_avg_sleep">Isilinganiselo: iiyure ezi-%1$s ngobusuku</string>
+    <string name="stats_avg_calories">Isilinganiselo: %1$s kcal ngemini</string>
+    <string name="stats_error">Asikwazanga ukulayisha izibalo zakho. Khangela ukunxibelelana uzame kwakhona.</string>
+
+    <string name="steps_title">Amanyathelo</string>
+    <string name="steps_goal">Injongo: %1$s amanyathelo</string>
+    <string name="steps_info">Abalwa sisenzi-manyathelo sefowuni yakho ngoxa usebenzisa i-app.</string>
+    <string name="steps_permission_needed">Vumela ukuqonda umsebenzi ukuze kubalwe amanyathelo akho.</string>
+    <string name="steps_no_sensor">Le fowuni ayinaso isibali-manyathelo.</string>
+
+    <string name="goaltrack_auto_tracked">Ihlaziya ngokuzenzekelayo kwidatha oyirekhodileyo</string>
+
+    <string name="logfood_macro_protein">Iprotheyini: %1$s</string>
+    <string name="logfood_macro_carbs">Iikhabhohayidreyithi: %1$s</string>
+    <string name="logfood_macro_fat">Amafutha: %1$s</string>
+
+    <string name="settings_height_cm_hint">Ubude (cm)</string>
+    <string name="settings_height_ft_hint">Ubude (ft)</string>
+    <string name="settings_height_in_hint">Iintshi</string>
+    <string name="settings_weight_kg_hint">Ubunzima (kg)</string>
+    <string name="settings_weight_lb_hint">Ubunzima (lb)</string>
+    <string name="settings_error_height">Faka ubude obunokwenzeka</string>
+    <string name="settings_error_weight">Faka ubunzima obunokwenzeka</string>
+</resources>

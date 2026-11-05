@@ -36,7 +36,7 @@ class SsoFragment : Fragment() {
             val email = binding.editEmail.text.toString().trim()
             if (email.isEmpty()) {
                 // Show inline validation error and stop navigation
-                binding.editEmail.error = "Enter your email to continue"
+                binding.editEmail.error = getString(R.string.auth_enter_email_continue)
                 return@setOnClickListener
             }
 

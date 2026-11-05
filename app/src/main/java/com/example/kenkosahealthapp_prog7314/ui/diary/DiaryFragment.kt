@@ -93,9 +93,9 @@ class DiaryFragment : Fragment() {
     private fun setupBottomNav() {
         with(binding.bottomNav) {
             navHome.setOnClickListener { findNavController().popBackStack(R.id.homeFragment, false) }
-            navGoals.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_goals) }
-            navStats.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_statistics) }
-            navSettings.setOnClickListener { findNavController().navigate(R.id.action_fitness_to_settings) }
+            navGoals.setOnClickListener { findNavController().navigate(R.id.action_global_goals) }
+            navStats.setOnClickListener { findNavController().navigate(R.id.action_global_statistics) }
+            navSettings.setOnClickListener { findNavController().navigate(R.id.action_global_settings) }
             fabAdd.setOnClickListener {
                 AddMenuBottomSheet().show(childFragmentManager, "AddMenuBottomSheet")
             }
@@ -253,8 +253,7 @@ class DiaryFragment : Fragment() {
                 setPadding(16, 16, 16, 16)
                 setBackgroundColor(0xFFFFFFFF.toInt())
                 setOnClickListener {
-                    // TODO: navigate to your teammate's Log Mood / edit screen with entry.id,
-                    // once you tell me the destination/nav action it uses.
+                    //TO DO
                 }
             }
             val params = android.widget.LinearLayout.LayoutParams(

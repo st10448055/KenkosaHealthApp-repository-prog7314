@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- DEBUG BUILDS ONLY: lets the app talk to a backend running on your own PC.
+         Release builds keep the default (HTTPS only). -->
+    <application android:networkSecurityConfig="@xml/network_security_config" />
+
+</manifest>

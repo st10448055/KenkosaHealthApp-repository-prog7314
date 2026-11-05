@@ -20,6 +20,7 @@ sealed class FoodSearchState{
     object Loading : FoodSearchState()
     data class Found(val food: FoodItemDto) : FoodSearchState()
     data class Error(val message: String) : FoodSearchState()
+    data class Results(val foods: List<FoodItemDto>) : FoodSearchState()
 }
 
 // Represents the state of saving the currently found food as a diary meal entry
@@ -39,6 +40,11 @@ class LogFoodViewModel(
 
     private val _searchState = MutableStateFlow<FoodSearchState>(FoodSearchState.Idle)
     val searchState: StateFlow<FoodSearchState> = _searchState
+
+    // The matches from the last text search. They stay on screen after the user picks one,
+    // so the user can switch to a different match without searching again.
+    private val _results = MutableStateFlow<List<FoodItemDto>>(emptyList())
+    val results: StateFlow<List<FoodItemDto>> = _results
 
     private val _logState = MutableStateFlow<LogMealState>(LogMealState.Idle)
     val logState: StateFlow<LogMealState> = _logState
@@ -60,6 +66,7 @@ class LogFoodViewModel(
     // Looks up a food item by scanned barcode value
     fun searchByBarcode(barcode: String) {
         viewModelScope.launch {
+            _results.value = emptyList()
             _searchState.value = FoodSearchState.Loading
             when (val result = foodRepository.searchByBarcode(barcode)) {
                 is ApiResult.Success -> _searchState.value = FoodSearchState.Found(result.data)
@@ -78,20 +85,23 @@ class LogFoodViewModel(
     // Looks up a food item by free-text search query
     fun searchByText(query: String) {
         viewModelScope.launch {
+            _results.value = emptyList()
             _searchState.value = FoodSearchState.Loading
-            when (val result = foodRepository.searchByQuery(query)) {
-                is ApiResult.Success -> _searchState.value = FoodSearchState.Found(result.data)
-                is ApiResult.ValidationError -> _searchState.value =
-                    FoodSearchState.Error(result.message)
-
-                is ApiResult.NetworkError -> _searchState.value =
-                    FoodSearchState.Error(result.message)
-
-                is ApiResult.ServerError -> _searchState.value =
-                    FoodSearchState.Error(result.message)
+            _searchState.value = when (val result = foodRepository.searchMany(query)) {
+                is ApiResult.Success ->
+                    if (result.data.isEmpty()) FoodSearchState.Error("No food found. Try a different search term")
+                    else {
+                        _results.value = result.data
+                        FoodSearchState.Results(result.data)
+                    }
+                is ApiResult.ValidationError -> FoodSearchState.Error(result.message)
+                is ApiResult.NetworkError -> FoodSearchState.Error(result.message)
+                is ApiResult.ServerError -> FoodSearchState.Error(result.message)
             }
         }
     }
+
+    fun selectFood(food: FoodItemDto) { _searchState.value = FoodSearchState.Found(food) }
 
     // Saves the currently found food as a meal entry for today, using the selected meal type and servings
     fun logCurrentFood() {
@@ -121,6 +131,7 @@ class LogFoodViewModel(
 
     // Clears the search result, e.g. when starting a fresh search
     fun resetSearch() {
+        _results.value = emptyList()
         _searchState.value = FoodSearchState.Idle
     }
 }

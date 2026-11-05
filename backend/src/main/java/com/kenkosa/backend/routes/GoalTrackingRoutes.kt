@@ -9,9 +9,11 @@ import io.ktor.server.auth.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import com.kenkosa.backend.notifications.NotificationService
+import com.kenkosa.backend.notifications.NotificationType
+import java.time.LocalDate
 
-
-fun Route.goalTrackingRoutes(repository: GoalTrackingRepository) {
+fun Route.goalTrackingRoutes(repository: GoalTrackingRepository, notifications: NotificationService) {
     // Requires Firebase authentication for all goal tracking routes.
     authenticate("firebase-auth") {
         route("/api/goal-tracking") {
@@ -105,8 +107,16 @@ fun Route.goalTrackingRoutes(repository: GoalTrackingRepository) {
                     return@put call.respond(HttpStatusCode.UnprocessableEntity, TrackingErrorResponse(errors))
                 }
 
-                // Saves the progress value for the specified date.
-                call.respond(HttpStatusCode.OK, repository.logProgress(id, request.date, request.value)!!)
+                val updated = repository.logProgress(id, request.date, request.value)!!
+
+                // Notify only the first time today's progress crosses the target (never for back-dated entries).
+                val target = existing.targetValue
+                val previous = existing.progressLog[request.date] ?: 0.0
+                val isToday = request.date == LocalDate.now().toString()
+                if (isToday && target > 0.0 && previous < target && request.value >= target) {
+                    notifications.sendToUserAsync(principal.uid, NotificationType.GOAL_COMPLETED, existing.name)
+                }
+                call.respond(HttpStatusCode.OK, updated)
             }
 
             // Deletes an existing tracked goal.

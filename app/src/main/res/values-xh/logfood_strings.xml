@@ -11,4 +11,5 @@
     <string name="logfood_scan_barcode">Skena ibhakhowudi</string>
     <string name="logfood_servings">Iinxalenye</string>
     <string name="logfood_add_entry">Yongeza irekhodi</string>
+    <string name="logfood_choose_result">Khetha ukutya</string>
 </resources>

@@ -31,6 +31,11 @@ class FoodRepository(
         }
     }
 
+    suspend fun searchMany(query: String): ApiResult<List<FoodItemDto>> {
+        if (query.isBlank()) return ApiResult.ValidationError("Please enter a food name to search")
+        return safeCall { api.searchMany(query) }
+    }
+
     // Searches for a food item using a food name or search query.
     suspend fun searchByQuery(
         query: String

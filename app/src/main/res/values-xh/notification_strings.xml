@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notif_channel_updates_name">Uhlaziyo</string>
+    <string name="notif_channel_updates_desc">Iindaba nezibhengezo ezivela kwi-Kenkosa Health</string>
+    <string name="notif_channel_alerts_name">Izilumkiso zeethagethi</string>
+    <string name="notif_channel_alerts_desc">Izilumkiso xa ufikelela kwithagethi yempilo</string>
+    <string name="settings_test_notification">Thumela isaziso sovavanyo</string>
+    <string name="settings_test_notification_sent">Isaziso sovavanyo sithunyelwe. Kufanele ukuba sifike kungekudala.</string>
+    <string name="settings_test_notification_no_device">Akukho fowuni ebhaliswe izaziso okwangoku. Khangela uxhulumaniso uzame kwakhona.</string>
+    <string name="settings_test_notification_off">Qala ngokuvula izaziso.</string>
+    <string name="settings_test_notification_failed">Asikwazanga ukuthumela isaziso sovavanyo. Zama kwakhona.</string>
+</resources>

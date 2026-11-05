@@ -14,6 +14,9 @@ import com.example.kenkosahealthapp_prog7314.security.BiometricAvailability
 import com.example.kenkosahealthapp_prog7314.security.BiometricHelper
 import com.example.kenkosahealthapp_prog7314.security.BiometricPreferences
 import com.google.firebase.auth.FirebaseAuth
+import androidx.lifecycle.lifecycleScope
+import com.example.kenkosahealthapp_prog7314.notifications.FcmTokenManager
+import kotlinx.coroutines.launch
 
 // Lock screen shown when a signed-in user opens the app (or returns after the re-lock timeout)
 // and has biometric login enabled. The user must pass fingerprint/face verification to continue,
@@ -102,12 +105,18 @@ class BiometricLockFragment : Fragment() {
     // Signs out and shows the regular login screen (password or Google).
     private fun fallbackToPasswordLogin() {
         Log.i(TAG, "User chose password fallback - signing out")
-        FirebaseAuth.getInstance().signOut()
-        findNavController().navigate(
-            R.id.startFragment,
-            null,
-            navOptions { popUpTo(R.id.nav_graph) { inclusive = true } }
-        )
+        val nav = findNavController()
+        val appContext = requireContext().applicationContext
+        // Stop push notifications for this phone first, then sign out.
+        requireActivity().lifecycleScope.launch {
+            FcmTokenManager.detachDevice(appContext)
+            FirebaseAuth.getInstance().signOut()
+            nav.navigate(
+                R.id.startFragment,
+                null,
+                navOptions { popUpTo(R.id.nav_graph) { inclusive = true } }
+            )
+        }
     }
 
     private fun showMessage(message: String) {

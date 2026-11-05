@@ -5,6 +5,9 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/startFragment">
 
+    <action android:id="@+id/action_global_goals" app:destination="@id/goalsFragment" />
+    <action android:id="@+id/action_global_statistics" app:destination="@id/statisticsFragment" />
+    <action android:id="@+id/action_global_settings" app:destination="@id/settingsFragment" />
     <fragment
         android:id="@+id/startFragment"
         android:name="com.example.kenkosahealthapp_prog7314.ui.auth.StartFragment"
@@ -82,7 +85,7 @@
             app:destination="@id/diaryFragment" />
         <action
             android:id="@+id/action_home_to_nutrition"
-            app:destination="@id/nutritionFragment" />
+            app:destination="@id/mealHistoryFragment" />
         <action
             android:id="@+id/action_home_to_steps"
             app:destination="@id/stepsFragment" />
@@ -127,14 +130,9 @@
 
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.stats.StatisticsFragment"
         android:label="Statistics"
-        tools:layout="@layout/fragment_feature_placeholder">
-        <argument
-            android:name="featureTitle"
-            app:argType="string"
-            android:defaultValue="Statistics" />
-    </fragment>
+        tools:layout="@layout/fragment_statistics" />
 
     <fragment
         android:id="@+id/trackingDiaryFragment"
@@ -160,14 +158,9 @@
 
     <fragment
         android:id="@+id/stepsFragment"
-        android:name="com.example.kenkosahealthapp_prog7314.ui.common.FeaturePlaceholderFragment"
+        android:name="com.example.kenkosahealthapp_prog7314.ui.steps.StepsFragment"
         android:label="Steps"
-        tools:layout="@layout/fragment_feature_placeholder">
-        <argument
-            android:name="featureTitle"
-            app:argType="string"
-            android:defaultValue="Steps" />
-    </fragment>
+        tools:layout="@layout/fragment_steps" />
 
     <fragment
         android:id="@+id/workoutsFragment"

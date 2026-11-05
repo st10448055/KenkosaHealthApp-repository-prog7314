@@ -39,6 +39,11 @@ fun Route.sleepLogRoutes(repository: SleepLogRepository) {
                     return@post call.respond(HttpStatusCode.UnprocessableEntity, SleepLogErrorResponse(errors))
                 }
 
+                if (repository.hasOverlap(principal.uid, request.sleepStart, request.sleepEnd)) {
+                    return@post call.respond(HttpStatusCode.Conflict,
+                        SleepLogErrorResponse(listOf("This overlaps a sleep you already logged")))
+                }
+
                 call.respond(HttpStatusCode.Created, repository.createSleep(principal.uid, request))
             }
 
@@ -76,6 +81,11 @@ fun Route.sleepLogRoutes(repository: SleepLogRepository) {
                 val errors = request.validate()
                 if (errors.isNotEmpty()) {
                     return@put call.respond(HttpStatusCode.UnprocessableEntity, SleepLogErrorResponse(errors))
+                }
+
+                if (repository.hasOverlap(principal.uid, request.sleepStart, request.sleepEnd, exceptId = id)) {
+                    return@put call.respond(HttpStatusCode.Conflict,
+                        SleepLogErrorResponse(listOf("This overlaps a sleep you already logged")))
                 }
 
                 call.respond(HttpStatusCode.OK, repository.updateSleep(id, request)!!)

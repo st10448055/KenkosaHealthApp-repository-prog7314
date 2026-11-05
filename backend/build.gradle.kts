@@ -32,3 +32,8 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm:2.3.12")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:2.0.0")
 }
+
+tasks.shadowJar {
+    // Firebase/gRPC register their parts in META-INF/services files; they must be merged, not overwritten
+    mergeServiceFiles()
+}

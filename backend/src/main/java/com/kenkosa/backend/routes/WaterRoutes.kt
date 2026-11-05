@@ -11,8 +11,10 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import java.time.LocalDate
+import com.kenkosa.backend.notifications.NotificationService
+import com.kenkosa.backend.notifications.NotificationType
 
-fun Route.waterRoutes(waterRepository: WaterRepository) {
+fun Route.waterRoutes(waterRepository: WaterRepository, notifications: NotificationService) {
 
     // Requires Firebase authentication for all water routes.
     authenticate("firebase-auth") {
@@ -41,7 +43,14 @@ fun Route.waterRoutes(waterRepository: WaterRepository) {
                 }
 
                 val date = LocalDate.now().toString()
+
+                // What the user had before this update, so we only notify when the goal is crossed.
+                val before = waterRepository.getTodaysWater(principal.uid, date)
                 val updated = waterRepository.updateWater(principal.uid, date, request.cupsConsumed)
+
+                if (before.cupsConsumed < before.targetCups && updated.cupsConsumed >= updated.targetCups) {
+                    notifications.sendToUserAsync(principal.uid, NotificationType.WATER_GOAL_REACHED)
+                }
                 call.respond(HttpStatusCode.OK, updated)
             }
         }

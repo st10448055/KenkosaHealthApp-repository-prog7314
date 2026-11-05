@@ -6,11 +6,11 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 
-// Handles unexpected errors that occur while processing API requests.
 fun Application.configureStatusPages() {
     install(StatusPages) {
-        // Returns a 500 error with the exception message when an unhandled error occurs.
         exception<Throwable> { call, cause ->
+            println("ERROR ${call.request.local.method.value} ${call.request.local.uri}")
+            cause.printStackTrace()
             call.respond(
                 HttpStatusCode.InternalServerError,
                 ErrorResponse(listOf(cause.message ?: "Unexpected server error"))
@@ -18,5 +18,4 @@ fun Application.configureStatusPages() {
         }
     }
 }
-
-// ------------------ END OF FILE ------------------ //
+//---------------------------------------------------END OF PAGE---------------------------------------

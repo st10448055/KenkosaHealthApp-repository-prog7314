@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auth_forgot_password">Ulibele iphasiwedi?</string>
+    <string name="auth_forgot_enter_email">Qala ngokufaka idilesi yakho ye-imeyile apha ngasentla</string>
+    <string name="auth_forgot_sent">Ukuba i-akhawunti ikhona kuloo imeyile, ikhonkco lokuseta kwakhona liyeza.</string>
+    <string name="auth_google_failed">Ukungena nge-Google akuphumelelanga. Nceda uzame kwakhona.</string>
+    <string name="auth_google_no_account">Akukho akhawunti ye-Google kule fowuni. Yongeza enye kwiSetingi uzame kwakhona.</string>
+    <string name="auth_enter_email_password">Nceda ufake i-imeyile nephasiwedi yakho</string>
+    <string name="auth_enter_email_continue">Faka i-imeyile yakho ukuze uqhubeke</string>
+    <string name="auth_fill_all">Nceda uzalise onke amacandelo</string>
+    <string name="auth_passwords_mismatch">Iiphasiwedi aziyifani</string>
+    <string name="auth_password_short">Iphasiwedi mayibe ngobona bude buncinci bamabinzana angama-6</string>
+    <string name="auth_fingerprint_not_ready">Ngena kanye, emva koko vula ukungena nge-Biometric kwiSetingi</string>
+</resources>

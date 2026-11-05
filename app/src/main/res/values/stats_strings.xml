@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Statistics -->
+    <string name="stats_title">Statistics</string>
+    <string name="stats_subtitle">Last 7 days</string>
+    <string name="stats_water">Water (glasses)</string>
+    <string name="stats_sleep">Sleep (hours)</string>
+    <string name="stats_calories">Calories (kcal)</string>
+    <string name="stats_avg_water">Average: %1$s glasses a day</string>
+    <string name="stats_avg_sleep">Average: %1$s h a night</string>
+    <string name="stats_avg_calories">Average: %1$s kcal a day</string>
+    <string name="stats_error">Couldn\'t load your statistics. Check your connection and try again.</string>
+
+    <!-- Steps -->
+    <string name="steps_title">Steps</string>
+    <string name="steps_goal">Goal: %1$s steps</string>
+    <string name="steps_info">Counted by your phone\'s step sensor while the app is in use.</string>
+    <string name="steps_permission_needed">Allow activity recognition to count your steps.</string>
+    <string name="steps_no_sensor">This phone has no step counter.</string>
+
+    <!-- Goals -->
+    <string name="goaltrack_auto_tracked">Updates automatically from your logged data</string>
+
+    <!-- Water and food (unit-aware) -->
+    <string name="logfood_macro_protein">Protein: %1$s</string>
+    <string name="logfood_macro_carbs">Carbs: %1$s</string>
+    <string name="logfood_macro_fat">Fat: %1$s</string>
+
+    <!-- Edit profile -->
+    <string name="settings_height_cm_hint">Height (cm)</string>
+    <string name="settings_height_ft_hint">Height (ft)</string>
+    <string name="settings_height_in_hint">Inches</string>
+    <string name="settings_weight_kg_hint">Weight (kg)</string>
+    <string name="settings_weight_lb_hint">Weight (lb)</string>
+    <string name="settings_error_height">Enter a realistic height</string>
+    <string name="settings_error_weight">Enter a realistic weight</string>
+</resources>

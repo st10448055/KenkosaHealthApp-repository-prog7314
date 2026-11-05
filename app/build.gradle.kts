@@ -1,6 +1,19 @@
+import java.util.Properties
+
+// Per-developer settings live in local.properties (git-ignored).
+val localProps = Properties().apply {
+    val f = rootProject.file("local.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+val cloudApiUrl = "https://kenkosahealthapp-repository-prog7314.onrender.com/"
+// Default = cloud. To use a backend on your own PC, add this line to local.properties:
+//   api.baseUrl=http://10.0.2.2:8080/
+val apiBaseUrl: String = localProps.getProperty("api.baseUrl")?.trim()?.ifEmpty { null } ?: cloudApiUrl
+
 plugins {
     alias(libs.plugins.android.application)
     id("com.google.gms.google-services")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -18,11 +31,15 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+        buildConfigField("String", "API_BASE_URL", "\"$apiBaseUrl\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
+            // Release builds can never point at a local/HTTP server
+            buildConfigField("String", "API_BASE_URL", "\"$cloudApiUrl\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -37,6 +54,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -54,9 +72,12 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-messaging")
 
-    // Google Sign-In (SSO)
-    implementation("com.google.android.gms:play-services-auth:21.2.0")
+    // Google sign-in (SSO) with Credential Manager (replaces the deprecated GoogleSignIn API)
+    implementation("androidx.credentials:credentials:1.5.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.5.0")
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
 
     // Navigation Component
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
@@ -85,4 +106,11 @@ dependencies {
 
 // ML Kit barcode scanning
     implementation("com.google.mlkit:barcode-scanning:17.3.0")
+    // Room (local database)
+    implementation("androidx.room:room-runtime:2.8.4")
+    implementation("androidx.room:room-ktx:2.8.4")
+    ksp("androidx.room:room-compiler:2.8.4")
+
+    // WorkManager (background sync)
+    implementation("androidx.work:work-runtime-ktx:2.10.0")
 }
