@@ -110,6 +110,11 @@ object RetrofitInstance {
     val notesApi: NotesApi by lazy {
         retrofit.create(NotesApi::class.java)
     }
+
+    // Retrofit implementation of the push notification API (device tokens, test message).
+    val deviceApi: DeviceApi by lazy {
+        retrofit.create(DeviceApi::class.java)
+    }
 }
 
 // ------------------ END OF FILE ------------------ //

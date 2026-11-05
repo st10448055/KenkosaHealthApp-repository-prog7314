@@ -42,7 +42,8 @@ import androidx.core.view.isVisible
 import com.example.kenkosahealthapp_prog7314.data.model.Gender
 import com.example.kenkosahealthapp_prog7314.data.model.MetricsLimits
 import com.example.kenkosahealthapp_prog7314.data.model.UnitConversions
-
+import com.example.kenkosahealthapp_prog7314.data.network.RetrofitInstance
+import com.example.kenkosahealthapp_prog7314.notifications.FcmTokenManager
 
 // Main settings screen — profile editing, units/language/dark-mode/notification toggles,
 // body metrics shortcut, and numeric goal targets (steps, calories, sleep).
@@ -128,6 +129,7 @@ class SettingsFragment : Fragment() {
     private fun setupLabels() {
         binding.rowUnits.textLabel.setText(R.string.settings_units)
         binding.rowPushNotifications.textLabel.setText(R.string.settings_push_notifications)
+        binding.rowTestNotification.textLabel.setText(R.string.settings_test_notification)
         binding.rowDarkMode.textLabel.setText(R.string.settings_dark_mode)
         binding.rowLanguage.textLabel.setText(R.string.settings_language)
         binding.rowBiometric.textLabel.setText(R.string.settings_biometric_login)
@@ -198,6 +200,8 @@ class SettingsFragment : Fragment() {
             }
         }
 
+        binding.rowTestNotification.root.setOnClickListener { sendTestNotification() }
+
         binding.rowDarkMode.root.setOnClickListener {
             binding.rowDarkMode.switchToggle.toggle()
         }
@@ -208,6 +212,33 @@ class SettingsFragment : Fragment() {
             // Applying the theme recreates the activity, so save first.
             ThemeManager.set(requireContext().applicationContext, mode)
         }
+    }
+
+    // Asks the server to push a test notification, so the whole chain can be checked.
+    private fun sendTestNotification() {
+        if (!binding.rowPushNotifications.switchToggle.isChecked) {
+            showToast(R.string.settings_test_notification_off)
+            return
+        }
+        val appContext = requireContext().applicationContext
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                // Make sure this phone's token is registered before the server tries to use it.
+                FcmTokenManager.syncPending(appContext)
+                val result = RetrofitInstance.deviceApi.sendTestNotification()
+                showToast(
+                    if (result.sent > 0) R.string.settings_test_notification_sent
+                    else R.string.settings_test_notification_no_device
+                )
+            } catch (e: Exception) {
+                showToast(R.string.settings_test_notification_failed)
+            }
+        }
+    }
+
+    // Only shows the toast if the fragment is still attached.
+    private fun showToast(@StringRes message: Int) {
+        context?.let { Toast.makeText(it, message, Toast.LENGTH_LONG).show() }
     }
 
     // Biometric login toggle. Turning ON checks the hardware and requires a successful scan

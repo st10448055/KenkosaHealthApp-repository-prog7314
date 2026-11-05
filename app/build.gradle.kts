@@ -72,6 +72,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-messaging")
 
     // Google sign-in (SSO) with Credential Manager (replaces the deprecated GoogleSignIn API)
     implementation("androidx.credentials:credentials:1.5.0")

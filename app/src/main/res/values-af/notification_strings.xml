@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notif_channel_updates_name">Opdaterings</string>
+    <string name="notif_channel_updates_desc">Nuus en aankondigings van Kenkosa Health</string>
+    <string name="notif_channel_alerts_name">Doelwaarskuwings</string>
+    <string name="notif_channel_alerts_desc">Waarskuwings wanneer jy \'n gesondheidsdoel bereik</string>
+    <string name="settings_test_notification">Stuur toetskennisgewing</string>
+    <string name="settings_test_notification_sent">Toetskennisgewing gestuur. Dit behoort binnekort aan te kom.</string>
+    <string name="settings_test_notification_no_device">Geen foon is nog vir kennisgewings geregistreer nie. Kontroleer jou verbinding en probeer weer.</string>
+    <string name="settings_test_notification_off">Skakel eers stootkennisgewings aan.</string>
+    <string name="settings_test_notification_failed">Kon nie die toetskennisgewing stuur nie. Probeer asseblief weer.</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notif_channel_updates_name">Updates</string>
+    <string name="notif_channel_updates_desc">News and announcements from Kenkosa Health</string>
+    <string name="notif_channel_alerts_name">Goal alerts</string>
+    <string name="notif_channel_alerts_desc">Alerts when you reach a health goal</string>
+    <string name="settings_test_notification">Send test notification</string>
+    <string name="settings_test_notification_sent">Test notification sent. It should arrive in a moment.</string>
+    <string name="settings_test_notification_no_device">No phone is registered for notifications yet. Check your connection and try again.</string>
+    <string name="settings_test_notification_off">Turn on push notifications first.</string>
+    <string name="settings_test_notification_failed">Couldn\'t send the test notification. Please try again.</string>
+</resources>

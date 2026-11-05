@@ -192,6 +192,13 @@
                         android:layout_height="wrap_content" />
 
                     <include
+                        android:id="@+id/rowTestNotification"
+                        layout="@layout/item_settings_row"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+
+                    <include
                         android:id="@+id/rowDarkMode"
                         layout="@layout/item_settings_toggle"
                         android:layout_width="match_parent"

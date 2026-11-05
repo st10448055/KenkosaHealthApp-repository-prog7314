@@ -8,6 +8,7 @@ import com.example.kenkosahealthapp_prog7314.data.repository.WaterRepository
 import com.google.firebase.auth.FirebaseAuth
 import retrofit2.HttpException
 import java.io.IOException
+import com.example.kenkosahealthapp_prog7314.notifications.FcmTokenManager
 
 // Background worker that uploads offline changes, then refreshes from the server.
 class SyncWorker(
@@ -23,6 +24,8 @@ class SyncWorker(
         return try {
             MoodRepository().syncAll()
             WaterRepository().syncAll()
+            // If the push token could not be registered earlier (offline), do it now.
+            if (!FcmTokenManager.syncPending(applicationContext)) return Result.retry()
             Result.success()
 
         } catch (e: IOException) {
