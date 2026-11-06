@@ -564,7 +564,7 @@ Quality is also supported by the CI builds on every push and pull request, the p
 
 ---
 
-## 12. References
+## 12. Acknowledgements
 
 - [Firebase](https://firebase.google.com/) for authentication, Cloud Firestore and Cloud Messaging
 - [Open Food Facts](https://world.openfoodfacts.org/) for barcode product data
