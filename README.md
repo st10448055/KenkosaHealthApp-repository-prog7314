@@ -14,6 +14,7 @@ PROG7314 · BCAD3 Group 2
 | **Group** | BCAD3 Group 2 |
 | **Team** | Qaniah Arnold (ST10448055), Jade Heeger (ST10445517), Brandon Less (ST10441540) |
 | **Repository** | [github.com/st10448055/KenkosaHealthApp-repository-prog7314](https://github.com/st10448055/KenkosaHealthApp-repository-prog7314) |
+| **YouTube Link** | https://youtu.be/_KEn0Jy-pnU |
 | **Platform** | Android (`minSdk 33`, `targetSdk 36`) with a Ktor backend hosted on Render |
 
 ---
