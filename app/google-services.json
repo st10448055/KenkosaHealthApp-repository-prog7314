@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "493411333577-molog0n63fc0ojhs8q1nem795psfgosl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.kenkosahealthapp_prog7314",
+            "certificate_hash": "0bea497a36c74548ed3a1e888701650947a46a95"
+          }
+        },
+        {
           "client_id": "493411333577-p305nv2e407esl6gjio6vb3k6h3clsir.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

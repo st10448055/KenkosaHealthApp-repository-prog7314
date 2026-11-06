@@ -1,0 +1,17 @@
+﻿Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: C=ZA, ST=Western Cape, L=Cape Town, CN=Jade Heeger
+Signer #1 certificate SHA-256 digest: d5d854c219fb3a0d1eaf2f8800f2921ec85f95da85531ec585d8d7af58bb0f38
+Signer #1 certificate SHA-1 digest: 0bea497a36c74548ed3a1e888701650947a46a95
+Signer #1 certificate MD5 digest: 2e565ec6ff3effda749111e2c3e23f99
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 2048
+Signer #1 public key SHA-256 digest: e141cbc5e916fbd1e191860c4649dc1d7627ecf1039e5c095904ae7d293d85ea
+Signer #1 public key SHA-1 digest: ae1fb8a912d5d9729ce1339548c9441d06bbee3d
+Signer #1 public key MD5 digest: c4e2692c00356eea70b80787bf4af1fa

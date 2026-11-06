@@ -19,3 +19,12 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# --- Added for release readiness (needed if you turn on isMinifyEnabled) ---
+-keepattributes Signature, *Annotation*, SourceFile, LineNumberTable
+-keep class com.example.kenkosahealthapp_prog7314.data.network.** { *; }
+-keep class com.example.kenkosahealthapp_prog7314.data.model.** { *; }
+-keep class com.example.kenkosahealthapp_prog7314.data.local.** { *; }
+-keep class retrofit2.** { *; }
+-dontwarn okhttp3.**
+-dontwarn retrofit2.**

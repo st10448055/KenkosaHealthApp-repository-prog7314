@@ -5,6 +5,11 @@ val localProps = Properties().apply {
     val f = rootProject.file("local.properties")
     if (f.exists()) f.inputStream().use { load(it) }
 }
+// Release signing secrets live in keystore.properties (git-ignored). See store/README_RELEASE.md
+val keystoreProps = Properties().apply {
+    val f = rootProject.file("keystore.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
 val cloudApiUrl = "https://kenkosahealthapp-repository-prog7314.onrender.com/"
 // Default = cloud. To use a backend on your own PC, add this line to local.properties:
 //   api.baseUrl=http://10.0.2.2:8080/
@@ -36,8 +41,22 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        create("release") {
+            if (keystoreProps.isNotEmpty()) {
+                storeFile = rootProject.file(keystoreProps.getProperty("storeFile"))
+                storePassword = keystoreProps.getProperty("storePassword")
+                keyAlias = keystoreProps.getProperty("keyAlias")
+                keyPassword = keystoreProps.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            if (keystoreProps.isNotEmpty()) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             // Release builds can never point at a local/HTTP server
             buildConfigField("String", "API_BASE_URL", "\"$cloudApiUrl\"")
             isMinifyEnabled = false
